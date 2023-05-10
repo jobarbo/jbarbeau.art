@@ -1,5 +1,6 @@
 ---
 import Card from './Card.astro';
+
 const featuresData = [
 	{
 		title: 'Zero JavaScript Runtime',
@@ -34,8 +35,22 @@ const artworks = json.data.map((artwork: Artwork) => artwork.attributes);
 
 <section class='features'>
 	<div class='container'>
-		{featuresData.map((feature) => <Card title={feature.title} body={feature.body} />)}
-		{artworks.map((artwork) => <Card title={artwork.Title} body={artwork.Description} />)}
+		{
+			featuresData.map((feature) => (
+				<Card>
+					<h3>{feature.title}</h3>
+					<p>{feature.body}</p>
+				</Card>
+			))
+		}
+		{
+			artworks.map((artwork) => (
+				<Card>
+					<h3>{artwork.Title}</h3>
+					<p>{artwork.Description}</p>
+				</Card>
+			))
+		}
 
 		<style>
 			/* Cards */
