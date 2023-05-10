@@ -30,8 +30,6 @@ const json = await response.json();
 // convert the data to an array
 
 const artworks = json.data.map((artwork: Artwork) => artwork.attributes);
-
-console.log(artworks);
 ---
 
 <section class='features'>
