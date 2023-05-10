@@ -14,26 +14,45 @@ const featuresData = [
 		body: "Components only hydrate when they scroll into view. If you don't see it, Astro won't load it.",
 	},
 ];
+
+interface Artwork {
+	attributes: {
+		Title: string;
+		Description: string;
+		// add more properties as needed
+	};
+	// add more properties as needed
+}
+
+const response = await fetch('http://localhost:1337/api/artworks');
+const json = await response.json();
+
+// convert the data to an array
+
+const artworks = json.data.map((artwork: Artwork) => artwork.attributes);
+
+console.log(artworks);
 ---
 
 <section class='features'>
 	<div class='container'>
 		{featuresData.map((feature) => <Card title={feature.title} body={feature.body} />)}
+		{artworks.map((artwork) => <Card title={artwork.Title} body={artwork.Description} />)}
+
+		<style>
+			/* Cards */
+			.features .container {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				grid-gap: 20px;
+				padding: 0 20px;
+				margin: 30px auto;
+			}
+			@media (max-width: 500px) {
+				.features .container {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
 	</div>
 </section>
-
-<style>
-	/* Cards */
-	.features .container {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		grid-gap: 20px;
-		padding: 0 20px;
-		margin: 30px auto;
-	}
-	@media (max-width: 500px) {
-		.features .container {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
