@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import {getCollection} from 'astro:content';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 
@@ -14,17 +14,17 @@ const projects = (await getCollection('work')).sort(
 ---
 
 <BaseLayout
-	title="My Work | Jeanine White"
-	description="Learn about Jeanine White's most recent projects"
+	title='JBarbeau.art x Korrigane | Jeanine White'
+	description='Exposition des oeuvres de Jonathan Barbeau à la korrigane.'
 >
-	<div class="stack gap-20">
-		<main class="wrapper stack gap-8">
+	<div class='stack gap-20'>
+		<main class='wrapper stack gap-8'>
 			<Hero
-				title="My Work"
-				tagline="See my most recent projects below to get an idea of my past experience."
-				align="start"
+				title='Vernissage Korrigane'
+				tagline='Voici mes oeuvres présentement exposé à la Korrigane cet été.'
+				align='start'
 			/>
-			<Grid variant="offset">
+			<Grid variant='offset'>
 				{
 					projects.map((project) => (
 						<li>

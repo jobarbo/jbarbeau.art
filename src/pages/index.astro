@@ -30,25 +30,23 @@ const projects = (await getCollection('work'))
 		<div class='wrapper stack gap-8 lg:gap-20'>
 			<header class='hero'>
 				<Hero
-					title='Hello, my name is Jonathan Barbeau'
-					tagline='I am a Creative Developer who is currently based in Québec City, Canada.'
+					title='Hi! I’m Jonathan Barbeau.'
+					tagline='I am a Generative Artist and Creative Developer based in Québec City, Canada.'
 					align='start'
 				>
 					<div class='roles'>
+						<Pill><Icon icon='artist' size='1.33em' /> Artist</Pill>
 						<Pill><Icon icon='code' size='1.33em' /> Developer</Pill>
-						<Pill><Icon icon='microphone-stage' size='1.33em' /> Speaker</Pill>
-						<Pill><Icon icon='pencil-line' size='1.33em' /> Writer</Pill>
+						<Pill><Icon icon='designer' size='1.33em' /> Designer</Pill>
 					</div>
 				</Hero>
 
 				<img alt='Jonathan Barbeau Profile Picture' width='480' height='620' src='/assets/pfp.webp' />
 			</header>
-
-			<Skills />
 		</div>
 
 		<main class='wrapper stack gap-20 lg:gap-48'>
-			<section class='section with-background with-cta'>
+			<section class='section with-cta'>
 				<header class='section-header stack gap-2 lg:gap-4'>
 					<h3>Selected Work</h3>
 					<p>Take a look below at some of my featured work for clients from the past few years.</p>
@@ -74,7 +72,7 @@ const projects = (await getCollection('work'))
 				</div>
 			</section>
 
-			<section class='section with-background bg-variant'>
+			<section class='section bg-variant'>
 				<header class='section-header stack gap-2 lg:gap-4'>
 					<h3>Mentions</h3>
 					<p>
@@ -138,8 +136,8 @@ const projects = (await getCollection('work'))
 		}
 
 		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
+			aspect-ratio: 1/1;
+			width: 80%;
 			object-fit: cover;
 		}
 	}
