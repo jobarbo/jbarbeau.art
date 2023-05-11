@@ -1,52 +1,74 @@
-<footer class='footer'>
-	<div class='container'>
-		<div>
-			<h3>Astro</h3>
-			<p>
-				This is a demo website to show how the Astro framework works. Visit the <a href='https://astro.build'
-					>official website</a
-				> to learn more.
-			</p>
-		</div>
-		<div>
-			<h3>Links</h3>
-			<ul>
-				<li><a href='#'>Home</a></li>
-				<li><a href='#'>About</a></li>
-				<li><a href='#'>Blog</a></li>
-			</ul>
-		</div>
+---
+import Icon from './Icon.astro';
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+	<div class="group">
+		<p>
+			Designed & Developed in Portland with <a href="https://astro.build/">Astro</a>
+			<Icon icon="rocket-launch" size="1.2em" />
+		</p>
+		<p>&copy; {currentYear} Jeanine White</p>
 	</div>
+	<p class="socials">
+		<a href="https://twitter.com/me"> Twitter</a>
+		<a href="https://github.com/me"> GitHub</a>
+		<a href="https://codepen.io/me"> CodePen</a>
+	</p>
 </footer>
-
 <style>
-	.footer {
-		background: var(--color-primary);
-		color: #fff;
-		text-align: center;
-		padding: 20px;
-		margin-top: 60px;
-	}
-
-	.footer .container {
+	footer {
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
+		flex-direction: column;
+		gap: 3rem;
+		margin-top: auto;
+		padding: 3rem 2rem 3rem;
+		text-align: center;
+		color: var(--gray-400);
+		font-size: var(--text-sm);
 	}
 
-	.footer a {
-		color: #a741ff;
+	footer a {
+		color: var(--gray-400);
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
 	}
 
-	.footer a:hover {
-		text-decoration: underline;
+	footer a:hover,
+	footer a:focus {
+		text-decoration-color: currentColor;
 	}
 
-	.footer h3 {
-		margin-bottom: 10px;
+	.group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
 
-	.footer div:nth-child(1) {
-		text-align: left;
+	.socials {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	@media (min-width: 50em) {
+		footer {
+			flex-direction: row;
+			justify-content: space-between;
+			padding: 2.5rem 5rem;
+		}
+
+		.group {
+			flex-direction: row;
+			gap: 1rem;
+			flex-wrap: wrap;
+		}
+
+		.socials {
+			justify-content: flex-end;
+		}
 	}
 </style>

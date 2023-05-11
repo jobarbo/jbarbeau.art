@@ -1,52 +1,120 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import logos from '../images/deploy-logos.png';
-import logosSmall from '../images/deploy-logos-small.png';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+import ContactCTA from '../components/ContactCTA.astro';
+import Hero from '../components/Hero.astro';
 ---
 
-<Layout title='About Me'>
-	<section class='page-content'>
-		<div class='container'>
-			<h2>About Astro</h2>
-			<p>
-				Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, vel quas repudiandae optio voluptatibus dolore
-				maxime sed nisi ad, quod exercitationem. Magni facilis ducimus neque nostrum voluptas, eius, aliquam ullam
-				eligendi corporis perferendis dolor iusto veniam cumque saepe iste porro, non optio amet. Enim esse porro
-				incidunt sequi consectetur vitae.
-			</p>
+<BaseLayout title="About | Jeanine White" description="About Jeanine White Lorem Ipsum">
+	<div class="stack gap-20">
+		<main class="wrapper about">
+			<Hero
+				title="About"
+				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
+			>
+				<img
+					width="1553"
+					height="873"
+					src="/assets/at-work.jpg"
+					alt="Jeanine White at work with a colleague"
+				/>
+			</Hero>
 
-			<p>
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio porro sequi officia nihil optio dicta eos, cumque
-				asperiores id harum, qui quas dolorem tempore? Recusandae repudiandae magnam quae doloribus impedit.
-			</p>
+			<section>
+				<h2 class="section-title">Background</h2>
+				<div class="content">
+					<p>
+						Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a> makes people happy.
+						Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum
+						id venenatis a condimentum vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla
+						pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare.
+					</p>
+					<p>
+						Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis
+						natoque penatibus. Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl
+						condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel
+						quam elementum pulvinar etiam non.
+					</p>
+					<p>
+						Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet
+						eget sit amet. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra.
+						Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl
+						pretium fusce.
+					</p>
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Education</h2>
+				<div class="content">
+					<p>Corporis voluptates tenetur laudantium.</p>
+				</div>
+			</section>
+			<section>
+				<h2 class="section-title">Skills</h2>
+				<div class="content">
+					<p>officia unde omnis</p>
+				</div>
+			</section>
+		</main>
 
-			<Card>
-				<h3>Use the tools you already love</h3>
-				<p>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsum deserunt inventore ut voluptate, officia
-					maiores repellat tenetur praesentium omnis est ex tempora a necessitatibus reiciendis at et dignissimos. Ipsam
-					eius consequuntur cupiditate aperiam porro, esse laborum impedit nesciunt ut voluptatum assumenda aspernatur
-					libero iusto error molestias dolorum, necessitatibus labore?
-				</p>
-			</Card>
+		<ContactCTA />
+	</div>
+</BaseLayout>
 
-			<h3>Deploy to anywhere, even the edge</h3>
-			<img class='logos' src={logos} alt='' />
-			<img class='logos-small' src={logosSmall} alt='' />
-			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde doloribus, vel ipsum mollitia aliquid cumque
-				commodi corrupti omnis ipsam sit earum, dolore quisquam harum qui non, quasi ea voluptatum debitis!
-			</p>
+<style>
+	.about {
+		display: flex;
+		flex-direction: column;
+		gap: 3.5rem;
+	}
 
-			<h3>Join our Community</h3>
-			<p>Join us in the Astro Discord to share with and get help from an active, friendly community!</p>
+	img {
+		margin-top: 1.5rem;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
+	}
 
-			<ul>
-				<li>💬 Say hi in our #introduce-yourself channel!</li>
-				<li>💬 Ask our Support Squad a question in our #support-threads channel!</li>
-				<li>💬 Share what you've been working on in our #showcase channel!</li>
-			</ul>
-		</div>
-	</section>
-</Layout>
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		color: var(--gray-200);
+	}
+
+	.section-title {
+		grid-column-start: 1;
+		font-size: var(--text-xl);
+		color: var(--gray-0);
+	}
+
+	.content {
+		grid-column: 2 / 4;
+	}
+
+	.content :global(a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.content :global(a:hover),
+	.content :global(a:focus) {
+		text-decoration-color: currentColor;
+	}
+
+	@media (min-width: 50em) {
+		.about {
+			display: grid;
+			grid-template-columns: 1fr 60% 1fr;
+		}
+
+		.about > :global(:first-child) {
+			grid-column-start: 2;
+		}
+
+		section {
+			display: contents;
+			font-size: var(--text-lg);
+		}
+	}
+</style>
