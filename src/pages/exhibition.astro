@@ -7,19 +7,24 @@ import ContactCTA from '../components/ContactCTA.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
-const collectionName = 'work';
-const projects = await getCollection('work');
+
+const collectionName = 'exhibition';
+const projects = await getCollection('exhibition');
 ---
 
 <BaseLayout title='JBarbeau.art x Korrigane ' description='Exposition des oeuvres de Jonathan Barbeau à la korrigane.'>
 	<div class='stack gap-20'>
 		<main class='wrapper stack gap-8'>
-			<Hero title='Vernissage Korrigane' tagline='Voici mes oeuvres' align='start' />
+			<Hero
+				title='Vernissage Korrigane'
+				tagline='Voici mes oeuvres présentement exposé à la Korrigane cet été.'
+				align='start'
+			/>
 			<Grid variant='offset'>
 				{
 					projects.map((project) => (
 						<li>
-							<PortfolioPreview type='work' project={project} />
+							<PortfolioPreview type={collectionName} project={project} />
 						</li>
 					))
 				}
