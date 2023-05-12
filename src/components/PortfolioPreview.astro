@@ -6,6 +6,7 @@ interface Props {
 }
 
 const {data, slug} = Astro.props.project;
+console.log('hi', data);
 ---
 
 <a class='card' href={`/work/${slug}`}>
