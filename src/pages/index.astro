@@ -29,6 +29,7 @@ const projects = (await getCollection('work'))
 	<div class='stack gap-20 lg:gap-48'>
 		<div class='wrapper stack gap-8 lg:gap-20'>
 			<header class='hero'>
+				<img alt='Jonathan Barbeau Profile Picture' width='480' height='620' src='/assets/minime.jpg' />
 				<Hero
 					title='Hi! I’m Jonathan Barbeau.'
 					tagline='I am a Generative Artist and Creative Developer based in Québec City, Canada.'
@@ -40,8 +41,6 @@ const projects = (await getCollection('work'))
 						<Pill><Icon icon='designer' size='1.33em' /> Designer</Pill>
 					</div>
 				</Hero>
-
-				<img alt='Jonathan Barbeau Profile Picture' width='480' height='620' src='/assets/pfp.webp' />
 			</header>
 		</div>
 
@@ -74,7 +73,7 @@ const projects = (await getCollection('work'))
 
 			<section class='section bg-variant'>
 				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Mentions</h3>
+					<h3>Web3 Marketplaces</h3>
 					<p>
 						I have been fortunate enough to recieve praise for my work in several publications. Take a look below to
 						learn more.
@@ -84,7 +83,7 @@ const projects = (await getCollection('work'))
 				<div class='gallery'>
 					<Grid variant='small'>
 						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
+							['Foundation', 'Teia.art', 'OBJKT', 'FX(hash).', 'Versum'].map((brand) => (
 								<li class='mention-card'>
 									<p>{brand}</p>
 								</li>
@@ -117,15 +116,13 @@ const projects = (await getCollection('work'))
 		object-fit: cover;
 		object-position: top;
 		border-radius: 1.5rem;
-		border-radius: 50%;
 		box-shadow: var(--shadow-md);
 	}
 
 	@media (min-width: 50em) {
 		.hero {
 			display: grid;
-			grid-template-columns: 6fr 4fr;
-			padding-inline: 2.5rem;
+			grid-template-columns: 4fr 6fr;
 			gap: 3.75rem;
 		}
 
@@ -136,7 +133,7 @@ const projects = (await getCollection('work'))
 		}
 
 		.hero img {
-			aspect-ratio: 1/1;
+			aspect-ratio: 3/4;
 			width: 80%;
 			object-fit: cover;
 		}
