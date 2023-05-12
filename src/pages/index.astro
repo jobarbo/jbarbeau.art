@@ -10,11 +10,12 @@ import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
+import WorkPreview from '../components/WorkPreview.astro';
 
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
 import Skills from '../components/Skills.astro';
+import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 
 // Content Fetching: List four most recent work projects
 const allProjects = await getCollection('exhibition');
@@ -57,7 +58,7 @@ const collectionName = 'exhibition';
 						{
 							projects.map((project) => (
 								<li>
-									<PortfolioPreview type={collectionName} project={project} />
+									<ExhibitionPreview type={collectionName} project={project} />
 								</li>
 							))
 						}

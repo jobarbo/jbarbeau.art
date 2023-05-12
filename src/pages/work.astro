@@ -4,7 +4,7 @@ import {getCollection} from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 import ContactCTA from '../components/ContactCTA.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
+import WorkPreview from '../components/WorkPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 const collectionName = 'work';
@@ -19,7 +19,7 @@ const projects = await getCollection('work');
 				{
 					projects.map((project) => (
 						<li>
-							<PortfolioPreview type='work' project={project} />
+							<WorkPreview type='work' project={project} />
 						</li>
 					))
 				}
