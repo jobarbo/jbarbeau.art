@@ -17,10 +17,9 @@ import ContactCTA from '../components/ContactCTA.astro';
 import Skills from '../components/Skills.astro';
 import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 
-// Content Fetching: List four most recent work projects
-const allProjects = await getCollection('exhibition');
-const shuffled = allProjects.sort(() => Math.random() - 0.5);
-const projects = shuffled.slice(0, 4);
+// Content Fetching: List four random work projects
+const projects = (await getCollection('exhibition')).sort(() => Math.random() - 0.5).slice(0, 4);
+
 const collectionName = 'exhibition';
 
 // Full Astro Component Syntax:
@@ -57,7 +56,7 @@ const collectionName = 'exhibition';
 					<Grid variant='offset'>
 						{
 							projects.map((project) => (
-								<li>
+								<li data-gallery>
 									<ExhibitionPreview type={collectionName} project={project} />
 								</li>
 							))
