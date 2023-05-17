@@ -1,0 +1,25 @@
+---
+interface Props {
+	id: string;
+}
+
+const {id} = Astro.props;
+---
+
+<div class='gallery'>
+	<h3 class='gallery__title'>Gallerie</h3>
+	<p class='gallery__text'>Voici différents rendu de cet algorithme</p>
+	<div class='gallery__grid'>
+		<div class='gallery__item'>
+			<img class='gallery__image' src=`/assets/gallery/${id}_1_render.webp` />
+		</div>
+	</div>
+</div>
+
+<style>
+	.gallery__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1em;
+	}
+</style>

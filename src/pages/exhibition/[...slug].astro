@@ -7,6 +7,7 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import SingleGallery from '../../components/SingleGallery.astro';
 
 interface Props {
 	entry: CollectionEntry<'exhibition'>;
@@ -25,6 +26,10 @@ export async function getStaticPaths() {
 
 const {entry} = Astro.props;
 const {Content} = await entry.render();
+
+// take the id from the entry and remove the characters that start at . and after
+
+const id = entry.id.split('.')[0];
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
@@ -46,6 +51,7 @@ const {Content} = await entry.render();
 			<main class='wrapper'>
 				<div class='stack gap-10 content'>
 					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+					<SingleGallery id={id} />
 					<div class='content'>
 						<Content />
 					</div>
@@ -78,6 +84,8 @@ const {Content} = await entry.render();
 	.tags {
 		display: flex;
 		gap: 0.5rem;
+		flex-wrap: wrap;
+		justify-content: flex-start;
 	}
 
 	.description {
