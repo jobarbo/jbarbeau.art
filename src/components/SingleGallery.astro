@@ -1,18 +1,39 @@
 ---
+import {Debug} from 'astro/components';
+
 interface Props {
-	id: string;
+	id?: number;
+	gallery?: {
+		attributes?: {
+			alternativeText?: string;
+			url?: string;
+		};
+	};
+	baseURL?: string;
 }
 
-const {id} = Astro.props;
+const {id, gallery, baseURL} = Astro.props as Props;
+const galleryKeys = Object.keys(gallery);
 ---
 
 <div class='gallery'>
 	<h3 class='gallery__title'>Gallerie</h3>
 	<p class='gallery__text'>Voici différents rendu de cet algorithme</p>
 	<div class='gallery__grid'>
-		<div class='gallery__item'>
-			<img class='gallery__image' src=`/assets/${id}_thumb.webp` />
-		</div>
+		{
+			galleryKeys?.map((key) => {
+				const image = gallery[key];
+				return (
+					<div class='gallery__item'>
+						<img
+							alt={image.attributes.alternativeText}
+							class='gallery__image'
+							src={`${baseURL}${image?.attributes.url}`}
+						/>
+					</div>
+				);
+			})
+		}
 	</div>
 </div>
 
