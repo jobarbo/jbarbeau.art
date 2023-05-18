@@ -13,8 +13,10 @@ const galleryKeys = Object.keys(gallery);
 ---
 
 <div class='gallery'>
-	<h3 class='gallery__title'>Gallerie</h3>
-	<p class='gallery__text'>Voici différents rendu de cet algorithme</p>
+	<div class='gallery__title-container'>
+		<h2 class='gallery__title'>Gallerie</h2>
+		<p class='gallery__text'>Voici différents rendu de cet algorithme</p>
+	</div>
 	<div class='gallery__grid'>
 		{
 			galleryKeys.map((key) => {
@@ -29,10 +31,20 @@ const galleryKeys = Object.keys(gallery);
 	</div>
 
 	<style>
+		.gallery .title-container {
+			margin-top: 4em;
+		}
 		.gallery__grid {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 			gap: 1em;
+			margin-top: 2em;
+		}
+		.gallery .gallery__title {
+			font-size: var(--text-2xl);
+			margin: 0;
+		}
+		@media (min-width: 1024px) {
 		}
 	</style>
 </div>

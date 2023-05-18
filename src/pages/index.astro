@@ -24,6 +24,29 @@ const projects = (await getCollection('exhibition'))
 
 const collectionName = 'exhibition';
 
+const web3Marketplace = [
+	{
+		name: 'Foundation',
+		url: 'https://foundation.app/@Jbarbeau',
+	},
+	{
+		name: 'Teia.art',
+		url: 'https://teia.art/Jbarbeau.art',
+	},
+	{
+		name: 'OBJKT',
+		url: 'https://objkt.com/profile/jbarbeau/created',
+	},
+	{
+		name: 'FX(hash).',
+		url: 'https://www.fxhash.xyz/u/jbarbeau.art',
+	},
+	{
+		name: 'Versum',
+		url: 'https://versum.xyz/user/tz1aTHPgADTSw2a7kZe9b1ASpYvNmkc1vNDB/created',
+	},
+];
+
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
@@ -34,8 +57,9 @@ const collectionName = 'exhibition';
 			<header class='hero'>
 				<img alt='Jonathan Barbeau Profile Picture' width='480' height='620' src='/assets/photo_jb.jpg' />
 				<Hero
-					title='Hi! I’m Jonathan Barbeau.'
-					tagline='I am a Generative Artist and Creative Developer based in Québec City, Canada.'
+					topline='Salut! Je m’appelle'
+					title=' Jonathan Barbeau'
+					tagline='Je suis un artiste générative et développeur basé à Québec, Canada.'
 					align='start'
 				>
 					<div class='roles'>
@@ -50,8 +74,8 @@ const collectionName = 'exhibition';
 		<main class='wrapper stack gap-20 lg:gap-48'>
 			<section class='section with-cta'>
 				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
+					<h3>Oeuvres en vedettes</h3>
+					<p>Voici mes crétions pref!</p>
 				</header>
 
 				<div class='gallery'>
@@ -68,7 +92,7 @@ const collectionName = 'exhibition';
 
 				<div class='cta'>
 					<CallToAction href='/work/'>
-						View All
+						Voir tout!
 						<Icon icon='arrow-right' size='1.2em' />
 					</CallToAction>
 				</div>
@@ -76,20 +100,17 @@ const collectionName = 'exhibition';
 
 			<section class='section bg-variant'>
 				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Web3 Marketplaces</h3>
-					<p>
-						I have been fortunate enough to recieve praise for my work in several publications. Take a look below to
-						learn more.
-					</p>
+					<h3>Ou peut on trouver mes oeuvres?</h3>
+					<p>Mes oeuvres sont disponibles sur plusieurs plateformes Web3. Voici les plus populaires.</p>
 				</header>
 
 				<div class='gallery'>
 					<Grid variant='small'>
 						{
-							['Foundation', 'Teia.art', 'OBJKT', 'FX(hash).', 'Versum'].map((brand) => (
-								<li class='mention-card'>
-									<p>{brand}</p>
-								</li>
+							web3Marketplace.map((marketplace) => (
+								<a class='web3link' target='_blank' href={marketplace.url}>
+									<li class='mention-card'>{marketplace.name}</li>
+								</a>
 							))
 						}
 					</Grid>
@@ -102,6 +123,20 @@ const collectionName = 'exhibition';
 </BaseLayout>
 
 <style>
+	.web3link {
+		text-decoration: none;
+	}
+	.web3link li {
+		font-size: 18px;
+	}
+	.web3link .mention-card {
+		font-size: 18px;
+		transition: 0.2s ease-in-out;
+	}
+	.web3link:hover .mention-card {
+		font-size: 18px;
+		border-color: var(--accent-dark);
+	}
 	.hero {
 		display: flex;
 		flex-direction: column;

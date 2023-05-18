@@ -1,4 +1,4 @@
-<div class="pill"><slot /></div>
+<div class='pill'><slot /></div>
 
 <style>
 	.pill {
@@ -9,8 +9,22 @@
 		border: 1px solid var(--accent-regular);
 		background-color: var(--accent-regular);
 		border-radius: 999rem;
-		font-size: var(--text-md);
+		font-size: var(--text-sm);
 		line-height: 1.35;
 		white-space: nowrap;
+	}
+
+	/* on tablet and up */
+	@media (min-width: 768px) {
+		.pill {
+			font-size: var(--text-base);
+		}
+	}
+
+	/* on desktop and up */
+	@media (min-width: 1024px) {
+		.pill {
+			font-size: var(--text-md);
+		}
 	}
 </style>

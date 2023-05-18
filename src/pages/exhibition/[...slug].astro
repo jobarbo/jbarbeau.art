@@ -45,6 +45,8 @@ interface Artwork {
 	attributes: {
 		title: string;
 		description: string;
+		url: string;
+		link_label: string;
 		image: {
 			data: {
 				attributes: {
@@ -64,7 +66,7 @@ const artworks: Artwork[] = json.data;
 
 // filter the array to only include the artwork that matches the index then map the data inside the attributes object to its respective variables title, description, image, gallery, and tags
 
-const {title, description, image, gallery, tag_group} = artworks
+const {title, description, url, link_label, image, gallery, tag_group} = artworks
 	.filter((artwork, i) => i + 1 === id)
 	.map((artwork) => artwork.attributes)[0];
 
@@ -113,13 +115,19 @@ if (image.data != undefined && image.data.attributes != undefined) {
 			</header>
 			<main class='wrapper'>
 				<div class='stack gap-10 content'>
-					{
-						featuredImage.url && featuredImage.url.trim() !== '' && (
-							<figure>
-								<img src={`${baseURL}${featuredImage.url}`} alt={featuredImage.alternativeText} />
-							</figure>
-						)
-					}
+					<div class='art'>
+						{
+							featuredImage.url && featuredImage.url.trim() !== '' && (
+								<figure>
+									<img src={`${baseURL}${featuredImage.url}`} alt={featuredImage.alternativeText} />
+								</figure>
+							)
+						}
+						<div class='render'>
+							<a href={url} target='_blank' class='render__link'>{link_label} <Icon icon='magic' size='1.2em' /></a>
+						</div>
+					</div>
+
 					{
 						gallery.data && gallery.data.length > 0 && (
 							<SingleGallery id={id} galleryData={gallery.data} baseURL={baseURL} />
@@ -141,7 +149,58 @@ if (image.data != undefined && image.data.attributes != undefined) {
 		padding-bottom: 2.5rem;
 		border-bottom: 1px solid var(--gray-800);
 	}
+	.art {
+		position: relative;
+	}
+	.render {
+		position: absolute;
+		top: 20px;
+		left: 20px;
+	}
+	.render__link {
+		position: relative;
+		display: flex;
+		place-content: center;
+		text-align: center;
+		padding: 0.56em 2em;
+		gap: 0.8em;
+		color: var(--accent-text-over);
+		text-decoration: none;
+		line-height: 1.1;
+		border-radius: 999rem;
+		overflow: hidden;
+		background: var(--gradient-accent-orange);
+		box-shadow: var(--shadow-md);
+		white-space: nowrap;
+	}
 
+	@media (min-width: 20em) {
+		.render__link {
+			font-size: var(--text-lg);
+		}
+	}
+
+	/* Overlay for hover effects. */
+	.render__link::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		transition: background-color var(--theme-transition);
+		mix-blend-mode: overlay;
+	}
+
+	.render__link:focus::after,
+	.render__link:hover::after {
+		background-color: hsla(var(--gray-999-basis), 0.3);
+	}
+
+	@media (min-width: 50em) {
+		.render__link {
+			padding: 1.125rem 2.5rem;
+			font-size: var(--text-xl);
+		}
+	}
 	.back-link {
 		display: none;
 	}
@@ -215,7 +274,24 @@ if (image.data != undefined && image.data.attributes != undefined) {
 		text-decoration-color: currentColor;
 	}
 
-	@media (min-width: 50em) {
+	@media (min-width: 768px) {
+		.back-link {
+			display: block;
+			align-self: flex-start;
+		}
+
+		.details {
+			flex-direction: column;
+			gap: 2.5rem;
+			justify-content: flex-start;
+			align-items: flex-start;
+		}
+
+		.content :global(blockquote) {
+			font-size: var(--text-2xl);
+		}
+	}
+	@media (min-width: 1024px) {
 		.back-link {
 			display: block;
 			align-self: flex-start;
@@ -224,6 +300,8 @@ if (image.data != undefined && image.data.attributes != undefined) {
 		.details {
 			flex-direction: row;
 			gap: 2.5rem;
+			justify-content: space-between;
+			align-items: center;
 		}
 
 		.content :global(blockquote) {
