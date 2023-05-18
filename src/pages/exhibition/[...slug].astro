@@ -113,9 +113,7 @@ const tags = single?.tagGroup;
 							</figure>
 						)
 					}
-					{ gallery && (
-						<SingleGallery id={id} gallery?={gallery} baseURL?={baseURL} />
-					)}
+					{gallery && <SingleGallery id={id} gallery={gallery} baseURL={baseURL} />}
 
 					<div class='content'>
 						<Content />
