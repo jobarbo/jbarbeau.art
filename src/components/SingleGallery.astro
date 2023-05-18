@@ -1,51 +1,37 @@
 ---
 import {Debug} from 'astro/components';
 
-interface Props {
+export interface Props {
 	id?: number;
-	gallery?: {
-		attributes?: {
-			alternativeText?: string;
-			url?: string;
-		};
-	};
+	gallery?: {};
 	baseURL?: string;
 }
 
 const {id, gallery, baseURL} = Astro.props as Props;
-console.log('gallery', gallery);
 const galleryKeys = Object.keys(gallery);
 ---
 
-<Debug {gallery} />
 <div class='gallery'>
 	<h3 class='gallery__title'>Gallerie</h3>
 	<p class='gallery__text'>Voici différents rendu de cet algorithme</p>
 	<div class='gallery__grid'>
-		<!-- if gallery is not undefined -->
-
 		{
-			gallery &&
-				galleryKeys?.map((key) => {
-					const image = gallery[key];
-					return (
-						<div class='gallery__item'>
-							<img
-								alt={image.attributes.alternativeText}
-								class='gallery__image'
-								src={`${baseURL}${image?.attributes.url}`}
-							/>
-						</div>
-					);
-				})
+			galleryKeys.map((key) => {
+				const image = gallery[key];
+				return (
+					<div class='gallery__item'>
+						<img class='gallery__image' src={`${baseURL}${image.url}`} alt={`Image ${key}`} />
+					</div>
+				);
+			})
 		}
 	</div>
-</div>
 
-<style>
-	.gallery__grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1em;
-	}
-</style>
+	<style>
+		.gallery__grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1em;
+		}
+	</style>
+</div>

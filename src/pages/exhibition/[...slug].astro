@@ -34,33 +34,28 @@ const id = Number(entry.id.split('.')[0]);
 // make id a number
 
 interface Artwork {
-	attributes?: {
-		Title?: string;
-		Description?: string;
-		Image?: {
-			data?: {
-				attributes?: {
-					url?: string;
-					alternativeText?: string;
+	id: number;
+	attributes: {
+		Title: string;
+		Description: string;
+		Image: {
+			data: {
+				attributes: {
+					url: string;
+					alternativeText: string;
 				};
 			};
 		};
-		Gallery?: {
-			data?: {
-				attributes?: {
-					images?: {
-						data?: {
-							attributes?: {
-								url?: string;
-								alternativeText?: string;
-							};
-						};
-					};
+		Gallery: {
+			data: {
+				attributes: {
+					url: string;
+					alternativeText: string;
 				};
 			};
 		};
-		tagGroup?: {
-			text?: string;
+		tagGroup: {
+			text: string;
 		};
 		// add more properties as needed
 	};
@@ -76,30 +71,32 @@ const artworks = json.data.map((artwork: Artwork) => artwork);
 
 const matchingArtwork = artworks.find((artwork) => artwork.id === id);
 
-const single = matchingArtwork?.attributes;
-const image = single?.Image?.data?.attributes;
-const gallery = single?.Gallery?.data?.attributes?.images?.data?.map((image) => image?.attributes);
-const tags = single?.tagGroup;
+const single = matchingArtwork.attributes;
+const image = single.Image.data.attributes;
+const gallery = single.Gallery.data.map((image) => image.attributes);
+const tags = single.tagGroup;
+console.log(image.url);
 ---
 
-<BaseLayout title={single?.Title} description={single?.Description}>
+<Debug {artworks} />
+<BaseLayout title={single.Title} description={single.Description}>
 	<div class='stack gap-20'>
 		<div class='stack gap-15'>
 			<header>
 				<div class='wrapper stack gap-2'>
 					<a class='back-link' href='/exhibition/'><Icon icon='arrow-left' /> Exhibitions</a>
-					<Hero title={single?.Title} align='start'>
+					<Hero title={single.Title} align='start'>
 						<div class='details'>
 							<div class='tags'>
 								{
-									tags?.map((tag) => (
+									tags.map((tag) => (
 										<>
-											<Pill>{tag?.text}</Pill>
+											<Pill>{tag.text}</Pill>
 										</>
 									))
 								}
 							</div>
-							<p class='description'>{single?.Description}</p>
+							<p class='description'>{single.Description}</p>
 						</div>
 					</Hero>
 				</div>
@@ -107,9 +104,9 @@ const tags = single?.tagGroup;
 			<main class='wrapper'>
 				<div class='stack gap-10 content'>
 					{
-						image?.url && (
+						image.url != undefined && (
 							<figure>
-								<img src={image?.url} alt={image?.alternativeText} />
+								<img src={`${baseURL}${image.url}`} alt={image.alternativeText} />
 							</figure>
 						)
 					}
