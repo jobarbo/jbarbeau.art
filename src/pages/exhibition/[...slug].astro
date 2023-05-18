@@ -37,6 +37,31 @@ interface Artwork {
 	attributes?: {
 		Title?: string;
 		Description?: string;
+		Image?: {
+			data?: {
+				attributes?: {
+					url?: string;
+					alternativeText?: string;
+				};
+			};
+		};
+		Gallery?: {
+			data?: {
+				attributes?: {
+					images?: {
+						data?: {
+							attributes?: {
+								url?: string;
+								alternativeText?: string;
+							};
+						};
+					};
+				};
+			};
+		};
+		tagGroup?: {
+			text?: string;
+		};
 		// add more properties as needed
 	};
 	// add more properties as needed
@@ -51,12 +76,10 @@ const artworks = json.data.map((artwork: Artwork) => artwork);
 
 const matchingArtwork = artworks.find((artwork) => artwork.id === id);
 
-// Add a conditional check for matchingArtwork
-const single = matchingArtwork ? matchingArtwork.attributes : null;
-const image = matchingArtwork ? matchingArtwork.attributes.Image.data.attributes : null;
-const imageURL = matchingArtwork ? baseURL + image.url : null;
-const gallery = matchingArtwork ? matchingArtwork.attributes.Gallery.data : null;
-const tags = matchingArtwork ? matchingArtwork.attributes.tagGroup : null;
+const single = matchingArtwork?.attributes;
+const image = single?.Image?.data?.attributes;
+const gallery = single?.Gallery?.data?.attributes?.images?.data?.map((image) => image?.attributes);
+const tags = single?.tagGroup;
 ---
 
 <BaseLayout title={single?.Title} description={single?.Description}>
@@ -83,8 +106,17 @@ const tags = matchingArtwork ? matchingArtwork.attributes.tagGroup : null;
 			</header>
 			<main class='wrapper'>
 				<div class='stack gap-10 content'>
-					{imageURL && <img src={imageURL} alt={image?.alternativeText || ''} />}
-					<SingleGallery id={id} gallery={gallery} baseURL={baseURL} />
+					{
+						image?.url && (
+							<figure>
+								<img src={image?.url} alt={image?.alternativeText} />
+							</figure>
+						)
+					}
+					{ gallery && (
+						<SingleGallery id={id} gallery?={gallery} baseURL?={baseURL} />
+					)}
+
 					<div class='content'>
 						<Content />
 					</div>

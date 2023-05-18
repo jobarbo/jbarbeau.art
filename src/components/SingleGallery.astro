@@ -13,26 +13,31 @@ interface Props {
 }
 
 const {id, gallery, baseURL} = Astro.props as Props;
+console.log('gallery', gallery);
 const galleryKeys = Object.keys(gallery);
 ---
 
+<Debug {gallery} />
 <div class='gallery'>
 	<h3 class='gallery__title'>Gallerie</h3>
 	<p class='gallery__text'>Voici différents rendu de cet algorithme</p>
 	<div class='gallery__grid'>
+		<!-- if gallery is not undefined -->
+
 		{
-			galleryKeys?.map((key) => {
-				const image = gallery[key];
-				return (
-					<div class='gallery__item'>
-						<img
-							alt={image.attributes.alternativeText}
-							class='gallery__image'
-							src={`${baseURL}${image?.attributes.url}`}
-						/>
-					</div>
-				);
-			})
+			gallery &&
+				galleryKeys?.map((key) => {
+					const image = gallery[key];
+					return (
+						<div class='gallery__item'>
+							<img
+								alt={image.attributes.alternativeText}
+								class='gallery__image'
+								src={`${baseURL}${image?.attributes.url}`}
+							/>
+						</div>
+					);
+				})
 		}
 	</div>
 </div>
