@@ -1,4 +1,5 @@
 ---
+import {Debug} from 'astro/components';
 import {getCollection} from 'astro:content';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -10,6 +11,14 @@ import Grid from '../components/Grid.astro';
 
 const collectionName = 'exhibition';
 const projects = await getCollection('exhibition');
+
+// reorder projects by id (ascending) but first isolate the number in the id string before the '.md' extension
+projects.sort((a, b) => {
+	const aId = parseInt(a.id.match(/(\d+).md/)[1]);
+	const bId = parseInt(b.id.match(/(\d+).md/)[1]);
+
+	return aId - bId;
+});
 ---
 
 <BaseLayout title='JBarbeau.art x Korrigane ' description='Exposition des oeuvres de Jonathan Barbeau à la korrigane.'>
@@ -17,7 +26,7 @@ const projects = await getCollection('exhibition');
 		<main class='wrapper stack gap-8'>
 			<Hero
 				title='Vernissage Korrigane'
-				tagline='Voici mes oeuvres présentement exposé à la Korrigane cet été.'
+				tagline='Voici mess oeuvres présentement exposé à la Korrigane cet été.'
 				align='start'
 			/>
 			<Grid variant='offset'>

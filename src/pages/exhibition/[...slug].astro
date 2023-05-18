@@ -31,72 +31,82 @@ const {Content} = await entry.render();
 // take the id from the entry and remove the characters that start at . and after
 
 const id = Number(entry.id.split('.')[0]);
+
 // make id a number
 
-interface Artwork {
-	id: number;
-	attributes: {
-		Title: string;
-		Description: string;
-		Image: {
-			data: {
-				attributes: {
-					url: string;
-					alternativeText: string;
-				};
-			};
-		};
-		Gallery: {
-			data: {
-				attributes: {
-					url: string;
-					alternativeText: string;
-				};
-			};
-		};
-		tagGroup: {
-			text: string;
-		};
-		// add more properties as needed
-	};
-	// add more properties as needed
-}
 const response = await fetch('http://localhost:1337/api/artworks?populate=*');
 const json = await response.json();
 const baseURL = 'http://localhost:1337';
 
 // convert the data to an array
 
-const artworks = json.data.map((artwork: Artwork) => artwork);
+interface Artwork {
+	id: number;
+	attributes: {
+		title: string;
+		description: string;
+		image: {
+			data: {
+				attributes: {
+					url: string;
+					alternativeText: string;
+				};
+			};
+		};
+		gallery: any;
+		tag_group: {
+			text: string;
+		}[];
+	};
+}
 
-const matchingArtwork = artworks.find((artwork) => artwork.id === id);
+const artworks: Artwork[] = json.data;
 
-const single = matchingArtwork.attributes;
-const image = single.Image.data.attributes;
-const gallery = single.Gallery.data.map((image) => image.attributes);
-const tags = single.tagGroup;
-console.log(image.url);
+// filter the array to only include the artwork that matches the index then map the data inside the attributes object to its respective variables title, description, image, gallery, and tags
+
+const {title, description, image, gallery, tag_group} = artworks
+	.filter((artwork, i) => i + 1 === id)
+	.map((artwork) => artwork.attributes)[0];
+
+let featuredImage = {
+	url: '',
+	alternativeText: '',
+};
+
+let galleryData = {
+	data: [],
+};
+
+if (gallery.data != undefined) {
+	galleryData = gallery.data;
+}
+if (image.data != undefined && image.data.attributes != undefined) {
+	featuredImage = image.data.attributes;
+}
 ---
 
-<Debug {artworks} />
-<BaseLayout title={single.Title} description={single.Description}>
+<BaseLayout title={title} description={description}>
 	<div class='stack gap-20'>
 		<div class='stack gap-15'>
 			<header>
 				<div class='wrapper stack gap-2'>
 					<a class='back-link' href='/exhibition/'><Icon icon='arrow-left' /> Exhibitions</a>
-					<Hero title={single.Title} align='start'>
+					<Hero title={title} align='start'>
 						<div class='details'>
-							<div class='tags'>
-								{
-									tags.map((tag) => (
-										<>
-											<Pill>{tag.text}</Pill>
-										</>
-									))
-								}
-							</div>
-							<p class='description'>{single.Description}</p>
+							{
+								tag_group.length > 0 && (
+									<>
+										<div class='tags'>
+											{tag_group.map((tag) => (
+												<>
+													<Pill>{tag.text}</Pill>
+												</>
+											))}
+										</div>
+									</>
+								)
+							}
+							<p class='description'>{description}</p>
 						</div>
 					</Hero>
 				</div>
@@ -104,13 +114,17 @@ console.log(image.url);
 			<main class='wrapper'>
 				<div class='stack gap-10 content'>
 					{
-						image.url != undefined && (
+						featuredImage.url && featuredImage.url.trim() !== '' && (
 							<figure>
-								<img src={`${baseURL}${image.url}`} alt={image.alternativeText} />
+								<img src={`${baseURL}${featuredImage.url}`} alt={featuredImage.alternativeText} />
 							</figure>
 						)
 					}
-					{gallery && <SingleGallery id={id} gallery={gallery} baseURL={baseURL} />}
+					{
+						gallery.data && gallery.data.length > 0 && (
+							<SingleGallery id={id} galleryData={gallery.data} baseURL={baseURL} />
+						)
+					}
 
 					<div class='content'>
 						<Content />

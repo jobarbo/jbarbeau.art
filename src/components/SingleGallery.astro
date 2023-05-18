@@ -2,12 +2,13 @@
 import {Debug} from 'astro/components';
 
 export interface Props {
-	id?: number;
-	gallery?: {};
-	baseURL?: string;
+	id?: number | undefined;
+	galleryData?: {} | undefined;
+	baseURL?: string | undefined;
 }
 
-const {id, gallery, baseURL} = Astro.props as Props;
+const {id, galleryData, baseURL} = Astro.props as Props;
+const gallery = galleryData;
 const galleryKeys = Object.keys(gallery);
 ---
 
@@ -17,7 +18,7 @@ const galleryKeys = Object.keys(gallery);
 	<div class='gallery__grid'>
 		{
 			galleryKeys.map((key) => {
-				const image = gallery[key];
+				const image = gallery[key].attributes;
 				return (
 					<div class='gallery__item'>
 						<img class='gallery__image' src={`${baseURL}${image.url}`} alt={`Image ${key}`} />
