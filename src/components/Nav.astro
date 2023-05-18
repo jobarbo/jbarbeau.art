@@ -14,6 +14,7 @@ const iconLinks: {label: string; href: string; icon: IconProps['icon']}[] = [
 	{label: 'Email', href: 'mailto:barbeau.jonathan@gmail.com', icon: 'email'},
 	{label: 'Twitter', href: 'https://twitter.com/JBarbeau_Art', icon: 'twitter-logo'},
 	{label: 'Instagram', href: 'https://www.instagram.com/jbarbeau.art/', icon: 'instagram'},
+	{label: 'Tiktok', href: 'https://www.tiktok.com/@jbarbeau.art', icon: 'tiktok'},
 	{label: 'Facebook', href: 'https://www.facebook.com/barbeaucodeart', icon: 'facebook'},
 	{label: 'Twitch', href: 'https://twitch.tv/jbarbeau_art', icon: 'twitch-logo'},
 	{label: 'GitHub', href: 'https://github.com/jobarbo', icon: 'github-logo'},
@@ -42,6 +43,7 @@ const iconLinks: {label: string; href: string; icon: IconProps['icon']}[] = [
 				textLinks.map(({label, href}) => (
 					<li>
 						<a
+							target='_blank'
 							aria-current={Astro.url.pathname === href}
 							class:list={[
 								'link',
@@ -61,7 +63,7 @@ const iconLinks: {label: string; href: string; icon: IconProps['icon']}[] = [
 			<div class='socials'>
 				{
 					iconLinks.map(({href, icon, label}) => (
-						<a href={href} class='social'>
+						<a target='_blank' href={href} class='social'>
 							<span class='sr-only'>{label}</span>
 							<Icon icon={icon} />
 						</a>
