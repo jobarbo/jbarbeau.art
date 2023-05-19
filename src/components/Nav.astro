@@ -43,7 +43,6 @@ const iconLinks: {label: string; href: string; icon: IconProps['icon']}[] = [
 				textLinks.map(({label, href}) => (
 					<li>
 						<a
-							target='_blank'
 							aria-current={Astro.url.pathname === href}
 							class:list={[
 								'link',
