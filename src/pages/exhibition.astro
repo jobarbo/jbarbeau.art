@@ -10,31 +10,75 @@ import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
 const collectionName = 'exhibition';
-const projects = await getCollection('exhibition');
+//const projects = await getCollection('exhibition');
 
-// reorder projects by id (ascending) but first isolate the number in the id string before the '.md' extension
-projects.sort((a, b) => {
-	const aId = parseInt(a.id.match(/(\d+).md/)[1]);
-	const bId = parseInt(b.id.match(/(\d+).md/)[1]);
+const response = await fetch('http://localhost:1337/api/exhibitions?populate=*');
+const json = await response.json();
+const baseURL = 'http://localhost:1337';
 
-	return aId - bId;
+// convert the data to an array
+
+interface Exhibition {
+	id: number;
+	attributes: {
+		title: string;
+		description: string;
+		slug: string;
+		link_label: string;
+		image: {
+			data: {
+				attributes: {
+					url: string;
+					alternativeText: string;
+				};
+			};
+		};
+	};
+}
+
+const exhibitions: Exhibition[] = json.data;
+console.log(exhibitions);
+
+// deconstruct exhibition data into a new object
+
+const projects = exhibitions.map((exhibition) => {
+	const {id, attributes} = exhibition;
+	const {title, description, slug, link_label, image} = attributes;
+	const {data} = image;
+	const {url: imageURL, alternativeText} = data.attributes;
+
+	return {
+		id,
+		title,
+		description,
+		slug,
+		link_label,
+		image: {
+			url: `${baseURL}${imageURL}`,
+			alt: alternativeText,
+		},
+	};
 });
 ---
 
-<BaseLayout title='JBarbeau.art x Korrigane ' description='Exposition des oeuvres de Jonathan Barbeau à la korrigane.'>
+<Debug {projects} />
+<BaseLayout title='Expositions en cours' description='Exposition des oeuvres de Jonathan Barbeau'>
 	<div class='stack gap-20'>
 		<main class='wrapper stack gap-8'>
-			<Hero
-				title='Vernissage Korrigane'
-				tagline='Voici mes oeuvres présentement exposées à la Korrigane cet été.'
-				align='start'
-			/>
+			<Hero title='Expositions' tagline='Voici mes expositions courantes et à venir.' align='start' />
 			<Grid variant='offset'>
 				{
 					projects.map((project) => (
-						<li>
-							<ExhibitionPreview type={collectionName} project={project} />
-						</li>
+						<ExhibitionPreview
+							type={collectionName}
+							title={project.title}
+							description={project.description}
+							slug={project.slug}
+							image={project.image.url}
+							alt={project.image.alt}
+							link={project.slug}
+							link_label={project.link_label}
+						/>
 					))
 				}
 			</Grid>

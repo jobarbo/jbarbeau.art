@@ -3,17 +3,22 @@ import type {CollectionEntry} from 'astro:content';
 
 interface Props {
 	type: string;
-	project?: CollectionEntry<'exhibition'>;
+	title: string;
+	description: string;
+	slug: string;
+	image: string;
+	alt?: string;
 }
 
-const {data, slug} = Astro.props.project;
-const {type} = Astro.props;
+// deconstruct exhibition data into a new object
+
+const {type, title, slug, description, image, alt} = Astro.props;
 ---
 
 <!-- test -->
 <a class='card' href={`/${type}/${slug}`}>
-	<span class='title'>{data.title}</span>
-	<img src={data.img} alt={data.img_alt || ''} loading='lazy' decoding='async' />
+	<span class='title'>{title}</span>
+	<img src={image} alt={alt || ''} loading='lazy' decoding='async' />
 </a>
 
 <style>
