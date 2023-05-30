@@ -10,7 +10,7 @@ import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
 const collectionName = 'exhibition';
-//const projects = await getCollection('exhibition');
+//const exhibitions = await getCollection('exhibition');
 
 const response = await fetch('http://localhost:1337/api/exhibitions?populate=*');
 const json = await response.json();
@@ -36,12 +36,12 @@ interface Exhibition {
 	};
 }
 
-const exhibitions: Exhibition[] = json.data;
-console.log(exhibitions);
+const exhibitionsData: Exhibition[] = json.data;
+console.log(exhibitionsData);
 
 // deconstruct exhibition data into a new object
 
-const projects = exhibitions.map((exhibition) => {
+const exhibitions = exhibitionsData.map((exhibition) => {
 	const {id, attributes} = exhibition;
 	const {title, description, slug, link_label, image} = attributes;
 	const {data} = image;
@@ -61,14 +61,13 @@ const projects = exhibitions.map((exhibition) => {
 });
 ---
 
-<Debug {projects} />
 <BaseLayout title='Expositions en cours' description='Exposition des oeuvres de Jonathan Barbeau'>
 	<div class='stack gap-20'>
 		<main class='wrapper stack gap-8'>
 			<Hero title='Expositions' tagline='Voici mes expositions courantes et à venir.' align='start' />
 			<Grid variant='offset'>
 				{
-					projects.map((project) => (
+					exhibitions.map((project) => (
 						<ExhibitionPreview
 							type={collectionName}
 							title={project.title}
@@ -76,8 +75,6 @@ const projects = exhibitions.map((exhibition) => {
 							slug={project.slug}
 							image={project.image.url}
 							alt={project.image.alt}
-							link={project.slug}
-							link_label={project.link_label}
 						/>
 					))
 				}
