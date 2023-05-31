@@ -7,8 +7,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
-import Pill from '../../components/Pill.astro';
-import SingleGallery from '../../components/SingleGallery.astro';
+import WorkPreview from '../../components/WorkPreview.astro';
+import Grid from '../../components/Grid.astro';
 
 interface Props {
 	entry: CollectionEntry<'exhibition'>;
@@ -84,15 +84,34 @@ let artworkIdArr = artworks.data.map((artwork) => artwork.id);
 // for each ID in the artworkIdArr array, fetch the artwork data from the API and push it to a new array
 
 let artworksArray = [];
-
+let collectionName = 'exhibition';
 for (let i = 0; i < artworkIdArr.length; i++) {
 	const response = await fetch(`http://localhost:1337/api/artworks/${artworkIdArr[i]}?populate=*`);
 	const json = await response.json();
 	artworksArray.push(json.data);
 }
+
+const works = artworksArray.map((artwork) => {
+	const {id, attributes} = artwork;
+	const {title, description, slug, url, link_label, image} = attributes;
+	const {data} = image;
+	const {url: imageURL, alternativeText} = data.attributes;
+
+	return {
+		id,
+		title,
+		description,
+		slug,
+		url,
+		link_label,
+		image: {
+			url: `${baseURL}${imageURL}`,
+			alt: alternativeText,
+		},
+	};
+});
 ---
 
-<Debug {artworksArray} />
 <BaseLayout title={title} description={description}>
 	<div class='stack gap-20'>
 		<div class='stack gap-15'>
@@ -108,7 +127,7 @@ for (let i = 0; i < artworkIdArr.length; i++) {
 			</header>
 			<main class='wrapper'>
 				<div class='stack gap-10 content'>
-					<div class='art'>
+					<div class='featured-image'>
 						{
 							featuredImage.url && featuredImage.url.trim() !== '' && (
 								<figure>
@@ -116,6 +135,25 @@ for (let i = 0; i < artworkIdArr.length; i++) {
 								</figure>
 							)
 						}
+					</div>
+
+					<div class='artworks'>
+						<div class='artworks__container'>
+							<Grid variant='offset'>
+								{
+									works.map((project) => (
+										<WorkPreview
+											type={collectionName}
+											title={project.title}
+											description={project.description}
+											slug={project.slug}
+											image={project.image.url}
+											alt={project.image.alt}
+										/>
+									))
+								}
+							</Grid>
+						</div>
 					</div>
 
 					<div class='content'>
@@ -133,7 +171,7 @@ for (let i = 0; i < artworkIdArr.length; i++) {
 		padding-bottom: 2.5rem;
 		border-bottom: 1px solid var(--gray-800);
 	}
-	.art {
+	.featured-image {
 		position: relative;
 	}
 	.render {

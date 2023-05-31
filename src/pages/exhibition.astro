@@ -9,7 +9,6 @@ import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
-const collectionName = 'exhibition';
 //const exhibitions = await getCollection('exhibition');
 
 const response = await fetch('http://localhost:1337/api/exhibitions?populate=*');
@@ -37,10 +36,9 @@ interface Exhibition {
 }
 
 const exhibitionsData: Exhibition[] = json.data;
-console.log(exhibitionsData);
 
 // deconstruct exhibition data into a new object
-
+const collectionName = `exhibition`;
 const exhibitions = exhibitionsData.map((exhibition) => {
 	const {id, attributes} = exhibition;
 	const {title, description, slug, link_label, image} = attributes;
