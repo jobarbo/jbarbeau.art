@@ -1,28 +1,28 @@
 import {defineCollection, z} from 'astro:content';
 
-const workCollection = defineCollection({
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		publishDate: z.coerce.date(),
-		tags: z.array(z.string()),
-		img: z.string(),
-		img_alt: z.string().optional(),
-	}),
-});
-
-const exhibitionCollection = defineCollection({
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		publishDate: z.coerce.date(),
-		tags: z.array(z.string()),
-		img: z.string(),
-		img_alt: z.string().optional(),
-	}),
-});
-
 export const collections = {
-	work: workCollection,
-	exhibition: exhibitionCollection,
+	work: defineCollection({
+		schema: z.object({
+			id_tag: z.string(),
+			title: z.string(),
+			description: z.string(),
+			publishDate: z.coerce.date(),
+			tags: z.array(z.string()),
+			img: z.string(),
+			img_alt: z.string().optional(),
+			level: z.number(),
+		}),
+	}),
+	exhibition: defineCollection({
+		schema: z.object({
+			id_tag: z.string(),
+			title: z.string(),
+			description: z.string(),
+			publishDate: z.coerce.date(),
+			tags: z.array(z.string()),
+			img: z.string(),
+			img_alt: z.string().optional(),
+			level: z.number(),
+		}),
+	}),
 };

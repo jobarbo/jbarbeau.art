@@ -28,13 +28,17 @@ export async function getStaticPaths() {
 const {entry} = Astro.props;
 const {Content} = await entry.render();
 
-// take the id from the entry and remove the characters that start at . and after
-
-const id = Number(entry.id.split('.')[0]);
+const entry_slug = entry.slug;
+const isNested = entry_slug.split('/').length > 1;
 
 // make id a number
 
-const response = await fetch('http://localhost:1337/api/exhibitions?populate=*');
+let apiUrl = 'http://localhost:1337/api/exhibitions?populate=*';
+if (isNested) {
+	apiUrl = 'http://localhost:1337/api/artworks?populate=*';
+}
+
+const response = await fetch(apiUrl);
 const json = await response.json();
 const baseURL = 'http://localhost:1337';
 
@@ -62,13 +66,17 @@ interface Exhibition {
 	};
 }
 
-const exhibitions: Exhibition[] = json.data;
+const exhibition_data: Exhibition[] = json.data;
+let collectionName = 'exhibition';
 
-// filter the array to only include the artwork that matches the index then map the data inside the attributes object to its respective variables title, description, image, gallery, and tags
+// filter the exhibition_data array to find the exhibition entry with the matching id
+// check the url to see if it's a nested exhibition
 
-const {title, description, slug, image, artworks} = exhibitions
-	.filter((exhibition, i) => i + 1 === id)
-	.map((exhibition) => exhibition.attributes)[0];
+const current_exhibition = exhibition_data.filter((exhibition) => exhibition.attributes.slug === entry_slug);
+
+//! destructure the current_exhibition array to get the attributes object
+
+const {title, description, image, artworks} = current_exhibition[0].attributes;
 
 let featuredImage = {
 	url: '',
@@ -78,40 +86,48 @@ let featuredImage = {
 if (image.data != undefined && image.data.attributes != undefined) {
 	featuredImage = image.data.attributes;
 }
+let artworkIdArr = null;
+let works = [];
+if (!isNested) {
+	artworkIdArr = artworks.data.map((artwork) => artwork.id);
+	let artworksArray = [];
 
-let artworkIdArr = artworks.data.map((artwork) => artwork.id);
+	for (let i = 0; i < artworkIdArr.length; i++) {
+		const response = await fetch(`http://localhost:1337/api/artworks/${artworkIdArr[i]}?populate=*`);
+		const json = await response.json();
+		artworksArray.push(json.data);
+	}
 
-// for each ID in the artworkIdArr array, fetch the artwork data from the API and push it to a new array
+	const works_slug_arr = await getCollection('exhibition').then((collection) => {
+		const slugs = collection.map((item) => item.slug);
+		const slugsLevel1 = slugs.filter((slug) => slug.split('/').length === 2);
+		return slugsLevel1;
+	});
 
-let artworksArray = [];
-let collectionName = 'exhibition';
-for (let i = 0; i < artworkIdArr.length; i++) {
-	const response = await fetch(`http://localhost:1337/api/artworks/${artworkIdArr[i]}?populate=*`);
-	const json = await response.json();
-	artworksArray.push(json.data);
+	works = artworksArray.map((artwork, index) => {
+		const {id, attributes} = artwork;
+		const {title, description, url, link_label, image} = attributes;
+		const slug = works_slug_arr[index];
+		const {data} = image;
+		const {url: imageURL, alternativeText} = data.attributes;
+
+		return {
+			id,
+			title,
+			description,
+			slug,
+			url,
+			link_label,
+			image: {
+				url: `${baseURL}${imageURL}`,
+				alt: alternativeText,
+			},
+		};
+	});
 }
-
-const works = artworksArray.map((artwork) => {
-	const {id, attributes} = artwork;
-	const {title, description, slug, url, link_label, image} = attributes;
-	const {data} = image;
-	const {url: imageURL, alternativeText} = data.attributes;
-
-	return {
-		id,
-		title,
-		description,
-		slug,
-		url,
-		link_label,
-		image: {
-			url: `${baseURL}${imageURL}`,
-			alt: alternativeText,
-		},
-	};
-});
 ---
 
+<!-- <Debug {artworkIdArr} /> -->
 <BaseLayout title={title} description={description}>
 	<div class='stack gap-20'>
 		<div class='stack gap-15'>
@@ -136,25 +152,26 @@ const works = artworksArray.map((artwork) => {
 							)
 						}
 					</div>
-
-					<div class='artworks'>
-						<div class='artworks__container'>
-							<Grid variant='offset'>
-								{
-									works.map((project) => (
-										<WorkPreview
-											type={collectionName}
-											title={project.title}
-											description={project.description}
-											slug={project.slug}
-											image={project.image.url}
-											alt={project.image.alt}
-										/>
-									))
-								}
-							</Grid>
-						</div>
-					</div>
+					{
+						works.length != 0 && (
+							<div class='artworks'>
+								<div class='artworks__container'>
+									<Grid variant='offset'>
+										{works.map((project) => (
+											<WorkPreview
+												type={collectionName}
+												title={project.title}
+												description={project.description}
+												slug={project.slug}
+												image={project.image.url}
+												alt={project.image.alt}
+											/>
+										))}
+									</Grid>
+								</div>
+							</div>
+						)
+					}
 
 					<div class='content'>
 						<Content />

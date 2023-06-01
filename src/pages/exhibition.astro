@@ -9,7 +9,12 @@ import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
-//const exhibitions = await getCollection('exhibition');
+// get all the slugs from the collection excluding nested collections but return item slug only if it's at level: 1 else remove it from the array splice
+const exhibition_slug_arr = await getCollection('exhibition').then((collection) => {
+	const slugs = collection.map((item) => item.slug);
+	const slugsLevel1 = slugs.filter((slug) => slug.split('/').length === 1);
+	return slugsLevel1;
+});
 
 const response = await fetch('http://localhost:1337/api/exhibitions?populate=*');
 const json = await response.json();
@@ -23,7 +28,6 @@ interface Exhibition {
 		title: string;
 		description: string;
 		slug: string;
-		link_label: string;
 		image: {
 			data: {
 				attributes: {
@@ -39,9 +43,10 @@ const exhibitionsData: Exhibition[] = json.data;
 
 // deconstruct exhibition data into a new object
 const collectionName = `exhibition`;
-const exhibitions = exhibitionsData.map((exhibition) => {
+const exhibitions = exhibitionsData.map((exhibition, index) => {
 	const {id, attributes} = exhibition;
-	const {title, description, slug, link_label, image} = attributes;
+	const {title, description, image} = attributes;
+	const slug = exhibition_slug_arr[index];
 	const {data} = image;
 	const {url: imageURL, alternativeText} = data.attributes;
 
@@ -50,7 +55,6 @@ const exhibitions = exhibitionsData.map((exhibition) => {
 		title,
 		description,
 		slug,
-		link_label,
 		image: {
 			url: `${baseURL}${imageURL}`,
 			alt: alternativeText,
