@@ -5,7 +5,7 @@ import {CollectionEntry, getCollection} from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 import ContactCTA from '../../components/ContactCTA.astro';
-import Hero from '../../components/Hero.astro';
+import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
 import WorkPreview from '../../components/WorkPreview.astro';
 import Grid from '../../components/Grid.astro';
@@ -153,50 +153,22 @@ const {contact} = contact_json.data.attributes;
 <BaseLayout title={title} description={description}>
 	<div class='stack gap-20'>
 		<div class='stack gap-15'>
-			<header>
-				<div class='wrapper stack gap-2'>
-					<a class='back-link' href='/exhibition/'><Icon icon='arrow-left' /> Exhibitions</a>
-					<Hero title={title} align='start'>
-						<div class='details'>
-							{
-								// its a nested exhibition
-								isNested && tag_group.length > 0 && (
-									<>
-										<div class='tags'>
-											{tag_group.map((tag) => (
-												<>
-													<Pill>{tag.text}</Pill>
-												</>
-											))}
-										</div>
-									</>
-								)
-							}
-							<p class='description'>{description}</p>
-						</div>
-					</Hero>
-				</div>
-			</header>
+			<div class='wrapper gap-2'>
+				<a class='back-link' href='/exhibition/'><Icon icon='arrow-left' /> Expositions</a>
+				<PageHero
+					baseURL={baseURL}
+					image={featuredImage}
+					isNested={isNested}
+					title={title}
+					tagline={description}
+					label={link_label}
+					linkURL={url}
+					align='start'
+					tag_group={tag_group}
+				/>
+			</div>
 			<main class='wrapper'>
 				<div class='stack gap-10 content'>
-					<div class='featured-image'>
-						{
-							featuredImage.url && featuredImage.url.trim() !== '' && (
-								<figure>
-									<img src={`${baseURL}${featuredImage.url}`} alt={featuredImage.alternativeText} />
-								</figure>
-							)
-						}
-						{
-							isNested && url.length > 0 && link_label.length > 0 && (
-								<div class='render'>
-									<a href={url} target='_blank' class='render__link'>
-										{link_label} <Icon icon='magic' size='1.2em' />
-									</a>
-								</div>
-							)
-						}
-					</div>
 					{
 						works.length != 0 && (
 							<div class='artworks'>
@@ -239,7 +211,15 @@ const {contact} = contact_json.data.attributes;
 	}
 	.featured-image {
 		position: relative;
+		margin-top: 1em;
 	}
+	.featured-image :global(img) {
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-sm);
+		background: var(--gradient-subtle);
+		border: 1px solid var(--gray-800);
+	}
+
 	.render {
 		position: absolute;
 		top: 20px;
