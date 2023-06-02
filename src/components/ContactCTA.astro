@@ -1,12 +1,19 @@
 ---
+import {Debug} from 'astro/components';
 import CallToAction from './CallToAction.astro';
 import Icon from './Icon.astro';
+
+interface Props {
+	data?: any;
+}
+
+const {data}: Props = Astro.props;
 ---
 
 <aside>
-	<h2>Vous êtes intéressés à vous procurer une de mes oeuvres?</h2>
-	<CallToAction href='mailto:barbeau.jonathan@gmail.com'>
-		Écrivez-moi!
+	<h2>{data.title}</h2>
+	<CallToAction href={data.link_url}>
+		{data.link_label}
 		<Icon icon='paper-plane-tilt' size='1.2em' />
 	</CallToAction>
 </aside>

@@ -10,6 +10,10 @@ import Icon from '../../components/Icon.astro';
 import WorkPreview from '../../components/WorkPreview.astro';
 import Grid from '../../components/Grid.astro';
 
+// for single artworks
+import Pill from '../../components/Pill.astro';
+import SingleGallery from '../../components/SingleGallery.astro';
+
 interface Props {
 	entry: CollectionEntry<'exhibition'>;
 }
@@ -24,10 +28,13 @@ export async function getStaticPaths() {
 		props: {entry},
 	}));
 }
-
+/* const projects = (await getCollection('exhibition'))
+	.filter((project) => project.data.id_tag.includes('/'))
+	.sort((a, b) => Number(b.data.id_tag) - Number(a.data.id_tag))
+	.slice(0, 4); */
 const {entry} = Astro.props;
 const {Content} = await entry.render();
-
+const id = Number(entry.id.split('.')[0]);
 const entry_slug = entry.slug;
 const isNested = entry_slug.split('/').length > 1;
 
@@ -42,6 +49,15 @@ const response = await fetch(apiUrl);
 const json = await response.json();
 const baseURL = 'http://localhost:1337';
 
+const responses = await Promise.all([
+	fetch(`${baseURL}/api/exhibitions?populate=*`),
+	fetch(`${baseURL}/api/exhibit?populate[contact][populate]=*`),
+]);
+
+const [exhibitions_response, contact_response] = responses;
+
+const [exhibitions_json, contact_json] = await Promise.all([exhibitions_response.json(), contact_response.json()]);
+
 // convert the data to an array
 
 interface Exhibition {
@@ -50,6 +66,8 @@ interface Exhibition {
 		title: string;
 		description: string;
 		slug: string;
+		url: string;
+		link_label: string;
 		image: {
 			data: {
 				attributes: {
@@ -63,6 +81,10 @@ interface Exhibition {
 				id: number;
 			}[];
 		};
+		gallery: any;
+		tag_group: {
+			text: string;
+		}[];
 	};
 }
 
@@ -76,7 +98,7 @@ const current_exhibition = exhibition_data.filter((exhibition) => exhibition.att
 
 //! destructure the current_exhibition array to get the attributes object
 
-const {title, description, image, artworks} = current_exhibition[0].attributes;
+const {title, description, url, link_label, artworks, image, gallery, tag_group} = current_exhibition[0].attributes;
 
 let featuredImage = {
 	url: '',
@@ -125,9 +147,9 @@ if (!isNested) {
 		};
 	});
 }
+const {contact} = contact_json.data.attributes;
 ---
 
-<!-- <Debug {artworkIdArr} /> -->
 <BaseLayout title={title} description={description}>
 	<div class='stack gap-20'>
 		<div class='stack gap-15'>
@@ -136,6 +158,20 @@ if (!isNested) {
 					<a class='back-link' href='/exhibition/'><Icon icon='arrow-left' /> Exhibitions</a>
 					<Hero title={title} align='start'>
 						<div class='details'>
+							{
+								// its a nested exhibition
+								isNested && tag_group.length > 0 && (
+									<>
+										<div class='tags'>
+											{tag_group.map((tag) => (
+												<>
+													<Pill>{tag.text}</Pill>
+												</>
+											))}
+										</div>
+									</>
+								)
+							}
 							<p class='description'>{description}</p>
 						</div>
 					</Hero>
@@ -149,6 +185,15 @@ if (!isNested) {
 								<figure>
 									<img src={`${baseURL}${featuredImage.url}`} alt={featuredImage.alternativeText} />
 								</figure>
+							)
+						}
+						{
+							isNested && url.length > 0 && link_label.length > 0 && (
+								<div class='render'>
+									<a href={url} target='_blank' class='render__link'>
+										{link_label} <Icon icon='magic' size='1.2em' />
+									</a>
+								</div>
 							)
 						}
 					</div>
@@ -172,14 +217,18 @@ if (!isNested) {
 							</div>
 						)
 					}
-
+					{
+						isNested && gallery.data && gallery.data.length > 0 && (
+							<SingleGallery id={id} galleryData={gallery.data} baseURL={baseURL} />
+						)
+					}
 					<div class='content'>
 						<Content />
 					</div>
 				</div>
 			</main>
 		</div>
-		<ContactCTA />
+		<ContactCTA data={contact} />
 	</div>
 </BaseLayout>
 

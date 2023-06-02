@@ -213,6 +213,9 @@ h5 {
 }
 
 @media (min-width: 50em) {
+	.wrapper {
+		padding: 2.5rem 5rem;
+	}
 	.lg\:gap-2 {
 		gap: 0.5rem;
 	}

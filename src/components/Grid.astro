@@ -49,6 +49,12 @@ const {variant} = Astro.props;
 		.grid.offset > :global(:last-child:nth-child(odd)) {
 			grid-column: 2 / 3;
 			transform: none;
+			height: 22rem;
+		}
+		/* If it's both the first and the last on the row span 2 */
+		.grid.offset > :global(:first-child:nth-child(odd):last-child:nth-child(odd)) {
+			grid-column: 1 / 3;
+			height: 40rem;
 		}
 
 		.grid.small {
