@@ -40,14 +40,14 @@ const isNested = entry_slug.split('/').length > 1;
 
 // make id a number
 
-let apiUrl = 'http://localhost:1337/api/exhibitions?populate=*';
+let apiUrl = 'https://strapi-ff64.onrender.com/api/exhibitions?populate=*';
 if (isNested) {
-	apiUrl = 'http://localhost:1337/api/artworks?populate=*';
+	apiUrl = 'https://strapi-ff64.onrender.com/api/artworks?populate=*';
 }
 
 const response = await fetch(apiUrl);
 const json = await response.json();
-const baseURL = 'http://localhost:1337';
+const baseURL = 'https://strapi-ff64.onrender.com';
 
 const responses = await Promise.all([
 	fetch(`${baseURL}/api/exhibitions?populate=*`),
@@ -108,6 +108,7 @@ let featuredImage = {
 if (image.data != undefined && image.data.attributes != undefined) {
 	featuredImage = image.data.attributes;
 }
+
 let artworkIdArr = null;
 let works = [];
 if (!isNested) {
@@ -115,7 +116,7 @@ if (!isNested) {
 	let artworksArray = [];
 
 	for (let i = 0; i < artworkIdArr.length; i++) {
-		const response = await fetch(`http://localhost:1337/api/artworks/${artworkIdArr[i]}?populate=*`);
+		const response = await fetch(`https://strapi-ff64.onrender.com/api/artworks/${artworkIdArr[i]}?populate=*`);
 		const json = await response.json();
 		artworksArray.push(json.data);
 	}
@@ -147,6 +148,7 @@ if (!isNested) {
 		};
 	});
 }
+
 const {contact} = contact_json.data.attributes;
 ---
 

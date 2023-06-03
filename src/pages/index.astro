@@ -17,7 +17,7 @@ import WorkPreview from '../components/WorkPreview.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 
-const baseURL = 'http://localhost:1337';
+const baseURL = 'https://strapi-ff64.onrender.com';
 const response = await fetch(`${baseURL}/api/exhibitions?populate=*`);
 const json = await response.json();
 
