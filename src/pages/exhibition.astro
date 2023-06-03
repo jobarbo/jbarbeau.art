@@ -9,36 +9,94 @@ import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
-const collectionName = 'exhibition';
-const projects = await getCollection('exhibition');
-
-// reorder projects by id (ascending) but first isolate the number in the id string before the '.md' extension
-projects.sort((a, b) => {
-	const aId = parseInt(a.id.match(/(\d+).md/)[1]);
-	const bId = parseInt(b.id.match(/(\d+).md/)[1]);
-
-	return aId - bId;
+// get all the slugs from the collection excluding nested collections but return item slug only if it's at level: 1 else remove it from the array splice
+const exhibition_slug_arr = await getCollection('exhibition').then((collection) => {
+	const slugs = collection.map((item) => item.slug);
+	const slugsLevel1 = slugs.filter((slug) => slug.split('/').length === 1);
+	return slugsLevel1;
 });
+const baseURL = 'http://localhost:1337';
+const response = await fetch(`${baseURL}/api/exhibitions?populate=*`);
+const json = await response.json();
+
+const responses = await Promise.all([
+	fetch(`${baseURL}/api/exhibitions?populate=*`),
+	fetch(`${baseURL}/api/exhibit?populate=*`),
+	fetch(`${baseURL}/api/exhibit?populate[contact][populate]=*`),
+]);
+
+const [exhibitions_response, exhibits_response, contact_response] = responses;
+
+const [exhibitions_json, exhibits_json, contact_json] = await Promise.all([
+	exhibitions_response.json(),
+	exhibits_response.json(),
+	contact_response.json(),
+]);
+// convert the data to an array
+
+interface Exhibition {
+	id: number;
+	attributes: {
+		title: string;
+		description: string;
+		slug: string;
+		image: {
+			data: {
+				attributes: {
+					url: string;
+					alternativeText: string;
+				};
+			};
+		};
+	};
+}
+
+const exhibitionsData: Exhibition[] = json.data;
+
+// deconstruct exhibition data into a new object
+const collectionName = `exhibition`;
+
+const exhibitions = exhibitionsData.map((exhibition, index) => {
+	const {id, attributes} = exhibition;
+	const {title, description, image} = attributes;
+	const slug = exhibition_slug_arr[index];
+	const {data} = image;
+	const {url: imageURL, alternativeText} = data.attributes;
+	return {
+		id,
+		title,
+		description,
+		slug,
+		image: {
+			url: `${baseURL}${imageURL}`,
+			alt: alternativeText,
+		},
+	};
+});
+
+const {title, description} = exhibits_json.data.attributes;
+const {contact} = contact_json.data.attributes;
 ---
 
-<BaseLayout title='JBarbeau.art x Korrigane ' description='Exposition des oeuvres de Jonathan Barbeau à la korrigane.'>
+<BaseLayout title='Expositions en cours' description='Exposition des oeuvres de Jonathan Barbeau'>
 	<div class='stack gap-20'>
 		<main class='wrapper stack gap-8'>
-			<Hero
-				title='Vernissage Korrigane'
-				tagline='Voici mes oeuvres présentement exposées à la Korrigane cet été.'
-				align='start'
-			/>
+			<Hero title={title} tagline={description} align='start' />
 			<Grid variant='offset'>
 				{
-					projects.map((project) => (
-						<li>
-							<ExhibitionPreview type={collectionName} project={project} />
-						</li>
+					exhibitions.map((project) => (
+						<ExhibitionPreview
+							type={collectionName}
+							title={project.title}
+							description={project.description}
+							slug={project.slug}
+							image={project.image.url}
+							alt={project.image.alt}
+						/>
 					))
 				}
 			</Grid>
 		</main>
-		<ContactCTA />
+		<ContactCTA data={contact} />
 	</div>
 </BaseLayout>

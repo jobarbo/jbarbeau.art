@@ -1,10 +1,12 @@
 ---
-title: Bas Firmament
-slug: korrigane/9
+level: 1
+id_tag: lezard
+title: Korrigane - Exposition Saisonière
+slug: lezard
 publishDate: 2023-05-15 12:00:00
-img: /assets/9_thumb.webp
+img: /assets/korrigane.jpg
 collection: exhibition
-img_alt: Thumbnail for the single post of the artwork
+img_alt: Thumbnail of art displayed at La Korrigane
 description: |
   Perlin noise algorithm that draws a sandy beach
 tags:

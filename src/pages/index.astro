@@ -1,4 +1,5 @@
 ---
+import {Debug} from 'astro/components';
 import {getCollection} from 'astro:content';
 
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
@@ -14,38 +15,90 @@ import WorkPreview from '../components/WorkPreview.astro';
 
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
-import Skills from '../components/Skills.astro';
 import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 
-// Content Fetching: List four newest work projects
-const projects = (await getCollection('exhibition'))
-	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
+const baseURL = 'http://localhost:1337';
+const response = await fetch(`${baseURL}/api/exhibitions?populate=*`);
+const json = await response.json();
+
+const responses = await Promise.all([
+	fetch(`${baseURL}/api/exhibitions?populate=*`),
+	fetch(`${baseURL}/api/home?populate[hero][populate]=*`),
+	fetch(`${baseURL}/api/home?populate[featured_exhibits][populate]=*`),
+	fetch(`${baseURL}/api/home?populate[featured_work][populate]=*`),
+	fetch(`${baseURL}/api/home?populate[marketplace][populate]=*`),
+	fetch(`${baseURL}/api/home?populate[contact][populate]=*`),
+]);
+
+const [
+	exhibitions_response,
+	hero_response,
+	featured_exhibitions_response,
+	featured_work_response,
+	marketplaces_response,
+	contact_response,
+] = responses;
+
+const [exhibition_json, hero_json, featured_exhibitions_json, featured_work_json, marketplaces_json, contact_json] =
+	await Promise.all([
+		exhibitions_response.json(),
+		hero_response.json(),
+		featured_exhibitions_response.json(),
+		featured_work_response.json(),
+		marketplaces_response.json(),
+		contact_response.json(),
+	]);
+
+// convert the data to an array
+
+interface Exhibition {
+	id: number;
+	attributes: {
+		title: string;
+		description: string;
+		slug: string;
+		ongoing: boolean;
+		image: {
+			data: {
+				attributes: {
+					url: string;
+					alternativeText: string;
+				};
+			};
+		};
+	};
+}
+
+// pick only 4 exhibitions
+const exhibitionsData: Exhibition[] = json.data;
+const ongoingExhibitions = exhibitionsData.filter((exhibition) => exhibition.attributes.ongoing === true).slice(0, 2); // pick only 4 exhibitions
+// deconstruct exhibition data into a new object
+const projects = ongoingExhibitions.map((exhibition, index) => {
+	const {id, attributes} = exhibition;
+	const {title, description, slug, ongoing, image} = attributes;
+	const {data} = image;
+	const {url: imageURL, alternativeText} = data.attributes;
+
+	return {
+		id,
+		title,
+		description,
+		slug,
+		ongoing,
+		image: {
+			url: `${baseURL}${imageURL}`,
+			alt: alternativeText,
+		},
+	};
+});
+
+const {hero} = hero_json.data.attributes;
+const {featured_exhibits} = featured_exhibitions_json.data.attributes;
+const {featured_work} = featured_work_json.data.attributes;
+const {marketplace} = marketplaces_json.data.attributes;
+const {contact} = contact_json.data.attributes;
 
 const collectionName = 'exhibition';
-
-const web3Marketplace = [
-	{
-		name: 'Foundation',
-		url: 'https://foundation.app/@Jbarbeau',
-	},
-	{
-		name: 'Teia.art',
-		url: 'https://teia.art/Jbarbeau.art',
-	},
-	{
-		name: 'OBJKT',
-		url: 'https://objkt.com/profile/jbarbeau/created',
-	},
-	{
-		name: 'FX(hash).',
-		url: 'https://www.fxhash.xyz/u/jbarbeau.art',
-	},
-	{
-		name: 'Versum',
-		url: 'https://versum.xyz/user/tz1aTHPgADTSw2a7kZe9b1ASpYvNmkc1vNDB/created',
-	},
-];
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -56,16 +109,15 @@ const web3Marketplace = [
 		<div class='wrapper stack gap-8 lg:gap-20'>
 			<header class='hero'>
 				<img alt='Jonathan Barbeau Profile Picture' width='480' height='620' src='/assets/photo_jb.jpg' />
-				<Hero
-					topline='Salut! Je m’appelle'
-					title=' Jonathan Barbeau'
-					tagline='Je suis un artiste génératif et développeur basé à Québec, Canada.'
-					align='start'
-				>
+				<Hero topline={hero.surtitle} title={hero.title} tagline={hero.description} align='start'>
 					<div class='roles'>
-						<Pill><Icon icon='artist' size='1.33em' /> Artist</Pill>
-						<Pill><Icon icon='code' size='1.33em' /> Developer</Pill>
-						<Pill><Icon icon='designer' size='1.33em' /> Designer</Pill>
+						{
+							hero.skills.map((skill) => (
+								<Pill>
+									<Icon icon={skill.icon} size='1.33em' /> {skill.skill}
+								</Pill>
+							))
+						}
 					</div>
 				</Hero>
 			</header>
@@ -74,7 +126,7 @@ const web3Marketplace = [
 		<main class='wrapper stack gap-20 lg:gap-48'>
 			<section class='section with-cta'>
 				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Oeuvres en vedettes</h3>
+					<h3>{featured_exhibits.title}</h3>
 					<!--<p>Voici mes créations pref!</p>-->
 				</header>
 
@@ -83,7 +135,14 @@ const web3Marketplace = [
 						{
 							projects.map((project) => (
 								<li data-gallery>
-									<ExhibitionPreview type={collectionName} project={project} />
+									<ExhibitionPreview
+										type={collectionName}
+										title={project.title}
+										description={project.description}
+										slug={project.slug}
+										image={project.image.url}
+										alt={project.image.alt}
+									/>
 								</li>
 							))
 						}
@@ -91,8 +150,8 @@ const web3Marketplace = [
 				</div>
 
 				<div class='cta'>
-					<CallToAction href='/exhibition/'>
-						Voir tout!
+					<CallToAction href={featured_exhibits.link_url}>
+						{featured_exhibits.link_label}
 						<Icon icon='arrow-right' size='1.2em' />
 					</CallToAction>
 				</div>
@@ -100,14 +159,14 @@ const web3Marketplace = [
 
 			<section class='section bg-variant'>
 				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>Art Génératif et Blockchain</h3>
-					<p>Certaines de mes oeuvres sont aussi disponibles sur plusieurs plateformes Web3. Les voici.</p>
+					<h3>{marketplace.title}</h3>
+					<p>{marketplace.description}</p>
 				</header>
 
 				<div class='gallery'>
 					<Grid variant='small'>
 						{
-							web3Marketplace.map((marketplace) => (
+							marketplace.card.map((marketplace) => (
 								<a class='web3link' target='_blank' href={marketplace.url}>
 									<li class='mention-card'>{marketplace.name}</li>
 								</a>
@@ -118,7 +177,7 @@ const web3Marketplace = [
 			</section>
 		</main>
 
-		<ContactCTA />
+		<ContactCTA data={contact} />
 	</div>
 </BaseLayout>
 
