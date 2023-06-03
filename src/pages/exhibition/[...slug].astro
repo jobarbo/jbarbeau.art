@@ -111,6 +111,7 @@ if (image.data != undefined && image.data.attributes != undefined) {
 
 let artworkIdArr = null;
 let works = [];
+let works_slug_arr = [];
 if (!isNested) {
 	artworkIdArr = artworks.data.map((artwork) => artwork.id);
 	let artworksArray = [];
@@ -121,9 +122,11 @@ if (!isNested) {
 		artworksArray.push(json.data);
 	}
 
-	const works_slug_arr = await getCollection('exhibition').then((collection) => {
+	works_slug_arr = await getCollection('exhibition').then((collection) => {
 		const slugs = collection.map((item) => item.slug);
 		const slugsLevel1 = slugs.filter((slug) => slug.split('/').length === 2);
+		// order by the the number that follows the slash ie 1, 2, 3, 4 ... 10 etc
+		slugsLevel1.sort((a, b) => Number(a.split('/')[1]) - Number(b.split('/')[1]));
 		return slugsLevel1;
 	});
 
