@@ -15,7 +15,7 @@ const exhibition_slug_arr = await getCollection('exhibition').then((collection) 
 	const slugsLevel1 = slugs.filter((slug) => slug.split('/').length === 1);
 	return slugsLevel1;
 });
-const baseURL = 'http://localhost:1337';
+const baseURL = 'https://strapi-ff64.onrender.com';
 const response = await fetch(`${baseURL}/api/exhibitions?populate=*`);
 const json = await response.json();
 
