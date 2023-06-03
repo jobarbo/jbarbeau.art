@@ -19,7 +19,7 @@ const {type, title, slug, description, image, alt} = Astro.props;
 <!-- test -->
 <a class='card' href={`/${type}/${slug}`}>
 	<span class='title'>{title}</span>
-	<img src={image} alt={alt || ''} loading='lazy' decoding='async' />
+	<img src={image} alt={alt || ''} decoding='async' />
 </a>
 
 <style>
