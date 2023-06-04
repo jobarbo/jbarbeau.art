@@ -46,10 +46,11 @@ const {type, title, slug, description, image, alt} = Astro.props;
 	.title {
 		grid-area: 1 / 1 / 2 / 2;
 		z-index: 1;
-		padding: 1rem 4rem;
+		padding: 0.5rem 2rem;
 		background: var(--gray-999);
 		color: var(--gray-200);
 		font-size: 16px;
+		border-radius: 0 0 0.5rem 0;
 	}
 
 	img {
@@ -68,6 +69,7 @@ const {type, title, slug, description, image, alt} = Astro.props;
 		.title {
 			font-size: 24px;
 			border-radius: 0 0 1.5rem 0;
+			padding: 1rem 4rem;
 		}
 	}
 </style>
