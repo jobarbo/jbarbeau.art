@@ -333,17 +333,14 @@ const {contact} = contact_json.data.attributes;
 		color: var(--gray-0);
 	}
 
-	.back-link,
-	.content :global(a) {
+	.back-link {
 		text-decoration: 1px solid underline transparent;
 		text-underline-offset: 0.25em;
 		transition: text-decoration-color var(--theme-transition);
 	}
 
 	.back-link:hover,
-	.back-link:focus,
-	.content :global(a:hover),
-	.content :global(a:focus) {
+	.back-link:focus {
 		text-decoration-color: currentColor;
 	}
 

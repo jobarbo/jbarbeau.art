@@ -18,7 +18,7 @@ const {type, title, slug, description, image, alt} = Astro.props;
 <!-- test -->
 <a class='card' href={`/${type}/${slug}`}>
 	<span class='title'>{title}</span>
-	<img src={image} alt={alt || ''} loading='lazy' decoding='async' />
+	<img class='image' src={image} alt={alt || ''} loading='lazy' decoding='async' />
 </a>
 
 <style>
@@ -35,11 +35,20 @@ const {type, title, slug, description, image, alt} = Astro.props;
 		font-family: var(--font-brand);
 		font-size: var(--text-lg);
 		font-weight: 500;
-		transition: box-shadow var(--theme-transition);
+		transition: box-shadow 0.2s ease-in-out;
 	}
 
 	.card:hover {
 		box-shadow: var(--shadow-md);
+		text-decoration: none;
+	}
+
+	.card:hover .image {
+		transform: scale(1.05);
+	}
+
+	.image {
+		transition: transform 0.8s ease-in-out;
 	}
 
 	.title {
@@ -51,6 +60,10 @@ const {type, title, slug, description, image, alt} = Astro.props;
 		color: var(--gray-200);
 		border-radius: 0.375rem;
 		font-size: 16px;
+	}
+
+	.card:hover .title {
+		text-decoration: none;
 	}
 
 	img {
@@ -68,6 +81,8 @@ const {type, title, slug, description, image, alt} = Astro.props;
 
 		.title {
 			border-radius: 0.9375rem;
+			font-size: 24px;
+			padding: 0.5rem 2rem;
 		}
 	}
 </style>
