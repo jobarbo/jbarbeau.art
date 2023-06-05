@@ -1,5 +1,6 @@
 ---
 import {Debug} from 'astro/components';
+import {marked} from 'marked';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 interface Props {
@@ -20,12 +21,14 @@ interface Props {
 	}[];
 }
 
-const {align = 'center', tagline, topline, title, baseURL, image, isNested, label, linkURL, tag_group} = Astro.props;
+let {align = 'center', tagline, topline, title, baseURL, image, isNested, label, linkURL, tag_group} = Astro.props;
+
+tagline = tagline ? marked(tagline) : '';
 ---
 
 <header class:list={['hero stack gap-4', align]}>
 	<div class='hero-container content stack gap-2'>
-		<div class='hero-info'>
+		<div class='hero-info --desktop'>
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 			{
@@ -42,22 +45,70 @@ const {align = 'center', tagline, topline, title, baseURL, image, isNested, labe
 					</div>
 				)
 			}
-			{tagline && <p class='tagline'>{tagline}</p>}
+			{
+				tagline && (
+					<div class='tagline markdown'>
+						<Fragment set:html={tagline} />{' '}
+					</div>
+				)
+			}
 		</div>
-		<div class='hero-image'>
+		<div class='hero-image --desktop'>
 			{
 				image.url && image.url.trim() !== '' && (
-					<figure>
+					<figure class='hero-figure'>
 						<img src={`${baseURL}${image.url}`} alt={image.alternativeText} />
+
+						{isNested && linkURL.length > 0 && label.length > 0 && (
+							<div class='hero-render'>
+								<a href={linkURL} target='_blank' class='hero-link'>
+									{label} <Icon icon='magic' size='1.2em' />
+								</a>
+							</div>
+						)}
 					</figure>
 				)
 			}
+		</div>
+		<div class='hero-info --mobile'>
+			{topline && <p class='tagline'>{topline}</p>}
+			{title && <h1 class='title'>{title}</h1>}
+
 			{
-				isNested && linkURL.length > 0 && label.length > 0 && (
-					<div class='hero-render'>
-						<a href={linkURL} target='_blank' class='hero-link'>
-							{label} <Icon icon='magic' size='1.2em' />
-						</a>
+				// its a nested exhibition
+				isNested && tag_group.length > 0 && (
+					<div class='hero-tags-container'>
+						<div class='hero-tags-list'>
+							{tag_group.map((tag) => (
+								<h>
+									<Pill>{tag.text}</Pill>
+								</h>
+							))}
+						</div>
+					</div>
+				)
+			}
+			<div class='hero-image --mobile'>
+				{
+					image.url && image.url.trim() !== '' && (
+						<figure class='hero-figure'>
+							<img src={`${baseURL}${image.url}`} alt={image.alternativeText} />
+
+							{isNested && linkURL.length > 0 && label.length > 0 && (
+								<div class='hero-render'>
+									<a href={linkURL} target='_blank' class='hero-link'>
+										{label} <Icon icon='magic' size='1.2em' />
+									</a>
+								</div>
+							)}
+						</figure>
+					)
+				}
+			</div>
+			{
+				tagline && (
+					<div class='tagline markdown'>
+						<Fragment set:html={tagline} />{' '}
 					</div>
 				)
 			}
@@ -73,8 +124,11 @@ const {align = 'center', tagline, topline, title, baseURL, image, isNested, labe
 	}
 
 	.hero {
-		font-size: var(--text-lg);
+		font-size: var(--text-md);
 		text-align: center;
+	}
+	.hero-info.--desktop {
+		display: none;
 	}
 	.hero-container {
 		display: flex;
@@ -85,6 +139,9 @@ const {align = 'center', tagline, topline, title, baseURL, image, isNested, labe
 		position: relative;
 		margin-top: 2em;
 	}
+	.hero-image.--desktop {
+		display: none;
+	}
 	.hero-image :global(img) {
 		border-radius: 1.5rem;
 		box-shadow: var(--shadow-sm);
@@ -93,13 +150,23 @@ const {align = 'center', tagline, topline, title, baseURL, image, isNested, labe
 	}
 	.title,
 	.tagline {
-		max-width: 37ch;
 		margin-inline: auto;
+	}
+
+	.tagline {
+		margin: 1em 0;
+		text-align: left;
+	}
+	.tagline p {
+		margin-bottom: 1em;
+		text-align: left;
 	}
 
 	.title {
 		font-size: var(--text-2xl);
 		color: var(--gray-0);
+		margin-bottom: 0.5em;
+		text-align: left;
 	}
 
 	.hero-tags-container {
@@ -108,7 +175,7 @@ const {align = 'center', tagline, topline, title, baseURL, image, isNested, labe
 		padding: 0.5rem;
 		margin: 1rem 0;
 		justify-content: space-between;
-		align-items: center;
+		align-items: flex-start;
 	}
 
 	.hero-tags-list {
@@ -180,10 +247,26 @@ const {align = 'center', tagline, topline, title, baseURL, image, isNested, labe
 			margin-top: 0;
 			margin-left: 1em;
 			flex: 1;
+			align-items: flex-start;
+			height: 100%;
+			justify-content: flex-end;
+			align-self: baseline;
 		}
-		.hero-info {
+		.hero-image.--desktop {
+			display: flex;
+		}
+
+		.hero-figure {
+			width: 90%;
+			position: relative;
+		}
+		.hero-info.--desktop {
 			flex: 1;
 			align-self: flex-start;
+			display: block;
+		}
+		.hero-info.--mobile {
+			display: none;
 		}
 		.hero-link {
 			padding: 1.125rem 2.5rem;

@@ -97,8 +97,16 @@ let collectionName = 'exhibition';
 const current_exhibition = exhibition_data.filter((exhibition) => exhibition.attributes.slug === entry_slug);
 
 //! destructure the current_exhibition array to get the attributes object
+let exhibition_slug = '';
+let {title, slug, description, url, link_label, artworks, image, gallery, tag_group} = current_exhibition[0].attributes;
 
-const {title, description, url, link_label, artworks, image, gallery, tag_group} = current_exhibition[0].attributes;
+if (isNested) {
+	let {title, slug, description, url, link_label, artworks, image, gallery, tag_group, exhibition} =
+		current_exhibition[0].attributes;
+
+	// Assign the value of exhibition.data.attributes.slug to exhibition_slug
+	exhibition_slug = exhibition.data.attributes.slug;
+}
 
 let featuredImage = {
 	url: '',
@@ -159,7 +167,10 @@ const {contact} = contact_json.data.attributes;
 	<div class='stack gap-20'>
 		<div class='stack gap-15'>
 			<div class='wrapper gap-2'>
-				<a class='back-link' href='/exhibition/'><Icon icon='arrow-left' /> Expositions</a>
+				<a class='back-link' href=`/exhibition/${exhibition_slug}`>
+					<Icon icon='arrow-left' /> Retour
+				</a>
+
 				<PageHero
 					baseURL={baseURL}
 					image={featuredImage}
@@ -247,12 +258,6 @@ const {contact} = contact_json.data.attributes;
 		white-space: nowrap;
 	}
 
-	@media (min-width: 768px) {
-		.render__link {
-			font-size: var(--text-lg);
-		}
-	}
-
 	/* Overlay for hover effects. */
 	.render__link::after {
 		content: '';
@@ -268,14 +273,18 @@ const {contact} = contact_json.data.attributes;
 		background-color: hsla(var(--gray-999-basis), 0.3);
 	}
 
-	@media (min-width: 50em) {
-		.render__link {
-			padding: 1.125rem 2.5rem;
-			font-size: var(--text-xl);
-		}
-	}
 	.back-link {
-		display: none;
+		background-color: var(--gray-0);
+		color: var(--gray-900);
+		padding: 0.5em 1em;
+		border-radius: 50px;
+		width: auto;
+		display: table;
+		font-size: 14px;
+	}
+
+	.back-link svg {
+		margin-right: 0.5em;
 	}
 
 	.details {
@@ -300,7 +309,7 @@ const {contact} = contact_json.data.attributes;
 	}
 
 	.content {
-		max-width: 83rem;
+		max-width: 1680px;
 		margin-inline: auto;
 	}
 
@@ -346,8 +355,9 @@ const {contact} = contact_json.data.attributes;
 
 	@media (min-width: 768px) {
 		.back-link {
-			display: block;
+			display: table;
 			align-self: flex-start;
+			font-size: 16px;
 		}
 
 		.details {
@@ -360,10 +370,14 @@ const {contact} = contact_json.data.attributes;
 		.content :global(blockquote) {
 			font-size: var(--text-2xl);
 		}
+
+		.render__link {
+			font-size: var(--text-lg);
+		}
 	}
 	@media (min-width: 1024px) {
 		.back-link {
-			display: block;
+			display: table;
 			align-self: flex-start;
 		}
 
@@ -376,6 +390,10 @@ const {contact} = contact_json.data.attributes;
 
 		.content :global(blockquote) {
 			font-size: var(--text-2xl);
+		}
+		.render__link {
+			padding: 1.125rem 2.5rem;
+			font-size: var(--text-xl);
 		}
 	}
 </style>

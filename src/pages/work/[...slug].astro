@@ -63,7 +63,16 @@ const {Content} = await entry.render();
 	}
 
 	.back-link {
-		display: none;
+		background-color: var(--gray-0);
+		color: var(--gray-900);
+		padding: 1em 1.5em;
+		border-radius: 50px;
+		width: auto;
+		display: table;
+	}
+
+	.back-link svg {
+		margin-right: 0.5em;
 	}
 
 	.details {
@@ -88,7 +97,7 @@ const {Content} = await entry.render();
 	}
 
 	.content {
-		max-width: 65ch;
+		max-width: 1680px;
 		margin-inline: auto;
 	}
 
@@ -137,7 +146,7 @@ const {Content} = await entry.render();
 
 	@media (min-width: 50em) {
 		.back-link {
-			display: block;
+			display: table;
 			align-self: flex-start;
 		}
 
