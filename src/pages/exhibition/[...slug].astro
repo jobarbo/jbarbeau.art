@@ -168,7 +168,8 @@ const {contact} = contact_json.data.attributes;
 		<div class='stack gap-15'>
 			<div class='wrapper gap-2'>
 				<a class='back-link' href=`/exhibition/${exhibition_slug}`>
-					<Icon icon='arrow-left' /> Retour
+					<Icon icon='arrow-left' />
+					<span>Retour</span>
 				</a>
 
 				<PageHero
@@ -283,8 +284,8 @@ const {contact} = contact_json.data.attributes;
 		font-size: 14px;
 	}
 
-	.back-link svg {
-		margin-right: 0.5em;
+	.back-link span {
+		margin-left: 0.5em;
 	}
 
 	.details {
