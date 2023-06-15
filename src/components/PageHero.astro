@@ -5,6 +5,8 @@ import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 interface Props {
 	title?: string;
+	price?: number;
+	is_available?: boolean;
 	tagline?: string;
 	topline?: string;
 	align?: 'start' | 'center';
@@ -21,9 +23,30 @@ interface Props {
 	}[];
 }
 
-let {align = 'center', tagline, topline, title, baseURL, image, isNested, label, linkURL, tag_group} = Astro.props;
+let {
+	align = 'center',
+	tagline,
+	topline,
+	title,
+	baseURL,
+	image,
+	isNested,
+	label,
+	linkURL,
+	tag_group,
+	price,
+	is_available,
+} = Astro.props;
 
 tagline = tagline ? marked(tagline) : '';
+let is_available_string = '';
+let is_available_class = 'hero-availability';
+if (is_available) {
+	is_available_string = 'Disponible';
+} else {
+	is_available_string = 'Vendu';
+	is_available_class = 'hero-availability hero-availability--sold';
+}
 ---
 
 <header class:list={['hero stack gap-4', align]}>
@@ -31,6 +54,16 @@ tagline = tagline ? marked(tagline) : '';
 		<div class='hero-info --desktop'>
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
+			{
+				price && (
+					<div class='hero-price-container'>
+						<p class='hero-price'>{price}$</p>
+						<div class='hero-availability-container'>
+							<p class='hero-availability'>{is_available_string}</p>
+						</div>
+					</div>
+				)
+			}
 			{
 				// its a nested exhibition
 				isNested && tag_group.length > 0 && (
@@ -74,15 +107,19 @@ tagline = tagline ? marked(tagline) : '';
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 
+			<div class='hero-price-container'>
+				<p class='hero-price'>{price}$</p>
+				<div class='hero-availability-container'>
+					<p class={`${is_available_class}`}>{is_available_string}</p>
+				</div>
+			</div>
 			{
 				// its a nested exhibition
 				isNested && tag_group.length > 0 && (
 					<div class='hero-tags-container'>
 						<div class='hero-tags-list'>
 							{tag_group.map((tag) => (
-								<h>
-									<Pill>{tag.text}</Pill>
-								</h>
+								<Pill>{tag.text}</Pill>
 							))}
 						</div>
 					</div>
@@ -126,6 +163,37 @@ tagline = tagline ? marked(tagline) : '';
 	.hero {
 		font-size: var(--text-md);
 		text-align: center;
+	}
+	.hero-availability-container {
+		border-radius: 99rem;
+		padding: 0.5em 1.5em;
+		width: fit-content;
+		display: block;
+	}
+	.hero-availability {
+		color: rgb(11, 173, 135);
+		width: auto;
+		display: block;
+	}
+	.hero-availability--sold {
+		color: rgb(255, 0, 0);
+	}
+	.hero-price-container {
+		margin-top: 1em;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	.hero-price {
+		color: var(--gray-0);
+		font-size: 24px;
+	}
+	.hero-tags-list {
+		width: 100%;
+		display: grid;
+		grid-template-columns: auto auto;
+		gap: 0;
 	}
 	.hero-info.--desktop {
 		display: none;
@@ -178,13 +246,6 @@ tagline = tagline ? marked(tagline) : '';
 		align-items: flex-start;
 	}
 
-	.hero-tags-list {
-		display: flex;
-		gap: 0.5rem;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-	}
-
 	.hero-render {
 		position: absolute;
 		top: 20px;
@@ -235,6 +296,12 @@ tagline = tagline ? marked(tagline) : '';
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
+		}
+
+		.hero-tags-list {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			gap: 0;
 		}
 
 		.hero-container {

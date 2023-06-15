@@ -68,6 +68,8 @@ interface Exhibition {
 		slug: string;
 		url: string;
 		link_label: string;
+		price: number;
+		is_available: boolean;
 		image: {
 			data: {
 				attributes: {
@@ -99,13 +101,28 @@ const current_exhibition = exhibition_data.filter((exhibition) => exhibition.att
 //! destructure the current_exhibition array to get the attributes object
 let exhibition_slug = '';
 let {title, slug, description, url, link_label, artworks, image, gallery, tag_group} = current_exhibition[0].attributes;
-
+let availability = false;
+let currentPrice = 0;
 if (isNested) {
-	let {title, slug, description, url, link_label, artworks, image, gallery, tag_group, exhibition} =
-		current_exhibition[0].attributes;
+	let {
+		title,
+		slug,
+		description,
+		url,
+		link_label,
+		artworks,
+		image,
+		gallery,
+		tag_group,
+		exhibition,
+		is_available,
+		price,
+	} = current_exhibition[0].attributes;
 
 	// Assign the value of exhibition.data.attributes.slug to exhibition_slug
 	exhibition_slug = exhibition.data.attributes.slug;
+	availability = is_available;
+	currentPrice = price;
 }
 
 let featuredImage = {
@@ -182,6 +199,8 @@ const {contact} = contact_json.data.attributes;
 					linkURL={url}
 					align='start'
 					tag_group={tag_group}
+					is_available={availability}
+					price={currentPrice}
 				/>
 			</div>
 			<main class='wrapper'>
