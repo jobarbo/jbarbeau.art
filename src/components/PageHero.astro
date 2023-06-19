@@ -57,7 +57,7 @@ if (is_available) {
 			{
 				price != 0 && isNested && (
 					<div class='hero-price-container'>
-						{is_available ? <p class='hero-price' /> : <p class='hero-price hero-price--sold'>{price}$</p>}
+						{is_available ? <p class='hero-price'>{price}$</p> : <p class='hero-price hero-price--sold'>{price}$</p>}
 						<div class='hero-availability-container'>
 							<p class={`${is_available_class}`}>{is_available_string}</p>
 						</div>
@@ -68,13 +68,11 @@ if (is_available) {
 				// its a nested exhibition
 				isNested && tag_group.length > 0 && (
 					<div class='hero-tags-container'>
-						<div class='hero-tags-list'>
+						<ul class='hero-tags-list'>
 							{tag_group.map((tag) => (
-								<h>
-									<Pill>{tag.text}</Pill>
-								</h>
+								<li class='hero-tags-item'>{tag.text}</li>
 							))}
-						</div>
+						</ul>
 					</div>
 				)
 			}
@@ -110,7 +108,7 @@ if (is_available) {
 			{
 				price != 0 && isNested && (
 					<div class='hero-price-container'>
-						{is_available ? <p class='hero-price' /> : <p class='hero-price hero-price--sold'>{price}$</p>}
+						{is_available ? <p class='hero-price'>{price}$</p> : <p class='hero-price hero-price--sold'>{price}$</p>}
 						<div class='hero-availability-container'>
 							<p class={`${is_available_class}`}>{is_available_string}</p>
 						</div>
@@ -121,11 +119,11 @@ if (is_available) {
 				// its a nested exhibition
 				isNested && tag_group.length > 0 && (
 					<div class='hero-tags-container'>
-						<div class='hero-tags-list'>
+						<ul class='hero-tags-list'>
 							{tag_group.map((tag) => (
-								<Pill>{tag.text}</Pill>
+								<li class='hero-tags-item'>{tag.text}</li>
 							))}
-						</div>
+						</ul>
 					</div>
 				)
 			}
@@ -203,6 +201,7 @@ if (is_available) {
 		display: grid;
 		grid-template-columns: auto auto;
 		gap: 0;
+		padding-left: 0;
 	}
 	.hero-info.--desktop {
 		display: none;
@@ -306,7 +305,10 @@ if (is_available) {
 			justify-content: space-between;
 			align-items: center;
 		}
-
+		.hero-price {
+			color: var(--gray-0);
+			font-size: 32px;
+		}
 		.hero-tags-list {
 			display: grid;
 			grid-template-columns: auto auto auto;
