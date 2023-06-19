@@ -55,9 +55,9 @@ if (is_available) {
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 			{
-				price && (
+				price != 0 && isNested && (
 					<div class='hero-price-container'>
-						<p class='hero-price'>{price}$</p>
+						{is_available ? <p class='hero-price' /> : <p class='hero-price hero-price--sold'>{price}$</p>}
 						<div class='hero-availability-container'>
 							<p class={`${is_available_class}`}>{is_available_string}</p>
 						</div>
@@ -107,12 +107,16 @@ if (is_available) {
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 
-			<div class='hero-price-container'>
-				<p class='hero-price'>{price}$</p>
-				<div class='hero-availability-container'>
-					<p class={`${is_available_class}`}>{is_available_string}</p>
-				</div>
-			</div>
+			{
+				price != 0 && isNested && (
+					<div class='hero-price-container'>
+						{is_available ? <p class='hero-price' /> : <p class='hero-price hero-price--sold'>{price}$</p>}
+						<div class='hero-availability-container'>
+							<p class={`${is_available_class}`}>{is_available_string}</p>
+						</div>
+					</div>
+				)
+			}
 			{
 				// its a nested exhibition
 				isNested && tag_group.length > 0 && (
@@ -188,6 +192,11 @@ if (is_available) {
 	.hero-price {
 		color: var(--gray-0);
 		font-size: 24px;
+	}
+	.hero-price--sold {
+		color: var(--gray-0);
+		font-size: 24px;
+		text-decoration: line-through;
 	}
 	.hero-tags-list {
 		width: 100%;
