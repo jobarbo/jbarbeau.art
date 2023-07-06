@@ -42,9 +42,9 @@ tagline = tagline ? marked(tagline) : '';
 let is_available_string = '';
 let is_available_class = 'hero-availability';
 if (is_available) {
-	is_available_string = 'Disponible';
+	is_available_string = 'Available';
 } else {
-	is_available_string = 'Vendu';
+	is_available_string = 'SOLD';
 	is_available_class = 'hero-availability hero-availability--sold';
 }
 ---
@@ -93,7 +93,7 @@ if (is_available) {
 						{isNested && linkURL.length > 0 && label.length > 0 && (
 							<div class='hero-render'>
 								<a href={linkURL} target='_blank' class='hero-link'>
-									{label} <Icon icon='magic' size='1.2em' />
+									Click to render live! <Icon icon='magic' size='1.2em' />
 								</a>
 							</div>
 						)}
@@ -197,12 +197,19 @@ if (is_available) {
 		text-decoration: line-through;
 	}
 	.hero-tags-list {
-		width: 100%;
-		display: grid;
-		grid-template-columns: auto auto;
-		gap: 0.5em;
+		list-style: none;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		border: 1px solid var(--gray-200);
+		width: fit-content;
 		padding-left: 0;
-		text-align: left;
+	}
+	.hero-tags-item {
+		padding: 0.5em 1em;
+		&:not(:last-child) {
+			border-right: 1px solid var(--gray-200);
+		}
 	}
 	.hero-info.--desktop {
 		display: none;
@@ -249,7 +256,6 @@ if (is_available) {
 	.hero-tags-container {
 		display: flex;
 		flex-direction: column;
-		padding: 0.5rem;
 		margin: 1rem 0;
 		justify-content: space-between;
 		align-items: flex-start;
@@ -309,11 +315,6 @@ if (is_available) {
 		.hero-price {
 			color: var(--gray-0);
 			font-size: 32px;
-		}
-		.hero-tags-list {
-			display: grid;
-			grid-template-columns: auto auto auto;
-			gap: 0;
 		}
 
 		.hero-container {
