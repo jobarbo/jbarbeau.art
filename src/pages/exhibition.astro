@@ -9,7 +9,7 @@ import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
-// get all the slugs from the collection excluding nested collections but return item slug only if it's at level: 1 else remove it from the array splice
+// get all the slugs from the collection excluding nested collections but return item slug only if it's at level: 1 else remove it from the array splices
 const exhibition_slug_arr = await getCollection('exhibition').then((collection) => {
 	const slugs = collection.map((item) => item.slug);
 	const slugsLevel1 = slugs.filter((slug) => slug.split('/').length === 1);
