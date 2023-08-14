@@ -18,55 +18,75 @@ import Hero from '../components/Hero.astro';
 ---
 
 <BaseLayout title='About | Jonathan Barbeau' description='About Jonathan Barbeau Lorem Ipsum'>
-	<div class='stack gap-20'>
-		<main class='wrapper about'>
-			<Hero title='About' tagline='Thanks for stopping by. Read below to learn more about myself and my background.'>
-				<img width='1553' height='873' src='/assets/minime.jpg' alt='Image of Jonathan Barbeau' />
-			</Hero>
+	<div class='stack gap-5 lg:gap-10'>
+		<div class='wrapper stack gap-8 lg:gap-20'>
+			<div class='hero'>
+				<img width='1553' height='873' src='/assets/photo_jb.jpg' alt='Image of Jonathan Barbeau' />
+				<Hero
+					topline='Hi i’m'
+					title='Jonathan Barbeau'
+					tagline='I am a generative artist and web developer based in Quebec, Canada.'
+					align='start'
+				/>
+			</div>
+		</div>
 
-			<section>
+		<main class='wrapper about'>
+			<section class='background'>
 				<h2 class='section-title'>Background</h2>
 				<div class='content'>
 					<p>
-						Lorem ipsum dolor sit amet, <a href='https://astro.build/'>Astro</a> makes people happy. Sed do eiusmod tempor
-						incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a condimentum vitae. Dapibus
-						ultrices in iaculis nunc. Arcu odio ut sem nulla pharetra diam sit amet. Diam quis enim lobortis scelerisque
-						fermentum dui faucibus in ornare.
+						As a child, I developed a keen interest in science and the wonders of the natural world, although artistic
+						pursuits didn't come naturally to me. Due to struggles with my handwriting, drawing wasn't a significant
+						part of my childhood. However, everything changed when I made the decision to learn coding in my
+						mid-twenties. During my college years, I had a exploratory course that gave student freedom in what they
+						wanted to learn, allowing me to explore any subject within the realm of computer science and web
+						development. Intrigued by the HTML5 canvas, a tool whose purpose remained elusive to us at the time, I
+						delved into its study.
 					</p>
 					<p>
-						Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis natoque penatibus.
-						Cras fermentum odio eu feugiat pretium nibh. Proin nibh nisl condimentum id venenatis. Porta nibh venenatis
-						cras sed felis eget velit. Id diam vel quam elementum pulvinar etiam non.
+						his exploration led me to the captivating realm of Generative Art, which beautifully blends science, art,
+						and design. Instantly captivated, I became deeply immersed in this field and officially began creating and
+						sharing my artwork on Instagram in 2018. Initially, it served as a personal exercise to foster a habit of
+						creation instead of consumption. Little did I anticipate that my creations would resonate emotionally and
+						visually with others.
 					</p>
 					<p>
-						Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet eget sit amet. Lacus
-						luctus accumsan tortor posuere ac ut consequat semper viverra. Viverra accumsan in nisl nisi scelerisque eu
-						ultrices. In massa tempor nec feugiat nisl pretium fusce.
+						Motivated by my deep need for exploration, learning and the need for self-expression, I use Javascript to
+						delve into mathematical, scientific, aesthetic, and emotional concepts. Through my work, I often merge the
+						laws of order and the chaos of anarchy—two contrasting forces that intriguingly coexist in the natural
+						world. By incorporating a touch of randomness, each new generative piece brings excitement, as I never know
+						exactly what the outcome will be.
 					</p>
-				</div>
-			</section>
-			<section>
-				<h2 class='section-title'>Education</h2>
-				<div class='content'>
-					<p>Corporis voluptates tenetur laudantium.</p>
-				</div>
-			</section>
-			<section>
-				<h2 class='section-title'>Skills</h2>
-				<div class='content'>
-					<p>officia unde omnis</p>
 				</div>
 			</section>
 		</main>
-
-		<ContactCTA data={contact} />
 	</div>
+
+	<ContactCTA data={contact} />
 </BaseLayout>
+
 <style>
 	.about {
 		display: flex;
 		flex-direction: column;
 		gap: 3.5rem;
+	}
+
+	.hero {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.hero img {
+		aspect-ratio: 1 / 1;
+		width: 50%;
+		object-fit: cover;
+		object-position: top;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
 	}
 
 	img {
@@ -87,9 +107,15 @@ import Hero from '../components/Hero.astro';
 		font-size: var(--text-xl);
 		color: var(--gray-0);
 	}
-
+	.background {
+		display: grid;
+		gap: 2em;
+	}
 	.content {
 		grid-column: 2 / 4;
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
 	}
 
 	.content :global(a) {
@@ -104,13 +130,16 @@ import Hero from '../components/Hero.astro';
 	}
 
 	@media (min-width: 50em) {
-		.about {
+		.hero {
 			display: grid;
-			grid-template-columns: 1fr 60% 1fr;
+			grid-template-columns: 4fr 6fr;
+			gap: 3.75rem;
 		}
 
-		.about > :global(:first-child) {
-			grid-column-start: 2;
+		.hero img {
+			aspect-ratio: 3/4;
+			width: 80%;
+			object-fit: cover;
 		}
 
 		section {
