@@ -1,12 +1,10 @@
 ---
 import Icon, {Props as IconProps} from './Icon.astro';
-import ThemeToggle from './ThemeToggle.astro';
-
 /** Main menu items */
 const textLinks: {label: string; href: string}[] = [
 	{label: 'Home', href: '/'},
 	{label: 'Exhibits', href: '/exhibition/'},
-	//{label: 'About', href: '/about/'},
+	{label: 'About', href: '/about/'},
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */
@@ -14,20 +12,17 @@ const iconLinks: {label: string; href: string; icon: IconProps['icon']}[] = [
 	{label: 'Email', href: 'mailto:barbeau.jonathan@gmail.com', icon: 'email'},
 	{label: 'Twitter', href: 'https://twitter.com/JBarbeau_Art', icon: 'twitter-logo'},
 	{label: 'Instagram', href: 'https://www.instagram.com/jbarbeau.art/', icon: 'instagram'},
-	{label: 'Tiktok', href: 'https://www.tiktok.com/@jbarbeau.art', icon: 'tiktok'},
 	{label: 'Facebook', href: 'https://www.facebook.com/barbeaucodeart', icon: 'facebook'},
-	{label: 'Twitch', href: 'https://twitch.tv/jbarbeau_art', icon: 'twitch-logo'},
+	/* 	{label: 'Twitch', href: 'https://twitch.tv/jbarbeau_art', icon: 'twitch-logo'},
+	{label: 'Tiktok', href: 'https://www.tiktok.com/@jbarbeau.art', icon: 'tiktok'},
 	{label: 'GitHub', href: 'https://github.com/jobarbo', icon: 'github-logo'},
-	{label: 'YouTube', href: 'https://www.youtube.com/@JoBarbo', icon: 'youtube-logo'},
+	{label: 'YouTube', href: 'https://www.youtube.com/@JoBarbo', icon: 'youtube-logo'}, */
 ];
 ---
 
 <nav>
 	<div class='menu-header'>
-		<a href='/' class='site-title'>
-			<Icon icon='terminal-window' color='var(--gray-999)' size='1.6em' gradient />
-			JBarbeau.art
-		</a>
+		<a href='/' class='site-title'> JBarbeau.art</a>
 		<menu-button>
 			<template>
 				<button class='menu-button' aria-expanded='false'>
@@ -68,10 +63,6 @@ const iconLinks: {label: string; href: string; icon: IconProps['icon']}[] = [
 						</a>
 					))
 				}
-			</div>
-
-			<div class='theme-toggle'>
-				<ThemeToggle />
 			</div>
 		</div>
 	</div>

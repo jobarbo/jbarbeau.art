@@ -10,7 +10,6 @@ import CallToAction from '../components/CallToAction.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
-import Pill from '../components/Pill.astro';
 import WorkPreview from '../components/WorkPreview.astro';
 
 // Page section components
@@ -109,17 +108,7 @@ const collectionName = 'exhibition';
 		<div class='wrapper stack gap-8 lg:gap-20'>
 			<header class='hero'>
 				<img alt='Jonathan Barbeau Profile Picture' width='480' height='620' src='/assets/photo_jb.jpg' />
-				<Hero topline={hero.surtitle} title={hero.title} tagline={hero.description} align='start'>
-					<div class='roles'>
-						{
-							hero.skills.map((skill) => (
-								<Pill>
-									<Icon icon={skill.icon} size='1.33em' /> {skill.skill}
-								</Pill>
-							))
-						}
-					</div>
-				</Hero>
+				<Hero topline={hero.surtitle} title={hero.title} tagline={hero.description} align='start' />
 			</header>
 		</div>
 
