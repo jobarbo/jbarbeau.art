@@ -3,40 +3,75 @@ interface Props {
 	title?: string;
 	tagline?: string;
 	topline?: string;
+	image?: string;
+	ratio?: string;
 	align?: 'start' | 'center';
 }
 
-const {align = 'center', tagline, topline, title} = Astro.props;
+const {align = 'center', tagline, topline, title, image, ratio} = Astro.props;
 ---
 
-<section class:list={['hero stack gap-4', align]}>
-	<div class='hero-container stack gap-2'>
-		{topline && <p class='tagline'>{topline}</p>}
-		{title && <h1 class='title'>{title}</h1>}
-		{tagline && <p class='tagline'>{tagline}</p>}
+<section class='hero stack gap-8 lg:gap-20'>
+	<div class:list={['hero-wrapper stack gap-4', align]}>
+		{image && <img style=`aspect-ratio: ${ratio};` alt='Jonathan Barbeau Profile Picture' width='480' height='620' src={image} />}
+
+		<div class='hero-container stack gap-2'>
+			{topline && <p class='topline'>{topline}</p>}
+			{title && <h1 class='title'>{title}</h1>}
+			{tagline && <p class='tagline'>{tagline}</p>}
+		</div>
+		<slot />
 	</div>
-	<slot />
 </section>
 
 <style>
 	.hero {
-		font-size: var(--text-lg);
+		font-size: var(--text-md);
 		text-align: center;
+	}
+	.hero-wrapper {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+
+	.hero-container {
+		margin-bottom: 2em;
 	}
 
 	.title,
 	.tagline {
 		margin-inline: auto;
 	}
-
+	.topline{
+			font-size: var(--text-md);
+			font-weight: 600;
+			color: rgb(196, 57, 6);
+		}
 	.title {
 		font-size: var(--text-2xl);
 		color: var(--gray-0);
+		margin-bottom: 0.3em;
+	}
+	img {
+		border-radius: 6px;
+		aspect-ratio: 1/1;
+		width: 100%;
+		object-fit: cover;
+		object-position: top;
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-md);
 	}
 
 	@media (min-width: 50em) {
 		.hero {
 			font-size: var(--text-xl);
+		}
+
+		.hero-wrapper {
+			display: grid;
+   	 	grid-template-columns: 4fr 6fr;
+    	gap: 3.75rem;
+			align-items: center;
 		}
 
 		.start {
@@ -47,9 +82,22 @@ const {align = 'center', tagline, topline, title} = Astro.props;
 		.start .tagline {
 			margin-inline: unset;
 		}
+		.topline{
+			font-size: var(--text-lg);
+			font-weight: 600;
+			color: rgb(196, 57, 6);
+		}
+		.tagline {
+			font-size: var(--text-lg);
+		}
 
 		.title {
-			font-size: var(--text-5xl);
+			font-size: var(--text-4xl);
+		}
+		img{
+			aspect-ratio: 3/4;
+    	width: 100%;
+    	object-fit: cover;
 		}
 	}
 </style>

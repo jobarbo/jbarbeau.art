@@ -32,31 +32,26 @@ import Hero from '../components/Hero.astro';
 
 <BaseLayout title='About | Jonathan Barbeau' description='About Jonathan Barbeau Lorem Ipsum'>
 	<div class='stack gap-5 lg:gap-10'>
-		<div class='wrapper stack gap-8 lg:gap-20'>
-			<div class='hero'>
-				<img width='1553' height='873' src='/assets/photo_jb.jpg' alt='Image of Jonathan Barbeau' />
-				<div class='hero-container'>
-					<Hero
-						topline='Hi i’m'
-						title='Jonathan Barbeau'
-						tagline='I am a generative artist and web developer based in Quebec, Canada.'
-						align='start'
-					/>
-					<div class='socials'>
-						{
-							iconLinks.map(({href, icon, label}) => (
-								<a target='_blank' href={href} class='social'>
-									<span class='sr-only'>{label}</span>
-									<Icon icon={icon} size={'30px'} />
-								</a>
-							))
-						}
-					</div>
+		<main class='wrapper about'>
+			<div class='hero-container'>
+				<Hero
+					topline='Hi i’m'
+					title='Jonathan Barbeau'
+					tagline='I am a generative artist and web developer based in Quebec, Canada.'
+					align='start'
+					image='/assets/photo_jb.jpg'
+				/>
+				<div class='socials'>
+					{
+						iconLinks.map(({href, icon, label}) => (
+							<a target='_blank' href={href} class='social'>
+								<span class='sr-only'>{label}</span>
+								<Icon icon={icon} size={'30px'} />
+							</a>
+						))
+					}
 				</div>
 			</div>
-		</div>
-
-		<main class='wrapper about'>
 			<section class='background'>
 				<h2 class='section-title'>Background</h2>
 				<div class='content'>
