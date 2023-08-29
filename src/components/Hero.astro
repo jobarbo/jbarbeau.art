@@ -9,11 +9,12 @@ interface Props {
 }
 
 const {align = 'center', tagline, topline, title, image, ratio} = Astro.props;
+const inlineStyle = `aspect-ratio: ${ratio};`;
 ---
 
 <section class='hero stack gap-8 lg:gap-20'>
 	<div class:list={['hero-wrapper stack gap-4', align]}>
-		{image && <img style=`aspect-ratio: ${ratio};` alt='Jonathan Barbeau Profile Picture' width='480' height='620' src={image} />}
+		{image && <img style={inlineStyle} alt='Jonathan Barbeau Profile Picture' width='480' height='620' src={image} />}
 
 		<div class='hero-container stack gap-2'>
 			{topline && <p class='topline'>{topline}</p>}
@@ -42,11 +43,11 @@ const {align = 'center', tagline, topline, title, image, ratio} = Astro.props;
 	.tagline {
 		margin-inline: auto;
 	}
-	.topline{
-			font-size: var(--text-md);
-			font-weight: 600;
-			color: rgb(196, 57, 6);
-		}
+	.topline {
+		font-size: var(--text-md);
+		font-weight: 600;
+		color: rgb(196, 57, 6);
+	}
 	.title {
 		font-size: var(--text-2xl);
 		color: var(--gray-0);
@@ -69,8 +70,8 @@ const {align = 'center', tagline, topline, title, image, ratio} = Astro.props;
 
 		.hero-wrapper {
 			display: grid;
-   	 	grid-template-columns: 4fr 6fr;
-    	gap: 3.75rem;
+			grid-template-columns: 4fr 6fr;
+			gap: 3.75rem;
 			align-items: center;
 		}
 
@@ -82,7 +83,7 @@ const {align = 'center', tagline, topline, title, image, ratio} = Astro.props;
 		.start .tagline {
 			margin-inline: unset;
 		}
-		.topline{
+		.topline {
 			font-size: var(--text-lg);
 			font-weight: 600;
 			color: rgb(196, 57, 6);
@@ -94,10 +95,10 @@ const {align = 'center', tagline, topline, title, image, ratio} = Astro.props;
 		.title {
 			font-size: var(--text-4xl);
 		}
-		img{
+		img {
 			aspect-ratio: 3/4;
-    	width: 100%;
-    	object-fit: cover;
+			width: 100%;
+			object-fit: cover;
 		}
 	}
 </style>

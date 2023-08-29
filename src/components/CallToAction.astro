@@ -3,7 +3,7 @@ interface Props {
 	href: string;
 }
 
-const {href} = Astro.props;
+const { href } = Astro.props;
 ---
 
 <a href={href}><slot /></a>
@@ -24,8 +24,6 @@ const {href} = Astro.props;
 		background: var(--gradient-accent-orange);
 		box-shadow: var(--shadow-md);
 		white-space: nowrap;
-		width: fit-content;
-		margin: auto;
 	}
 
 	@media (min-width: 20em) {
