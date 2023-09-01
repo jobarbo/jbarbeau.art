@@ -51,9 +51,15 @@ if (is_available) {
 <header class:list={['hero stack gap-4', align]}>
 	<div class='hero-container content stack gap-2'>
 		<div class='hero-info --desktop'>
-			<div class='hero-availability-container'>
-				<p class={`${is_available_class}`}>{is_available_string}</p>
-			</div>
+			{
+				price != 0 && isNested && (
+					<>
+						<div class='hero-availability-container'>
+							<p class={`${is_available_class}`}>{is_available_string}</p>
+						</div>
+					</>
+				)
+			}
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 			{
@@ -117,9 +123,15 @@ if (is_available) {
 			}
 		</div>
 		<div class='hero-info --mobile'>
-			<div class='hero-availability-container'>
-				<p class={`${is_available_class}`}>{is_available_string}</p>
-			</div>
+			{
+				price != 0 && isNested && (
+					<>
+						<div class='hero-availability-container'>
+							<p class={`${is_available_class}`}>{is_available_string}</p>
+						</div>
+					</>
+				)
+			}
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 
