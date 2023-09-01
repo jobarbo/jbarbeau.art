@@ -51,16 +51,22 @@ if (is_available) {
 <header class:list={['hero stack gap-4', align]}>
 	<div class='hero-container content stack gap-2'>
 		<div class='hero-info --desktop'>
+			<div class='hero-availability-container'>
+				<p class={`${is_available_class}`}>{is_available_string}</p>
+			</div>
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 			{
 				price != 0 && isNested && (
-					<div class='hero-price-container'>
-						{is_available ? <p class='hero-price'>{price}$</p> : <p class='hero-price hero-price--sold'>{price}$</p>}
-						<div class='hero-availability-container'>
-							<p class={`${is_available_class}`}>{is_available_string}</p>
+					<>
+						<div class='hero-price-container'>
+							{is_available ? (
+								<p class='hero-price'>230$(USD) / 300$(CAD)</p>
+							) : (
+								<p class='hero-price hero-price--sold'>{price}$</p>
+							)}
 						</div>
-					</div>
+					</>
 				)
 			}
 			{
@@ -101,17 +107,23 @@ if (is_available) {
 			}
 		</div>
 		<div class='hero-info --mobile'>
+			<div class='hero-availability-container'>
+				<p class={`${is_available_class}`}>{is_available_string}</p>
+			</div>
 			{topline && <p class='tagline'>{topline}</p>}
 			{title && <h1 class='title'>{title}</h1>}
 
 			{
 				price != 0 && isNested && (
-					<div class='hero-price-container'>
-						{is_available ? <p class='hero-price'>{price}$</p> : <p class='hero-price hero-price--sold'>{price}$</p>}
-						<div class='hero-availability-container'>
-							<p class={`${is_available_class}`}>{is_available_string}</p>
+					<>
+						<div class='hero-price-container'>
+							{is_available ? (
+								<p class='hero-price'>230$(USD) / 300$(CAD)</p>
+							) : (
+								<p class='hero-price hero-price--sold'>{price}$</p>
+							)}
 						</div>
-					</div>
+					</>
 				)
 			}
 			{
@@ -167,7 +179,7 @@ if (is_available) {
 	}
 	.hero-availability-container {
 		border-radius: 99rem;
-		padding: 0.5em 1.5em;
+		padding: 0.5em 0;
 		width: fit-content;
 		display: block;
 	}
