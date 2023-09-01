@@ -72,13 +72,23 @@ if (is_available) {
 			{
 				// its a nested exhibition
 				isNested && tag_group.length > 0 && (
-					<div class='hero-tags-container'>
-						<ul class='hero-tags-list'>
-							{tag_group.map((tag) => (
-								<li class='hero-tags-item'>{tag.text}</li>
-							))}
-						</ul>
-					</div>
+					<>
+						<div class='hero-tags-container'>
+							<ul class='hero-tags-list'>
+								{tag_group.map((tag) => (
+									<li class='hero-tags-item'>{tag.text}</li>
+								))}
+							</ul>
+						</div>
+						<div class='hero-order-container'>
+							<a href='mailto:barbeau.jonathan@gmail.com' class='hero-order-button'>
+								Order via email
+							</a>
+							<a href='https://objkt.com/collection/KT19SFj1tsXQvbLnJHp9Kf9Kn8QzmsM8SB4R' class='hero-order-button'>
+								Order via NFT
+							</a>
+						</div>
+					</>
 				)
 			}
 			{
@@ -129,13 +139,23 @@ if (is_available) {
 			{
 				// its a nested exhibition
 				isNested && tag_group.length > 0 && (
-					<div class='hero-tags-container'>
-						<ul class='hero-tags-list'>
-							{tag_group.map((tag) => (
-								<li class='hero-tags-item'>{tag.text}</li>
-							))}
-						</ul>
-					</div>
+					<>
+						<div class='hero-tags-container'>
+							<ul class='hero-tags-list'>
+								{tag_group.map((tag) => (
+									<li class='hero-tags-item'>{tag.text}</li>
+								))}
+							</ul>
+						</div>
+						<div class='hero-order-container'>
+							<a href='mailto:barbeau.jonathan@gmail.com' class='hero-order-button'>
+								Order via email
+							</a>
+							<a href='https://objkt.com/collection/KT19SFj1tsXQvbLnJHp9Kf9Kn8QzmsM8SB4R' class='hero-order-button'>
+								Order via NFT
+							</a>
+						</div>
+					</>
 				)
 			}
 			<div class='hero-image --mobile'>
@@ -192,7 +212,8 @@ if (is_available) {
 		color: rgb(255, 0, 0);
 	}
 	.hero-price-container {
-		margin-top: 1em;
+		margin-top: 0.15em;
+		margin-bottom: 1em;
 		display: flex;
 		align-items: center;
 		justify-content: flex-start;
@@ -200,7 +221,7 @@ if (is_available) {
 
 	.hero-price {
 		color: var(--gray-0);
-		font-size: 24px;
+		font-size: 22px;
 	}
 	.hero-price--sold {
 		color: var(--gray-0);
@@ -229,7 +250,7 @@ if (is_available) {
 	.hero-container {
 		display: flex;
 		flex-direction: column;
-		margin-top: 1.5em;
+		margin-top: 0em;
 	}
 	.hero-image {
 		position: relative;
@@ -243,6 +264,9 @@ if (is_available) {
 		box-shadow: var(--shadow-sm);
 		background: var(--gradient-subtle);
 		border: 1px solid var(--gray-800);
+	}
+	.title {
+		margin-bottom: 0.5em;
 	}
 	.title,
 	.tagline {
@@ -278,7 +302,8 @@ if (is_available) {
 		top: 20px;
 		left: 20px;
 	}
-	.hero-link {
+	.hero-link,
+	.hero-order-button {
 		position: relative;
 		display: flex;
 		place-content: center;
@@ -294,6 +319,16 @@ if (is_available) {
 		box-shadow: var(--shadow-md);
 		white-space: nowrap;
 		font-size: var(--text-base);
+	}
+	.hero-order-container {
+		display: flex;
+	}
+	.hero-order-button {
+		background: var(--accent-regular);
+		display: block;
+		width: fit-content;
+		margin-right: 0.5em;
+		padding: 1em 2em;
 	}
 
 	/* Overlay for hover effects. */
@@ -326,7 +361,8 @@ if (is_available) {
 		}
 		.hero-price {
 			color: var(--gray-0);
-			font-size: 32px;
+			font-size: 24px;
+			font-weight: 500;
 		}
 
 		.hero-container {
@@ -364,6 +400,10 @@ if (is_available) {
 			padding: 1.125rem 2.5rem;
 			font-size: var(--text-xl);
 		}
+
+		.hero-order-button {
+			margin-right: 0.5em;
+		}
 		.start {
 			text-align: start;
 		}
@@ -375,6 +415,7 @@ if (is_available) {
 
 		.title {
 			font-size: var(--text-4xl);
+			margin-bottom: 0.25em;
 		}
 		.hero-tags-container {
 			flex-direction: row;
