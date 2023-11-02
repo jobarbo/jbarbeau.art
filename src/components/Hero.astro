@@ -9,15 +9,12 @@ interface Props {
 }
 
 const {align = 'center', tagline, topline, title, image, ratio} = Astro.props;
+const inlineStyle = `aspect-ratio: ${ratio};`;
 ---
 
 <section class='hero stack gap-8 lg:gap-20'>
 	<div class:list={['hero-wrapper stack gap-4', align]}>
-		{
-			image && (
-				<img style={{aspectRatio: ratio}} alt='Jonathan Barbeau Profile Picture' width='480' height='620' src={image} />
-			)
-		}
+		{image && <img style={inlineStyle} alt='Jonathan Barbeau Profile Picture' width='480' height='620' src={image} />}
 
 		<div class='hero-container stack gap-2'>
 			{topline && <p class='topline'>{topline}</p>}

@@ -4,16 +4,22 @@ import CallToAction from './CallToAction.astro';
 import Icon from './Icon.astro';
 
 interface Props {
-	data?: any;
+	title?: any;
+	link_label?: any;
+	link_url?: any;
 }
 
-const {data}: Props = Astro.props;
+const {
+	title = 'Interested in acquiring one of my works?',
+	link_label = 'Send me an email',
+	link_url = 'mailto:barbeau.jonathan@gmail.com',
+}: Props = Astro.props;
 ---
 
 <aside>
-	<h2>{data.title}</h2>
-	<CallToAction href={data.link_url}>
-		{data.link_label}
+	<h2>{title}</h2>
+	<CallToAction href={link_url}>
+		{link_label}
 		<Icon icon='paper-plane-tilt' size='1.2em' />
 	</CallToAction>
 </aside>

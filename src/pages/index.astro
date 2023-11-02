@@ -2,7 +2,7 @@
 import {Debug} from 'astro/components';
 import {getCollection} from 'astro:content';
 
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc. t
+// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // Component Imports
@@ -10,99 +10,54 @@ import CallToAction from '../components/CallToAction.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
-import WorkPreview from '../components/WorkPreview.astro';
+import Pill from '../components/Pill.astro';
+import ArtworkPreview from '../components/ArtworkPreview.astro';
+import ExhibitionPreview from '../components/ExhibitionPreview.astro';
 
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
-import ExhibitionPreview from '../components/ExhibitionPreview.astro';
+import Skills from '../components/Skills.astro';
 
-const baseURL = 'https://strapi-ff64.onrender.com';
-const response = await fetch(`${baseURL}/api/exhibitions?populate=*`);
-const json = await response.json();
+// Content Fetching: List four most recent work projects from oldest to newest
+const projects = (await getCollection('artwork'))
+	.sort((a, b) => a.data.publishDate.valueOf() - b.data.publishDate.valueOf())
+	.slice(0, 4);
+const exhibitions = (await getCollection('exhibition'))
+	.sort((a, b) => a.data.publishDate.valueOf() - b.data.publishDate.valueOf())
+	.slice(0, 4);
 
-const responses = await Promise.all([
-	fetch(`${baseURL}/api/exhibitions?populate=*`),
-	fetch(`${baseURL}/api/home?populate[hero][populate]=*`),
-	fetch(`${baseURL}/api/home?populate[featured_exhibits][populate]=*`),
-	fetch(`${baseURL}/api/home?populate[featured_work][populate]=*`),
-	fetch(`${baseURL}/api/home?populate[marketplace][populate]=*`),
-	fetch(`${baseURL}/api/home?populate[contact][populate]=*`),
-]);
+const marketplaces = [
+	{
+		name: '256art',
+		url: 'https://256art.com/artist/jonathan-barbeau-1',
+	},
+	{
+		name: 'fx(hash)',
+		url: 'https://www.fxhash.xyz/u/jbarbeau.art',
+	},
+	{
+		name: 'Foundation',
+		url: 'https://foundation.app/@Jbarbeau',
+	},
+	{
+		name: 'OBJKT',
+		url: 'https://objkt.com/profile/jbarbeau/created',
+	},
+	{
+		name: 'Versum',
+		url: 'https://versum.xyz/user/tz1aTHPgADTSw2a7kZe9b1ASpYvNmkc1vNDB/created',
+	},
+	{
+		name: 'Teia.art',
+		url: 'https://teia.art/Jbarbeau.art',
+	},
+];
 
-const [
-	exhibitions_response,
-	hero_response,
-	featured_exhibitions_response,
-	featured_work_response,
-	marketplaces_response,
-	contact_response,
-] = responses;
-
-const [exhibition_json, hero_json, featured_exhibitions_json, featured_work_json, marketplaces_json, contact_json] =
-	await Promise.all([
-		exhibitions_response.json(),
-		hero_response.json(),
-		featured_exhibitions_response.json(),
-		featured_work_response.json(),
-		marketplaces_response.json(),
-		contact_response.json(),
-	]);
-
-// convert the data to an array
-
-interface Exhibition {
-	id: number;
-	attributes: {
-		title: string;
-		description: string;
-		slug: string;
-		ongoing: boolean;
-		image: {
-			data: {
-				attributes: {
-					url: string;
-					alternativeText: string;
-				};
-			};
-		};
-	};
-}
-
-// pick only 4 exhibitions
-const exhibitionsData: Exhibition[] = json.data;
-const ongoingExhibitions = exhibitionsData.filter((exhibition) => exhibition.attributes.ongoing === true).slice(0, 2); // pick only 4 exhibitions
-// deconstruct exhibition data into a new object
-const projects = ongoingExhibitions.map((exhibition, index) => {
-	const {id, attributes} = exhibition;
-	const {title, description, slug, ongoing, image} = attributes;
-	const {data} = image;
-	const {url: imageURL, alternativeText} = data.attributes;
-
-	return {
-		id,
-		title,
-		description,
-		slug,
-		ongoing,
-		image: {
-			url: `${baseURL}${imageURL}`,
-			alt: alternativeText,
-		},
-	};
-});
-
-const {hero} = hero_json.data.attributes;
-const {featured_exhibits} = featured_exhibitions_json.data.attributes;
-const {featured_work} = featured_work_json.data.attributes;
-const {marketplace} = marketplaces_json.data.attributes;
-const {contact} = contact_json.data.attributes;
-
-const collectionName = 'exhibition';
-
-// Full Astro Components Syntax:
+// Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
+<!-- <Debug {exhibitions} /> -->
 <BaseLayout>
 	<div class='stack gap-5 lg:gap-10'>
 		<main class='wrapper stack gap-5 lg:gap-30'>
@@ -114,219 +69,198 @@ const collectionName = 'exhibition';
 				image='/assets/47.png'
 				ratio='16/22'
 			/>
+			<section class='section with-cta'>
+				<div class='section-header stack gap-2 lg:gap-4'>
+					<h3>Current Exhibitions</h3>
+				</div>
+
+				<div class='gallery'>
+					<Grid>
+						{
+							exhibitions.map((exhibit) => (
+								<li>
+									<ExhibitionPreview data={exhibit} />
+								</li>
+							))
+						}
+					</Grid>
+				</div>
+				<div class='cta'>
+					<CallToAction href='/exhibition/'>
+						View All
+						<Icon icon='arrow-right' size='1.2em' />
+					</CallToAction>
+				</div>
+			</section>
 
 			<section class='section with-cta'>
-				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>{featured_exhibits.title}</h3>
-					<!--<p>Voici mes créations pref!</p>-->
-				</header>
+				<div class='section-header stack gap-2 lg:gap-4'>
+					<h3>Selected Work</h3>
+				</div>
 
 				<div class='gallery'>
 					<Grid variant='offset'>
 						{
 							projects.map((project) => (
-								<>
-									<li data-gallery>
-										<ExhibitionPreview
-											type={collectionName}
-											title={project.title}
-											description={project.description}
-											slug={project.slug}
-											image={project.image.url}
-											alt={project.image.alt}
-										/>
-									</li>
-									<li data-gallery style='pointer-events:none'>
-										<ExhibitionPreview
-											type='Upcomging'
-											title='Coming Soon'
-											description='Coming Soon'
-											slug='/'
-											image='/assets/gdl.jpg'
-											alt='alt'
-										/>
-									</li>
-								</>
+								<li>
+									<ArtworkPreview data={project} />
+								</li>
 							))
 						}
 					</Grid>
 				</div>
 
 				<div class='cta'>
-					<CallToAction href={featured_exhibits.link_url}>
-						{featured_exhibits.link_label}
+					<CallToAction href='/artwork/'>
+						View All
 						<Icon icon='arrow-right' size='1.2em' />
 					</CallToAction>
 				</div>
 			</section>
 
-			<section class='section bg-variant'>
+			<section class='section with-background bg-variant'>
 				<header class='section-header stack gap-2 lg:gap-4'>
-					<h3>{marketplace.title}</h3>
-					<p>{marketplace.description}</p>
+					<h3>Where to find my web3 projects</h3>
+					<p>This is a list of marketplaces where you can find and collect my work.</p>
 				</header>
 
 				<div class='gallery'>
 					<Grid variant='small'>
 						{
-							marketplace.card.map((marketplace) => (
-								<a class='web3link' target='_blank' href={marketplace.url}>
-									<li class='mention-card'>{marketplace.name}</li>
-								</a>
+							marketplaces.map((marketplace) => (
+								<li class='mention-card'>
+									<a class='web3link' target='_blank' href={marketplace.url}>
+										{marketplace.name}
+									</a>
+								</li>
 							))
 						}
 					</Grid>
 				</div>
 			</section>
 		</main>
-
-		<ContactCTA data={contact} />
 	</div>
 
-	<style>
-		.web3link {
-			text-decoration: none;
-		}
-		.web3link li {
-			font-size: 18px;
-		}
-		.web3link .mention-card {
-			font-size: 18px;
-			transition: 0.2s ease-in-out;
-		}
-		.web3link:hover .mention-card {
-			font-size: 18px;
-			border-color: var(--accent-dark);
-		}
-		.hero {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 2rem;
-		}
+	<ContactCTA />
+</BaseLayout>
 
-		.hero img {
-			aspect-ratio: 1 / 1;
-			width: 50%;
-			object-fit: cover;
-			object-position: top;
-			border-radius: 1.5rem;
-			box-shadow: var(--shadow-md);
-		}
+<style>
+	.section {
+		display: grid;
+		gap: 2rem;
+	}
 
-		@media (min-width: 50em) {
-			.hero {
-				display: grid;
-				grid-template-columns: 4fr 6fr;
-				gap: 3.75rem;
-			}
+	.with-background {
+		position: relative;
+	}
 
-			.hero img {
-				aspect-ratio: 3/4;
-				width: 80%;
-				object-fit: cover;
-			}
-		}
+	.with-background::before {
+		--hero-bg: var(--bg-image-subtle-2);
 
-		/* ====================================================== */
+		content: '';
+		position: absolute;
+		pointer-events: none;
+		left: 50%;
+		width: 100vw;
+		aspect-ratio: calc(2.25 / var(--bg-scale));
+		top: 0;
+		transform: translateY(-75%) translateX(-50%);
+		background: url('/assets/backgrounds/noise.png') top center/220px repeat,
+			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat, var(--gray-999);
+		background-blend-mode: overlay, normal, normal, normal;
+		mix-blend-mode: var(--bg-blend-mode);
+		z-index: -1;
+	}
 
+	.with-background.bg-variant::before {
+		--hero-bg: var(--bg-image-subtle-1);
+	}
+
+	.section-header {
+		justify-self: center;
+		text-align: center;
+		max-width: 50ch;
+		font-size: var(--text-md);
+		color: var(--gray-300);
+	}
+
+	.section-header h3 {
+		font-size: var(--text-2xl);
+	}
+
+	.mention-card a {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (min-width: 50em) {
 		.section {
-			display: grid;
-			gap: 2rem;
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
+			gap: 5rem;
 		}
 
-		.with-background {
-			position: relative;
-		}
-
-		.with-background::before {
-			--hero-bg: var(--bg-image-subtle-2);
-
-			content: '';
-			position: absolute;
-			pointer-events: none;
-			left: 50%;
-			width: 100vw;
-			aspect-ratio: calc(2.25 / var(--bg-scale));
-			top: 0;
-			transform: translateY(-75%) translateX(-50%);
-			background: url('/assets/backgrounds/noise.png') top center/220px repeat,
-				var(--hero-bg) center center / var(--bg-gradient-size) no-repeat, var(--gray-999);
-			background-blend-mode: overlay, normal, normal, normal;
-			mix-blend-mode: var(--bg-blend-mode);
-			z-index: -1;
-		}
-
-		.with-background.bg-variant::before {
-			--hero-bg: var(--bg-image-subtle-1);
+		.section.with-cta {
+			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
 		}
 
 		.section-header {
-			justify-self: center;
-			text-align: center;
-			max-width: 50ch;
-			font-size: var(--text-md);
-			color: var(--gray-300);
+			grid-area: header;
+			font-size: var(--text-lg);
 		}
 
 		.section-header h3 {
-			font-size: var(--text-2xl);
+			font-size: var(--text-4xl);
 		}
 
-		@media (min-width: 50em) {
-			.section {
-				grid-template-columns: repeat(4, 1fr);
-				grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
-				gap: 5rem;
-			}
-
-			.section.with-cta {
-				grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
-			}
-
-			.section-header {
-				grid-area: header;
-				font-size: var(--text-lg);
-			}
-
-			.section-header h3 {
-				font-size: var(--text-4xl);
-			}
-
-			.with-cta .section-header {
-				justify-self: flex-start;
-				text-align: left;
-			}
-
-			.gallery {
-				grid-area: gallery;
-			}
-
-			.cta {
-				grid-area: cta;
-			}
+		.with-cta .section-header {
+			justify-self: flex-start;
+			text-align: left;
 		}
 
-		/* ====================================================== */
+		.gallery {
+			grid-area: gallery;
+		}
 
+		.cta {
+			grid-area: cta;
+		}
+	}
+
+	/* ====================================================== */
+	.web3link {
+		text-decoration: none;
+	}
+	li .web3link {
+		font-size: 18px;
+	}
+	.mention-card .web3link {
+		font-size: 18px;
+	}
+	.mention-card:hover {
+		border-color: var(--accent-dark);
+	}
+	.mention-card {
+		display: flex;
+		height: 7rem;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		border: 1px solid var(--gray-800);
+		border-radius: 1.5rem;
+		color: var(--gray-300);
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+		transition: 0.2s ease-in-out;
+	}
+
+	@media (min-width: 50em) {
 		.mention-card {
-			display: flex;
-			height: 7rem;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-			border: 1px solid var(--gray-800);
 			border-radius: 1.5rem;
-			color: var(--gray-300);
-			background: var(--gradient-subtle);
-			box-shadow: var(--shadow-sm);
+			height: 9.5rem;
 		}
-
-		@media (min-width: 50em) {
-			.mention-card {
-				border-radius: 1.5rem;
-				height: 9.5rem;
-			}
-		}
-	</style>
-</BaseLayout>
+	}
+</style>

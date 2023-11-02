@@ -3,10 +3,10 @@ interface Props {
 	variant?: 'offset' | 'small';
 }
 
-const {variant} = Astro.props;
+const { variant } = Astro.props;
 ---
 
-<ul data-gallery class:list={['grid', {offset: variant === 'offset', small: variant === 'small'}]}>
+<ul class:list={['grid', { offset: variant === 'offset', small: variant === 'small' }]}>
 	<slot />
 </ul>
 
@@ -14,7 +14,6 @@ const {variant} = Astro.props;
 	.grid {
 		display: grid;
 		grid-auto-rows: 1fr;
-		grid-template-columns: 1fr 1fr;
 		gap: 1rem;
 		list-style: none;
 		padding: 0;
@@ -50,12 +49,6 @@ const {variant} = Astro.props;
 		.grid.offset > :global(:last-child:nth-child(odd)) {
 			grid-column: 2 / 3;
 			transform: none;
-			height: 22rem;
-		}
-		/* If it's both the first and the last on the row span 2 */
-		.grid.offset > :global(:first-child:nth-child(odd):last-child:nth-child(odd)) {
-			grid-column: 1 / 3;
-			height: 40rem;
 		}
 
 		.grid.small {
