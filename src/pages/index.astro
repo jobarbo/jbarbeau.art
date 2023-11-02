@@ -69,29 +69,6 @@ const marketplaces = [
 				image='/assets/47.png'
 				ratio='16/22'
 			/>
-			<section class='section with-cta'>
-				<div class='section-header stack gap-2 lg:gap-4'>
-					<h3>Current Exhibitions</h3>
-				</div>
-
-				<div class='gallery'>
-					<Grid>
-						{
-							exhibitions.map((exhibit) => (
-								<li>
-									<ExhibitionPreview data={exhibit} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-				<div class='cta'>
-					<CallToAction href='/exhibition/'>
-						View All
-						<Icon icon='arrow-right' size='1.2em' />
-					</CallToAction>
-				</div>
-			</section>
 
 			<section class='section with-cta'>
 				<div class='section-header stack gap-2 lg:gap-4'>
@@ -136,6 +113,29 @@ const marketplaces = [
 							))
 						}
 					</Grid>
+				</div>
+			</section>
+			<section class='section with-cta'>
+				<div class='section-header stack gap-2 lg:gap-4'>
+					<h3>Current Exhibitions</h3>
+				</div>
+
+				<div class='gallery'>
+					<Grid>
+						{
+							exhibitions.map((exhibit) => (
+								<li>
+									<ExhibitionPreview data={exhibit} />
+								</li>
+							))
+						}
+					</Grid>
+				</div>
+				<div class='cta'>
+					<CallToAction href='/exhibition/'>
+						View All
+						<Icon icon='arrow-right' size='1.2em' />
+					</CallToAction>
 				</div>
 			</section>
 		</main>
