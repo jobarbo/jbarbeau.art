@@ -14,7 +14,7 @@ tags:
 <section class="exhibit">
   <div class="exhibit__container">
     <div class="exhibit__image">
-      <img src="/assets/korrigane.jpg" alt="Image of Exhibit-A">
+      <img src="/assets/jo_korrigane.jpg" alt="Image of Exhibit-A">
     </div>
   <div class="exhibit__content">
     <p>
@@ -30,6 +30,11 @@ tags:
       Finally all pieces are linked with a token(NFT) that act as a certificate of authenticity. If requested, the corresponding NFT will be transferred to the buyer / collector wallet.
     </p>
   </div>
+
+<link rel="stylesheet" href="https://mint.highlight.xyz/assets/embed.css" />
+<div data-widget="highlight-mint-page" data-mint-collection-id="64f7c27b373cff27b5e9309c"></div>
+<script type="module" crossorigin="true" src="https://mint.highlight.xyz/assets/embed.js?v=1"></script>
+
   </div>
 </section>
 
