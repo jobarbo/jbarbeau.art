@@ -42,4 +42,7 @@ tags:
   p{
     margin-bottom:1em;
   }
+  .highlight-Header-root{
+    display:none;
+  }
 </style>
