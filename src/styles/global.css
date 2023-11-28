@@ -170,7 +170,7 @@ section > div {
 	margin: auto;
 	width: 100%;
 	max-width: 1680px;
-	padding: 2.5rem 5rem;
+	padding: 0.5rem 1.5rem;
 }
 .main {
 	min-height: 100vh;
@@ -210,9 +210,27 @@ section > div {
 }
 
 @media (min-width: 50em) {
-	.wrapper {
+	nav .wrapper,
+	section {
+		width: 100%;
+		margin: 0 auto;
+		width: 100%;
+		max-width: 1680px;
+	}
+	section > div {
+		margin: auto;
+		width: 100%;
+		max-width: 1680px;
 		padding: 2.5rem 5rem;
 	}
+	.main {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: space-between;
+	}
+
 	section {
 		margin-bottom: 0;
 	}
