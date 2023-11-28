@@ -4,6 +4,7 @@ import {getCollection} from 'astro:content';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Socials from '../components/Socials.astro';
+import Icon from '../components/Icon.astro';
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -13,24 +14,94 @@ import Socials from '../components/Socials.astro';
 <BaseLayout>
 	<section class='hero'>
 		<div class='hero-container'>
-			<h1 class='hero-title'>Generative Artist</h1>
-
-			<h5 class='hero-subtitle'>Based in Québec City</h5>
-		</div>
-	</section>
-	<section class='exhibitions'>
-		<div class='exhibitions-container'>
-			<h2 class='exhibitions-title'>New website coming soon!</h2>
-			<p class='exhibitions-subtitle'>In the meantime here's where you can find me</p>
+			<h1 class='hero-title'>Jonathan Barbeau</h1>
+			<h4 class='hero-subtitle'>Generative Artist based in Québec City</h4>
 			<div class='socials'>
 				<Socials />
 			</div>
 		</div>
 	</section>
-</BaseLayout>
+	<section class='work'>
+		<div class='work-container'>
+			<h2 class='work-title'>Recent Work</h2>
+			<hr />
+			<div class='work-layout'>
+				<div class='work-description'>
+					<h3 class='work-description-title'>Jeu de Ligne</h3>
+					<p class='work-description-info'>June 2023 - 256art.com</p>
+					<p class='work-description-text'>
+						'Jeu de ligne' is a generative artwork that uses particles, movement, and constraint. As the initial
+						composition glides across the canvas, columns and rows emerge from the particles getting trapped on the
+						margin.
+					</p>
+					<a class='work-description-link button' href='https://256art.com/project/jeu-de-ligne-2'>
+						View Project<Icon isButton={true} icon={'external'} />
+					</a>
+				</div>
+				<div class='work-image-row'>
+					<img src='/public/assets/jeudeligne/jdl.jpg' alt='' class='work-image' />
+					<img src='/public/assets/jeudeligne/jdl2.jpg' alt='' class='work-image' />
+					<img src='/public/assets/jeudeligne/jdl3.jpg' alt='' class='work-image' />
+					<img src='/public/assets/jeudeligne/jdl4.jpg' alt='' class='work-image' />
+					<img src='/public/assets/jeudeligne/jdl5.jpg' alt='' class='work-image' />
+					<img src='/public/assets/jeudeligne/jdl6.jpg' alt='' class='work-image' />
+					<img src='/public/assets/jeudeligne/jdl7.jpg' alt='' class='work-image' />
+				</div>
+			</div>
+		</div>
+	</section>
+	<style>
+		.hero-title {
+			margin-bottom: 0.1em;
+		}
 
-<style>
-	.socials {
-		margin-top: 1rem;
-	}
-</style>
+		.socials {
+			margin-top: 0.5rem;
+		}
+
+		.work-description {
+			margin: 1em 0;
+			max-width: 600px;
+		}
+		.work-description-info {
+			margin: 0.15em 0;
+			font-size: 0.8em;
+			color: var(--accent-regular);
+		}
+		.work-description-text {
+			line-height: 1.25em;
+			margin: 0.5em 0 1em 0;
+		}
+		.work-layout {
+			display: flex;
+			flex-direction: column;
+			overflow-x: scroll;
+			margin-top: 2em;
+		}
+		.work-image-row {
+			display: flex;
+			flex-direction: row;
+			gap: 2em;
+			overflow-x: auto; /* Enable horizontal scrolling */
+		}
+
+		.work-image {
+			max-height: 100%; /* Fill the cell's height */
+			max-width: 100%;
+			height: 600px;
+			width: auto;
+		}
+
+		.button {
+			padding: 0.5em 1em;
+			border-radius: 50px;
+			background-color: var(--gray-0);
+			color: var(--gray-999);
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: fit-content;
+		}
+	</style>
+</BaseLayout>

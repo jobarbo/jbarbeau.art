@@ -7,18 +7,22 @@ export interface Props {
 	color?: string;
 	gradient?: boolean;
 	size?: string;
+	isButton?: boolean;
 }
 
-const {color = 'currentcolor', gradient, icon, size} = Astro.props;
+const {color = 'currentcolor', gradient, icon, size, isButton} = Astro.props;
 const iconPath = iconPaths[icon];
 
 const attrs: HTMLAttributes<'svg'> = {};
 if (size) attrs.style = {'--size': size};
 
 const gradientId = 'icon-gradient-' + Math.round(Math.random() * 10e12).toString(36);
+
+const cssClass = isButton ? 'icon-button' : '';
 ---
 
 <svg
+	class={cssClass}
 	xmlns='http://www.w3.org/2000/svg'
 	width='40'
 	height='40'
@@ -45,5 +49,8 @@ const gradientId = 'icon-gradient-' + Math.round(Math.random() * 10e12).toString
 		vertical-align: middle;
 		width: var(--size, 1em);
 		height: var(--size, 1em);
+	}
+	.icon-button {
+		margin-left: 0.5em;
 	}
 </style>

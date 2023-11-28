@@ -47,11 +47,11 @@
 	--text-base: 1rem;
 	--text-md: 1.125rem;
 	--text-lg: 1.45rem;
-	--text-xl: 1.625rem;
-	--text-2xl: 2.125rem;
-	--text-3xl: 2.625rem;
-	--text-4xl: 3.5rem;
-	--text-5xl: 4.5rem;
+	--text-xl: 1rem;
+	--text-2xl: 1.125rem;
+	--text-3xl: 1.625rem;
+	--text-4xl: 2.5rem;
+	--text-5xl: 3.5rem;
 
 	/* Fonts */
 	--font-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
@@ -160,7 +160,7 @@ section > div {
 	padding: 2.5rem 5rem;
 }
 .main {
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
