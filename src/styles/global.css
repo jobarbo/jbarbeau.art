@@ -230,7 +230,9 @@ section > div {
 		justify-content: center;
 		align-items: space-between;
 	}
-
+	.wrapper {
+		padding: 2.5rem 5rem;
+	}
 	section {
 		margin-bottom: 0;
 	}
