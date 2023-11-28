@@ -49,9 +49,9 @@
 	--text-lg: 1.45rem;
 	--text-xl: 1rem;
 	--text-2xl: 1.125rem;
-	--text-3xl: 1.625rem;
-	--text-4xl: 2.5rem;
-	--text-5xl: 3.5rem;
+	--text-3xl: 1.325rem;
+	--text-4xl: 1.85rem;
+	--text-5xl: 2rem;
 
 	/* Fonts */
 	--font-system: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
@@ -61,6 +61,19 @@
 
 	/* Transitions */
 	--theme-transition: 0.2s ease-in-out;
+
+	@media (min-width: 50em) {
+		/* Text Sizes */
+		--text-sm: 0.875rem;
+		--text-base: 1rem;
+		--text-md: 1.125rem;
+		--text-lg: 1.45rem;
+		--text-xl: 1rem;
+		--text-2xl: 1.125rem;
+		--text-3xl: 1.625rem;
+		--text-4xl: 2.5rem;
+		--text-5xl: 3.5rem;
+	}
 }
 
 html,
