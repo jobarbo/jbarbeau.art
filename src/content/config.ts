@@ -4,12 +4,11 @@ export const collections = {
 	project: defineCollection({
 		schema: z.object({
 			title: z.string(),
-			description: z.string(),
 			publishDate: z.coerce.date(),
-			tags: z.array(z.string()),
-			img: z.string(),
-			img_alt: z.string().optional(),
 			subtitle: z.string().optional(),
+			description: z.string(),
+			url: z.string(),
+			images: z.array(z.string()).optional(),
 		}),
 	}),
 };

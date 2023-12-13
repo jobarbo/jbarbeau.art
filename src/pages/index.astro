@@ -6,11 +6,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Socials from '../components/Socials.astro';
 import Icon from '../components/Icon.astro';
 
-const works = await Astro.glob('../content/project/*.md');
+
+
+const projects = (await getCollection('project')).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+
+
 
 
 ---
-
 <BaseLayout>
 	<section class='hero'>
 		<div class='hero-container'>
@@ -26,30 +29,60 @@ const works = await Astro.glob('../content/project/*.md');
 			<h2 class='work-title'>Recent Work</h2>
 
 			<ul class="recent-work-list">
-				{works.map(work =>(
-					<Debug {work} />
+				{projects.map(work =>(
+
 					<li class="recent-work-item">
 						<hr />
 						<div class='work-layout'>
 							<div class='work-description'>
-								<h3 class='work-description-title'>{work.frontmatter.title}</h3>
-								<p class='work-description-info'>{work.frontmatter.subtitle}</p>
-								<p class='work-description-text'>
-								{work.frontmatter.description}
-								</p>
-								<a class='work-description-link button' href='https://256art.com/project/jeu-de-ligne-2'>
+								<h3 class='work-description-title'>{work.data.title}</h3>
+								<p class='work-description-info'>{work.data.subtitle}</p>
+								<p class='work-description-text'>{work.data.description}</p>
+								<a class='work-description-link button' href={work.data.url} target="_blank">
 									View Project<Icon isButton={true} icon={'external'} />
 								</a>
 							</div>
-							<slot/>
-
+							<div class='work-image-row'>
+								{work.data.images.map(url => (
+									<img src={url} alt='' class='work-image' />
+								))}
+							</div>
 						</div>
 					</li>
 				))}
-
 			</ul>
 		</div>
 	</section>
+	<script>
+
+		// make the images in the work section scrollable horizontally by dragging the mouse
+		const workImageRow = document.querySelectorAll('.work-image-row');
+		workImageRow.forEach((row) => {
+			row.addEventListener('mousedown', (e:MouseEvent) => {
+				e.preventDefault();
+				const scrollLeft = row.scrollLeft;
+				const mouseX = e.clientX;
+				let mouseDown = true;
+
+				row.addEventListener('mousemove', (e:MouseEvent) => {
+					if (!mouseDown) return;
+					const mouseMoveX = e.clientX;
+					const scrollAmount = mouseMoveX - mouseX;
+					row.scrollLeft = scrollLeft - scrollAmount;
+				});
+
+				// if the cursor leaves the row, stop scrolling
+				row.addEventListener('mouseleave', () => {
+					mouseDown = false;
+				});
+
+
+				row.addEventListener('mouseup', () => {
+					mouseDown = false;
+				});
+			});
+		});
+	</script>
 	<style>
 		.hero-title {
 			margin-bottom: 0.1em;
@@ -61,7 +94,7 @@ const works = await Astro.glob('../content/project/*.md');
 
 		.work-description {
 			margin: 1em 0;
-			max-width: 600px;
+			max-width: 75%;
 		}
 		.work-description-info {
 			margin: 0.15em 0;
@@ -70,19 +103,23 @@ const works = await Astro.glob('../content/project/*.md');
 		}
 		.work-description-text {
 			line-height: 1.25em;
-			margin: 0.5em 0 1em 0;
+			margin: 0.5em 0 2em 0;
+			white-space: pre-wrap;
 		}
 		.work-layout {
 			display: flex;
 			flex-direction: column;
-			overflow-x: scroll;
+			overflow-y: scroll;
+			overflow-x: hidden;
 			margin-top: 2em;
 		}
 		.work-image-row {
 			display: flex;
 			flex-direction: row;
 			gap: 2em;
-			overflow-x: auto; /* Enable horizontal scrolling */
+			overflow-y: scroll;
+			overflow-x: hidden;
+			cursor : grab;
 		}
 
 		.work-image {
@@ -90,6 +127,10 @@ const works = await Astro.glob('../content/project/*.md');
 			max-width: 100%;
 			height: 600px;
 			width: auto;
+		}
+
+		.recent-work-item{
+			margin-top: 2em;
 		}
 
 		.button {
@@ -102,6 +143,7 @@ const works = await Astro.glob('../content/project/*.md');
 			align-items: center;
 			justify-content: center;
 			width: fit-content;
+			margin: 1em 0;
 		}
 	</style>
 </BaseLayout>
