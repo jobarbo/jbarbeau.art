@@ -1,19 +1,34 @@
 ---
 import {Debug} from 'astro/components';
-import {CollectionEntry, getCollection} from 'astro:content';
+import { getCollection} from 'astro:content';
+import type {CollectionEntry} from 'astro:content';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Socials from '../components/Socials.astro';
 import Icon from '../components/Icon.astro';
 
-console.log(getCollection)
-const works = await Astro.glob('../content/artwork/project/*.md');
+const works = await Astro.glob('../content/project/*.md');
+interface Props {
+	entry: CollectionEntry<'project'>;
+}
 
+// This is a dynamic route that generates a page for every Markdown file in src/content/
+// Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
+// https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
+export async function getStaticPaths() {
+	const projects = await getCollection('project');
+	return projects.map((entry) => ({
+entry : entry
+	}));
+}
+
+
+const {entry} = Astro.props;
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
-
+<Debug {entry} />
 <BaseLayout>
 	<section class='hero'>
 		<div class='hero-container'>

@@ -2,7 +2,7 @@
 title: "Exhibit-A"
 slug: exhibit-a
 publishDate: 2023-06-15 12:00:00
-collection: collection
+collection: project
 img_alt: Thumbnail for the single post of the artwork
 subtitle: Mai 2023 - Highlight.xyz
 description: "This collection features 10 artworks made in pair by 5 different algorithm. This collection was exhibited at La Korrigane in Quebec City during the summer of 2023.
