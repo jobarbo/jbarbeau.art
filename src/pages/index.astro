@@ -5,17 +5,9 @@ import {getCollection} from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Socials from '../components/Socials.astro';
 import Icon from '../components/Icon.astro';
-import RecentWorkItem from '../components/RecentWorkItem.astro';
 
 
 const works = await Astro.glob('../content/artwork/collection/*.md');
-
-
-
-
-
-
-
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -38,7 +30,24 @@ const works = await Astro.glob('../content/artwork/collection/*.md');
 
 			<ul class="recent-work-list">
 				{works.map(work =>(
-					<RecentWorkItem project=work />
+					<Debug {work} />
+					<li class="recent-work-item">
+						<hr />
+						<div class='work-layout'>
+							<div class='work-description'>
+								<h3 class='work-description-title'>{work.frontmatter.title}</h3>
+								<p class='work-description-info'>{work.frontmatter.subtitle}</p>
+								<p class='work-description-text'>
+								{work.frontmatter.description}
+								</p>
+								<a class='work-description-link button' href='https://256art.com/project/jeu-de-ligne-2'>
+									View Project<Icon isButton={true} icon={'external'} />
+								</a>
+							</div>
+							<slot/>
+
+						</div>
+					</li>
 				))}
 
 			</ul>
