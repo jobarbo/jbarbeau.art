@@ -5,12 +5,23 @@ import {getCollection} from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Socials from '../components/Socials.astro';
 import Icon from '../components/Icon.astro';
+import RecentWorkItem from '../components/RecentWorkItem.astro';
+
+
+const works = await Astro.glob('../content/artwork/collection/*.md');
+
+
+
+
+
+
+
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
 
-<!-- <Debug {exhibitions} /> -->
+
 <BaseLayout>
 	<section class='hero'>
 		<div class='hero-container'>
@@ -24,30 +35,13 @@ import Icon from '../components/Icon.astro';
 	<section class='work'>
 		<div class='work-container'>
 			<h2 class='work-title'>Recent Work</h2>
-			<hr />
-			<div class='work-layout'>
-				<div class='work-description'>
-					<h3 class='work-description-title'>Jeu de Ligne</h3>
-					<p class='work-description-info'>June 2023 - 256art.com</p>
-					<p class='work-description-text'>
-						'Jeu de ligne' is a generative artwork that uses particles, movement, and constraint. As the initial
-						composition glides across the canvas, columns and rows emerge from the particles getting trapped on the
-						margin.
-					</p>
-					<a class='work-description-link button' href='https://256art.com/project/jeu-de-ligne-2'>
-						View Project<Icon isButton={true} icon={'external'} />
-					</a>
-				</div>
-				<div class='work-image-row'>
-					<img src='/assets/jeudeligne/jdl.jpg' alt='' class='work-image' />
-					<img src='/assets/jeudeligne/jdl2.jpg' alt='' class='work-image' />
-					<img src='/assets/jeudeligne/jdl3.jpg' alt='' class='work-image' />
-					<img src='/assets/jeudeligne/jdl4.jpg' alt='' class='work-image' />
-					<img src='/assets/jeudeligne/jdl5.jpg' alt='' class='work-image' />
-					<img src='/assets/jeudeligne/jdl6.jpg' alt='' class='work-image' />
-					<img src='/assets/jeudeligne/jdl7.jpg' alt='' class='work-image' />
-				</div>
-			</div>
+
+			<ul class="recent-work-list">
+				{works.map(work =>(
+					<RecentWorkItem project=work />
+				))}
+
+			</ul>
 		</div>
 	</section>
 	<style>
