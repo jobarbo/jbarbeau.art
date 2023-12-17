@@ -14,7 +14,7 @@ The EX-LIBRIS project stands as a testament to the union of creativity and the p
 
 
 EX-LIBRIS encapsulates the essence of a moment in time, where I found my tribe as an artist and transformed into an enduring testament to art's evolution—an ode to tradition, knowledge, innovation, and the limitless horizons of art in the digital age."
-url: https://fx-bookmarks.netlify.app/
+url: https://www.fxhash.xyz/generative/0x682e10BF76d4150461ccf271e44aDb1DFe5f9F3A
 images:
   [
     "/assets/exlibris/1.png",
