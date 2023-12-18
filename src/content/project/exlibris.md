@@ -17,12 +17,24 @@ EX-LIBRIS encapsulates the essence of a moment in time, where I found my tribe a
 url: https://www.fxhash.xyz/generative/0x682e10BF76d4150461ccf271e44aDb1DFe5f9F3A
 images:
   [
-    "/assets/exlibris/1.png",
-    "/assets/exlibris/2.png",
-    "/assets/exlibris/3.png",
-    "/assets/exlibris/4.png",
-    "/assets/exlibris/5.png",
-    "/assets/exlibris/6.png",
-    "/assets/exlibris/7.png",
+    "/assets/exlibris/1.jpg",
+    "/assets/exlibris/2.jpg",
+    "/assets/exlibris/3.jpg",
+    "/assets/exlibris/4.jpg",
+    "/assets/exlibris/5.jpg",
+    "/assets/exlibris/6.jpg",
+    "/assets/exlibris/7.jpg",
   ]
 ---
+
+GM!!🌞☕️
+
+I have news from the shop!
+
+EX-LIBRIS will drop on
+@fx*hash*
+on December 6th 2023. It will be part of the new fx(hash) 2.0 launch party. 🎉
+
+Each piece can be redeemed as a signed bookmark set, so no more excuses using receipts to mark your page.
+
+Happy Reading 🌝
