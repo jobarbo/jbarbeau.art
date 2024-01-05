@@ -94,7 +94,7 @@ const projects = (await getCollection('project')).sort((a, b) => b.data.publishD
 
 		.work-description {
 			margin: 1em 0;
-			max-width: 75%;
+			max-width: 100%;
 		}
 		.work-description-info {
 			margin: 0.15em 0;
@@ -116,16 +116,20 @@ const projects = (await getCollection('project')).sort((a, b) => b.data.publishD
 		.work-image-row {
 			display: flex;
 			flex-direction: row;
-			gap: 2em;
-			overflow-y: scroll;
-			overflow-x: hidden;
-			cursor : grab;
+			gap: 0.5em;
+			overflow-y: hidden;
+			overflow-x: scroll;
+		}
+
+		/* remove the scrollbar */
+		.work-image-row::-webkit-scrollbar {
+			display: none;
 		}
 
 		.work-image {
 			max-height: 100%; /* Fill the cell's height */
 			max-width: 100%;
-			height: 600px;
+			height: 300px;
 			width: auto;
 		}
 
@@ -145,5 +149,29 @@ const projects = (await getCollection('project')).sort((a, b) => b.data.publishD
 			width: fit-content;
 			margin: 1em 0;
 		}
+
+		/* media queries */
+		/* desktop */
+
+		@media (min-width: 1024px) {
+			.work-image-row {
+				overflow-y: hidden;
+				overflow-x: scroll;
+				cursor : grab;
+				gap: 1em;
+			}
+
+			.work-image {
+				max-height: 100%; /* Fill the cell's height */
+				max-width: 100%;
+				height: 600px;
+				width: auto;
+			}
+			.work-description {
+				margin: 1em 0;
+				max-width: 75%;
+			}
+		}
+			
 	</style>
 </BaseLayout>
