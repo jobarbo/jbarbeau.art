@@ -2,17 +2,18 @@
 import {Debug} from 'astro/components';
 import { getCollection} from 'astro:content';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
 import Socials from '../components/Socials.astro';
 import Icon from '../components/Icon.astro';
-import { getSortedProjects } from '../utils/contentCollections';
+import {iconPaths} from '../components/IconPaths';
+import { getSortedProjects } from '../functions/contentCollections';
 
 
 // put the projects in a global variable so we can use it in the script tag
 const projects = await getSortedProjects();
 
 ---
-<BaseLayout>
+<Layout>
 	<section class='hero'>
 		<div class='hero-container'>
 			<h1 class='hero-title'>Jonathan Barbeau</h1>
@@ -172,4 +173,4 @@ const projects = await getSortedProjects();
 		}
 			
 	</style>
-</BaseLayout>
+</Layout>
