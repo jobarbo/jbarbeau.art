@@ -1,18 +1,20 @@
 ---
-import {Debug} from 'astro/components';
-import { getCollection} from 'astro:content';
+import {Debug} from "astro/components";
+import {getCollection} from "astro:content";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
-import Layout from '../layouts/Layout.astro';
-import Socials from '../components/Socials.astro';
-import Icon from '../components/Icon.astro';
-import {iconPaths} from '../components/IconPaths';
-import { getSortedProjects } from '../functions/contentCollections';
+import Layout from "../layouts/Layout.astro";
+import Socials from "../components/Socials.astro";
+import Icon from "../components/Icon.astro";
+import {iconPaths} from "../components/IconPaths";
+import {getSortedProjects} from "../functions/contentCollections";
 
+import BlazeSlider from "blaze-slider";
+import "blaze-slider/dist/blaze.css";
 
 // put the projects in a global variable so we can use it in the script tag
 const projects = await getSortedProjects();
-
 ---
+
 <Layout>
 	<section class='hero'>
 		<div class='hero-container'>
@@ -27,43 +29,67 @@ const projects = await getSortedProjects();
 		<div class='work-container'>
 			<h2 class='work-title'>Recent Work</h2>
 
-			<ul class="recent-work-list">
-				{projects.map(work =>(
-
-					<li class="recent-work-item">
-						<hr />
-						<div class='work-layout'>
-							<div class='work-description'>
-								<h3 class='work-description-title'>{work.data.title}</h3>
-								<p class='work-description-info'>{work.data.subtitle}</p>
-								<p class='work-description-text'>{work.data.description}</p>
-								<a class='work-description-link button' href={work.data.url} target="_blank">
-									View Project<Icon isButton={true} icon={'external'} />
-								</a>
+			<ul class='recent-work-list'>
+				{
+					projects.map((work) => (
+						<li class='recent-work-item'>
+							<hr />
+							<div class='work-layout'>
+								<div class='work-description'>
+									<h3 class='work-description-title'>{work.data.title}</h3>
+									<p class='work-description-info'>{work.data.subtitle}</p>
+									<p class='work-description-text'>{work.data.description}</p>
+									<a class='work-description-link button' href={work.data.url} target='_blank'>
+										View Project
+										<Icon isButton={true} icon={"external"} />
+									</a>
+								</div>
+								<div class='work-image-row'>
+									{work.data.images.map((url) => (
+										<img src={url} alt='' class='work-image' />
+									))}
+								</div>
 							</div>
-							<div class='work-image-row'>
-								{work.data.images.map(url => (
-									<img src={url} alt='' class='work-image' />
-								))}
-							</div>
-						</div>
-					</li>
-				))}
+						</li>
+					))
+				}
 			</ul>
 		</div>
 	</section>
-	<script>
+	<div class='blaze-slider'>
+		<div class='blaze-container'>
+			<div class='blaze-track-container'>
+				<div class='blaze-track'>
+					<div>slide 1</div>
+					<div>slide 2</div>
+					<div>slide 3</div>
+					<div>slide 4</div>
+				</div>
 
+				<!-- pagination container -->
+				<div class='my-pagination-container'>
+					<div class='blaze-pagination'></div>
+				</div>
+			</div>
+
+			<!-- navigation buttons -->
+			<div class='my-nav-container'>
+				<button class='blaze-prev'>previous</button>
+				<button class='blaze-next'>next</button>
+			</div>
+		</div>
+	</div>
+	<script>
 		// make the images in the work section scrollable horizontally by dragging the mouse
-		const workImageRow = document.querySelectorAll('.work-image-row');
+		const workImageRow = document.querySelectorAll(".work-image-row");
 		workImageRow.forEach((row) => {
-			row.addEventListener('mousedown', (e:MouseEvent) => {
+			row.addEventListener("mousedown", (e: MouseEvent) => {
 				e.preventDefault();
 				const scrollLeft = row.scrollLeft;
 				const mouseX = e.clientX;
 				let mouseDown = true;
 
-				row.addEventListener('mousemove', (e:MouseEvent) => {
+				row.addEventListener("mousemove", (e: MouseEvent) => {
 					if (!mouseDown) return;
 					const mouseMoveX = e.clientX;
 					const scrollAmount = mouseMoveX - mouseX;
@@ -71,12 +97,11 @@ const projects = await getSortedProjects();
 				});
 
 				// if the cursor leaves the row, stop scrolling
-				row.addEventListener('mouseleave', () => {
+				row.addEventListener("mouseleave", () => {
 					mouseDown = false;
 				});
 
-
-				row.addEventListener('mouseup', () => {
+				row.addEventListener("mouseup", () => {
 					mouseDown = false;
 				});
 			});
@@ -132,7 +157,7 @@ const projects = await getSortedProjects();
 			width: auto;
 		}
 
-		.recent-work-item{
+		.recent-work-item {
 			margin-top: 2em;
 		}
 
@@ -156,7 +181,7 @@ const projects = await getSortedProjects();
 			.work-image-row {
 				overflow-y: hidden;
 				overflow-x: scroll;
-				cursor : grab;
+				cursor: grab;
 				gap: 1em;
 			}
 
@@ -171,6 +196,5 @@ const projects = await getSortedProjects();
 				max-width: 75%;
 			}
 		}
-			
 	</style>
 </Layout>

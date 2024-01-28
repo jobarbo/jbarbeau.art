@@ -1,16 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <!-- make a snipcart product (art print) -->
-
 <Layout>
-  <button class="snipcart-add-item"
-    data-item-id="starry-night"
-    data-item-price="79.99"
-    data-item-description="High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh."
-    data-item-image="/assets/images/starry-night.jpg"
-    data-item-name="The Starry Night">
-    Add to cart
-  </button>
+	<div class='w-fit m-auto'>
+		<div class=''>
+			<button
+				class='snipcart-add-item text-slate-500 py-5 px-10 bg-slate-100 rounded-lg transition-all hover:text-slate-50 hover:bg-slate-400'
+				data-item-id='starry-night'
+				data-item-price='79.99'
+				data-item-description='High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh.'
+				data-item-image='/assets/images/starry-night.jpg'
+				data-item-name='The Starry Night'>
+				Add to cart
+			</button>
+		</div>
+	</div>
 </Layout>
