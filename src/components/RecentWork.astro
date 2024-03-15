@@ -1,7 +1,162 @@
 ---
-import type {CollectionEntry} from 'astro:content';
+import type {CollectionEntry} from "astro:content";
+import Icon from "../components/Icon.astro";
+import {iconPaths} from "../components/IconPaths";
 
 interface Props {
-	data: CollectionEntry<'project'>;
+	work: CollectionEntry<"project">;
 }
+
+const {work} = Astro.props;
 ---
+
+<li class='recent-work-item'>
+	<hr />
+	<div class='work-layout'>
+		<h3 class='work-description-title'>{work.data.title}</h3>
+		<p class='work-description-info'>{work.data.subtitle}</p>
+		<a class='work-description-link button' href={work.data.url} target='_blank'>
+			View Project
+			<Icon isButton={true} icon={"external"} />
+		</a>
+		<div class='work-image-row blaze-slider'>
+			<div class='blaze-container'>
+				<div class='blaze-track-container'>
+					<div class='blaze-track'>
+						{work.data.images.map((url) => <img src={url} alt='' class='work-image' />)}
+					</div>
+				</div>
+				<!-- navigation buttons -->
+				<div class='blaze-btn'>
+					<button class='blaze-prev'>previous</button>
+					<button class='blaze-next'>next</button>
+				</div>
+			</div>
+		</div>
+		<div class='work-description'>
+			<p class='work-description-text'>{work.data.description}</p>
+		</div>
+	</div>
+</li>
+
+<script>
+	import BlazeSlider from "blaze-slider";
+	import "blaze-slider/dist/blaze.css";
+
+	const el_array = document.querySelectorAll(".blaze-slider") as NodeListOf<HTMLElement>;
+
+	el_array.forEach((el) => {
+		new BlazeSlider(el, {
+			all: {
+				transitionDuration: 300,
+				slidesToShow: 3,
+			},
+			"(max-width: 900px)": {
+				slidesToShow: 2,
+			},
+			"(max-width: 500px)": {
+				slidesToShow: 1,
+			},
+		});
+	});
+</script>
+
+<style>
+	.work-description {
+		margin: 1em 0;
+		max-width: 100%;
+	}
+	.work-description-info {
+		margin: 0.15em 0;
+		font-size: 0.8em;
+		color: var(--accent-regular);
+	}
+	.work-description-text {
+		line-height: 1.25em;
+		margin: 0.5em 0 2em 0;
+		white-space: pre-wrap;
+	}
+	.work-layout {
+		display: flex;
+		flex-direction: column;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		margin-top: 2em;
+	}
+	.work-image-row {
+		display: flex;
+		flex-direction: row;
+		gap: 0.5em;
+	}
+
+	/* remove the scrollbar */
+	.work-image-row::-webkit-scrollbar {
+		display: none;
+	}
+
+	.work-image {
+		max-height: 100%; /* Fill the cell's height */
+		max-width: 100%;
+		height: auto;
+	}
+
+	.recent-work-item {
+		margin-top: 2em;
+	}
+
+	.button {
+		padding: 0.5em 1em;
+		border-radius: 50px;
+		background-color: var(--gray-0);
+		color: var(--gray-999);
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		margin: 1em 0;
+	}
+
+	.blaze-btn {
+		margin-top: 1em;
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.blaze-prev,
+	.blaze-next {
+		padding: 0.25em 1em;
+		border-radius: 50px;
+		background-color: black;
+		color: white;
+		font-size: 16px;
+		margin-left: 1em;
+	}
+
+	.blaze-prev:before {
+		content: "\2039";
+		padding-right: 0.5em;
+		font-size: 16px;
+	}
+	.blaze-next:after {
+		content: "\203A";
+		padding-left: 0.5em;
+		font-size: 16px;
+	}
+
+	@media (min-width: 1024px) {
+		.work-image-row {
+			gap: 1em;
+		}
+
+		.work-image {
+			max-height: 100%; /* Fill the cell's height */
+			max-width: 100%;
+			height: auto;
+		}
+		.work-description {
+			margin: 1em 0;
+			max-width: 75%;
+		}
+	}
+</style>
