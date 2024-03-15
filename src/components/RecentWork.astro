@@ -13,17 +13,17 @@ const {work} = Astro.props;
 <li class='recent-work-item'>
 	<hr />
 	<div class='work-layout'>
-		<div class='work-description'>
-			<h3 class='work-description-title'>{work.data.title}</h3>
-			<p class='work-description-info'>{work.data.subtitle}</p>
-			<p class='work-description-text'>{work.data.description}</p>
-			<a class='work-description-link button' href={work.data.url} target='_blank'>
-				View Project
-				<Icon isButton={true} icon={"external"} />
-			</a>
-		</div>
+		<h3 class='work-description-title'>{work.data.title}</h3>
+		<p class='work-description-info'>{work.data.subtitle}</p>
+		<a class='work-description-link button' href={work.data.url} target='_blank'>
+			View Project
+			<Icon isButton={true} icon={"external"} />
+		</a>
 		<div class='work-image-row'>
 			{work.data.images.map((url) => <img src={url} alt='' class='work-image' />)}
+		</div>
+		<div class='work-description'>
+			<p class='work-description-text'>{work.data.description}</p>
 		</div>
 	</div>
 </li>
