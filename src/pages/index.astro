@@ -6,9 +6,6 @@ import Layout from "../layouts/Layout.astro";
 import Socials from "../components/Socials.astro";
 
 import {getSortedProjects} from "../functions/contentCollections";
-
-import BlazeSlider from "blaze-slider";
-import "blaze-slider/dist/blaze.css";
 import RecentWork from "../components/RecentWork.astro";
 
 // put the projects in a global variable so we can use it in the script tag
@@ -35,14 +32,6 @@ const projects = await getSortedProjects();
 		</div>
 	</section>
 
-	<script>
-		import blazeSlider from "blaze-slider";
-		import BlazeSlider from "blaze-slider";
-		import "blaze-slider/dist/blaze.css";
-
-		const el = document.querySelector(".blaze-slider") as HTMLElement;
-		new BlazeSlider(el);
-	</script>
 	<style>
 		.hero-title {
 			margin-bottom: 0.1em;

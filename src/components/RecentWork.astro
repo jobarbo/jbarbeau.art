@@ -19,14 +19,45 @@ const {work} = Astro.props;
 			View Project
 			<Icon isButton={true} icon={"external"} />
 		</a>
-		<div class='work-image-row'>
-			{work.data.images.map((url) => <img src={url} alt='' class='work-image' />)}
+		<div class='work-image-row blaze-slider'>
+			<div class='blaze-container'>
+				<div class='blaze-track-container'>
+					<div class='blaze-track'>
+						{work.data.images.map((url) => <img src={url} alt='' class='work-image' />)}
+					</div>
+				</div>
+				<!-- navigation buttons -->
+				<button class='blaze-prev'>previous</button>
+				<button class='blaze-next'>next</button>
+			</div>
 		</div>
 		<div class='work-description'>
 			<p class='work-description-text'>{work.data.description}</p>
 		</div>
 	</div>
 </li>
+
+<script>
+	import BlazeSlider from "blaze-slider";
+	import "blaze-slider/dist/blaze.css";
+
+	const el_array = document.querySelectorAll(".blaze-slider") as NodeListOf<HTMLElement>;
+
+	el_array.forEach((el) => {
+		new BlazeSlider(el, {
+			all: {
+				transitionDuration: 300,
+				slidesToShow: 3,
+			},
+			"(max-width: 900px)": {
+				slidesToShow: 2,
+			},
+			"(max-width: 500px)": {
+				slidesToShow: 1,
+			},
+		});
+	});
+</script>
 
 <style>
 	.work-description {
@@ -54,8 +85,6 @@ const {work} = Astro.props;
 		display: flex;
 		flex-direction: row;
 		gap: 0.5em;
-		overflow-y: hidden;
-		overflow-x: scroll;
 	}
 
 	/* remove the scrollbar */
@@ -66,8 +95,7 @@ const {work} = Astro.props;
 	.work-image {
 		max-height: 100%; /* Fill the cell's height */
 		max-width: 100%;
-		height: 300px;
-		width: auto;
+		height: auto;
 	}
 
 	.recent-work-item {
@@ -89,17 +117,13 @@ const {work} = Astro.props;
 
 	@media (min-width: 1024px) {
 		.work-image-row {
-			overflow-y: hidden;
-			overflow-x: scroll;
-			cursor: grab;
 			gap: 1em;
 		}
 
 		.work-image {
 			max-height: 100%; /* Fill the cell's height */
 			max-width: 100%;
-			height: 600px;
-			width: auto;
+			height: auto;
 		}
 		.work-description {
 			margin: 1em 0;
