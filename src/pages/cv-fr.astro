@@ -1,0 +1,198 @@
+---
+import {Debug} from "astro/components";
+---
+
+<html lang='en' class='bg-slate-200'>
+	<head>
+		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width' />
+		<meta name='generator' content={Astro.generator} />
+		<title>Document</title>
+	</head>
+	<body class='max-w-screen-lg m-auto bg-white py-8'>
+		<section class='py-2 px-10'>
+			<div class='mb-2'>
+				<h1 class='text-xl font-light underline italic mb-5'>Curriculum Vitae</h1>
+				<h2 class='text-2xl font-bold'>Jonathan Barbeau</h2>
+				<div class='text-sm'>
+					<p>22 septembre 1989</p>
+					<p>Basé à Québec, QC, Canada</p>
+					<p>Langues : Français, Anglais</p>
+					<p>Téléphone : <a class='italic text-blue-700 underline' href='tel:+4388746769'>1 (438) 874 6769</a></p>
+					<p>E-mail : <a class='italic text-blue-700 underline' href='mailto:barbeau.jonathan@gmail.com'>barbeau.jonathan@gmail.com</a></p>
+
+					<p>Portfolio Web: <a class='italic text-blue-700 underline' target='_blank' href='https://www.awwwards.com/jbarbeau/submissions'>Awwwards</a></p>
+					<p>CV Artistique : <a class='italic text-blue-700 underline' target='_blank' href='https://jbarbeau.art/artist-cv'>www.jbarbeau.art/artist-cv</a></p>
+					<p>Site Web : <a class='italic text-blue-700 underline' target='_blank' href='https://jbarbeau.art'>www.jbarbeau.art</a></p>
+					<p>Réseaux sociaux : <a class='italic text-blue-700 underline' target='_blank' href='https://www.instagram.com/jbarbeau.art/'>Instagram</a></p>
+				</div>
+			</div>
+		</section>
+		<section class='py-0 px-10'>
+			<h3 class='text-xl font-semibold underline'>Compétences</h3>
+			<div class='grid grid-cols-3'>
+				<div class='my-2'>
+					<p class='font-bold'>Langages</p>
+					<div class='text-sm mt-2'>
+						<ul>
+							<li class='text-xs'>- HTML5 / CSS3</li>
+							<li class='text-xs'>- Javascript</li>
+							<li class='text-xs'>- PHP</li>
+							<li class='text-xs'>- Node</li>
+						</ul>
+					</div>
+				</div>
+				<div class='my-2'>
+					<p class='font-bold'>Framework</p>
+					<div class='text-sm mt-2'>
+						<ul>
+							<li class='text-xs'>- Wordpress</li>
+							<li class='text-xs'>- Tailwind</li>
+							<li class='text-xs'>- React</li>
+							<li class='text-xs'>- Astro</li>
+						</ul>
+					</div>
+				</div>
+				<div class='my-2'>
+					<p class='font-bold'>Outils & Librairies</p>
+					<div class='text-sm mt-2'>
+						<ul>
+							<li class='text-xs'>- Git / Vite / NPM</li>
+							<li class='text-xs'>- Snipcart</li>
+							<li class='text-xs'>- GSAP / Motion One</li>
+							<li class='text-xs'>- P5.js / Three.js</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class='py-2 px-10'>
+			<h3 class='text-xl font-semibold underline'>Expérience Professionnelle</h3>
+			<div class='my-2'>
+				<p class='font-bold'>Artiste Génératif Professionel</p>
+				<div class='text-xs'>
+					<p><span class='italic text-gray-500'>Ville de Québec (2022-présent)</span></p>
+				</div>
+				<div class='text-sm mt-2'>
+					<ul>
+						<li>- Création d'œuvres génératives en utilisant des outils tels que Processing3, HTML5 Canvas, Javascript, P5.js, Three.js.</li>
+						<li>- Construction de projets génératifs de type "long form" via des galeries digitales comme Foundation, Highlight, 256art et fx(hash).</li>
+						<li>- Projets principalement basés sur les technologies web3</li>
+
+						<div class='grid grid-cols-2 mt-2 mb-5'>
+							<div>
+								<li class='font-bold underline'>Expositions organisée</li>
+								<ul class='pl-2'>
+									<li class='text-xs italic font-medium'>- Under Neith avec Forever Projects</li>
+									<li class='text-xs italic font-medium'>- Digital Art Wine & Love, Station3 & Sotheby's, Wall Street NYC</li>
+									<li class='text-xs italic font-medium'>- Station3 By The Sea, Long Island, NY, USA</li>
+								</ul>
+							</div>
+
+							<div>
+								<li class='font-bold underline'>Commandes artistiques pour les clients:</li>
+								<ul class='pl-2'>
+									<li class='text-xs italic font-medium'>- Sartoro Genève (Mazarine, Pipemind)</li>
+									<li class='text-xs italic font-medium'>- Collection pour Genify, Jeu de Formes</li>
+									<li class='text-xs italic font-medium'>- Interfaces, Financé par le commissaire Allemand pour la culture et les Médias. Exposé à Hanovre</li>
+								</ul>
+							</div>
+						</div>
+					</ul>
+				</div>
+			</div>
+
+			<hr class='my-2' />
+			<div class='my-2'>
+				<p class='font-bold'>Développeur Web Freelance</p>
+				<div class='text-xs'>
+					<p><span class='italic text-gray-500'>Ville de Québec (2022-présent)</span></p>
+				</div>
+				<div class='text-sm mt-2'>
+					<ul>
+						<li>- Conception et création de sites Web pour des clients avec Wordpress ou Astro</li>
+						<li>- Conception et création de thèmes entièrement personnalisés pour Wordpress (Pas de WYSIWYG)</li>
+						<li>- Construction de solutions de commerce électronique pour les clients avec Snipcart ou Shopify</li>
+						<li>- Déploiement Web utilisant Flywheel ou Netlify</li>
+						<li>- Développement front-end créatif (Tailwind, WebGl, CSS, Motion one, GSAP, Threejs)</li>
+						<div class="mt-2 mb-5'">
+							<li class='font-bold underline'>Clients:</li>
+							<ul class='pl-2'>
+								<li class='text-xs italic font-medium'>- Station3.nyc</li>
+								<li class='text-xs italic font-medium'>- Studio Mill3</li>
+								<li class='text-xs italic font-medium'>- Substratum</li>
+								<li class='text-xs italic font-medium'>- Ether Ethos</li>
+							</ul>
+						</div>
+					</ul>
+				</div>
+			</div>
+			<hr class='my-2' />
+			<div class='my-2 page-break'>
+				<p class='font-bold'>Instynct - Développeur créatif</p>
+				<div class='text-xs'>
+					<p><span class='italic text-gray-500'>Ville de Québec (2020-2022)</span></p>
+				</div>
+				<div class='text-sm mt-2'>
+					<ul>
+						<li>- Création de sites Web pour des clients en utilisant Wordpress</li>
+						<li>- Construction de thèmes Wordpress entièrement personnalisés pour nos clients (Pas de WYSIWYG)</li>
+						<li>- Création de solutions de commerce électronique avec Snipcart</li>
+						<li>- Déploiement Web utilisant flywheel</li>
+						<li>- Développement créatif (WebGl, CSS, Motion one, GSAP, Threejs)</li>
+					</ul>
+				</div>
+			</div>
+			<hr class='my-2' />
+			<div class='my-2'>
+				<p class='font-bold'>O2Web - Développeur Front-end</p>
+				<div class='text-xs'>
+					<p><span class='italic text-gray-500'>Ville de Québec (2017-2020)</span></p>
+				</div>
+				<div class='text-sm mt-2'>
+					<ul>
+						<li>- Création de sites Web pour des clients en utilisant Wordpress, CakePHP ou Magento</li>
+						<li>- Construction de thèmes Wordpress entièrement personnalisés pour nos clients (Pas de WYSIWYG)</li>
+						<li>- Création de solutions de commerce électronique avec Magento & WooCommerce</li>
+						<li>- Déploiement Web utilisant Capistrano et Jenkins</li>
+					</ul>
+				</div>
+			</div>
+			<hr class='my-2' />
+			<div class='my-2'>
+				<p class='font-bold'>MamboMambo - Développeur Front-end</p>
+				<div class='text-xs'>
+					<p><span class='italic text-gray-500'>Ville de Québec (2015-2017)</span></p>
+				</div>
+				<div class='text-sm mt-2'>
+					<ul>
+						<li>- Création de sites Web pour des clients en utilisant Wordpress</li>
+						<li>- Construction de thèmes Wordpress entièrement personnalisés pour nos clients (Pas de WYSIWYG)</li>
+						<li>- Utilisation de Frameworks comme Bootstrap et Foundation</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class='py-2 px-10'>
+			<div class='mb-2'>
+				<h3 class='text-xl font-semibold underline'>Éducation</h3>
+				<p class='font-bold'>Technique d'intégration multimédia</p>
+				<div class='text-xs'>
+					<p><span class='italic text-gray-500'>Cégep de Ste-Foy, Ville de Québec (2014-2017)</span></p>
+				</div>
+				<div class='text-sm mt-2'>
+					<ul>
+						<li>- Développement Web</li>
+						<li>- Conception Graphique & Web</li>
+						<li>- Montage Vidéo, Animation, Modélisation 3D</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
+<style>
+	.page-break {
+		page-break-before: always;
+	}
+</style>
