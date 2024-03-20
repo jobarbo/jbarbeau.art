@@ -26,15 +26,18 @@ const {work} = Astro.props;
 						{work.data.images.map((url) => <img src={url} alt='' class='work-image' />)}
 					</div>
 				</div>
-				<!-- navigation buttons -->
-				<div class='blaze-btn'>
-					<button class='blaze-prev'>previous</button>
-					<button class='blaze-next'>next</button>
+				<div class='work-description'>
+					<div class='work-description-wrapper'>
+						<h4 class='work-description-title'>Description</h4>
+						<p class='work-description-text'>{work.data.description}</p>
+					</div>
+					<!-- navigation buttons -->
+					<div class='blaze-btn'>
+						<button class='blaze-prev'>previous</button>
+						<button class='blaze-next'>next</button>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class='work-description'>
-			<p class='work-description-text'>{work.data.description}</p>
 		</div>
 	</div>
 </li>
@@ -70,6 +73,8 @@ const {work} = Astro.props;
 	.work-description {
 		margin: 1em 0;
 		max-width: 100%;
+		display: flex;
+		flex-direction: column-reverse;
 	}
 	.work-description-info {
 		margin: 0.15em 0;
@@ -91,7 +96,6 @@ const {work} = Astro.props;
 		display: flex;
 		flex-direction: row;
 		gap: 0.5em;
-		cursor: grab;
 	}
 
 	/* remove the scrollbar */
@@ -166,6 +170,7 @@ const {work} = Astro.props;
 
 	.blaze-track-container {
 		overflow: visible;
+		cursor: grab;
 	}
 
 	@media (min-width: 1024px) {
@@ -180,9 +185,15 @@ const {work} = Astro.props;
 		}
 		.work-description {
 			margin: 1em 0;
-			max-width: 75%;
+			max-width: 100%;
+			display: flex;
+			align-items: flex-start;
+			justify-content: space-between;
 		}
 
+		.work-description-text {
+			max-width: 75%;
+		}
 		.blaze-next:hover,
 		.blaze-prev:hover {
 			background-color: white;
