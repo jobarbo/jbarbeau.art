@@ -19,7 +19,7 @@ const {work} = Astro.props;
 			View Project
 			<Icon isButton={true} icon={"external"} />
 		</a>
-		<div class='work-image-row blaze-slider'>
+		<div data-slider={work.data.slider} class='work-image-row blaze-slider'>
 			<div class='blaze-container'>
 				<div class='blaze-track-container'>
 					<div class='blaze-track'>
@@ -46,16 +46,21 @@ const {work} = Astro.props;
 	const el_array = document.querySelectorAll(".blaze-slider") as NodeListOf<HTMLElement>;
 
 	el_array.forEach((el) => {
+		// convert the data attribute to a an array by splitting it at the comma and then removing the comma
+		let sliderArray = el.dataset.slider.split(",").map((item) => Number(item.trim()));
+
+		console.log(sliderArray);
 		new BlazeSlider(el, {
 			all: {
 				transitionDuration: 300,
-				slidesToShow: 3,
+				slidesToShow: sliderArray[0] || 3, // use the first value of sliderArray, or default to 3 if it's not available
+				loop: false,
 			},
 			"(max-width: 900px)": {
-				slidesToShow: 2,
+				slidesToShow: sliderArray[1] || 2, // use the second value of sliderArray, or default to 2 if it's not available
 			},
 			"(max-width: 500px)": {
-				slidesToShow: 1,
+				slidesToShow: sliderArray[2] || 1, // use the third value of sliderArray, or default to 1 if it's not available
 			},
 		});
 	});
@@ -79,14 +84,14 @@ const {work} = Astro.props;
 	.work-layout {
 		display: flex;
 		flex-direction: column;
-		overflow-y: scroll;
-		overflow-x: hidden;
+		overflow: visible;
 		margin-top: 2em;
 	}
 	.work-image-row {
 		display: flex;
 		flex-direction: row;
 		gap: 0.5em;
+		cursor: grab;
 	}
 
 	/* remove the scrollbar */
@@ -98,6 +103,17 @@ const {work} = Astro.props;
 		max-height: 100%; /* Fill the cell's height */
 		max-width: 100%;
 		height: auto;
+		box-shadow:
+			1.3px 0.9px 1.8px rgba(0, 0, 0, 0.02),
+			2px 1.4px 3.5px rgba(0, 0, 0, 0.02),
+			2.4px 1.7px 5.1px rgba(0, 0, 0, 0.02),
+			2.6px 1.9px 6.6px rgba(0, 0, 0, 0.02),
+			2.8px 2px 8px rgba(0, 0, 0, 0.019),
+			3.2px 2.3px 9.5px rgba(0, 0, 0, 0.019),
+			3.9px 2.8px 11.1px rgba(0, 0, 0, 0.018),
+			5.3px 3.8px 13.1px rgba(0, 0, 0, 0.018),
+			8.2px 5.9px 15.7px rgba(0, 0, 0, 0.017),
+			21px 15px 19px rgba(0, 0, 0, 0.014);
 	}
 
 	.recent-work-item {
@@ -115,6 +131,8 @@ const {work} = Astro.props;
 		justify-content: center;
 		width: fit-content;
 		margin: 1em 0;
+		border: 1px solid black;
+		transition: all 0.3s;
 	}
 
 	.blaze-btn {
@@ -131,6 +149,8 @@ const {work} = Astro.props;
 		color: white;
 		font-size: 16px;
 		margin-left: 1em;
+		border: 1px solid black;
+		transition: all 0.3s;
 	}
 
 	.blaze-prev:before {
@@ -142,6 +162,10 @@ const {work} = Astro.props;
 		content: "\203A";
 		padding-left: 0.5em;
 		font-size: 16px;
+	}
+
+	.blaze-track-container {
+		overflow: visible;
 	}
 
 	@media (min-width: 1024px) {
@@ -157,6 +181,18 @@ const {work} = Astro.props;
 		.work-description {
 			margin: 1em 0;
 			max-width: 75%;
+		}
+
+		.blaze-next:hover,
+		.blaze-prev:hover {
+			background-color: white;
+			color: black;
+			border: 1px solid black;
+		}
+		.button:hover {
+			background-color: white;
+			color: black;
+			border: 1px solid black;
 		}
 	}
 </style>

@@ -3,6 +3,7 @@ title: "EX-LIBRIS"
 slug: exlibris
 publishDate: 2023-12-15 12:00:00
 collection: project
+slider: ["6", "5", "4"]
 subtitle: January 2024 - fx(hash)
 description: "The idea of EX-LIBRIS emerged only days before my pilgrimage to the Artblocks Marfa Weekend in September. What began as an intent to craft exquisite bookmarks for a select circle swiftly transformed into a revelation of the creative potential within this seemingly modest format. From this first batch only 32 bookmarks came into existence.
 
