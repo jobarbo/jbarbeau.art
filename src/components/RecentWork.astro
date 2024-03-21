@@ -8,6 +8,8 @@ interface Props {
 }
 
 const {work} = Astro.props;
+
+const dis_btn = work.data.url === "" || work.data.url === "undefined" ? "disabled" : "";
 ---
 
 <li class='recent-work-item'>
@@ -15,7 +17,7 @@ const {work} = Astro.props;
 	<div class='work-layout'>
 		<h3 class='work-description-title'>{work.data.title}</h3>
 		<p class='work-description-info'>{work.data.subtitle}</p>
-		<a class='work-description-link button' href={work.data.url} target='_blank'>
+		<a class=`work-description-link button ${dis_btn}` href={work.data.url} target='_blank'>
 			View Project
 			<Icon isButton={true} icon={"external"} />
 		</a>
@@ -85,6 +87,12 @@ const {work} = Astro.props;
 		line-height: 1.25em;
 		margin: 0.5em 0 2em 0;
 		white-space: pre-wrap;
+	}
+
+	.work-description-link.disabled {
+		pointer-events: none;
+		cursor: default;
+		opacity: 0.6;
 	}
 	.work-layout {
 		display: flex;
