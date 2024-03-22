@@ -17,10 +17,14 @@ const dis_btn = work.data.url === "" || work.data.url === "undefined" ? "disable
 	<div class='work-layout'>
 		<h3 class='work-description-title'>{work.data.title}</h3>
 		<p class='work-description-info'>{work.data.subtitle}</p>
-		<a class=`work-description-link button ${dis_btn}` href={work.data.url} target='_blank'>
-			View Project
-			<Icon isButton={true} icon={"external"} />
-		</a>
+		<div class='work-description-link-wrapper'>
+			<a class=`work-description-link button ${dis_btn}` href={work.data.url} target='_blank'>
+				View Project
+				<Icon isButton={true} icon={"external"} />
+			</a>
+			<a href='mailto:barbeau.jonathan@gmail.com' class='work-description-mailto button'> Email me for inquiries </a>
+		</div>
+
 		<div data-slider={work.data.slider} class='work-image-row blaze-slider'>
 			<div class='blaze-container'>
 				<div class='blaze-track-container'>
@@ -106,6 +110,15 @@ const dis_btn = work.data.url === "" || work.data.url === "undefined" ? "disable
 		gap: 0.5em;
 	}
 
+	.work-description-link-wrapper {
+		display: flex;
+		gap: 1em;
+	}
+
+	.blaze-track {
+		margin: 1em 0 3em 0;
+	}
+
 	/* remove the scrollbar */
 	.work-image-row::-webkit-scrollbar {
 		display: none;
@@ -155,7 +168,7 @@ const dis_btn = work.data.url === "" || work.data.url === "undefined" ? "disable
 
 	.blaze-prev,
 	.blaze-next {
-		padding: 0.25em 1em;
+		padding: 0.1em 1em 0.25em 1em;
 		border-radius: 50px;
 		background-color: black;
 		color: white;
