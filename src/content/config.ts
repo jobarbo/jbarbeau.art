@@ -7,6 +7,8 @@ const projectCollection = defineCollection({
 		subtitle: z.string().optional(),
 		description: z.string(),
 		url: z.string(),
+		isRedeemable: z.boolean().optional(),
+		redeemUrl: z.string().optional(),
 		images: z.array(z.string()).optional(),
 		slider: z.array(z.string()).optional(),
 	}),

@@ -4,6 +4,8 @@ slug: exhibit-a
 publishDate: 2023-04-15 12:00:00
 collection: project
 slider: ["3", "2", "1"]
+isRedeemable: false
+redeemUrl: /
 subtitle: Mai 2023 - Highlight.xyz
 description: "This collection features 10 artworks made in pair by 5 different algorithm. This collection was exhibited at La Korrigane in Quebec City during the summer of 2023.
 

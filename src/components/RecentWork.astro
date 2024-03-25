@@ -1,4 +1,5 @@
 ---
+import {Debug} from "astro:components";
 import type {CollectionEntry} from "astro:content";
 import Icon from "../components/Icon.astro";
 import {iconPaths} from "../components/IconPaths";
@@ -9,7 +10,7 @@ interface Props {
 
 const {work} = Astro.props;
 
-const dis_btn = work.data.url === "" || work.data.url === "undefined" ? "disabled" : "";
+const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "disabled" : "";
 ---
 
 <li class='recent-work-item'>
@@ -18,10 +19,18 @@ const dis_btn = work.data.url === "" || work.data.url === "undefined" ? "disable
 		<h3 class='work-description-title'>{work.data.title}</h3>
 		<p class='work-description-info'>{work.data.subtitle}</p>
 		<div class='work-description-link-wrapper'>
-			<a class=`work-description-link button ${dis_btn}` href={work.data.url} target='_blank'>
+			<a class=`work-description-link button ${isBtnDisabled}` href={work.data.url} target='_blank'>
 				View Project
 				<Icon isButton={true} icon={"external"} />
 			</a>
+			{
+				work.data.isRedeemable && (
+					<a class='work-description-link button' href={work.data.redeemUrl} target='_blank'>
+						Redeem here!
+						<Icon isButton={true} icon={"external"} />
+					</a>
+				)
+			}
 			<a href='mailto:barbeau.jonathan@gmail.com' class='work-description-mailto button'> Email me for inquiries </a>
 		</div>
 

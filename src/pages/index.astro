@@ -1,10 +1,11 @@
 ---
-import {Debug} from "astro/components";
-import {getCollection} from "astro:content";
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import Layout from "../layouts/Layout.astro";
+
+// Socials import — provides social media links and icons
 import Socials from "../components/Socials.astro";
 
+//! This import the recent art works in the project folder. The files are Markdown.
 import {getSortedProjects} from "../functions/contentCollections";
 import RecentWork from "../components/RecentWork.astro";
 
@@ -31,14 +32,14 @@ const projects = await getSortedProjects();
 			</ul>
 		</div>
 	</section>
-
-	<style>
-		.hero-title {
-			margin-bottom: 0.1em;
-		}
-
-		.socials {
-			margin-top: 0.5rem;
-		}
-	</style>
 </Layout>
+
+<style>
+	.hero-title {
+		margin-bottom: 0.1em;
+	}
+
+	.socials {
+		margin-top: 0.5rem;
+	}
+</style>
