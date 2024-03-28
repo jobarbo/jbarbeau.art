@@ -31,7 +31,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 					</a>
 				)
 			}
-			<a href='mailto:barbeau.jonathan@gmail.com' class='work-description-mailto button'> Email me for inquiries </a>
+			<a href='mailto:barbeau.jonathan@gmail.com' class='work-description-link button'> Email me for inquiries </a>
 		</div>
 
 		<div data-slider={work.data.slider} class='work-image-row blaze-slider'>
@@ -102,6 +102,19 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		white-space: pre-wrap;
 	}
 
+	.work-description-link-wrapper {
+		display: flex;
+		gap: 0.5em 1em;
+		flex-wrap: wrap;
+		margin: 1em 0;
+	}
+
+	.work-description-link {
+		cursor: pointer;
+		font-size: 14px;
+		white-space: nowrap;
+	}
+
 	.work-description-link.disabled {
 		pointer-events: none;
 		cursor: default;
@@ -117,15 +130,6 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		display: flex;
 		flex-direction: row;
 		gap: 0.5em;
-	}
-
-	.work-description-link-wrapper {
-		display: flex;
-		gap: 1em;
-	}
-
-	.blaze-track {
-		margin: 1em 0 3em 0;
 	}
 
 	/* remove the scrollbar */
@@ -164,13 +168,16 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		align-items: center;
 		justify-content: center;
 		width: fit-content;
-		margin: 1em 0;
 		border: 1px solid black;
 		transition: all 0.3s;
 	}
 
+	.blaze-track {
+		margin: 1em 0 1em 0;
+	}
+
 	.blaze-btn {
-		margin-top: 1em;
+		margin: 1em 0;
 		display: flex;
 		justify-content: flex-end;
 	}
@@ -214,7 +221,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 			height: auto;
 		}
 		.work-description {
-			margin: 1em 0;
+			margin: 2em 0 1em 0;
 			max-width: 100%;
 			display: flex;
 			align-items: flex-start;
