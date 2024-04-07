@@ -1,7 +1,7 @@
 ---
 title: "Traces"
 slug: traces
-publishDate: 2024-03-22 12:00:00
+publishDate: 2024-03-06 12:00:00
 collection: project
 slider: ["3", "2", "1"]
 isRedeemable: false
