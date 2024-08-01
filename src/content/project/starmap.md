@@ -25,7 +25,7 @@ STARMAP is a meditative piece that paints itself over time.
 The artist uses a high number of particulate to paint each piece of this series. This collection has been built with contemplation in mind so take the time to kick back and enjoy the automated painting process (around 60s).
 
 
-Made with Javascript"
+Made with Javascript on <canvas>"
 url: https://foundation.app/collection/strmp
 images:
   [
