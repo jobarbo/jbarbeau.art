@@ -1,6 +1,6 @@
 ---
-import type {HTMLAttributes} from 'astro/types';
-import {iconPaths} from './IconPaths';
+import type {HTMLAttributes} from "astro/types";
+import {iconPaths} from "./IconPaths";
 
 export interface Props {
 	icon: keyof typeof iconPaths;
@@ -10,15 +10,15 @@ export interface Props {
 	isButton?: boolean;
 }
 
-const {color = 'currentcolor', gradient, icon, size, isButton} = Astro.props;
+const {color = "currentcolor", gradient, icon, size, isButton} = Astro.props;
 const iconPath = iconPaths[icon];
 
-const attrs: HTMLAttributes<'svg'> = {};
-if (size) attrs.style = {'--size': size};
+const attrs: HTMLAttributes<"svg"> = {};
+if (size) attrs.style = {"--size": size};
 
-const gradientId = 'icon-gradient-' + Math.round(Math.random() * 10e12).toString(36);
+const gradientId = "icon-gradient-" + Math.round(Math.random() * 10e12).toString(36);
 
-const cssClass = isButton ? 'icon-button' : '';
+const cssClass = isButton ? "icon-button" : "";
 ---
 
 <svg
@@ -30,8 +30,7 @@ const cssClass = isButton ? 'icon-button' : '';
 	aria-hidden='true'
 	stroke={gradient ? `url(#${gradientId})` : color}
 	fill={gradient ? `url(#${gradientId})` : color}
-	{...attrs}
->
+	{...attrs}>
 	<g set:html={iconPath} />
 	{
 		gradient && (
@@ -49,8 +48,5 @@ const cssClass = isButton ? 'icon-button' : '';
 		vertical-align: middle;
 		width: var(--size, 1em);
 		height: var(--size, 1em);
-	}
-	.icon-button {
-		margin-left: 0.5em;
 	}
 </style>

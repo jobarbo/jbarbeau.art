@@ -48,8 +48,8 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 					</div>
 					<!-- navigation buttons -->
 					<div class='blaze-btn'>
-						<button class='blaze-prev'>previous</button>
-						<button class='blaze-next'>next</button>
+						<button class='blaze-prev'><Icon isButton={true} icon={"chevron_left"} />previous</button>
+						<button class='blaze-next'>next<Icon isButton={true} icon={"chevron_right"} /></button>
 					</div>
 				</div>
 			</div>
@@ -95,6 +95,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		margin: 0.15em 0;
 		font-size: 0.8em;
 		color: var(--accent-regular);
+		max-width: 500px;
 	}
 	.work-description-text {
 		line-height: 1.25em;
@@ -170,6 +171,10 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		width: fit-content;
 		border: 1px solid black;
 		transition: all 0.3s;
+		font-size: 16px;
+		svg {
+			margin-left: 0.5em;
+		}
 	}
 
 	.blaze-track {
@@ -184,7 +189,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 
 	.blaze-prev,
 	.blaze-next {
-		padding: 0.1em 1em 0.25em 1em;
+		padding: 0.5em 1em;
 		border-radius: 50px;
 		background-color: black;
 		color: white;
@@ -192,17 +197,20 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		margin-left: 1em;
 		border: 1px solid black;
 		transition: all 0.3s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.blaze-prev:before {
-		content: "\2039";
-		padding-right: 0.5em;
-		font-size: 16px;
+	.blaze-prev {
+		svg {
+			margin-right: 0.5em;
+		}
 	}
-	.blaze-next:after {
-		content: "\203A";
-		padding-left: 0.5em;
-		font-size: 16px;
+	.blaze-next {
+		svg {
+			margin-left: 0.5em;
+		}
 	}
 
 	.blaze-track-container {

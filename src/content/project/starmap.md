@@ -6,7 +6,7 @@ collection: project
 slider: ["3", "2", "1"]
 isRedeemable: false
 redeemUrl: /
-subtitle: March 2024 - Under Neith - Forever Projects - Foundation
+subtitle: "March 2024  -  Show: Under Neith  -  Curated by: Forever Projects  -  Hosted by: Foundation"
 description: "STARMAP serves as an homage to the captivating mysticism of the cosmos and the insidious fear that accompanies the exploration of the unknown. This artwork invites viewers to embark on a cosmic journey, celebrating the vastness of the universe.
 
 
