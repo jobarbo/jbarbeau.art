@@ -6,20 +6,26 @@ collection: project
 slider: ["3", "2", "1"]
 isRedeemable: false
 redeemUrl: /
-subtitle: March 2024 - Under Neith - Forever Projects - Foundation
+subtitle: "March 2024  -  Show: Under Neith  -  Curated by: Forever Projects  -  Hosted by: Foundation"
 description: "STARMAP serves as an homage to the captivating mysticism of the cosmos and the insidious fear that accompanies the exploration of the unknown. This artwork invites viewers to embark on a cosmic journey, celebrating the vastness of the universe.
 
 
-The artworks shows the perspective of a space cartographer, alone and fully committed to charting the vastness of the cosmos. The explorer is never shown; instead, the viewer shares his perspective, experiencing both the awe of discovery and the profound feeling of solitude in a place far greater than us.
+Each pieces put you in the perspective of an unnamed space explorer. Alone and fully committed to charting the vastness of the cosmos. The explorer is never shown; instead, the viewer shares his point of view, experiencing both the awe and wonder of discovery and the profound feeling of solitude in a place that is far greater than us.
 
 
-This generative collection conveys the profound sentiment that returning home is never guaranteed. As the explorer delves deeper into the cosmos, a sense of wonder and curiosity becomes entwined with feelings of isolation and the weight of emptiness that begins to envelop them. It encapsulates the paradox of discovery mingled with the fear of losing connection with the familiar—a dichotomy resonating within every soul, akin to the emotions associated with significant life changes.
+This generative collection conveys the acute sentiment that returning home is never guaranteed. As the explorer delves deeper into the cosmos, emotions like wonder and curiosity becomes entwined with the dread of isolation and the weight of emptiness that begins to envelop them.
+
+The artist is showcasing the paradox of discovery mingled with the fear of losing connection with the familiar, a dichotomy resonating within every soul, akin to the emotions associated with significant life changes.
 
 
 ||==NOTES==||
 
 
-STARMAP is a contemplative piece that paints itself over time. This collection has been built with contemplation in mind so take the time to kick back and enjoy the automated painting process (around 60s)"
+STARMAP is a meditative piece that paints itself over time.
+The artist uses a high number of particulate to paint each piece of this series. This collection has been built with contemplation in mind so take the time to kick back and enjoy the automated painting process (around 60s).
+
+
+Made with Javascript on <canvas>"
 url: https://foundation.app/collection/strmp
 images:
   [
