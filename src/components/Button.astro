@@ -14,7 +14,7 @@ const {label, icon, href, target, class: className} = Astro.props;
 ---
 
 <a href={href} class={`button ${className}`} target={target}>
-	{label}
+	<span> {label}</span>
 	{icon && <Icon icon={icon} />}
 </a>
 

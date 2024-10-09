@@ -49,8 +49,14 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 					</div>
 					<!-- navigation buttons -->
 					<div class='blaze-btn'>
-						<button class='blaze-prev'><Icon isButton={true} icon={"chevron_left"} />previous</button>
-						<button class='blaze-next'>next<Icon isButton={true} icon={"chevron_right"} /></button>
+						<button class='blaze-prev'>
+							<span><Icon isButton={true} icon={"chevron_left"} /></span>
+							<span class='-mt-0.5'>previous</span>
+						</button>
+						<button class='blaze-next'>
+							<span class='-mt-0.5'>next</span>
+							<span><Icon isButton={true} icon={"chevron_right"} /></span>
+						</button>
 					</div>
 				</div>
 			</div>
