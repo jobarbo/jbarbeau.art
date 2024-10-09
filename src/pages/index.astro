@@ -21,10 +21,10 @@ const projects = await getSortedProjects();
 		<div class='hero-container'>
 			<h1 class='hero-title'>Jonathan Barbeau</h1>
 			<h4 class='hero-subtitle'>Generative Artist based in Québec City</h4>
-			<Button label='View my Artist CV' href='/artist-cv' target='_blank' icon='external' />
-			<div class='socials'>
+			<div class='hero-socials'>
 				<Socials />
 			</div>
+			<Button class='hero-button my-6' label='View my Artist Curriculum' href='/artist-cv' target='_blank' icon='external' />
 		</div>
 	</section>
 	<section class='work'>
@@ -47,7 +47,7 @@ const projects = await getSortedProjects();
 		margin-bottom: 0.5rem;
 	}
 
-	.socials {
+	.hero-socials {
 		margin-top: 0.5rem;
 	}
 

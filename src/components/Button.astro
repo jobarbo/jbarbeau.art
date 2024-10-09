@@ -7,12 +7,13 @@ interface Props {
 	icon?: IconProps["icon"];
 	href: string;
 	target: string;
+	class?: string;
 }
 
-const {label, icon, href, target} = Astro.props;
+const {label, icon, href, target, class: className} = Astro.props;
 ---
 
-<a href={href} class='button' target={target}>
+<a href={href} class={`button ${className}`} target={target}>
 	{label}
 	{icon && <Icon icon={icon} />}
 </a>

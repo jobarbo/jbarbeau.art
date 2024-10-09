@@ -33,7 +33,7 @@ const iconLinks: {label: string; href: string; icon: IconProps["icon"]}[] = [
 <style>
 	.menu-footer {
 		--icon-size: var(--text-2xl);
-		--icon-padding: 0.25rem;
+		--icon-padding: 0px;
 		display: flex;
 		justify-content: space-between;
 		gap: 0.25rem;
@@ -44,16 +44,24 @@ const iconLinks: {label: string; href: string; icon: IconProps["icon"]}[] = [
 	.socials {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.15rem;
+		gap: 0.5em;
 		font-size: var(--icon-size);
+		padding: 0.5em 0;
 	}
 
 	.social {
 		display: flex;
-		padding: var(--icon-padding);
+		padding: 0;
 		text-decoration: none;
 		color: var(--accent-dark);
 		transition: color var(--theme-transition);
+		width: 25px;
+		height: 25px;
+
+		svg {
+			width: 25px;
+			height: 25px;
+		}
 	}
 
 	.social:hover,
@@ -76,7 +84,7 @@ const iconLinks: {label: string; href: string; icon: IconProps["icon"]}[] = [
 	@media (min-width: 60em) {
 		.socials {
 			display: flex;
-			gap: 0;
+			gap: 0.5em;
 		}
 	}
 </style>
