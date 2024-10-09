@@ -1,18 +1,19 @@
 ---
-import Icon, {Props as IconProps} from './Icon.astro';
+import Icon from "./Icon.astro";
+import type {Props as IconProps} from "./Icon.astro";
 /** Main menu itemse */
 
 /** Icon links to social media — edit these with links to your profiles! */
-const iconLinks: {label: string; href: string; icon: IconProps['icon']}[] = [
-	{label: 'Email', href: 'mailto:barbeau.jonathan@gmail.com', icon: 'email'},
-	{label: 'Twitter', href: 'https://twitter.com/JBarbeau_Art', icon: 'twitter-logo'},
-	{label: 'Instagram', href: 'https://www.instagram.com/jbarbeau.art/', icon: 'instagram'},
-	{label: 'Facebook', href: 'https://www.facebook.com/barbeaucodeart', icon: 'facebook'},
-	{label: 'Twitch', href: 'https://twitch.tv/jbarbeau_art', icon: 'twitch-logo'},
-	{label: 'Tiktok', href: 'https://www.tiktok.com/@jbarbeau.art', icon: 'tiktok'},
-	{label: 'GitHub', href: 'https://github.com/jobarbo', icon: 'github-logo'},
-	{label: 'YouTube', href: 'https://www.youtube.com/@JoBarbo', icon: 'youtube-logo'},
-	{label: 'linktree', href: 'https://linktr.ee/jobarbo', icon: 'linktree-logo'},
+const iconLinks: {label: string; href: string; icon: IconProps["icon"]}[] = [
+	{label: "Email", href: "mailto:barbeau.jonathan@gmail.com", icon: "email"},
+	{label: "Twitter", href: "https://twitter.com/JBarbeau_Art", icon: "twitter-logo"},
+	{label: "Instagram", href: "https://www.instagram.com/jbarbeau.art/", icon: "instagram"},
+	{label: "Facebook", href: "https://www.facebook.com/barbeaucodeart", icon: "facebook"},
+	{label: "Twitch", href: "https://twitch.tv/jbarbeau_art", icon: "twitch-logo"},
+	{label: "Tiktok", href: "https://www.tiktok.com/@jbarbeau.art", icon: "tiktok"},
+	{label: "GitHub", href: "https://github.com/jobarbo", icon: "github-logo"},
+	{label: "YouTube", href: "https://www.youtube.com/@JoBarbo", icon: "youtube-logo"},
+	{label: "linktree", href: "https://linktr.ee/jobarbo", icon: "linktree-logo"},
 ];
 ---
 

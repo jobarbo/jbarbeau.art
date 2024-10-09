@@ -9,6 +9,9 @@ import Socials from "../components/Socials.astro";
 import {getSortedProjects} from "../functions/contentCollections";
 import RecentWork from "../components/RecentWork.astro";
 
+// Button import — provides a button component
+import Button from "../components/Button.astro";
+
 // put the projects in a global variable so we can use it in the script tag
 const projects = await getSortedProjects();
 ---
@@ -18,6 +21,7 @@ const projects = await getSortedProjects();
 		<div class='hero-container'>
 			<h1 class='hero-title'>Jonathan Barbeau</h1>
 			<h4 class='hero-subtitle'>Generative Artist based in Québec City</h4>
+			<Button label='View my Artist CV' href='/artist-cv' target='_blank' icon='external' />
 			<div class='socials'>
 				<Socials />
 			</div>
@@ -39,7 +43,23 @@ const projects = await getSortedProjects();
 		margin-bottom: 0.1em;
 	}
 
+	.hero-subtitle {
+		margin-bottom: 0.5rem;
+	}
+
 	.socials {
 		margin-top: 0.5rem;
+	}
+
+	.hero-button {
+		cursor: pointer;
+		font-size: 14px;
+		white-space: nowrap;
+	}
+
+	.hero-button.disabled {
+		pointer-events: none;
+		cursor: default;
+		opacity: 0.6;
 	}
 </style>

@@ -1,0 +1,42 @@
+---
+import Icon from "./Icon.astro";
+import type {Props as IconProps} from "./Icon.astro";
+
+interface Props {
+	label: string;
+	icon?: IconProps["icon"];
+	href: string;
+	target: string;
+}
+
+const {label, icon, href, target} = Astro.props;
+---
+
+<a href={href} class='button' target={target}>
+	{label}
+	{icon && <Icon icon={icon} />}
+</a>
+
+<style>
+	.button {
+		border-radius: 50px;
+		background-color: var(--gray-0);
+		color: var(--gray-999);
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		padding: 0.5em 1.25em;
+		font-size: 0.875rem;
+		justify-content: center;
+		width: fit-content;
+		border: 1px solid black;
+		cursor: pointer;
+		transition: all 0.3s;
+		gap: 0.5em;
+	}
+
+	.button:hover {
+		background-color: var(--gray-999);
+		color: var(--gray-0);
+	}
+</style>
