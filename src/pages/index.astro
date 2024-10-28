@@ -41,18 +41,23 @@ const iFrameArray = [
 			</div>
 			<div class='hero-iframe-container'>
 				<div class='hero-iframe-wrapper'>
-					<div class='hero-canvas'>
+					<div data-canvas class='hero-canvas'>
 						<iframe
 							id='generativeArtFrame'
 							title='Generative Art'
 							src=''
-							frameborder='0'
 							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 							referrerpolicy='strict-origin-when-cross-origin'
 							allowfullscreen></iframe>
 					</div>
-					<p class='hero-iframe-name' id='projectName'></p>
-					<p class='hero-iframe-hash' id='randomHash'></p>
+					<div class='hero-iframe-info'>
+						<p class='hero-iframe-name' id='projectName'></p>
+						<p class='hero-iframe-hash' id='randomHash'></p>
+						<div class='hero-iframe-buttons'>
+							<Button label='Generate new art' icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
+							<Button label='Open in new tab' icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -67,6 +72,72 @@ const iFrameArray = [
 		</div>
 	</section>
 
+	<script>
+		// Define iFrameArray in client-side JavaScript
+		const iFrameArray = [
+			{url: "https://kodamandala.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1", name: "Kodamandala - working title"},
+			{url: "https://jeudeligne.netlify.app/", urlParam: "hash", aspectRatio: "1/1.3756", name: "Jeu de ligne - 2023"},
+			{url: "https://phantasmagoria.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1.4", name: "Phantasmagoria (working title)"},
+		];
+
+		let currentUrl; // Add this variable to store the current URL
+		let randomIframe;
+		let canvas = document.querySelector("[data-canvas]") as HTMLElement;
+		function generateRandomHash(size = 64) {
+			let genHash = (size) => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join("");
+			let hash = "0x" + genHash(64);
+			return hash;
+		}
+
+		function updateIframeAndHash() {
+			// Generate random hash
+			const hash = generateRandomHash(64);
+			document.getElementById("randomHash").textContent = hash;
+
+			// Select random iframe
+			randomIframe = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
+
+			// add the hash to the url
+			currentUrl = `${randomIframe.url}?${randomIframe.urlParam}=${hash}`; // Store URL in the outer variable
+
+			// Update iframe
+			const iframe = document.getElementById("generativeArtFrame") as HTMLIFrameElement;
+			iframe.src = currentUrl;
+			iframe.style.aspectRatio = randomIframe.aspectRatio;
+			//canvas.style.aspectRatio = randomIframe.aspectRatio;
+
+			// Update project name
+			document.getElementById("projectName").textContent = `Project: ${randomIframe.name}`;
+		}
+
+		function openInNewTab() {
+			window.open(currentUrl, "_blank"); // Use the stored URL
+		}
+
+		function updateHash() {
+			//update only the hash not the iFrame
+			const hash = generateRandomHash(64);
+			document.getElementById("randomHash").textContent = hash;
+
+			// reload the iframe
+			const iframe = document.getElementById("generativeArtFrame") as HTMLIFrameElement;
+			iframe.src = `${randomIframe.url}?${randomIframe.urlParam}=${hash}`;
+			iframe.style.aspectRatio = randomIframe.aspectRatio;
+			//canvas.style.aspectRatio = randomIframe.aspectRatio;
+			// Update project name
+			document.getElementById("projectName").textContent = `Project: ${randomIframe.name}`;
+
+			currentUrl = `${randomIframe.url}?${randomIframe.urlParam}=${hash}`;
+		}
+
+		// add event listeners to the buttons
+		document.querySelector("[data-refresh]").addEventListener("click", updateHash);
+		document.querySelector("[data-fullscreen]").addEventListener("click", openInNewTab);
+
+		// Run on page load
+		updateIframeAndHash();
+	</script>
+
 	<style>
 		.hero-container {
 			display: grid;
@@ -78,8 +149,10 @@ const iFrameArray = [
 			padding-bottom: 0;
 			gap: 2rem;
 
-			@media all and (max-width: 1280px) {
+			@media all and (max-width: 1024px) {
 				grid-template-columns: 1fr;
+				padding-top: 5em;
+				padding-bottom: 2em;
 			}
 		}
 
@@ -106,8 +179,9 @@ const iFrameArray = [
 			align-items: flex-start;
 			gap: 1rem;
 
-			@media all and (max-width: 1280px) {
+			@media all and (max-width: 1024px) {
 				width: 100%;
+				align-items: center;
 			}
 		}
 
@@ -117,17 +191,39 @@ const iFrameArray = [
 			font-weight: 600;
 		}
 
+		.hero-iframe-hash {
+			font-size: 0.6rem;
+			font-style: italic;
+			font-weight: 600;
+		}
+
+		.hero-iframe-buttons {
+			display: flex;
+			gap: 0.5rem;
+			margin-top: 1.5rem;
+
+			@media all and (max-width: 1024px) {
+				justify-content: center;
+			}
+		}
+
 		.hero-canvas {
-			height: 100%;
+			height: 50vh;
 			width: fit-content;
-			flex: 1;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			overflow: visible;
 			justify-self: center;
 			position: relative;
-			border: 4px solid rgb(32, 22, 0);
+			border: 6px solid rgb(54, 43, 19);
+			box-shadow:
+				2.8px 2.8px 2.2px rgba(0, 0, 0, 0.118),
+				6.7px 6.7px 5.3px rgba(0, 0, 0, 0.119),
+				12.5px 12.5px 10px rgba(0, 0, 0, 0.115),
+				22.3px 22.3px 17.9px rgba(0, 0, 0, 0.11),
+				41.8px 41.8px 33.4px rgba(0, 0, 0, 0.105),
+				100px 100px 80px rgba(0, 0, 0, 0.1);
 			&::after {
 				content: "";
 				display: block;
@@ -140,43 +236,49 @@ const iFrameArray = [
 					13.5px 14.2px 17.5px inset rgba(0, 0, 0, 0.041),
 					20px 21px 58px inset rgba(0, 0, 0, 0.025);
 			}
-
-			@media all and (max-width: 1280px) {
-				height: auto;
-				width: 100%;
-				border: 8px solid rgb(32, 22, 0);
-			}
 		}
 
 		iframe {
-			height: 70vh;
-			width: auto;
+			height: 100%;
+			width: 100%;
 			aspect-ratio: 1/1;
 			position: relative;
-			box-shadow:
-				2.8px 2.8px 2.2px rgba(0, 0, 0, 0.118),
-				6.7px 6.7px 5.3px rgba(0, 0, 0, 0.119),
-				12.5px 12.5px 10px rgba(0, 0, 0, 0.115),
-				22.3px 22.3px 17.9px rgba(0, 0, 0, 0.11),
-				41.8px 41.8px 33.4px rgba(0, 0, 0, 0.105),
-				100px 100px 80px rgba(0, 0, 0, 0.1);
 
-			@media all and (max-width: 1280px) {
-				height: auto;
-				width: 100%;
+			@media all and (max-width: 1024px) {
 			}
 		}
 
+		.hero-content {
+			@media all and (max-width: 1024px) {
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+		}
 		.hero-title {
 			margin-bottom: 0.1em;
+
+			@media all and (max-width: 1024px) {
+				font-size: 1.5rem;
+			}
 		}
 
 		.hero-subtitle {
 			margin-bottom: 0.5rem;
+
+			@media all and (max-width: 1024px) {
+				margin-bottom: 0.2rem;
+				font-size: 0.85rem;
+			}
 		}
 
 		.hero-socials {
 			margin-top: 0.5rem;
+
+			@media all and (max-width: 1024px) {
+				margin-top: 0rem;
+			}
 		}
 
 		.hero-button {
@@ -192,32 +294,3 @@ const iFrameArray = [
 		}
 	</style>
 </Layout>
-
-<script>
-	// Define iFrameArray in client-side JavaScript
-	const iFrameArray = [
-		{url: "https://kodamandala.netlify.app/", aspectRatio: "1/1", name: "Kodamandala - working title"},
-		{url: "https://jeudeligne.netlify.app/", aspectRatio: "1/1.3756", name: "Jeu de ligne - 2023"},
-		{url: "https://phantasmagoria.netlify.app/", aspectRatio: "1/1.4", name: "Phantasmagoria (working title)"},
-	];
-
-	function updateIframeAndHash() {
-		// Generate random hash
-		const hash = Math.random().toString(36).substring(2, 25);
-		document.getElementById("randomHash").textContent = hash;
-
-		// Select random iframe
-		const randomIframe = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
-
-		// Update iframe
-		const iframe = document.getElementById("generativeArtFrame") as HTMLIFrameElement;
-		iframe.src = randomIframe.url;
-		iframe.style.aspectRatio = randomIframe.aspectRatio;
-
-		// Update project name
-		document.getElementById("projectName").textContent = `Project: ${randomIframe.name}`;
-	}
-
-	// Run on page load
-	updateIframeAndHash();
-</script>
