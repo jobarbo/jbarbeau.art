@@ -23,13 +23,6 @@ const iFrameArray = [
 	{url: "https://jeudeligne.netlify.app/", aspectRatio: "1/1.3756", name: "Jeu de ligne - 2023"},
 	{url: "https://phantasmagoria.netlify.app/", aspectRatio: "1/1.4", name: "Phantasmagoria (working title)"},
 ];
-
-// select a random iframe url
-let randomIframeUrl = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
-
-let randomHash = Math.random().toString(36).substring(2, 25);
-
-console.log(randomHash);
 ---
 
 <Layout>
@@ -50,16 +43,16 @@ console.log(randomHash);
 				<div class='hero-iframe-wrapper'>
 					<div class='hero-canvas'>
 						<iframe
-							style={`aspect-ratio: ${randomIframeUrl.aspectRatio};`}
-							src={randomIframeUrl.url}
+							id='generativeArtFrame'
 							title='Generative Art'
+							src=''
 							frameborder='0'
 							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 							referrerpolicy='strict-origin-when-cross-origin'
 							allowfullscreen></iframe>
 					</div>
-					<p class='hero-iframe-name'>Project: {randomIframeUrl.name}</p>
-					<p class='hero-iframe-hash'>{randomHash}</p>
+					<p class='hero-iframe-name' id='projectName'></p>
+					<p class='hero-iframe-hash' id='randomHash'></p>
 				</div>
 			</div>
 		</div>
@@ -200,4 +193,31 @@ console.log(randomHash);
 	</style>
 </Layout>
 
-<script></script>
+<script>
+	// Define iFrameArray in client-side JavaScript
+	const iFrameArray = [
+		{url: "https://kodamandala.netlify.app/", aspectRatio: "1/1", name: "Kodamandala - working title"},
+		{url: "https://jeudeligne.netlify.app/", aspectRatio: "1/1.3756", name: "Jeu de ligne - 2023"},
+		{url: "https://phantasmagoria.netlify.app/", aspectRatio: "1/1.4", name: "Phantasmagoria (working title)"},
+	];
+
+	function updateIframeAndHash() {
+		// Generate random hash
+		const hash = Math.random().toString(36).substring(2, 25);
+		document.getElementById("randomHash").textContent = hash;
+
+		// Select random iframe
+		const randomIframe = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
+
+		// Update iframe
+		const iframe = document.getElementById("generativeArtFrame") as HTMLIFrameElement;
+		iframe.src = randomIframe.url;
+		iframe.style.aspectRatio = randomIframe.aspectRatio;
+
+		// Update project name
+		document.getElementById("projectName").textContent = `Project: ${randomIframe.name}`;
+	}
+
+	// Run on page load
+	updateIframeAndHash();
+</script>
