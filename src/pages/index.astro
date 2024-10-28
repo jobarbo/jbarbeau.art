@@ -92,7 +92,9 @@ const iFrameArray = [
 		function updateIframeAndHash() {
 			// Generate random hash
 			const hash = generateRandomHash(64);
-			document.getElementById("randomHash").textContent = hash;
+			// create excerpt of the hash
+			const hashExcerpt = hash.substring(0, 8);
+			document.getElementById("randomHash").textContent = `Seed: #${hashExcerpt}...`;
 
 			// Select random iframe
 			randomIframe = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
@@ -236,6 +238,11 @@ const iFrameArray = [
 					13.5px 14.2px 17.5px inset rgba(0, 0, 0, 0.041),
 					20px 21px 58px inset rgba(0, 0, 0, 0.025);
 			}
+
+			@media all and (max-width: 1024px) {
+				height: auto;
+				width: 100%;
+			}
 		}
 
 		iframe {
@@ -245,6 +252,8 @@ const iFrameArray = [
 			position: relative;
 
 			@media all and (max-width: 1024px) {
+				height: auto;
+				width: 100%;
 			}
 		}
 
