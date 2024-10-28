@@ -2,6 +2,8 @@
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import Layout from "../layouts/Layout.astro";
 
+import {Image} from "astro:assets";
+let profileImage = "/assets/home/jonathan.png";
 // Socials import — provides social media links and icons
 import Socials from "../components/Socials.astro";
 
@@ -14,17 +16,47 @@ import Button from "../components/Button.astro";
 
 // put the projects in a global variable so we can use it in the script tag
 const projects = await getSortedProjects();
+
+// iframe array that contains the urls of the generative art projects + the aspect ratio + the name of the project
+const iFrameArray = [
+	{url: "https://kodamandala.netlify.app/", aspectRatio: "1/1", name: "Kodamandala - working title"},
+	{url: "https://jeudeligne.netlify.app/", aspectRatio: "1/1.3746", name: "Jeu de ligne - 2023"},
+	{url: "https://phantasmagoria.netlify.app/", aspectRatio: "1/1.4", name: "Phantasmagoria (working title)"},
+];
+
+// select a random iframe url
+const randomIframeUrl = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
 ---
 
 <Layout>
 	<section class='hero'>
 		<div class='hero-container'>
-			<h1 class='hero-title'>Jonathan Barbeau</h1>
-			<h4 class='hero-subtitle'>Generative Artist based in Québec City</h4>
-			<div class='hero-socials'>
-				<Socials />
+			<div class='hero-content'>
+				<div class='hero-image'>
+					<Image src={profileImage} alt='' class='work-image' width={300} height={200} loading='lazy' data-src={profileImage} />
+				</div>
+				<h1 class='hero-title'>Jonathan Barbeau</h1>
+				<h4 class='hero-subtitle'>Generative Artist based in Québec City</h4>
+				<div class='hero-socials'>
+					<Socials />
+					<Button class='hero-button my-6' label='View my Artist Curriculum' href='/artist-cv' target='_blank' icon='external' />
+				</div>
 			</div>
-			<Button class='hero-button my-6' label='View my Artist Curriculum' href='/artist-cv' target='_blank' icon='external' />
+			<div class='hero-iframe-container'>
+				<div class='hero-iframe-wrapper'>
+					<div class='hero-canvas'>
+						<iframe
+							style={`aspect-ratio: ${randomIframeUrl.aspectRatio};`}
+							src={randomIframeUrl.url}
+							title='Generative Art'
+							frameborder='0'
+							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+							referrerpolicy='strict-origin-when-cross-origin'
+							allowfullscreen></iframe>
+					</div>
+					<p class='hero-iframe-name'>Project: {randomIframeUrl.name}</p>
+				</div>
+			</div>
 		</div>
 	</section>
 	<section class='work'>
@@ -36,30 +68,106 @@ const projects = await getSortedProjects();
 			</ul>
 		</div>
 	</section>
+
+	<style>
+		.hero-container {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			position: relative;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.hero-image {
+			width: 100px;
+			overflow: hidden;
+			border-radius: 50%;
+			border: 1px solid black;
+			display: none;
+			img {
+				object-fit: cover;
+				height: 100%;
+				width: 100%;
+			}
+		}
+
+		.hero-iframe-container {
+			display: flex;
+			justify-content: center;
+		}
+		.hero-iframe-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+		}
+
+		.hero-iframe-name {
+			font-size: 0.8rem;
+			font-style: italic;
+			font-weight: 600;
+		}
+
+		.hero-canvas {
+			height: 100%;
+			width: fit-content;
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: visible;
+			justify-self: center;
+			position: relative;
+			border: 4px solid rgb(32, 22, 0);
+			&::after {
+				content: "";
+				display: block;
+				height: 100%;
+				width: 100%;
+				position: absolute;
+				box-shadow:
+					4px 3px 4px 0px inset rgb(0 0 0 / 38%),
+					6px 7px 7.3px inset rgb(0 0 0 / 11%),
+					13.5px 14.2px 17.5px inset rgba(0, 0, 0, 0.041),
+					20px 21px 58px inset rgba(0, 0, 0, 0.025);
+			}
+			iframe {
+				height: 50vh;
+				width: auto;
+				aspect-ratio: 1/1;
+				position: relative;
+				box-shadow:
+					2.8px 2.8px 2.2px rgba(0, 0, 0, 0.118),
+					6.7px 6.7px 5.3px rgba(0, 0, 0, 0.119),
+					12.5px 12.5px 10px rgba(0, 0, 0, 0.115),
+					22.3px 22.3px 17.9px rgba(0, 0, 0, 0.11),
+					41.8px 41.8px 33.4px rgba(0, 0, 0, 0.105),
+					100px 100px 80px rgba(0, 0, 0, 0.1);
+			}
+		}
+
+		.hero-title {
+			margin-bottom: 0.1em;
+		}
+
+		.hero-subtitle {
+			margin-bottom: 0.5rem;
+		}
+
+		.hero-socials {
+			margin-top: 0.5rem;
+		}
+
+		.hero-button {
+			cursor: pointer;
+			font-size: 14px;
+			white-space: nowrap;
+		}
+
+		.hero-button.disabled {
+			pointer-events: none;
+			cursor: default;
+			opacity: 0.6;
+		}
+	</style>
 </Layout>
-
-<style>
-	.hero-title {
-		margin-bottom: 0.1em;
-	}
-
-	.hero-subtitle {
-		margin-bottom: 0.5rem;
-	}
-
-	.hero-socials {
-		margin-top: 0.5rem;
-	}
-
-	.hero-button {
-		cursor: pointer;
-		font-size: 14px;
-		white-space: nowrap;
-	}
-
-	.hero-button.disabled {
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.6;
-	}
-</style>
