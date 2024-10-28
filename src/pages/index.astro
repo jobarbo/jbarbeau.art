@@ -25,7 +25,11 @@ const iFrameArray = [
 ];
 
 // select a random iframe url
-const randomIframeUrl = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
+let randomIframeUrl = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
+
+let randomHash = Math.random().toString(36).substring(2, 25);
+
+console.log(randomHash);
 ---
 
 <Layout>
@@ -55,6 +59,7 @@ const randomIframeUrl = iFrameArray[Math.floor(Math.random() * iFrameArray.lengt
 							allowfullscreen></iframe>
 					</div>
 					<p class='hero-iframe-name'>Project: {randomIframeUrl.name}</p>
+					<p class='hero-iframe-hash'>{randomHash}</p>
 				</div>
 			</div>
 		</div>
@@ -194,3 +199,5 @@ const randomIframeUrl = iFrameArray[Math.floor(Math.random() * iFrameArray.lengt
 		}
 	</style>
 </Layout>
+
+<script></script>
