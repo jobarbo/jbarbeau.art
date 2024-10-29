@@ -36,24 +36,18 @@ const iFrameArray = [
 				<h4 class='hero-subtitle'>Generative Artist based in Québec City</h4>
 				<div class='hero-socials'>
 					<Socials />
-					<Button class='hero-button my-6' label='View my Artist Curriculum' href='/artist-cv' target='_blank' icon='external' />
 				</div>
+				<Button class='hero-button my-6' label='View my Artist Curriculum' href='/artist-cv' target='_blank' icon='external' />
 			</div>
-			<div class='hero-iframe-container'>
-				<div class='hero-iframe-wrapper'>
-					<div data-canvas class='hero-canvas'>
-						<iframe
-							id='generativeArtFrame'
-							title='Generative Art'
-							src=''
-							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-							referrerpolicy='strict-origin-when-cross-origin'
-							allowfullscreen></iframe>
-					</div>
-				</div>
+			<div data-canvas class='hero-canvas'>
+				<iframe
+					id='generativeArtFrame'
+					title='Generative Art'
+					src=''
+					allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+					referrerpolicy='strict-origin-when-cross-origin'
+					allowfullscreen></iframe>
 			</div>
-		</div>
-		<div class='hero-iframe-info-wrapper'>
 			<div class='hero-iframe-info'>
 				<p class='hero-iframe-name' id='projectName'></p>
 				<p class='hero-iframe-hash' id='randomHash'></p>
@@ -63,6 +57,7 @@ const iFrameArray = [
 				</div>
 			</div>
 		</div>
+
 		<section class='work'>
 			<div class='work-container'>
 				<h2 class='work-title'>Recent Work</h2>
@@ -172,32 +167,16 @@ const iFrameArray = [
 				}
 			}
 
-			.hero-iframe-container {
-				display: flex;
-				justify-content: center;
-			}
-			.hero-iframe-wrapper {
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				gap: 1rem;
-
-				@media all and (max-width: 1024px) {
-					width: 100%;
-					align-items: center;
-				}
-			}
-
-			.hero-iframe-info-wrapper {
-				display: grid;
-				gap: 2rem;
-				grid-template-columns: 1fr 1fr;
-			}
-
 			.hero-iframe-info {
 				grid-column: 2/2;
 				width: 22vw;
 				justify-self: center;
+
+				@media all and (max-width: 1024px) {
+					height: auto;
+					width: 70%;
+					grid-column: 1/1;
+				}
 			}
 
 			.hero-iframe-name {
@@ -218,7 +197,7 @@ const iFrameArray = [
 				margin-top: 1.5rem;
 
 				@media all and (max-width: 1024px) {
-					justify-content: center;
+					justify-content: flex-start;
 				}
 			}
 
@@ -239,22 +218,25 @@ const iFrameArray = [
 					22.3px 22.3px 17.9px rgba(0, 0, 0, 0.11),
 					41.8px 41.8px 33.4px rgba(0, 0, 0, 0.105),
 					100px 100px 80px rgba(0, 0, 0, 0.1);
-				&::after {
-					content: "";
-					display: block;
-					height: 100%;
-					width: 100%;
-					position: absolute;
-					box-shadow:
-						4px 3px 4px 0px inset rgb(0 0 0 / 38%),
-						6px 7px 7.3px inset rgb(0 0 0 / 11%),
-						13.5px 14.2px 17.5px inset rgba(0, 0, 0, 0.041),
-						20px 21px 58px inset rgba(0, 0, 0, 0.025);
-				}
+			}
 
-				@media all and (max-width: 1024px) {
+			.hero-canvas::after {
+				content: "";
+				display: block;
+				height: 100%;
+				width: 100%;
+				position: absolute;
+				box-shadow:
+					4px 3px 4px 0px inset rgb(0 0 0 / 38%),
+					6px 7px 7.3px inset rgb(0 0 0 / 11%),
+					13.5px 14.2px 17.5px inset rgba(0, 0, 0, 0.041),
+					20px 21px 58px inset rgba(0, 0, 0, 0.025);
+			}
+
+			@media all and (max-width: 1024px) {
+				.hero-canvas {
 					height: auto;
-					width: 100%;
+					width: 70%;
 				}
 			}
 
