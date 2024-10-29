@@ -1,0 +1,266 @@
+---
+import {Image} from "astro:assets";
+import Socials from "./Socials.astro";
+import Button from "./Button.astro";
+
+const {profileImage} = Astro.props;
+---
+
+<section class='hero'>
+	<div class='hero-container'>
+		<div class='hero-content'>
+			<div class='hero-image'>
+				<Image src={profileImage} alt='' class='work-image' width={300} height={200} loading='lazy' data-src={profileImage} />
+			</div>
+			<h1 class='hero-title'>Jonathan Barbeau</h1>
+			<h4 class='hero-subtitle'>Generative Artist based in Québec City</h4>
+			<div class='hero-socials'>
+				<Socials />
+			</div>
+			<Button class='hero-button my-6' label='View my Artist Curriculum' href='/artist-cv' target='_blank' icon='external' />
+		</div>
+		<div data-canvas class='hero-canvas'>
+			<iframe
+				id='generativeArtFrame'
+				title='Generative Art'
+				src=''
+				allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+				referrerpolicy='strict-origin-when-cross-origin'
+				allowfullscreen></iframe>
+		</div>
+		<div class='hero-iframe-info'>
+			<p class='hero-iframe-name' id='projectName'></p>
+			<p class='hero-iframe-hash' id='randomHash'></p>
+			<div class='hero-iframe-buttons'>
+				<Button label='Generate new art' icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
+				<Button label='Open in new tab' icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero-container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		position: relative;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 8em;
+		padding-bottom: 0;
+		gap: 2rem;
+
+		@media all and (max-width: 1024px) {
+			grid-template-columns: 1fr;
+			padding-top: 5em;
+			padding-bottom: 2em;
+		}
+	}
+
+	.hero-image {
+		width: 100px;
+		overflow: hidden;
+		border-radius: 50%;
+		border: 1px solid black;
+		display: none;
+		img {
+			object-fit: cover;
+			height: 100%;
+			width: 100%;
+		}
+	}
+
+	.hero-iframe-info {
+		grid-column: 2/2;
+		width: 22vw;
+		justify-self: center;
+
+		@media all and (max-width: 1024px) {
+			height: auto;
+			width: 70%;
+			grid-column: 1/1;
+		}
+	}
+
+	.hero-iframe-name {
+		font-size: 0.8rem;
+		font-style: italic;
+		font-weight: 600;
+	}
+
+	.hero-iframe-hash {
+		font-size: 0.6rem;
+		font-style: italic;
+		font-weight: 600;
+	}
+
+	.hero-iframe-buttons {
+		display: flex;
+		gap: 0.5rem;
+		margin-top: 1.5rem;
+
+		@media all and (max-width: 1024px) {
+			justify-content: flex-start;
+		}
+	}
+
+	.hero-canvas {
+		height: fit-content;
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: visible;
+		justify-self: center;
+		position: relative;
+		border: 6px solid rgb(54, 43, 19);
+		box-shadow:
+			2.8px 2.8px 2.2px rgba(0, 0, 0, 0.118),
+			6.7px 6.7px 5.3px rgba(0, 0, 0, 0.119),
+			12.5px 12.5px 10px rgba(0, 0, 0, 0.115),
+			22.3px 22.3px 17.9px rgba(0, 0, 0, 0.11),
+			41.8px 41.8px 33.4px rgba(0, 0, 0, 0.105),
+			100px 100px 80px rgba(0, 0, 0, 0.1);
+		&::after {
+			content: "";
+			display: block;
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			box-shadow:
+				4px 3px 4px 0px inset rgb(0 0 0 / 38%),
+				6px 7px 7.3px inset rgb(0 0 0 / 11%),
+				13.5px 14.2px 17.5px inset rgba(0, 0, 0, 0.041),
+				20px 21px 58px inset rgba(0, 0, 0, 0.025);
+		}
+		@media all and (max-width: 1024px) {
+			height: auto;
+			width: 70%;
+		}
+	}
+
+	iframe {
+		height: fit-content;
+		width: 22vw;
+		aspect-ratio: 1/1;
+		position: relative;
+
+		@media all and (max-width: 1024px) {
+			height: auto;
+			width: 100%;
+		}
+	}
+
+	.hero-content {
+		@media all and (max-width: 1024px) {
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+	.hero-title {
+		margin-bottom: 0.1em;
+
+		@media all and (max-width: 1024px) {
+			font-size: 1.5rem;
+		}
+	}
+
+	.hero-subtitle {
+		margin-bottom: 0.5rem;
+
+		@media all and (max-width: 1024px) {
+			margin-bottom: 0.2rem;
+			font-size: 0.85rem;
+		}
+	}
+
+	.hero-socials {
+		margin-top: 0.5rem;
+
+		@media all and (max-width: 1024px) {
+			margin-top: 0rem;
+		}
+	}
+
+	.hero-button {
+		cursor: pointer;
+		font-size: 14px;
+		white-space: nowrap;
+	}
+
+	.hero-button.disabled {
+		pointer-events: none;
+		cursor: default;
+		opacity: 0.6;
+	}
+</style>
+
+<script>
+	// Define iFrameArray in client-side JavaScript
+	const iFrameArray = [
+		{url: "https://kodamandala.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1", name: "Kodamandala - working title"},
+		{url: "https://jeudeligne.netlify.app/", urlParam: "hash", aspectRatio: "1/1.3756", name: "Jeu de ligne - 2023"},
+		{url: "https://phantasmagoria.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1.4", name: "Phantasmagoria (working title)"},
+	];
+
+	let currentUrl; // Add this variable to store the current URL
+	let randomIframe;
+	let canvas = document.querySelector("[data-canvas]") as HTMLElement;
+	function generateRandomHash(size = 64) {
+		let genHash = (size) => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join("");
+		let hash = "0x" + genHash(64);
+		return hash;
+	}
+
+	function updateIframeAndHash() {
+		// Generate random hash
+		const hash = generateRandomHash(64);
+		// create excerpt of the hash
+		const hashExcerpt = hash.substring(0, 8);
+		document.getElementById("randomHash").textContent = `Seed: #${hashExcerpt}...`;
+
+		// Select random iframe
+		randomIframe = iFrameArray[Math.floor(Math.random() * iFrameArray.length)];
+
+		// add the hash to the url
+		currentUrl = `${randomIframe.url}?${randomIframe.urlParam}=${hash}`; // Store URL in the outer variable
+
+		// Update iframe
+		const iframe = document.getElementById("generativeArtFrame") as HTMLIFrameElement;
+		iframe.src = currentUrl;
+		iframe.style.aspectRatio = randomIframe.aspectRatio;
+		//canvas.style.aspectRatio = randomIframe.aspectRatio;
+
+		// Update project name
+		document.getElementById("projectName").textContent = `Project: ${randomIframe.name}`;
+	}
+
+	function openInNewTab() {
+		window.open(currentUrl, "_blank"); // Use the stored URL
+	}
+
+	function updateHash() {
+		//update only the hash not the iFrame
+		const hash = generateRandomHash(64);
+		document.getElementById("randomHash").textContent = hash;
+
+		// reload the iframe
+		const iframe = document.getElementById("generativeArtFrame") as HTMLIFrameElement;
+		iframe.src = `${randomIframe.url}?${randomIframe.urlParam}=${hash}`;
+		iframe.style.aspectRatio = randomIframe.aspectRatio;
+		//canvas.style.aspectRatio = randomIframe.aspectRatio;
+		// Update project name
+		document.getElementById("projectName").textContent = `Project: ${randomIframe.name}`;
+
+		currentUrl = `${randomIframe.url}?${randomIframe.urlParam}=${hash}`;
+	}
+
+	// add event listeners to the buttons
+	document.querySelector("[data-refresh]").addEventListener("click", updateHash);
+	document.querySelector("[data-fullscreen]").addEventListener("click", openInNewTab);
+
+	// Run on page load
+	updateIframeAndHash();
+</script>

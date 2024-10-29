@@ -1,0 +1,13 @@
+---
+import RecentWork from "./RecentWork.astro";
+const {projects} = Astro.props;
+---
+
+<section class='work'>
+	<div class='work-container'>
+		<h2 class='work-title'>Recent Work</h2>
+		<ul class='recent-work-list'>
+			{projects.map((work) => <RecentWork work={work} />)}
+		</ul>
+	</div>
+</section>
