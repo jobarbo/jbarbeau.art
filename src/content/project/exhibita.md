@@ -14,15 +14,15 @@ All pairs of artworks uses Perlin Noise as the main algorithmic foundation and s
 url: https://highlight.xyz/mint/64f7c27b373cff27b5e9309c
 images:
   [
-    "/assets/exhibita/1_thumb.webp",
-    "/assets/exhibita/2_thumb.webp",
-    "/assets/exhibita/3_thumb.webp",
-    "/assets/exhibita/4_thumb.webp",
-    "/assets/exhibita/5_thumb.webp",
-    "/assets/exhibita/6_thumb.webp",
-    "/assets/exhibita/7_thumb.webp",
-    "/assets/exhibita/8_thumb.webp",
-    "/assets/exhibita/9_thumb.webp",
-    "/assets/exhibita/10_thumb.webp"
+    "/assets/exhibita/1_thumb.jpg",
+    "/assets/exhibita/2_thumb.jpg",
+    "/assets/exhibita/3_thumb.jpg",
+    "/assets/exhibita/4_thumb.jpg",
+    "/assets/exhibita/5_thumb.jpg",
+    "/assets/exhibita/6_thumb.jpg",
+    "/assets/exhibita/7_thumb.jpg",
+    "/assets/exhibita/8_thumb.jpg",
+    "/assets/exhibita/9_thumb.jpg",
+    "/assets/exhibita/10_thumb.jpg"
   ]
 ---
