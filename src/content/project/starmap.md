@@ -29,14 +29,14 @@ Made with Javascript on <canvas>"
 url: https://foundation.app/collection/strmp
 images:
   [
-    "/assets/starmap/0.jpg",
-    "/assets/starmap/1.jpg",
-    "/assets/starmap/2.jpg",
-    "/assets/starmap/3.jpg",
-    "/assets/starmap/4.jpg",
-    "/assets/starmap/5.jpg",
-    "/assets/starmap/6.jpg",
-    "/assets/starmap/7.jpg",
-    "/assets/starmap/8.jpg",
+    "/assets/starmap/0.webp",
+    "/assets/starmap/1.webp",
+    "/assets/starmap/2.webp",
+    "/assets/starmap/3.webp",
+    "/assets/starmap/4.webp",
+    "/assets/starmap/5.webp",
+    "/assets/starmap/6.webp",
+    "/assets/starmap/7.webp",
+    "/assets/starmap/8.webp",
   ]
 ---
