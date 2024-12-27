@@ -74,7 +74,6 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		// convert the data attribute to a an array by splitting it at the comma and then removing the comma
 		let sliderArray = el.dataset.slider.split(",").map((item) => Number(item.trim()));
 
-		console.log(sliderArray);
 		new BlazeSlider(el, {
 			all: {
 				transitionDuration: 300,
