@@ -39,7 +39,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 			<div class='blaze-container'>
 				<div class='blaze-track-container'>
 					<div class='blaze-track'>
-						{work.data.images.map((url, index) => <Image src={url} alt='' class='work-image' width={300} height={200} data-src={url} />)}
+						{work.data.images.map((url, index) => <img alt='' class='work-image' width={300} height={200} loading='lazy' data-src={url} />)}
 					</div>
 				</div>
 				<div class='work-description'>
@@ -87,6 +87,30 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 				slidesToShow: sliderArray[2] || 1, // use the third value of sliderArray, or default to 1 if it's not available
 			},
 		});
+	});
+
+	// Add this new code for intersection observer
+	const images = document.querySelectorAll(".work-image");
+	const config = {
+		rootMargin: "0px",
+		threshold: 0.1,
+	};
+
+	let observer = new IntersectionObserver((entries, self) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				let image = entry.target as HTMLImageElement;
+				if (image.dataset.src) {
+					image.src = image.dataset.src; // Set the src from data-src
+					image.removeAttribute("loading"); // Remove loading attribute
+					self.unobserve(entry.target); // Stop observing once loaded
+				}
+			}
+		});
+	}, config);
+
+	images.forEach((image) => {
+		observer.observe(image);
 	});
 </script>
 
