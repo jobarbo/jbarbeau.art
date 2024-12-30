@@ -3,7 +3,7 @@ title: "Exhibit-A"
 slug: exhibit-a
 publishDate: 2023-04-15 12:00:00
 collection: project
-slider: ["3", "2", "1"]
+slider: ["4", "3", "2"]
 isRedeemable: false
 redeemUrl: /
 subtitle: May 2023 - Self curated - Exhibited at La Korrigane in Quebec city - Certificate hosted by Highlight.xyz

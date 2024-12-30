@@ -3,7 +3,7 @@ title: "Traces"
 slug: traces
 publishDate: 2024-03-06 12:00:00
 collection: project
-slider: ["3", "2", "1"]
+slider: ["4", "3", "2"]
 isRedeemable: false
 redeemUrl: /
 subtitle: April 2024 - Intefaces - Funded by the federal government commissioner for culture and the media, Hanover, Stuttgart, Germany - OBJKT.

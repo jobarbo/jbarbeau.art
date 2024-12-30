@@ -3,7 +3,7 @@ title: "Je Me Souviens"
 slug: jemesouviens
 publishDate: 2024-12-21 12:00:00
 collection: project
-slider: ["3", "2", "1"]
+slider: ["4", "3", "2"]
 isRedeemable: false
 redeemUrl: /
 subtitle: "December 2024  -  Show: My Reality  -  Curated by: Qm & Snow  -  Hosted by: Cloud Art Museum"

@@ -3,7 +3,7 @@ title: "STARMAP"
 slug: starmap
 publishDate: 2024-03-07 12:00:00
 collection: project
-slider: ["3", "2", "1"]
+slider: ["4", "3", "2"]
 isRedeemable: false
 redeemUrl: /
 subtitle: "March 2024  -  Show: Under Neith  -  Curated by: Forever Projects  -  Hosted by: Foundation"

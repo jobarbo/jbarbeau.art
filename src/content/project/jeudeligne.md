@@ -3,7 +3,7 @@ title: "Jeu de Ligne"
 slug: jeu-de-ligne
 publishDate: 2023-06-15 12:00:00
 collection: project
-slider: ["3", "2", "1"]
+slider: ["4", "3", "2"]
 isRedeemable: false
 redeemUrl: /
 subtitle: June 2023 - 256art.com
