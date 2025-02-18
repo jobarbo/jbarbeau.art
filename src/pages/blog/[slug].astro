@@ -1,0 +1,217 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Parser from "rss-parser";
+
+export async function getStaticPaths() {
+	const SUBSTACK_RSS_URL = "https://jbarbeau.substack.com/feed";
+	const TARGET_SLUG = "paths-meet-connections-emerge";
+
+	// Initialize parser inside getStaticPaths
+	const parser = new Parser({
+		customFields: {
+			item: [["content:encoded", "contentEncoded"]],
+		},
+		timeout: 10000,
+		requestOptions: {
+			rejectUnauthorized: false,
+		},
+	});
+
+	try {
+		const response = await fetch(SUBSTACK_RSS_URL);
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
+		const feedText = await response.text();
+
+		// Log the raw feed content to see what we're working with
+		console.log("\n=== Feed Debug Info ===");
+		console.log("Feed content length:", feedText.length);
+		console.log("Feed starts with:", feedText.substring(0, 200));
+
+		const feed = await parser.parseString(feedText);
+		console.log("\n=== Feed Parse Results ===");
+		console.log("Number of items:", feed.items?.length);
+
+		if (!feed.items || feed.items.length === 0) {
+			console.error("No items found in feed");
+			return [];
+		}
+
+		console.log("\n=== Processing Items ===");
+		const paths = feed.items.map((post: any) => {
+			// Log the raw link first
+			console.log("\nProcessing post:", post.title);
+			console.log("Raw link:", post.link);
+
+			// Split and log each step
+			const parts = post.link.split("/p/");
+			console.log("After /p/ split:", parts);
+
+			const lastPart = parts[parts.length - 1];
+			console.log("Last part:", lastPart);
+
+			const withoutQuery = lastPart?.split("?")[0];
+			console.log("Without query:", withoutQuery);
+
+			const withoutHash = withoutQuery?.split("#")[0];
+			console.log("Without hash (final slug):", withoutHash);
+
+			// Check if this is the target slug
+			if (withoutHash === TARGET_SLUG) {
+				console.log("!!! FOUND TARGET SLUG !!!");
+				console.log("Full post data:", {
+					title: post.title,
+					link: post.link,
+					contentLength: post.content?.length || 0,
+					contentEncodedLength: post.contentEncoded?.length || 0,
+				});
+			}
+
+			return {
+				params: {slug: withoutHash},
+				props: {
+					title: post.title,
+					content: post.contentEncoded || post.content,
+					pubDate: post.pubDate,
+					link: post.link,
+				},
+			};
+		});
+
+		console.log("\n=== Final Paths ===");
+		console.log("All generated slugs:", paths.map((p) => p.params.slug).join(", "));
+
+		// Verify the target slug exists
+		const hasTargetSlug = paths.some((p) => p.params.slug === TARGET_SLUG);
+		console.log(`Target slug "${TARGET_SLUG}" exists in paths:`, hasTargetSlug);
+
+		return paths;
+	} catch (error) {
+		console.error("\n=== Error Processing Feed ===");
+		console.error("Error:", error);
+		if (error instanceof Error) {
+			console.error("Error message:", error.message);
+			console.error("Error stack:", error.stack);
+		}
+		return [];
+	}
+}
+
+const {title, content, pubDate, link} = Astro.props;
+
+// Format the date
+const date = new Date(pubDate);
+const formattedDate = date.toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+---
+
+<Layout title={`${title} | Blog | J Barbeau`}>
+	<main class='container mx-auto px-4 py-8 max-w-4xl'>
+		<article class='prose max-w-none'>
+			<h1 class='text-4xl font-bold mb-4'>{title}</h1>
+			<div class='flex items-center gap-4 text-gray-600 mb-8'>
+				<time datetime={date.toISOString()}>{formattedDate}</time>
+				<a href={link} target='_blank' rel='noopener noreferrer' class='hover:text-gray-800'> View on Substack ↗ </a>
+			</div>
+			<div class='substack-content' set:html={content} />
+		</article>
+
+		<div class='mt-8 pt-8 border-t'>
+			<a href='/blog' class='text-blue-600 hover:text-blue-800'> ← Back to all posts </a>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	/* Ensure images and iframes in the content are responsive */
+	.substack-content :global(img),
+	.substack-content :global(iframe) {
+		max-width: 100%;
+		height: auto;
+		margin: 1.5rem 0;
+	}
+
+	/* Style blockquotes */
+	.substack-content :global(blockquote) {
+		border-left: 4px solid #e5e7eb;
+		padding-left: 1rem;
+		margin: 1.5rem 0;
+		color: #4b5563;
+	}
+
+	/* Style code blocks */
+	.substack-content :global(pre) {
+		background-color: #f3f4f6;
+		padding: 1rem;
+		border-radius: 0.375rem;
+		overflow-x: auto;
+	}
+
+	/* Style inline code */
+	.substack-content :global(code) {
+		background-color: #f3f4f6;
+		padding: 0.2rem 0.4rem;
+		border-radius: 0.25rem;
+		font-size: 0.875em;
+	}
+
+	/* Ensure proper spacing for paragraphs */
+	.substack-content :global(p) {
+		margin: 1.25rem 0;
+	}
+
+	/* Style links within the content */
+	.substack-content :global(a) {
+		color: #2563eb;
+		text-decoration: underline;
+	}
+
+	.substack-content :global(a:hover) {
+		color: #1d4ed8;
+	}
+
+	/* Style image galleries */
+	.substack-content :global(.image-gallery-embed) {
+		margin: 2rem 0;
+	}
+
+	/* Style embedded content */
+	.substack-content :global(.embedded-post-wrap),
+	.substack-content :global(.embedded-publication-wrap) {
+		margin: 2rem 0;
+		padding: 1rem;
+		border: 1px solid #e5e7eb;
+		border-radius: 0.5rem;
+	}
+
+	/* Style lists */
+	.substack-content :global(ul),
+	.substack-content :global(ol) {
+		margin: 1.25rem 0;
+		padding-left: 1.5rem;
+	}
+
+	.substack-content :global(li) {
+		margin: 0.5rem 0;
+	}
+
+	/* Style headings */
+	.substack-content :global(h2),
+	.substack-content :global(h3) {
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		font-weight: bold;
+	}
+
+	.substack-content :global(h2) {
+		font-size: 1.5em;
+	}
+
+	.substack-content :global(h3) {
+		font-size: 1.25em;
+	}
+</style>
