@@ -9,7 +9,7 @@ const parser = new Parser({
 		item: [
 			["content:encoded", "contentEncoded"],
 			["description", "description"],
-			["enclosure", "image"], // Add enclosure field for images
+			["enclosure", "image"],
 		],
 	},
 	timeout: 10000,
@@ -24,6 +24,29 @@ const TARGET_SLUG = "paths-meet-connections-emerge";
 // Function to convert emoji codes to actual emojis
 function decodeEmoji(text) {
 	return text?.replace(/&#(\d+);/g, (match, dec) => String.fromCodePoint(dec)) || "";
+}
+
+// Function to optimize Substack image URLs
+function optimizeImageUrl(url: string, width = 600) {
+	if (!url) return null;
+	try {
+		// Check if it's already a Substack CDN URL
+		if (url.includes("substackcdn.com")) {
+			// Get everything after /fetch/
+			const fetchIndex = url.indexOf("/fetch/");
+			if (fetchIndex === -1) return url;
+
+			const afterFetch = url.slice(fetchIndex + 7);
+			const originalUrl = afterFetch.split("/").slice(1).join("/");
+
+			// Construct new optimized URL
+			return `https://substackcdn.com/image/fetch/w_${width},c_limit,f_auto,q_auto:good/${originalUrl}`;
+		}
+		return url;
+	} catch (e) {
+		console.error("Error optimizing image URL:", e);
+		return url;
+	}
 }
 
 // Fetch blog posts
@@ -51,10 +74,16 @@ try {
 			const withoutQuery = lastPart?.split("?")[0];
 			const slug = withoutQuery?.split("#")[0];
 
-			// Debug post data
-			console.log("\nProcessing post:", post.title);
-			console.log("Description field:", post.description);
-			console.log("Image URL:", post.enclosure?.url);
+			// Get and optimize the image URL
+			const originalImageUrl = post.enclosure?.url;
+			const optimizedImageUrl = optimizeImageUrl(originalImageUrl);
+
+			// Debug image URLs
+			if (originalImageUrl) {
+				console.log("\nImage URLs for:", post.title);
+				console.log("Original:", originalImageUrl);
+				console.log("Optimized:", optimizedImageUrl);
+			}
 
 			// Use the description field for the excerpt, remove CDATA wrapper if present
 			let excerpt = post.description || "";
@@ -69,7 +98,7 @@ try {
 				pubDate: post.pubDate,
 				excerpt,
 				slug,
-				image: post.enclosure?.url || null, // Add the image URL
+				image: optimizedImageUrl,
 			};
 		});
 
