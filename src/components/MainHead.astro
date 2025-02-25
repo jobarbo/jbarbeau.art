@@ -1,15 +1,12 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
 }
 
-const {
-	title = 'Jonathan Barbeau | Generative Artist',
-	description = 'I am an artist and developer using Javascript and the HTML5 Canvas as a medium creation',
-} = Astro.props;
+const {title = "Jonathan Barbeau | Generative Artist", description = "I am an artist and developer using Javascript and the HTML5 Canvas as a medium creation"} = Astro.props;
 ---
 
 <meta charset='UTF-8' />
@@ -21,27 +18,24 @@ const {
 <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 <link rel='preconnect' href='https://fonts.googleapis.com' />
 <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-<link
-	href='https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap'
-	rel='stylesheet'
-/>
+<link href='https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap' rel='stylesheet' />
 <script is:inline>
 	// This code is inlined in the head to make dark mode instant & blocking.
 	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
+		if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+			return localStorage.getItem("theme");
 		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('theme-dark');
+	const isDark = getThemePreference() === "dark";
+	document.documentElement.classList[isDark ? "add" : "remove"]("theme-dark");
 
-	if (typeof localStorage !== 'undefined') {
+	if (typeof localStorage !== "undefined") {
 		// Watch the document element and persist user preference when it changes.
 		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('theme-dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			const isDark = document.documentElement.classList.contains("theme-dark");
+			localStorage.setItem("theme", isDark ? "dark" : "light");
 		});
-		observer.observe(document.documentElement, {attributes: true, attributeFilter: ['class']});
+		observer.observe(document.documentElement, {attributes: true, attributeFilter: ["class"]});
 	}
 </script>

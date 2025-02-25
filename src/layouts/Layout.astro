@@ -11,6 +11,8 @@ interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
 }
+// Get Snipcart API key from environment variable
+const SNIPCART_API_KEY = import.meta.env.PUBLIC_SNIPCART_API_KEY;
 
 const {title, description} = Astro.props;
 ---
@@ -25,6 +27,9 @@ const {title, description} = Astro.props;
 			<slot />
 			<Footer />
 		</div>
+		<!-- Snipcart Scripts -->
+		<script async src='https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js'></script>
+		<div hidden id='snipcart' data-api-key={SNIPCART_API_KEY} data-config-modal-style='side' data-templates-url='/snipcart-templates.html'></div>
 
 		<script>
 			// Add “loaded” class once the document has completely loaded.
