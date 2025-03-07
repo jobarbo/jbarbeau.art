@@ -12,14 +12,15 @@ interface Props {
 	description?: string | undefined;
 	image?: string | undefined;
 	type?: "website" | "article" | undefined;
+	logo?: string | undefined;
 }
 
-const {title, description, image, type = "website"} = Astro.props;
+const {title, description, image, type = "website", logo = "/favicon.svg"} = Astro.props;
 ---
 
 <html lang='en'>
 	<head>
-		<MainHead title={title} description={description} image={image} type={type} />
+		<MainHead title={title} description={description} image={image} type={type} logo={logo} />
 	</head>
 	<body>
 		<div class='main'>

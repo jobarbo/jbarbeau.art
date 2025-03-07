@@ -6,6 +6,7 @@ interface Props {
 	description?: string | undefined;
 	image?: string | undefined;
 	type?: "website" | "article" | undefined;
+	logo?: string | undefined;
 }
 
 const {
@@ -13,11 +14,14 @@ const {
 	description = "I am an artist and developer using Javascript and the HTML5 Canvas as a medium creation",
 	image = "/assets/og/profile.png",
 	type = "website",
+	logo = "/favicon.svg",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Ensure image URL is absolute
 const socialImageURL = image.startsWith("http") ? image : new URL(image.startsWith("/") ? image.slice(1) : image, Astro.site).toString();
+// Ensure logo URL is absolute
+const logoURL = logo.startsWith("http") ? logo : new URL(logo.startsWith("/") ? logo.slice(1) : logo, Astro.site).toString();
 ---
 
 <meta charset='UTF-8' />
@@ -33,6 +37,7 @@ const socialImageURL = image.startsWith("http") ? image : new URL(image.startsWi
 <meta property='og:image' content={socialImageURL} />
 <meta property='og:image:width' content='1200' />
 <meta property='og:image:height' content='630' />
+<meta property='og:logo' content={logoURL} />
 
 <!-- Twitter -->
 <meta name='twitter:card' content='summary_large_image' />
