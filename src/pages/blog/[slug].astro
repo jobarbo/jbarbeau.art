@@ -75,6 +75,7 @@ export async function getStaticPaths() {
 					content: post.contentEncoded || post.content,
 					pubDate: post.pubDate,
 					link: post.link,
+					image: post.enclosure?.url || null,
 				},
 			};
 		});
@@ -98,7 +99,7 @@ export async function getStaticPaths() {
 	}
 }
 
-const {title, content, pubDate, link} = Astro.props;
+const {title, content, pubDate, link, image} = Astro.props;
 
 // Format the date
 const date = new Date(pubDate);
@@ -107,9 +108,20 @@ const formattedDate = date.toLocaleDateString("en-US", {
 	month: "long",
 	day: "numeric",
 });
+
+// Extract the first image from content as fallback if no enclosure
+let contentImage = null;
+if (!image && content) {
+	const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
+	if (imgMatch && imgMatch[1]) {
+		contentImage = imgMatch[1];
+	}
+}
+
+const ogImage = image || contentImage || "/assets/og/profile.png";
 ---
 
-<Layout title={`${title} | Blog | J Barbeau`}>
+<Layout title={`${title} | Blog | J Barbeau`} description={content?.substring(0, 160).replace(/<[^>]*>/g, "")} image={ogImage} type='article'>
 	<main class='container mx-auto px-4 py-8 max-w-4xl'>
 		<article class='prose max-w-none'>
 			<h1 class='text-4xl font-bold mb-4'>{title}</h1>
