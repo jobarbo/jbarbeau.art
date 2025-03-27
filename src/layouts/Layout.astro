@@ -15,11 +15,21 @@ interface Props {
 const SNIPCART_API_KEY = import.meta.env.PUBLIC_SNIPCART_API_KEY;
 
 const {title, description} = Astro.props;
+
+// Declare netlifyIdentity type
+declare global {
+	interface Window {
+		netlifyIdentity: {
+			on: (event: string, callback: (user?: any) => void) => void;
+		};
+	}
+}
 ---
 
 <html lang='en'>
 	<head>
 		<MainHead title={title} description={description} />
+		<script src='https://identity.netlify.com/v1/netlify-identity-widget.js'></script>
 	</head>
 	<body>
 		<div class='main'>
@@ -32,8 +42,18 @@ const {title, description} = Astro.props;
 		<div hidden id='snipcart' data-api-key={SNIPCART_API_KEY} data-config-modal-style='side' data-templates-url='/snipcart-templates.html'></div>
 
 		<script>
-			// Add “loaded” class once the document has completely loaded.
+			// Add "loaded" class once the document has completely loaded.
 			addEventListener("load", () => document.documentElement.classList.add("loaded"));
+
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", (user) => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
