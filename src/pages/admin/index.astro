@@ -1,0 +1,19 @@
+---
+// Import necessary components
+import {promises as fs} from "fs";
+import path from "path";
+
+// Get the content of the admin HTML file
+let adminHtml = "";
+try {
+	const filePath = path.join(process.cwd(), "public", "admin", "index.html");
+	adminHtml = await fs.readFile(filePath, "utf-8");
+} catch (error) {
+	console.error("Error reading admin file:", error);
+}
+
+// Set the content type to HTML
+Astro.response.headers.set("Content-Type", "text/html");
+---
+
+{adminHtml ? <Fragment set:html={adminHtml} /> : <p>Admin interface not found.</p>}

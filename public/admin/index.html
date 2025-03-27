@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Add a base tag to ensure all relative URLs are resolved against /admin/ -->
+		<base href="/admin/" />
 		<title>Content Manager</title>
 		<link rel="stylesheet" href="admin.css" />
 		<script>
@@ -18,6 +20,49 @@
 		<script>
 			// Explicitly set the config URL to the same directory
 			window.CMS_CONFIG_URL = "config.yml";
+
+			// Prevent hash routing from affecting parent pages
+			if (window.parent !== window) {
+				// We're in an iframe, don't modify parent URL
+				window.stopPropagation = function (e) {
+					e.stopPropagation();
+				};
+
+				// Add event listeners to prevent bubbling
+				window.addEventListener("hashchange", window.stopPropagation, true);
+			}
+
+			// Additional measure to prevent hash routing from affecting the main site
+			// This script hijacks pushState and replaceState to contain the hash changes to this page
+			(function () {
+				// Save references to original history methods
+				const originalPushState = window.history.pushState;
+				const originalReplaceState = window.history.replaceState;
+
+				// Override pushState
+				window.history.pushState = function (state, title, url) {
+					// Only modify URLs that have a hash and are for the current page
+					if (url && url.includes("#")) {
+						const urlObj = new URL(url, window.location.origin);
+						// Keep the hash changes contained to this page
+						originalPushState.call(window.history, state, title, urlObj.hash);
+						return;
+					}
+					originalPushState.call(window.history, state, title, url);
+				};
+
+				// Override replaceState
+				window.history.replaceState = function (state, title, url) {
+					// Only modify URLs that have a hash and are for the current page
+					if (url && url.includes("#")) {
+						const urlObj = new URL(url, window.location.origin);
+						// Keep the hash changes contained to this page
+						originalReplaceState.call(window.history, state, title, urlObj.hash);
+						return;
+					}
+					originalReplaceState.call(window.history, state, title, url);
+				};
+			})();
 		</script>
 	</body>
 </html>
