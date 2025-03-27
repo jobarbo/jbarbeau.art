@@ -24,12 +24,15 @@ declare global {
 		};
 	}
 }
+
+// Determine if we're in development or production
+const isProd = import.meta.env.PROD;
 ---
 
 <html lang='en'>
 	<head>
 		<MainHead title={title} description={description} />
-		<script src='https://identity.netlify.com/v1/netlify-identity-widget.js'></script>
+		{isProd && <script src='https://identity.netlify.com/v1/netlify-identity-widget.js' />}
 	</head>
 	<body>
 		<div class='main'>

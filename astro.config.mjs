@@ -8,4 +8,9 @@ export default defineConfig({
 	devToolbar: {
 		enabled: false,
 	},
+	output: "static",
+	server: {
+		port: 4321,
+		host: true,
+	},
 });

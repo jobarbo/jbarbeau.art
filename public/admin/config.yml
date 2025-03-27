@@ -1,38 +1,51 @@
 backend:
-  name: git-gateway
-  branch: main
-  proxy_url: http://localhost:8081/api/v1
+  name: test-repo
 
 # These lines are optional but recommended for using images
-media_folder: "public/images" # Media files will be stored in the repo under public/images
-public_folder: "/images" # The src attribute for uploaded media will begin with /images
+media_folder: "public/assets" # Media files will be stored in the repo under public/assets
+public_folder: "/assets" # The src attribute for uploaded media will begin with /assets
+
+# This line is important for local development
+local_backend: true
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
 
 collections:
   - name: "project"
     label: "Projects"
     folder: "src/content/project"
     create: true
+    summary: "{{title}} - {{publishDate}}"
+    format: frontmatter
+    extension: md
     fields:
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
       - {label: "Publish Date", name: "publishDate", widget: "datetime"}
+      - {label: "Collection", name: "collection", widget: "hidden", default: "project"}
       - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Description", name: "description", widget: "markdown", required: true}
       - {label: "URL", name: "url", widget: "string"}
       - {label: "Is Redeemable", name: "isRedeemable", widget: "boolean", default: false}
       - {label: "Redeem URL", name: "redeemUrl", widget: "string", required: false}
-      - {label: "Images", name: "images", widget: "list", required: false, fields: [{label: "Image", name: "image", widget: "image"}]}
-      - {label: "Slider", name: "slider", widget: "list", required: false, fields: [{label: "Image", name: "image", widget: "image"}]}
+      - {label: "Images", name: "images", widget: "list", required: false, field: {label: "Image Path", name: "image", widget: "string", hint: "Path relative to /assets (e.g. /jeudeligne/jdl.jpg)"}}
+      - {label: "Slider", name: "slider", widget: "list", required: false, field: {label: "Image Number", name: "image", widget: "string"}}
+      - {label: "Body", name: "body", widget: "markdown", required: false}
 
   - name: "prints"
     label: "Prints"
     folder: "src/content/prints"
     create: true
+    format: frontmatter
+    extension: md
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
       - {label: "Price", name: "price", widget: "number"}
       - {label: "Currency", name: "currency", widget: "string"}
-      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Image", name: "image", widget: "string", hint: "Path relative to /assets (e.g. /jemesouviens/1.webp)"}
       - {label: "Dimensions", name: "dimensions", widget: "string"}
       - {label: "Paper", name: "paper", widget: "string"}
       - {label: "Edition", name: "edition", widget: "string"}
@@ -52,3 +65,4 @@ collections:
         }
       - {label: "Publish Date", name: "publishDate", widget: "datetime"}
       - {label: "Featured", name: "featured", widget: "boolean"}
+      - {label: "Body", name: "body", widget: "markdown", required: false}
