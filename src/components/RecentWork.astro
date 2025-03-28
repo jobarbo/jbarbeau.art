@@ -1,6 +1,7 @@
 ---
 import type {CollectionEntry} from "astro:content";
 import Icon from "../components/Icon.astro";
+import Button from "../components/Button.astro";
 import {Image} from "astro:assets";
 
 interface Props {
@@ -18,10 +19,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		<h3 class='work-description-title'>{work.data.title}</h3>
 		<p class='work-description-info'>{work.data.subtitle}</p>
 		<div class='work-description-link-wrapper'>
-			<a class=`work-description-link button ${isBtnDisabled}` href={work.data.url} target='_blank'>
-				View Project
-				<Icon isButton={true} icon={"external"} />
-			</a>
+			<Button label='View Project' icon='external' href={work.data.url} target='_blank' class={`work-description-link button ${isBtnDisabled}`} />
 			{
 				work.data.isRedeemable && (
 					<a class='work-description-link button' href={work.data.redeemUrl} target='_blank'>
@@ -30,7 +28,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 					</a>
 				)
 			}
-			<a href='mailto:barbeau.jonathan@gmail.com' class='work-description-link button'> Email me for inquiries </a>
+			<Button label='Email me for inquiries' target='_blank' icon='email' href='mailto:barbeau.jonathan@gmail.com' class='work-description-link button' />
 		</div>
 
 		<div data-slider={work.data.slider} class='work-image-row blaze-slider'>
@@ -199,7 +197,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		width: fit-content;
 		border: 1px solid black;
 		transition: all 0.3s;
-		font-size: 16px;
+		font-size: 14px;
 		svg {
 			margin-left: 0.5em;
 		}
