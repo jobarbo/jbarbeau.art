@@ -8,6 +8,9 @@ const prints = await getCollection("prints");
 
 // Sort by publish date
 const sortedPrints = prints.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+// Get Snipcart API key from environment
+const snipcartApiKey = import.meta.env.PUBLIC_SNIPCART_API_KEY;
 ---
 
 <Layout title='Prints | J Barbeau'>
@@ -41,4 +44,4 @@ const sortedPrints = prints.sort((a, b) => b.data.publishDate.valueOf() - a.data
 <link rel='preconnect' href='https://cdn.snipcart.com' />
 <link rel='stylesheet' href='https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.css' />
 <script async src='https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js'></script>
-<div hidden id='snipcart' data-api-key='N2RlOTFkNTItYTkxZC00MTRkLWE0ZTAtY2Q0ZTA4MzkxZTI4NjM3ODE0MDg1OTMzODE1ODIw'></div>
+<div hidden id='snipcart' data-api-key={snipcartApiKey}></div>
