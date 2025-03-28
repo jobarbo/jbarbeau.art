@@ -1,5 +1,6 @@
 backend:
   name: jbdecaptest
+  base_url: https://jbdecaptest.netlify.app/.netlify/identity
 
 # Global media folder settings
 media_folder: "public/assets"
