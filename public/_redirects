@@ -1,5 +1,1 @@
-# Redirect /admin to /admin/
-/admin  /admin/  301
 
-# Handle /admin/ path properly
-/admin/*  /admin/:splat  200
