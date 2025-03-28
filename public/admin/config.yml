@@ -17,7 +17,7 @@ collections:
     label: "Projects"
     folder: "src/content/project"
     create: true
-    summary: "{{fields.projectImage}} - {{fields.title}}"
+    summary: "{{fields.title}}"
     format: frontmatter
     extension: md
     media_folder: "/public/assets/{{fields.slug}}"

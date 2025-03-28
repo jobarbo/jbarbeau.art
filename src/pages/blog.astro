@@ -57,11 +57,8 @@ try {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
 	const feedText = await response.text();
-	console.log("\n=== Blog Page Feed Debug ===");
-	console.log("Feed content length:", feedText.length);
 
 	const feed = await parser.parseString(feedText);
-	console.log("Number of items:", feed.items?.length);
 
 	if (!feed.items || feed.items.length === 0) {
 		console.error("No items found in feed");
@@ -78,12 +75,7 @@ try {
 			const originalImageUrl = post.enclosure?.url;
 			const optimizedImageUrl = optimizeImageUrl(originalImageUrl);
 
-			// Debug image URLs
-			if (originalImageUrl) {
-				console.log("\nImage URLs for:", post.title);
-				console.log("Original:", originalImageUrl);
-				console.log("Optimized:", optimizedImageUrl);
-			}
+			// Use the description field for the excerpt, remove CDATA wrapper if present
 
 			// Use the description field for the excerpt, remove CDATA wrapper if present
 			let excerpt = post.description || "";
@@ -100,12 +92,6 @@ try {
 				slug,
 				image: optimizedImageUrl,
 			};
-		});
-
-		console.log("\nFirst post data:", {
-			title: posts[0]?.title,
-			excerpt: posts[0]?.excerpt,
-			image: posts[0]?.image,
 		});
 	}
 } catch (error) {
