@@ -1,5 +1,5 @@
 ---
-title: Je Me Souviens
+title: Je Me Souviens 2
 slug: jemesouviens
 publishDate: 2024-12-21 12:00:00
 collection: project
@@ -48,6 +48,7 @@ images:
   - /assets/jemesouviens/4.webp
   - /assets/jemesouviens/5.webp
   - /assets/jemesouviens/6.webp
+  - /assets/jemesouviens/3_27_2025_17_10_10_0x73b51098ea7409449b4f705cca30b6ee456ad468053c32f0feb0c7496e4f907b.png
 slider:
   - "4"
   - "3"
