@@ -1,5 +1,5 @@
 ---
-title: Je Me Souviens 2
+title: Je Me Souviens
 slug: jemesouviens
 publishDate: 2024-12-21 12:00:00
 collection: project
