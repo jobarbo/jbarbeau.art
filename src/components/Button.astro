@@ -35,6 +35,13 @@ const {label, icon, href, target, class: className, attributes} = Astro.props;
 		cursor: pointer;
 		transition: all 0.3s;
 		gap: 0.5em;
+		white-space: nowrap;
+	}
+
+	.button.disabled {
+		pointer-events: none;
+		cursor: default;
+		opacity: 0.6;
 	}
 
 	.button:hover {
