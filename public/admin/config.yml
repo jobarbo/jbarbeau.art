@@ -1,0 +1,111 @@
+backend:
+  name: git-gateway
+  branch: main
+  base_url: https://jbdecaptest.netlify.app/.netlify/identity
+  auth_redirect_url: https://jbdecaptest.netlify.app/confirmation.html
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
+
+# Global media folder settings
+media_folder: "/public/assets"
+public_folder: "/assets"
+
+# Enable local backend only in development
+local_backend: false
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+collections:
+  - name: "project"
+    label: "Projects"
+    folder: "src/content/project"
+    create: true
+    summary: "{{fields.title}}"
+    format: frontmatter
+    extension: md
+    media_folder: "/public/assets/{{fields.slug}}"
+    public_folder: "/assets/{{fields.slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime"}
+      - {label: "Collection", name: "collection", widget: "hidden", default: "project"}
+      - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "markdown", required: true}
+      - {label: "URL", name: "url", widget: "string"}
+      - {label: "Is Redeemable", name: "isRedeemable", widget: "boolean", default: false}
+      - {label: "Redeem URL", name: "redeemUrl", widget: "string", required: false}
+      - label: "Project Image"
+        name: "image"
+        widget: "image"
+        choose_url: true
+        required: false
+        media_folder: "/public/assets/{{fields.slug}}"
+        public_folder: "/assets"
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        summary: "{{fields.image}}"
+        field:
+          label: "Image"
+          name: "image"
+          widget: "image"
+          choose_url: true
+          media_folder: "/public/assets/{{fields.slug}}"
+          public_folder: "/assets/{{fields.slug}}"
+          allow_multiple: false
+      - label: "Slider Configuration (Number of slides visible per screen size)"
+        name: "slider"
+        widget: "list"
+        required: false
+        field:
+          label: "Number of slides"
+          name: "image"
+          widget: "string"
+          hint: "Enter numbers in order: [Large screens >900px, Medium screens 500px-900px, Small screens <500px]"
+      - {label: "Body", name: "body", widget: "markdown", required: false}
+
+  - name: "prints"
+    label: "Prints"
+    folder: "src/content/prints"
+    create: true
+    format: frontmatter
+    extension: md
+    media_folder: "/public/assets/{{fields.slug}}"
+    public_folder: "/assets/{{fields.slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Price", name: "price", widget: "number"}
+      - {label: "Currency", name: "currency", widget: "string"}
+      - label: "Image"
+        name: "image"
+        widget: "image"
+        choose_url: true
+      - {label: "Dimensions", name: "dimensions", widget: "string"}
+      - {label: "Paper", name: "paper", widget: "string"}
+      - {label: "Edition", name: "edition", widget: "string"}
+      - {label: "Weight", name: "weight", widget: "number"}
+      - {label: "Digital Goods", name: "digital_goods", widget: "boolean"}
+      - {
+          label: "Shipping",
+          name: "shipping",
+          widget: "object",
+          fields:
+            [
+              {label: "Weight", name: "weight", widget: "number"},
+              {label: "Width", name: "width", widget: "number"},
+              {label: "Length", name: "length", widget: "number"},
+              {label: "Height", name: "height", widget: "number"},
+            ],
+        }
+      - {label: "Publish Date", name: "publishDate", widget: "datetime"}
+      - {label: "Featured", name: "featured", widget: "boolean"}
+      - {label: "Body", name: "body", widget: "markdown", required: false}

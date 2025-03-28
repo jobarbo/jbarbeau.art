@@ -15,18 +15,23 @@ const projectCollection = defineCollection({
 	}),
 });
 
-const blogCollection = defineCollection({
+const prints = defineCollection({
 	type: "content",
 	schema: z.object({
 		title: z.string(),
-		description: z.string().optional(),
-		pubDate: z.date(),
-		updatedDate: z.date().optional(),
-		heroImage: z.string().optional(),
+		description: z.string(),
+		price: z.number(),
+		currency: z.string(),
+		image: z.string(),
+		dimensions: z.string(),
+		paper: z.string(),
+		edition: z.string(),
+		weight: z.number(),
+		digital_goods: z.boolean(),
+		shipping: z.object({weight: z.number(), width: z.number(), length: z.number(), height: z.number()}),
+		publishDate: z.date(),
+		featured: z.boolean(),
 	}),
 });
 
-export const collections = {
-	project: projectCollection,
-	blog: blogCollection,
-};
+export const collections = {project: projectCollection, prints};

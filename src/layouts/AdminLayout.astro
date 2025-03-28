@@ -1,0 +1,38 @@
+---
+// Admin-specific layout that includes Netlify Identity Widget
+import MainHead from "../components/MainHead.astro";
+
+interface Props {
+	title?: string | undefined;
+	description?: string | undefined;
+}
+
+const {title = "Admin | Jonathan Barbeau", description = "Admin area"} = Astro.props;
+
+// Determine if we're in development or production
+const isProd = import.meta.env.PROD;
+---
+
+<html lang='en'>
+	<head>
+		<MainHead title={title} description={description} />
+		<!-- Always include Netlify Identity Widget in admin layout -->
+		<script src='https://identity.netlify.com/v1/netlify-identity-widget.js'></script>
+	</head>
+	<body>
+		<slot />
+
+		<script>
+			// Admin-specific scripts
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", (user) => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

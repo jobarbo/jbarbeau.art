@@ -1,0 +1,44 @@
+/* Custom styles for Decap CMS admin */
+
+/* Style image paths to show as thumbnails */
+.widget-string input[type="text"][value^="/assets"] {
+	padding-left: 60px;
+	background-position: 5px center;
+	background-size: 45px auto;
+	background-repeat: no-repeat;
+}
+
+.widget-string input[type="text"][value^="/assets/jeudeligne"] {
+	background-image: url(/assets/jeudeligne/jdl.jpg);
+}
+
+.widget-string input[type="text"][value^="/assets/starmap"] {
+	background-image: url(/assets/starmap/0.webp);
+}
+
+.widget-string input[type="text"][value^="/assets/traces"] {
+	background-image: url(/assets/traces/int1.jpg);
+}
+
+.widget-string input[type="text"][value^="/assets/jemesouviens"] {
+	background-image: url(/assets/jemesouviens/1.webp);
+}
+
+.widget-string input[type="text"][value^="/assets/exhibita"] {
+	background-image: url(/assets/exhibita/1_thumb.jpg);
+}
+
+.widget-string input[type="text"][value^="/assets/exlibris"] {
+	background-image: url(/assets/exlibris/1.jpg);
+}
+
+/* Make the CMS layout more comfortable */
+.css-191c49t {
+	padding: 16px;
+}
+
+/* Improve readability of Markdown preview */
+.css-1y1qzfi {
+	font-size: 16px;
+	line-height: 1.6;
+}

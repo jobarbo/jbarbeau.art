@@ -14,13 +14,28 @@ interface Props {
 	type?: "website" | "article" | undefined;
 	logo?: string | undefined;
 }
+// Get Snipcart API key from environment variable
+const SNIPCART_API_KEY = import.meta.env.PUBLIC_SNIPCART_API_KEY;
 
-const {title, description, image, type = "website", logo = "/favicon.svg"} = Astro.props;
+const {title, description} = Astro.props;
+
+// Declare netlifyIdentity type
+declare global {
+	interface Window {
+		netlifyIdentity: {
+			on: (event: string, callback: (user?: any) => void) => void;
+		};
+	}
+}
+
+// Determine if we're in development or production
+const isProd = import.meta.env.PROD;
 ---
 
 <html lang='en'>
 	<head>
-		<MainHead title={title} description={description} image={image} type={type} logo={logo} />
+		<MainHead title={title} description={description} />
+		<!-- Netlify Identity Widget is now only loaded in the admin section -->
 	</head>
 	<body>
 		<div class='main'>
@@ -28,10 +43,24 @@ const {title, description, image, type = "website", logo = "/favicon.svg"} = Ast
 			<slot />
 			<Footer />
 		</div>
+		<!-- Snipcart Scripts -->
+		<script async src='https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js'></script>
+		<div hidden id='snipcart' data-api-key={SNIPCART_API_KEY} data-config-modal-style='side' data-templates-url='/snipcart-templates.html'></div>
 
 		<script>
 			// Add "loaded" class once the document has completely loaded.
 			addEventListener("load", () => document.documentElement.classList.add("loaded"));
+
+			// Only run this if netlifyIdentity exists (which would only be on the admin page)
+			if (typeof window.netlifyIdentity !== "undefined") {
+				window.netlifyIdentity.on("init", (user) => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
