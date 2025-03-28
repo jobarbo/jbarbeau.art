@@ -61,7 +61,15 @@ collections:
           media_folder: "/public/assets/{{fields.slug}}"
           public_folder: "/assets/{{fields.slug}}"
           allow_multiple: false
-      - {label: "Slider", name: "slider", widget: "list", required: false, field: {label: "Image Number", name: "image", widget: "string"}}
+      - label: "Slider Configuration (Number of slides visible per screen size)"
+        name: "slider"
+        widget: "list"
+        required: false
+        field:
+          label: "Number of slides"
+          name: "image"
+          widget: "string"
+          hint: "Enter numbers in order: [Large screens >900px, Medium screens 500px-900px, Small screens <500px]"
       - {label: "Body", name: "body", widget: "markdown", required: false}
 
   - name: "prints"
