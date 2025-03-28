@@ -2,11 +2,11 @@ backend:
   name: test-repo
 
 # Global media folder settings
-media_folder: "/public/assets"
+media_folder: "public/assets"
 public_folder: "/assets"
 
-# Local backend is disabled by default
-local_backend: false
+# Enable local backend only in development
+local_backend: true
 
 slug:
   encoding: "ascii"
@@ -20,8 +20,8 @@ collections:
     summary: "{{fields.title}}"
     format: frontmatter
     extension: md
-    media_folder: "/public/assets/{{fields.slug}}"
-    public_folder: "/assets/{{fields.slug}}"
+    media_folder: "public/assets"
+    public_folder: "/assets"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Slug", name: "slug", widget: "string"}
@@ -37,8 +37,8 @@ collections:
         widget: "image"
         choose_url: true
         required: false
-        media_folder: "/public/assets/{{fields.slug}}"
-        public_folder: "/assets/{{fields.slug}}"
+        media_folder: "public/assets"
+        public_folder: "/assets"
       - label: "Images"
         name: "images"
         widget: "list"
@@ -49,8 +49,8 @@ collections:
           name: "image"
           widget: "image"
           choose_url: true
-          media_folder: "/public/assets/{{fields.slug}}"
-          public_folder: "/assets/{{fields.slug}}"
+          media_folder: "public/assets"
+          public_folder: "/assets"
           allow_multiple: false
       - {label: "Slider", name: "slider", widget: "list", required: false, field: {label: "Image Number", name: "image", widget: "string"}}
       - {label: "Body", name: "body", widget: "markdown", required: false}
@@ -61,8 +61,8 @@ collections:
     create: true
     format: frontmatter
     extension: md
-    media_folder: "/public/assets/{{fields.slug}}"
-    public_folder: "/assets/{{fields.slug}}"
+    media_folder: "public/assets"
+    public_folder: "/assets"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}

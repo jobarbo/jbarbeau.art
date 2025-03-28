@@ -19,7 +19,12 @@
 		<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 		<script>
 			// Load the CMS configuration
-			window.CMS_CONFIG_URL = "admin.js";
+			window.CMS_CONFIG_URL = "config.yml";
+
+			// Disable local backend in production
+			if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+				window.CMS_CONFIG = {...window.CMS_CONFIG, local_backend: false};
+			}
 
 			// Prevent hash routing from affecting parent pages
 			if (window.parent !== window) {
