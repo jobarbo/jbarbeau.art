@@ -5,8 +5,8 @@ backend:
 media_folder: "/public/assets"
 public_folder: "/assets"
 
-# This line is important for local development
-local_backend: true
+# Local backend is disabled by default
+local_backend: false
 
 slug:
   encoding: "ascii"
