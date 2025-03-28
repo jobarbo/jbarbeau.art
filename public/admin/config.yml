@@ -11,7 +11,7 @@ backend:
     deleteMedia: 'Delete "{{path}}"'
 
 # Global media folder settings
-media_folder: "public/assets"
+media_folder: "/public/assets"
 public_folder: "/assets"
 
 # Enable local backend only in development
@@ -29,8 +29,8 @@ collections:
     summary: "{{fields.title}}"
     format: frontmatter
     extension: md
-    media_folder: "public/assets"
-    public_folder: "/assets"
+    media_folder: "/public/assets/{{fields.slug}}"
+    public_folder: "/assets/{{fields.slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Slug", name: "slug", widget: "string"}
@@ -46,7 +46,7 @@ collections:
         widget: "image"
         choose_url: true
         required: false
-        media_folder: "public/assets"
+        media_folder: "/public/assets/{{fields.slug}}"
         public_folder: "/assets"
       - label: "Images"
         name: "images"
@@ -58,8 +58,8 @@ collections:
           name: "image"
           widget: "image"
           choose_url: true
-          media_folder: "public/assets"
-          public_folder: "/assets"
+          media_folder: "/public/assets/{{fields.slug}}"
+          public_folder: "/assets/{{fields.slug}}"
           allow_multiple: false
       - {label: "Slider", name: "slider", widget: "list", required: false, field: {label: "Image Number", name: "image", widget: "string"}}
       - {label: "Body", name: "body", widget: "markdown", required: false}
@@ -70,8 +70,8 @@ collections:
     create: true
     format: frontmatter
     extension: md
-    media_folder: "public/assets"
-    public_folder: "/assets"
+    media_folder: "/public/assets/{{fields.slug}}"
+    public_folder: "/assets/{{fields.slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
