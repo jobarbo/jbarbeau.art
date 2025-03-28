@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Confirming your email...</title>
+	</head>
+	<body>
+		<script>
+			window.onload = function () {
+				const hash = window.location.hash;
+				if (hash) {
+					const token = hash.replace("#confirmation_token=", "");
+					window.location.href = `https://jbdecaptest.netlify.app/.netlify/identity/confirm?token=${token}`;
+				}
+			};
+		</script>
+		<p>Confirming your email...</p>
+	</body>
+</html>
