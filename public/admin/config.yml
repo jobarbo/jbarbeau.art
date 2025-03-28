@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: features/decap-cms
+  branch: main
   base_url: https://jbdecaptest.netlify.app/.netlify/identity
   auth_redirect_url: https://jbdecaptest.netlify.app/confirmation.html
   commit_messages:
