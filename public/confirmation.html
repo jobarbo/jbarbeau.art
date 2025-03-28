@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Confirming your email...</title>
+		<script>
+			window.onload = function () {
+				const hash = window.location.hash;
+				if (hash) {
+					const token = hash.replace("#confirmation_token=", "");
+					// Redirect to the Netlify Identity confirmation endpoint
+					window.location.href = `https://jbdecaptest.netlify.app/.netlify/identity/confirm?token=${token}`;
+				} else {
+					// If no token found, redirect to admin
+					window.location.href = "https://jbdecaptest.netlify.app/admin/";
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<p>Processing your email confirmation...</p>
+	</body>
+</html>

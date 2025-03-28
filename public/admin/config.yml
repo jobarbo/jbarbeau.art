@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   base_url: https://jbdecaptest.netlify.app/.netlify/identity
-  auth_redirect_url: https://jbdecaptest.netlify.app/admin/
+  auth_redirect_url: https://jbdecaptest.netlify.app/confirmation.html
 
 # Global media folder settings
 media_folder: "public/assets"
