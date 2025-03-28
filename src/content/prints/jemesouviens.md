@@ -1,5 +1,6 @@
 ---
 title: "Je Me Souviens"
+slug: jemesouviens
 description: "A vibrant digital artwork capturing the essence of Quebec"
 price: 150
 currency: CAD

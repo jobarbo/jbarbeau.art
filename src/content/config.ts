@@ -1,7 +1,5 @@
 import {defineCollection, z} from "astro:content";
 
-console.log(z);
-
 const projectCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
@@ -29,18 +27,10 @@ const prints = defineCollection({
 		edition: z.string(),
 		weight: z.number(),
 		digital_goods: z.boolean(),
-		shipping: z.object({
-			weight: z.number(),
-			width: z.number(),
-			length: z.number(),
-			height: z.number(),
-		}),
+		shipping: z.object({weight: z.number(), width: z.number(), length: z.number(), height: z.number()}),
 		publishDate: z.date(),
 		featured: z.boolean(),
 	}),
 });
 
-export const collections = {
-	project: projectCollection,
-	prints,
-};
+export const collections = {project: projectCollection, prints};

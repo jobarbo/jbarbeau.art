@@ -17,10 +17,11 @@ collections:
     label: "Projects"
     folder: "src/content/project"
     create: true
+    summary: "{{fields.projectImage}} - {{fields.title}}"
     format: frontmatter
     extension: md
-    media_folder: "/public/assets"
-    public_folder: "/assets"
+    media_folder: "/public/assets/{{fields.slug}}"
+    public_folder: "/assets/{{fields.slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Slug", name: "slug", widget: "string"}
@@ -60,8 +61,8 @@ collections:
     create: true
     format: frontmatter
     extension: md
-    media_folder: "public/assets/prints"
-    public_folder: "/assets/prints"
+    media_folder: "/public/assets/{{fields.slug}}"
+    public_folder: "/assets/{{fields.slug}}"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
