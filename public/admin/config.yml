@@ -2,7 +2,7 @@ backend:
   name: test-repo
 
 # Global media folder settings
-media_folder: "public/assets"
+media_folder: "/public/assets"
 public_folder: "/assets"
 
 # This line is important for local development
@@ -17,11 +17,10 @@ collections:
     label: "Projects"
     folder: "src/content/project"
     create: true
-    summary: "{{title}} - {{publishDate}}"
     format: frontmatter
     extension: md
-    media_folder: "public/assets/{{slug}}"
-    public_folder: "/assets/{{slug}}"
+    media_folder: "/public/assets"
+    public_folder: "/assets"
     fields:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Slug", name: "slug", widget: "string"}
@@ -33,20 +32,25 @@ collections:
       - {label: "Is Redeemable", name: "isRedeemable", widget: "boolean", default: false}
       - {label: "Redeem URL", name: "redeemUrl", widget: "string", required: false}
       - label: "Project Image"
-        name: "projectImage"
+        name: "image"
         widget: "image"
         choose_url: true
         required: false
+        media_folder: "/public/assets/{{fields.slug}}"
+        public_folder: "/assets/{{fields.slug}}"
       - label: "Images"
         name: "images"
         widget: "list"
         required: false
         summary: "{{fields.image}}"
         field:
-          label: "Image Path"
+          label: "Image"
           name: "image"
           widget: "image"
           choose_url: true
+          media_folder: "/public/assets/{{fields.slug}}"
+          public_folder: "/assets/{{fields.slug}}"
+          allow_multiple: false
       - {label: "Slider", name: "slider", widget: "list", required: false, field: {label: "Image Number", name: "image", widget: "string"}}
       - {label: "Body", name: "body", widget: "markdown", required: false}
 

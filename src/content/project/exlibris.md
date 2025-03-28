@@ -1,8 +1,14 @@
 ---
-title: EX-LIBRIS 3
-slug: exlibris
+title: EX-LIBRIS
 publishDate: 2023-12-15 12:00:00
 collection: project
+isRedeemable: true
+slider:
+  - "6"
+  - "5"
+  - "4"
+projectImage: /assets/exlibris/1.jpg
+slug: exlibris
 subtitle: January 2024 - fx(hash)
 description: >-
   The idea of EX-LIBRIS emerged only days before my pilgrimage to the Artblocks
@@ -20,8 +26,8 @@ description: >-
 
   EX-LIBRIS encapsulates the essence of a moment in time, where I found my tribe as an artist and transformed into an enduring testament to art's evolution—an ode to tradition, knowledge, innovation, and the limitless horizons of art in the digital age.
 url: https://www.fxhash.xyz/generative/0x682e10BF76d4150461ccf271e44aDb1DFe5f9F3A
-isRedeemable: true
 redeemUrl: https://www.wovn.xyz/jbarbeau/prints
+image: /assets/exlibris/4.jpg
 images:
   - /assets/exlibris/1.jpg
   - /assets/exlibris/2.jpg
@@ -30,20 +36,4 @@ images:
   - /assets/exlibris/5.jpg
   - /assets/exlibris/6.jpg
   - /assets/exlibris/7.jpg
-slider:
-  - "6"
-  - "5"
-  - "4"
 ---
-
-GM!!🌞☕️
-
-I have news from the shop!
-
-EX-LIBRIS will drop on
-@fx*hash*
-on December 6th 2023. It will be part of the new fx(hash) 2.0 launch party. 🎉
-
-Each piece can be redeemed as a signed bookmark set, so no more excuses using receipts to mark your page.
-
-Happy Reading 🌝
