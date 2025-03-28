@@ -1,5 +1,5 @@
 backend:
-  name: netlify
+  name: git-gateway
   base_url: https://jbdecaptest.netlify.app/.netlify/identity
 
 # Global media folder settings
