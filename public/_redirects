@@ -1,5 +1,5 @@
 # Redirect /admin to /admin/
 /admin  /admin/  301
 
-# Handle /admin/ path to serve the index.html file
-/admin/  /admin/index.html  200
+# Handle /admin/ path properly
+/admin/*  /admin/:splat  200
