@@ -1,5 +1,5 @@
 backend:
-  name: test-repo
+  name: jbdecaptest
 
 # Global media folder settings
 media_folder: "public/assets"
