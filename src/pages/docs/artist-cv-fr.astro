@@ -1,0 +1,368 @@
+---
+import {Debug} from "astro/components";
+---
+
+<html lang='fr' class='bg-slate-200'>
+	<head>
+		<meta charset='utf-8' />
+		<meta name='viewport' content='width=device-width' />
+		<meta name='generator' content={Astro.generator} />
+		<title>Curriculum Vitae</title>
+	</head>
+	<body class='max-w-screen-lg m-auto bg-white py-8'>
+		<section class='py-2 px-10'>
+			<div class='mb-2'>
+				<h1 class='text-xl font-light underline italic mb-5'>Curriculum Vitae</h1>
+				<h2 class='text-2xl font-bold'>Jonathan Barbeau</h2>
+				<div class='text-sm'>
+					<p>22 septembre 1989</p>
+					<p>Basé à Québec, QC, Canada</p>
+					<p>Courriel: <a class='italic text-blue-700 underline' href='mailto:barbeau.jonathan@gmail.com'>barbeau.jonathan@gmail.com</a></p>
+					<div class='flex flex-col'>
+						<p>Site web: <a class='italic text-blue-700 underline' target='_blank' href='https://jbarbeau.art'>www.jbarbeau.art</a></p>
+						<a class='italic text-blue-700 underline' target='_blank' href='https://www.instagram.com/jbarbeau.art/'>Instagram</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
+			<h3 class='text-xl font-semibold underline'>Expérience Professionnelle</h3>
+			<div class='mb-2 text-sm'>
+				<p>2023-2024: Installation d'Art Numérique pour Sartoro Genève à Dubaï</p>
+				<p>2017-2024: Développeur Front-end Créatif</p>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
+			<h3 class='text-xl font-semibold underline'>Expositions</h3>
+			<div class='mb-2'>
+				<p class='font-bold'>Expositions Autoproduites:</p>
+				<div class='text-sm'>
+					<p>2023: <span class='italic'>EXHIBIT-A</span>, La Korrigane, Québec, Canada</p>
+				</div>
+			</div>
+			<div class='mb-2'>
+				<p class='font-bold'>Expositions de Groupe:</p>
+				<div class='text-sm'>
+					<p>2025: <span class='italic'>Je me souviens</span>, Pour l'exposition "My Reality" Organisé par: Qm & Snow - Hébergé par: Cloud Art Museum, Guizhou, Chine</p>
+					<p>2024: <span class='italic'>RGBMTL</span>, Artiste Invité, Montréal, Canada</p>
+					<p>2024: <span class='italic'>Station3 By The Sea</span>, Long Island, NY, États-Unis</p>
+					<p>2024: <span class='italic'>Interfaces</span>, Financé par le commissaire fédéral à la culture et aux médias, Hanovre, Stuttgart, Allemagne</p>
+					<p>2024: <span class='italic'>Digital Art Wine & Love</span>, Station3 & Sotheby's, Wall Street NYC, NY, États-Unis</p>
+					<p>2023: <span class='italic'>Station3 By The Sea</span>, Long Island, NY, États-Unis</p>
+				</div>
+			</div>
+			<div class='mb-2 hidden'>
+				<p class='font-bold'>Expositions à Venir:</p>
+				<div class='text-sm'></div>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
+			<h3 class='text-xl font-semibold underline'>Expositions Numériques</h3>
+			<div class='mb-2'>
+				<p class='font-bold'>Collections Longform Autoproduites:</p>
+				<div class='text-sm'>
+					<p>2025: <span class='italic'>Je me souviens</span>, Highlight</p>
+					<p>2024: <span class='italic'>EX-LIBRIS</span>, fx(hash)</p>
+					<p>2023: <span class='italic'>Aweille!</span>, fx(hash)</p>
+					<p>2023: <span class='italic'>Jeu de Ligne</span>, 256art</p>
+					<p>2023: <span class='italic'>Never Stop Never Stopping</span>, fx(hash)</p>
+					<p>2022: <span class='italic'>Terra Incognita</span>, fx(hash)</p>
+				</div>
+			</div>
+			<div class='mb-2'>
+				<p class='font-bold'>Expositions Commissionnées:</p>
+				<div class='text-sm'>
+					<p>2025: <span class='italic'>Ligne Haute Tension</span>, MOWNA Biennale 2025, Organisé par: The Museum of Wild and Newfangled Art, New York, NY, États-Unis</p>
+					<p>2024: <span class='italic'>STARMAP - Under Neith</span>, Forever Projects, Foundation, États-Unis</p>
+				</div>
+			</div>
+			<div class='mb-2'>
+				<p class='font-bold'>Expositions à Venir:</p>
+				<div class='text-sm'>
+					<p>2025: <span class='italic'>Geodes and Geologies</span>, Dawn Contemporary, Alba Art, NYC, États-Unis</p>
+				</div>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
+			<h3 class='text-xl font-semibold underline'>Publications</h3>
+			<div class='mb-2 text-sm'>
+				<p>2025(à venir): <span class='italic'>Artist & Computer 2025</span>, Generative Artists Club</p>
+				<p>2025: <span class='italic'>Edition 5</span>, Revue un:un, Revue pour l'art, l'architecture et le design</p>
+				<p>2024: <span class='italic'>Processing Community Catalog</span>, Processing Foundation</p>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
+			<h3 class='text-xl font-semibold underline'>Participations / Événements</h3>
+			<div class='mb-2 text-sm'>
+				<p>2024: <span class='italic'>Membre de la Délégation Québécoise LOJIQ(OFQJ/HACNUM)</span>, Biennales des imaginaires numériques par Chroniques, Marseille, France</p>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
+			<div class='mb-2'>
+				<p class='font-bold'>Diplôme:</p>
+				<div class='text-sm'>
+					<p>2017: Cégep de Ste-Foy - Technique d'Intégration Multimédia</p>
+				</div>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
+			<div class='mb-2'>
+				<h3 class='text-xl font-semibold underline mb-2'>Liste des Œuvres</h3>
+
+				<div class='text-[10px] grid grid-cols-2 gap-x-4'>
+					<p>
+						<span class='font-bold'>2025: </span><a target='_blank' href='https://highlight.xyz/mint/64f7c27b373cff27b5e9309c/tokens/1' class='italic text-blue-700 underline'>Je me souviens</a>,
+						Highlight, Collection de 6 œuvres, 1 sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2024: </span><a target='_blank' href='https://foundation.app/collection/strmp' class='italic text-blue-700 underline'>STARMAP</a>, Forever Projects (Foundation), 64
+						Éditions, Longform
+					</p>
+					<p>
+						<span class='font-bold'>2024: </span><a target='_blank' href='https://www.fxhash.xyz/generative/slug/ex-libris' class='italic text-blue-700 underline'>EX-LIBRIS</a>, fx(hash), 256
+						Éditions, Longform
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://www.fxhash.xyz/generative/slug/aweille!' class='italic text-blue-700 underline'>Aweille!</a>, fx(hash), 128 Éditions,
+						Longform
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://256art.com/project/jeu-de-ligne-2' class='italic text-blue-700 underline'>Jeu de Ligne</a>, 256Art, 300 Éditions,
+						Longform
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://highlight.xyz/mint/ethereum:0xb75A0596A66560C5a629B25e571Bc6a0eB048bC8' class='italic text-blue-700 underline'
+							>EXHIBIT-A</a
+						>, La Korrigane, 10 œuvres, 1 sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://objkt.com/tokens/KT1TdZxMExP2GvGKcbQBJk7jPybAoAQKNuwm/1' class='italic text-blue-700 underline'>Fūrinkazan</a>, OBJKT,
+						1 sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/32696' class='italic text-blue-700 underline'>Nebula</a>, OBJKT, 1 sur 1,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/32682' class='italic text-blue-700 underline'>Dandelion</a>, OBJKT, 1 sur 1,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://www.fxhash.xyz/generative/slug/never-stop-never-stopping' class='italic text-blue-700 underline'
+							>Never Stop Never Stopping</a
+						>, fx(hash), 14 Éditions, Longform
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/32631' class='italic text-blue-700 underline'>The Only Way To Stop Time</a>, OBJKT, 1
+						sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/32513' class='italic text-blue-700 underline'>Lichen</a>, OBJKT, 1 sur 1,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/32444' class='italic text-blue-700 underline'>Chromatic Flow</a>, OBJKT, 1 sur 1, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://foundation.app/@Jbarbeau/jbtbt/1' class='italic text-blue-700 underline'>Clair de Lune</a>, Foundation, 1 sur 1, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2023: </span><a target='_blank' href='https://foundation.app/@Jbarbeau/jbtbt/1' class='italic text-blue-700 underline'>Chill Wave</a>, Foundation, 1 sur 1, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/31338' class='italic text-blue-700 underline'>The Octopi</a>, OBJKT, 1 sur 1, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/31321' class='italic text-blue-700 underline'>The Mage</a>, OBJKT, 1 sur 1,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/31249' class='italic text-blue-700 underline'>Hadean</a>, OBJKT, 1 sur 1,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/31022' class='italic text-blue-700 underline'>Chardon des champs</a>, OBJKT, 1 sur 11,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/30652' class='italic text-blue-700 underline'>Champs Fleury</a>, OBJKT, 1 sur 11, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/30648' class='italic text-blue-700 underline'>Mousse Quantique</a>, OBJKT, 1 sur 11,
+						Auto- commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/30198' class='italic text-blue-700 underline'>Dérives Littorales</a>, OBJKT, 1 sur 11,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/30180' class='italic text-blue-700 underline'>Vacarme</a>, OBJKT, 1 sur 11,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/29984' class='italic text-blue-700 underline'>Rétine Cramée</a>, OBJKT, 1 sur 20, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/29983' class='italic text-blue-700 underline'>Rétine Brulée</a>, OBJKT, 1 sur 20, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/29588' class='italic text-blue-700 underline'>Playful Deconstruction III</a>, OBJKT, 1
+						sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/29429' class='italic text-blue-700 underline'>Playful Deconstruction II</a>, OBJKT, 1
+						sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/29406' class='italic text-blue-700 underline'>Playful Deconstruction I</a>, OBJKT, 1 sur
+						1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://foundation.app/@Jbarbeau/metromtl/1' class='italic text-blue-700 underline'>Metropolis</a>, Foundation, 6 œuvres, 1
+						sur 1, Auto-commissariée
+					</p>
+
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://foundation.app/@Jbarbeau/hautmont/1' class='italic text-blue-700 underline'>Haute Montagne</a>, Foundation, 4 œuvres,
+						1 sur 1, Auto-commissariée
+					</p>
+
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://www.fxhash.xyz/generative/slug/terra-incognita-2' class='italic text-blue-700 underline'>Terra Incognita</a>,
+						fx(hash), 56 Éditions, Longform
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://foundation.app/@Jbarbeau/randbor/2' class='italic text-blue-700 underline'>Les Randomnées Boréales</a>, Foundation, 5
+						œuvres, 1 sur 1, Auto-commissariée
+					</p>
+
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/27452' class='italic text-blue-700 underline'>Stagnum Salinarum</a>, OBJKT, 1 sur 1,
+						Auto- commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/26265' class='italic text-blue-700 underline'>Null City</a>, OBJKT, 1 sur 1,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/26199' class='italic text-blue-700 underline'>Acouphene</a>, OBJKT, 1 sur 1,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/26115' class='italic text-blue-700 underline'>Lim City</a>, OBJKT, 1 sur 5,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/25408' class='italic text-blue-700 underline'>Out of bounds</a>, OBJKT, 1 sur 5, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/20226' class='italic text-blue-700 underline'>Position Absolute</a>, OBJKT, 1 sur 5,
+						Auto- commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/20225' class='italic text-blue-700 underline'>Static Content Deploy</a>, OBJKT, 1 sur 5,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/15769' class='italic text-blue-700 underline'>Divergence</a>, OBJKT, 1 sur 5, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/15567' class='italic text-blue-700 underline'>Collide</a>, OBJKT, 1 sur 5,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/8587' class='italic text-blue-700 underline'>Crypto Glyph</a>, OBJKT, 1 sur 3, Auto-
+						commissariée
+					</p>
+
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/5' class='italic text-blue-700 underline'>Purple Haze</a>,
+						OBJKT, 1 sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/4' class='italic text-blue-700 underline'>Fever Dream</a>,
+						OBJKT, 1 sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/3' class='italic text-blue-700 underline'>Milton</a>, OBJKT, 1
+						sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/2' class='italic text-blue-700 underline'>Shilly Shally</a>,
+						OBJKT, 1 sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/1' class='italic text-blue-700 underline'>Crushed Velvet</a>,
+						OBJKT, 1 sur 1, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/0' class='italic text-blue-700 underline'>November Blues</a>,
+						OBJKT, 1 sur 1, Auto-commissariée
+					</p>
+
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://foundation.app/@Jbarbeau/foundation/78279' class='italic text-blue-700 underline'>Oceans</a>, Foundation, 3 œuvres, 1
+						sur 1, Auto-commissariée
+					</p>
+
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/340470' class='italic text-blue-700 underline'>Corals</a>, Hic et Nunc, 3 œuvres, 1 sur 10,
+						Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/226926' class='italic text-blue-700 underline'>Les Quartiers</a>, Hic et Nunc, 3 œuvres, 1
+						sur 5, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/215169' class='italic text-blue-700 underline'>Le Seuil</a>, Hic et Nunc, 1 sur 1, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/213253' class='italic text-blue-700 underline'>Extera Animus</a>, Hic et Nunc, 1 sur 1,
+						Auto- commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/46327' class='italic text-blue-700 underline'>Brume de Mer</a>, Hic et Nunc, 1 sur 498,
+						Auto- commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/35916' class='italic text-blue-700 underline'>Oil Slick</a>, Hic et Nunc, 1 sur 30, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/19157' class='italic text-blue-700 underline'>Iridescence</a>, Hic et Nunc, 3 œuvres, 1 sur
+						20, Auto-commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/16793' class='italic text-blue-700 underline'>Tournesol</a>, Hic et Nunc, 1 sur 10, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/11361' class='italic text-blue-700 underline'>Araneae</a>, Hic et Nunc, 1 sur 1, Auto-
+						commissariée
+					</p>
+					<p>
+						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/11345' class='italic text-blue-700 underline'>Beings</a>, Hic et Nunc, 1 sur 1,
+						Auto-commissariée
+					</p>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
