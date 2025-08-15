@@ -2,6 +2,7 @@
 import {Image} from "astro:assets";
 import Socials from "./Socials.astro";
 import Button from "./Button.astro";
+import Icon from "./Icon.astro";
 
 const {profileImage} = Astro.props;
 ---
@@ -31,7 +32,12 @@ const {profileImage} = Astro.props;
 		</div>
 		<div class='hero-iframe-info'>
 			<p class='hero-iframe-name' id='projectName'></p>
-			<p class='hero-iframe-hash' id='randomHash'></p>
+			<div class='hero-iframe-hash-container'>
+				<p class='hero-iframe-hash' id='randomHash'></p>
+				<button class='copy-hash-btn' id='copyHashBtn' title='Copy full hash'>
+					<Icon icon='copy' size='0.8em' />
+				</button>
+			</div>
 			<div class='hero-iframe-buttons'>
 				<Button label='New variations' icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
 				<Button label='Fullscreen' icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
@@ -89,10 +95,42 @@ const {profileImage} = Astro.props;
 		font-weight: 600;
 	}
 
+	.hero-iframe-hash-container {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
 	.hero-iframe-hash {
 		font-size: 0.6rem;
 		font-style: italic;
 		font-weight: 600;
+		margin: 0;
+	}
+
+	.copy-hash-btn {
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.2rem;
+		border-radius: 0.2rem;
+		transition: background-color 0.2s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.copy-hash-btn:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+
+	.copy-hash-btn:active {
+		background-color: rgba(0, 0, 0, 0.2);
+	}
+
+	.copy-hash-btn.copied {
+		background-color: rgba(0, 255, 0, 0.2);
+		border: 1px solid rgba(0, 255, 0, 0.5);
 	}
 
 	.hero-iframe-buttons {
@@ -197,15 +235,32 @@ const {profileImage} = Astro.props;
 	let currentUrl; // Add this variable to store the current URL
 	let randomIframe;
 	let canvas = document.querySelector("[data-canvas]") as HTMLElement;
+	let currentFullHash = ""; // Store the full hash for copying
+
 	function generateRandomHash(size = 64) {
 		let genHash = (size) => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join("");
 		let hash = "0x" + genHash(64);
 		return hash;
 	}
 
+	async function copyToClipboard(text: string) {
+		try {
+			await navigator.clipboard.writeText(text);
+			// Show visual feedback
+			const copyBtn = document.getElementById("copyHashBtn") as HTMLButtonElement;
+			copyBtn.classList.add("copied");
+			setTimeout(() => {
+				copyBtn.classList.remove("copied");
+			}, 1500);
+		} catch (err) {
+			console.error("Failed to copy: ", err);
+		}
+	}
+
 	function updateIframeAndHash() {
 		// Generate random hash
 		const hash = generateRandomHash(64);
+		currentFullHash = hash; // Store the full hash
 		// create excerpt of the hash
 		const hashExcerpt = hash.substring(0, 8);
 		document.getElementById("randomHash").textContent = `Seed: #${hashExcerpt}...`;
@@ -233,6 +288,7 @@ const {profileImage} = Astro.props;
 	function updateHash() {
 		//update only the hash not the iFrame
 		const hash = generateRandomHash(64);
+		currentFullHash = hash; // Store the full hash
 		const hashExcerpt = hash.substring(0, 8);
 		document.getElementById("randomHash").textContent = `Seed: #${hashExcerpt}...`;
 
@@ -250,6 +306,9 @@ const {profileImage} = Astro.props;
 	// add event listeners to the buttons
 	document.querySelector("[data-refresh]").addEventListener("click", updateHash);
 	document.querySelector("[data-fullscreen]").addEventListener("click", openInNewTab);
+	document.getElementById("copyHashBtn").addEventListener("click", () => {
+		copyToClipboard(currentFullHash);
+	});
 
 	// Run on page load
 	updateIframeAndHash();
