@@ -1,0 +1,41 @@
+nav {
+	z-index: 9;
+	position: relative;
+	font-family: var(--font-brand);
+	font-weight: 500;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1680px;
+	display: none;
+}
+
+.menu-header {
+	display: flex;
+	justify-content: space-between;
+	gap: 0.5rem;
+	padding: 1.5rem;
+}
+
+.site-title {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	line-height: 1.1;
+	color: var(--gray-0);
+	text-decoration: none;
+}
+
+@media (min-width: 50em) {
+	nav {
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+	}
+
+	.menu-header {
+		padding: 0;
+	}
+
+	.site-title {
+		font-size: var(--text-lg);
+	}
+}

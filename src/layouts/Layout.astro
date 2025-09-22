@@ -14,8 +14,6 @@ interface Props {
 	type?: "website" | "article" | undefined;
 	logo?: string | undefined;
 }
-// Get Snipcart API key from environment variable
-const SNIPCART_API_KEY = import.meta.env.PUBLIC_SNIPCART_API_KEY;
 
 const {title, description} = Astro.props;
 
@@ -43,9 +41,6 @@ const isProd = import.meta.env.PROD;
 			<slot />
 			<Footer />
 		</div>
-		<!-- Snipcart Scripts -->
-		<script async src='https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js'></script>
-		<div hidden id='snipcart' data-api-key={SNIPCART_API_KEY} data-config-modal-style='side' data-templates-url='/snipcart-templates.html'></div>
 
 		<script>
 			// Add "loaded" class once the document has completely loaded.
@@ -62,5 +57,8 @@ const isProd = import.meta.env.PROD;
 				});
 			}
 		</script>
+		<style lang='scss' is:global>
+			@import "../styles/global.scss";
+		</style>
 	</body>
 </html>

@@ -26,7 +26,6 @@ description: >-
 
   EX-LIBRIS encapsulates the essence of a moment in time, where I found my tribe as an artist and transformed into an enduring testament to art's evolution—an ode to tradition, knowledge, innovation, and the limitless horizons of art in the digital age.
 url: https://www.fxhash.xyz/generative/0x682e10BF76d4150461ccf271e44aDb1DFe5f9F3A
-redeemUrl: https://www.wovn.xyz/jbarbeau/prints
 image: /assets/exlibris/4.jpg
 images:
   - /assets/exlibris/1.jpg

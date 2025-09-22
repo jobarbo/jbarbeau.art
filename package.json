@@ -14,7 +14,9 @@
 		"astro": "^5.5.4",
 		"blaze-slider": "^1.9.3",
 		"decap-cms-app": "^3.6.2",
-		"rss-parser": "^3.13.0"
+		"gsap": "^3.13.0",
+		"rss-parser": "^3.13.0",
+		"sass": "^1.93.0"
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.16",

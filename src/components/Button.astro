@@ -19,33 +19,6 @@ const {label, icon, href, target, class: className, attributes} = Astro.props;
 	{icon && <Icon icon={icon} />}
 </a>
 
-<style>
-	.button {
-		border-radius: 50px;
-		background-color: var(--gray-0);
-		color: var(--gray-999);
-		text-decoration: none;
-		display: flex;
-		align-items: center;
-		padding: 0.5em 1.25em;
-		font-size: 14px;
-		justify-content: center;
-		width: fit-content;
-		border: 1px solid black;
-		cursor: pointer;
-		transition: all 0.3s;
-		gap: 0.5em;
-		white-space: nowrap;
-	}
-
-	.button.disabled {
-		pointer-events: none;
-		cursor: default;
-		opacity: 0.6;
-	}
-
-	.button:hover {
-		background-color: var(--gray-999);
-		color: var(--gray-0);
-	}
+<style lang='scss'>
+	@import "../styles/components/Button.scss";
 </style>
