@@ -8,57 +8,61 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 
 interface Props {
-	title?: string | undefined;
-	description?: string | undefined;
-	image?: string | undefined;
-	type?: "website" | "article" | undefined;
-	logo?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  image?: string | undefined;
+  type?: "website" | "article" | undefined;
+  logo?: string | undefined;
 }
 
-const {title, description} = Astro.props;
+const { title, description } = Astro.props;
 
 // Declare netlifyIdentity type
 declare global {
-	interface Window {
-		netlifyIdentity: {
-			on: (event: string, callback: (user?: any) => void) => void;
-		};
-	}
+  interface Window {
+    netlifyIdentity: {
+      on: (event: string, callback: (user?: any) => void) => void;
+    };
+  }
 }
 
 // Determine if we're in development or production
 const isProd = import.meta.env.PROD;
 ---
 
-<html lang='en'>
-	<head>
-		<MainHead title={title} description={description} />
-		<!-- Netlify Identity Widget is now only loaded in the admin section -->
-	</head>
-	<body>
-		<div class='main'>
-			<Nav />
-			<slot />
-			<Footer />
-		</div>
+<html lang="en">
+  <head>
+    <MainHead title={title} description={description} />
+    <!-- Netlify Identity Widget is now only loaded in the admin section -->
+  </head>
+  <body>
+    <div class="main">
+      <Nav />
+      <slot />
+      <Footer />
+    </div>
 
-		<script>
-			// Add "loaded" class once the document has completely loaded.
-			addEventListener("load", () => document.documentElement.classList.add("loaded"));
+    <div class="bg-texture"></div>
 
-			// Only run this if netlifyIdentity exists (which would only be on the admin page)
-			if (typeof window.netlifyIdentity !== "undefined") {
-				window.netlifyIdentity.on("init", (user) => {
-					if (!user) {
-						window.netlifyIdentity.on("login", () => {
-							document.location.href = "/admin/";
-						});
-					}
-				});
-			}
-		</script>
-		<style lang='scss' is:global>
-			@import "../styles/global.scss";
-		</style>
-	</body>
+    <script>
+      // Add "loaded" class once the document has completely loaded.
+      addEventListener("load", () =>
+        document.documentElement.classList.add("loaded"),
+      );
+
+      // Only run this if netlifyIdentity exists (which would only be on the admin page)
+      if (typeof window.netlifyIdentity !== "undefined") {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+    <style lang="scss" is:global>
+      @use "../styles/global.scss";
+    </style>
+  </body>
 </html>

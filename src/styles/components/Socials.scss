@@ -1,47 +1,46 @@
 .menu-footer {
-	--icon-size: var(--text-2xl);
-	--icon-padding: 0px;
-	display: flex;
-	justify-content: space-between;
-	gap: 0.25rem;
-	background-color: var(--gray-999);
-	border-radius: 0 0 0.75rem 0.75rem;
+  --icon-size: var(--text-2xl);
+  --icon-padding: 0px;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+  border-radius: 0 0 0.75rem 0.75rem;
 }
 
 .socials {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5em;
-	font-size: var(--icon-size);
-	padding: 0.5em 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  font-size: var(--icon-size);
+  padding: 0.5em 0;
 }
 
 .social {
-	display: flex;
-	padding: 0;
-	text-decoration: none;
-	color: var(--accent-dark);
-	transition: color var(--theme-transition);
-	width: 25px;
-	height: 25px;
+  display: flex;
+  padding: 0;
+  text-decoration: none;
+  color: var(--accent-dark);
+  transition: color var(--theme-transition);
+  width: 25px;
+  height: 25px;
 
-	@media all and (max-width: 1024px) {
-		width: 18px;
-		height: 18px;
-	}
+  @media all and (max-width: 1024px) {
+    width: 18px;
+    height: 18px;
+  }
 
-	svg {
-		width: 25px;
-		height: 25px;
+  svg {
+    width: 25px;
+    height: 25px;
 
-		@media all and (max-width: 1024px) {
-			width: 18px;
-			height: 18px;
-		}
-	}
+    @media all and (max-width: 1024px) {
+      width: 18px;
+      height: 18px;
+    }
+  }
 }
 
 .social:hover,
 .social:focus {
-	color: var(--accent-text-over);
+  color: var(--accent-text-over);
 }
