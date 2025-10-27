@@ -19,16 +19,9 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 		<h3 class='work-description-title'>{work.data.title}</h3>
 		<p class='work-description-info'>{work.data.subtitle}</p>
 		<div class='work-description-link-wrapper'>
-			<Button label='View Project' icon='external' href={work.data.url} target='_blank' class={`work-description-link button ${isBtnDisabled}`} />
-			{
-				work.data.isRedeemable && (
-					<a class='work-description-link button' href={work.data.redeemUrl} target='_blank'>
-						Redeem here!
-						<Icon isButton={true} icon={"external"} />
-					</a>
-				)
-			}
-			<Button label='Email me for inquiries' target='_blank' icon='email' href='mailto:barbeau.jonathan@gmail.com' class='work-description-link button' />
+			<Button label='View Project' icon='external' href={work.data.url} target='_blank' class={`work-description-link ${isBtnDisabled}`} />
+			{work.data.isRedeemable && <Button label='Redeem here!' icon='external' href={work.data.redeemUrl} target='_blank' class='work-description-link' />}
+			<Button label='Email me for inquiries' target='_blank' icon='email' href='mailto:barbeau.jonathan@gmail.com' class='work-description-link' />
 		</div>
 
 		<div data-slider={work.data.slider} class='work-image-row blaze-slider'>
