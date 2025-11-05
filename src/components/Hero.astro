@@ -20,27 +20,29 @@ const {profileImage} = Astro.props;
 			</div>
 			<Button class='hero-button my-6' label='View my Artist Curriculum' href='/docs/artist-cv' target='_blank' icon='external' />
 		</div>
-		<div data-canvas class='hero-canvas'>
-			<iframe
-				id='generativeArtFrame'
-				title='Generative Art'
-				src=''
-				allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-				referrerpolicy='strict-origin-when-cross-origin'
-				loading='lazy'
-				allowfullscreen></iframe>
-		</div>
-		<div class='hero-iframe-info'>
-			<p class='hero-iframe-name' id='projectName'></p>
-			<div class='hero-iframe-hash-container'>
-				<p class='hero-iframe-hash' id='randomHash'></p>
-				<button class='copy-hash-btn' id='copyHashBtn' title='Copy full hash'>
-					<Icon icon='copy' size='0.8em' />
-				</button>
+		<div class='hero-canvas-container'>
+			<div data-canvas class='hero-canvas'>
+				<iframe
+					id='generativeArtFrame'
+					title='Generative Art'
+					src=''
+					allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+					referrerpolicy='strict-origin-when-cross-origin'
+					loading='lazy'
+					allowfullscreen></iframe>
 			</div>
-			<div class='hero-iframe-buttons'>
-				<Button label='New variations' icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
-				<Button label='Fullscreen' icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
+			<div class='hero-iframe-info'>
+				<p class='hero-iframe-name' id='projectName'></p>
+				<div class='hero-iframe-hash-container'>
+					<p class='hero-iframe-hash' id='randomHash'></p>
+					<button class='copy-hash-btn' id='copyHashBtn' title='Copy full hash'>
+						<Icon icon='copy' size='0.8em' />
+					</button>
+				</div>
+				<div class='hero-iframe-buttons'>
+					<Button label='New variations' icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
+					<Button label='Fullscreen' icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
+				</div>
 			</div>
 		</div>
 	</div>
