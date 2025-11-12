@@ -66,7 +66,7 @@
 	padding: 2em;
 	z-index: 1;
 	grid-column: 2/2;
-	width: 22vw;
+	width: fit-content;
 	justify-self: center;
 	box-shadow:
 		3px 0px 0px 0px rgb(246, 246, 246),
@@ -88,9 +88,9 @@
 }
 
 .hero-iframe-name {
-	font-size: 0.8rem;
-	font-style: italic;
+	font-size: 1.2rem;
 	font-weight: 600;
+	font-family: var(--font-brand);
 }
 
 .hero-iframe-hash-container {
@@ -100,10 +100,11 @@
 }
 
 .hero-iframe-hash {
-	font-size: 0.6rem;
-	font-style: italic;
-	font-weight: 600;
+	font-size: 0.8rem;
+	font-weight: 400;
 	margin: 0;
+	font-family: var(--font-brand);
+	color: var(--gray-500);
 }
 
 .copy-hash-btn {

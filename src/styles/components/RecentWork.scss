@@ -10,10 +10,18 @@
 	color: var(--accent-regular);
 	max-width: 500px;
 }
+
+.work-description-title {
+	font-family: var(--font-brand);
+	font-weight: 600;
+	font-size: 1.45rem;
+}
 .work-description-text {
 	line-height: 1.25em;
 	margin: 0.5em 0 2em 0;
+	font-family: var(--font-brand);
 	white-space: pre-wrap;
+	font-weight: 600;
 }
 
 .work-description-link-wrapper {
