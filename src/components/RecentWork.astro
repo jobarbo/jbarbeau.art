@@ -81,8 +81,9 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 	// Add this new code for intersection observer
 	const images = document.querySelectorAll(".work-image");
 	const config = {
-		rootMargin: "0px",
-		threshold: 0.1,
+		// preload a bit before the image enters the viewport
+		rootMargin: "250px 0px",
+		threshold: 0.05,
 	};
 
 	let observer = new IntersectionObserver((entries, self) => {
