@@ -6,22 +6,23 @@
 }
 .work-description-info {
 	margin: 0.15em 0;
-	font-size: 0.8em;
+	font-size: 1em;
+	font-weight: 600;
 	color: var(--accent-regular);
 	max-width: 500px;
 }
 
 .work-description-title {
 	font-family: var(--font-brand);
-	font-weight: 600;
 	font-size: 1.45rem;
+	margin-bottom: 0.5em;
 }
 .work-description-text {
 	line-height: 1.25em;
 	margin: 0.5em 0 2em 0;
 	font-family: var(--font-brand);
 	white-space: pre-wrap;
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .work-description-link-wrapper {
@@ -112,11 +113,12 @@
 
 .blaze-prev,
 .blaze-next {
-	padding: 0.5em 1em;
+	padding: 0.75em 1.5em;
 	border-radius: 50px;
 	background-color: black;
 	color: white;
 	font-size: 16px;
+	font-weight: 600;
 	margin-left: 1em;
 	border: 1px solid black;
 	transition: all 0.3s;
@@ -126,11 +128,13 @@
 }
 
 .blaze-prev {
+	padding-left: 0.75em;
 	svg {
 		margin-right: 0.5em;
 	}
 }
 .blaze-next {
+	padding-right: 0.75em;
 	svg {
 		margin-left: 0.5em;
 	}

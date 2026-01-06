@@ -8,9 +8,10 @@ export interface Props {
 	gradient?: boolean;
 	size?: string;
 	isButton?: boolean;
+	className?: string;
 }
 
-const {color = "currentcolor", gradient, icon, size, isButton} = Astro.props;
+const {color = "currentcolor", gradient, icon, size, isButton, className} = Astro.props;
 const iconPath = iconPaths[icon];
 
 const attrs: HTMLAttributes<"svg"> = {};
@@ -18,7 +19,9 @@ if (size) attrs.style = {"--size": size};
 
 const gradientId = "icon-gradient-" + Math.round(Math.random() * 10e12).toString(36);
 
-const cssClass = isButton ? "icon-button" : "";
+let cssClass = isButton ? "icon-button" : "";
+//Add the className to the cssClass string if it exists
+if (className) cssClass += ` ${className}`;
 ---
 
 <svg
