@@ -8,6 +8,26 @@ import {Debug} from "astro/components";
 		<meta name='viewport' content='width=device-width' />
 		<meta name='generator' content={Astro.generator} />
 		<title>Curriculum Vitae</title>
+		<style>
+			@media print {
+				body {
+					background: white;
+					padding: 1rem 0;
+				}
+				section {
+				}
+				.works-grid {
+					display: block;
+					column-count: 2;
+					page-break-inside: auto;
+					break-inside: auto;
+				}
+				.works-grid p {
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+			}
+		</style>
 	</head>
 	<body class='max-w-screen-lg m-auto bg-white py-8'>
 		<section class='py-2 px-10'>
@@ -35,15 +55,33 @@ import {Debug} from "astro/components";
 		</section>
 
 		<section class='py-2 px-10'>
+			<h3 class='text-xl font-semibold underline'>Résidences Artistiques</h3>
+			<div class='mb-2 text-sm'>
+				<p>Mars 2026: Micro-résidence de création, Charpentes des Fauves, Québec, Canada</p>
+				<p>Mars 2026: Résidence de création en tandem avec William C. Pépin, Productions Rhizome, Québec, Canada</p>
+			</div>
+			<p class='font-bold'>Participations / Événements</p>
+			<div class='mb-2 text-sm'>
+				<p>2024: <span class='italic'>Membre de la Délégation Québécoise LOJIQ(OFQJ/HACNUM)</span>, Biennales des imaginaires numériques par Chroniques, Marseille, France</p>
+			</div>
+		</section>
+
+		<section class='py-2 px-10'>
 			<h3 class='text-xl font-semibold underline'>Expositions</h3>
 			<div class='mb-2'>
-				<p class='font-bold'>Expositions Autoproduites:</p>
+				<p class='font-bold'>Expositions autoproduites:</p>
 				<div class='text-sm'>
 					<p>2023: <span class='italic'>EXHIBIT-A</span>, La Korrigane, Québec, Canada</p>
 				</div>
 			</div>
 			<div class='mb-2'>
-				<p class='font-bold'>Expositions de Groupe:</p>
+				<p class='font-bold'>Expositions commissariées individuelles:</p>
+				<div class='text-sm'>
+					<p>2026: <span class='italic'>Chambres d'écho (titre à venir)</span>, La Facade, Charpentes des Fauves, Québec, Canada</p>
+				</div>
+			</div>
+			<div class='mb-2'>
+				<p class='font-bold'>Expositions commissariées de groupe:</p>
 				<div class='text-sm'>
 					<p>2025: <span class='italic'>Je me souviens</span>, Pour l'exposition "My Reality" Organisé par: Qm & Snow - Hébergé par: Cloud Art Museum, Guizhou, Chine</p>
 					<p>2024: <span class='italic'>RGBMTL</span>, Artiste Invité, Montréal, Canada</p>
@@ -53,9 +91,12 @@ import {Debug} from "astro/components";
 					<p>2023: <span class='italic'>Station3 By The Sea</span>, Long Island, NY, États-Unis</p>
 				</div>
 			</div>
-			<div class='mb-2 hidden'>
+			<div class='mb-2'>
 				<p class='font-bold'>Expositions à Venir:</p>
-				<div class='text-sm'></div>
+				<div class='text-sm'>
+					<p>2026: <span class='italic'>Ex-Machina</span>, Localisation à venir</p>
+					<p>2026: <span class='italic'>Il ne reste que poussières</span>, Localisation à venir</p>
+				</div>
 			</div>
 		</section>
 
@@ -79,27 +120,13 @@ import {Debug} from "astro/components";
 					<p>2024: <span class='italic'>STARMAP - Under Neith</span>, Forever Projects, Foundation, États-Unis</p>
 				</div>
 			</div>
-			<div class='mb-2'>
-				<p class='font-bold'>Expositions à Venir:</p>
-				<div class='text-sm'>
-					<p>2025: <span class='italic'>Geodes and Geologies</span>, Dawn Contemporary, Alba Art, NYC, États-Unis</p>
-				</div>
-			</div>
 		</section>
 
 		<section class='py-2 px-10'>
 			<h3 class='text-xl font-semibold underline'>Publications</h3>
 			<div class='mb-2 text-sm'>
-				<p>2025(à venir): <span class='italic'>Artist & Computer 2025</span>, Generative Artists Club</p>
 				<p>2025: <span class='italic'>Edition 4 - (dé)mesures</span>, Revue un:un, Revue pour l'art, l'architecture et le design</p>
 				<p>2024: <span class='italic'>Processing Community Catalog</span>, Processing Foundation</p>
-			</div>
-		</section>
-
-		<section class='py-2 px-10'>
-			<h3 class='text-xl font-semibold underline'>Participations / Événements</h3>
-			<div class='mb-2 text-sm'>
-				<p>2024: <span class='italic'>Membre de la Délégation Québécoise LOJIQ(OFQJ/HACNUM)</span>, Biennales des imaginaires numériques par Chroniques, Marseille, France</p>
 			</div>
 		</section>
 
@@ -115,8 +142,7 @@ import {Debug} from "astro/components";
 		<section class='py-2 px-10'>
 			<div class='mb-2'>
 				<h3 class='text-xl font-semibold underline mb-2'>Liste des Œuvres</h3>
-
-				<div class='text-[10px] grid grid-cols-2 gap-x-4'>
+				<div class='text-[10px] grid grid-cols-2 gap-x-4 works-grid'>
 					<p>
 						<span class='font-bold'>2025: </span><a target='_blank' href='https://highlight.xyz/mint/64f7c27b373cff27b5e9309c/tokens/1' class='italic text-blue-700 underline'>Je me souviens</a>,
 						Highlight, Collection de 6 œuvres, 1 sur 1, Auto-commissariée
@@ -286,31 +312,7 @@ import {Debug} from "astro/components";
 						<span class='font-bold'>2022: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/15567' class='italic text-blue-700 underline'>Collide</a>, OBJKT, 1 sur 5,
 						Auto-commissariée
 					</p>
-					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/versum_items/8587' class='italic text-blue-700 underline'>Crypto Glyph</a>, OBJKT, 1 sur 3, Auto-
-						commissariée
-					</p>
 
-					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/5' class='italic text-blue-700 underline'>Purple Haze</a>,
-						OBJKT, 1 sur 1, Auto-commissariée
-					</p>
-					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/4' class='italic text-blue-700 underline'>Fever Dream</a>,
-						OBJKT, 1 sur 1, Auto-commissariée
-					</p>
-					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/3' class='italic text-blue-700 underline'>Milton</a>, OBJKT, 1
-						sur 1, Auto-commissariée
-					</p>
-					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/2' class='italic text-blue-700 underline'>Shilly Shally</a>,
-						OBJKT, 1 sur 1, Auto-commissariée
-					</p>
-					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/1' class='italic text-blue-700 underline'>Crushed Velvet</a>,
-						OBJKT, 1 sur 1, Auto-commissariée
-					</p>
 					<p>
 						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/KT1GpBHjtbwszXwWuPJwUgcX9JoQcVrYqfrV/0' class='italic text-blue-700 underline'>November Blues</a>,
 						OBJKT, 1 sur 1, Auto-commissariée
@@ -334,10 +336,6 @@ import {Debug} from "astro/components";
 						commissariée
 					</p>
 					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/213253' class='italic text-blue-700 underline'>Extera Animus</a>, Hic et Nunc, 1 sur 1,
-						Auto- commissariée
-					</p>
-					<p>
 						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/46327' class='italic text-blue-700 underline'>Brume de Mer</a>, Hic et Nunc, 1 sur 498,
 						Auto- commissariée
 					</p>
@@ -351,10 +349,6 @@ import {Debug} from "astro/components";
 					</p>
 					<p>
 						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/16793' class='italic text-blue-700 underline'>Tournesol</a>, Hic et Nunc, 1 sur 10, Auto-
-						commissariée
-					</p>
-					<p>
-						<span class='font-bold'>2021: </span><a target='_blank' href='https://objkt.com/tokens/hicetnunc/11361' class='italic text-blue-700 underline'>Araneae</a>, Hic et Nunc, 1 sur 1, Auto-
 						commissariée
 					</p>
 					<p>
