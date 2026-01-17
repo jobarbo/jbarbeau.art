@@ -2,4 +2,9 @@ svg {
 	vertical-align: middle;
 	width: var(--size, 1em);
 	height: var(--size, 1em);
+
+	&.--socials {
+		width: 1.25em;
+		height: 1.25em;
+	}
 }

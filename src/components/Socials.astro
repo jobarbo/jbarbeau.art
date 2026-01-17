@@ -3,6 +3,11 @@ import Icon from "./Icon.astro";
 import type {Props as IconProps} from "./Icon.astro";
 /** Main menu itemse */
 
+export interface Props {
+	iconClass?: string;
+}
+
+const {iconClass} = Astro.props;
 /** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: {label: string; href: string; icon: IconProps["icon"]}[] = [
 	{label: "Email", href: "mailto:barbeau.jonathan@gmail.com", icon: "email"},
@@ -23,7 +28,7 @@ const iconLinks: {label: string; href: string; icon: IconProps["icon"]}[] = [
 			iconLinks.map(({href, icon, label}) => (
 				<a target='_blank' href={href} class='social'>
 					<span class='sr-only'>{label}</span>
-					<Icon icon={icon} />
+					<Icon className={iconClass} icon={icon} />
 				</a>
 			))
 		}
