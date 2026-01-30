@@ -1,3 +1,9 @@
+@use "../base/variables" as *;
+@use "../base/functions" as *;
+@use "../base/container" as *;
+@use "../base/mediaqueries" as *;
+@use "../base/typography" as *;
+
 .hero-container {
 	display: flex;
 	position: relative;
@@ -5,10 +11,9 @@
 	justify-content: space-between;
 	padding-top: 8em;
 	padding-bottom: 0;
-	gap: 15em;
-
+	gap: to-vw(200);
 	@media all and (max-width: 1024px) {
-		flex-direction: column;
+		flex-direction: column-reverse;
 		align-items: stretch;
 		padding-top: 5em;
 		padding-bottom: 2em;
@@ -239,15 +244,15 @@ iframe {
 }
 .hero-title {
 	margin-bottom: 0.1em;
-	font-size: 4.5rem;
+	font-size: clamp(12px, to-vw(70), 4.5rem);
 
 	@media all and (max-width: 1024px) {
-		font-size: 1.5rem;
+		//font-size: 1.5rem;
 		margin-bottom: 0.2em;
 	}
 
 	@media all and (max-width: 640px) {
-		font-size: 1.25rem;
+		//font-size: 1.25rem;
 	}
 }
 
