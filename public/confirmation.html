@@ -8,10 +8,10 @@
 				if (hash) {
 					const token = hash.replace("#confirmation_token=", "");
 					// Redirect to the Netlify Identity confirmation endpoint
-					window.location.href = `https://jbdecaptest.netlify.app/.netlify/identity/confirm?token=${token}`;
-				} else {
-					// If no token found, redirect to admin
-					window.location.href = "https://jbdecaptest.netlify.app/admin/";
+				window.location.href = `https://jbarbeau.netlify.app/.netlify/identity/confirm?token=${token}`;
+			} else {
+				// If no token found, redirect to admin
+				window.location.href = "https://jbarbeau.netlify.app/admin/";
 				}
 			};
 		</script>
