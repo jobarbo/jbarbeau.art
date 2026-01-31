@@ -13,8 +13,8 @@ subtitle: May 2023 - Self curated - Exhibited at La Korrigane in Quebec city -
   Certificate hosted by Highlight.xyz
 description: >-
   This collection features 10 artworks made in pair by 5 different algorithm.
-  This collection was exhibited at La Korrigane in Quebec City during the summer
-  of 2023.
+  This collection was exhibited at La Korrigane in **Quebec City** during the
+  summer of 2023.
 
 
   All pairs of artworks uses Perlin Noise as the main algorithmic foundation and shows how a similar techniques can yield such different results.
