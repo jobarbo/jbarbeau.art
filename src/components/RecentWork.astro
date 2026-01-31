@@ -3,6 +3,7 @@ import type {CollectionEntry} from "astro:content";
 import Icon from "../components/Icon.astro";
 import Button from "../components/Button.astro";
 import {Image} from "astro:assets";
+import {marked} from "marked";
 
 interface Props {
 	work: CollectionEntry<"project">;
@@ -11,6 +12,7 @@ interface Props {
 const {work} = Astro.props;
 
 const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "disabled" : "";
+const descriptionHtml = await marked(work.data.description);
 ---
 
 <li class='recent-work-item'>
@@ -34,7 +36,7 @@ const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "d
 				<div class='work-description'>
 					<div class='work-description-wrapper'>
 						<h4 class='work-description-title'>Description</h4>
-						<p class='work-description-text'>{work.data.description}</p>
+						<div class='work-description-text' set:html={descriptionHtml} />
 					</div>
 					<!-- navigation buttons -->
 					<div class='blaze-btn'>

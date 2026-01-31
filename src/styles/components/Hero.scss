@@ -208,7 +208,7 @@
 
 iframe {
 	min-height: 500px;
-	height: 65vh;
+	height: to-vw(700, true, 500, 800);
 	width: fit-content;
 	aspect-ratio: 1/1;
 	position: relative;
