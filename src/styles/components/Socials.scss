@@ -10,7 +10,7 @@
 .socials {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1.2em;
+	gap: 0.6em;
 	font-size: var(--icon-size);
 	padding: 0.5em 0;
 	margin-top: 1em;
@@ -18,15 +18,20 @@
 
 .social {
 	display: flex;
-	padding: 0;
+	padding: 10px;
+	background-color: rgba(0, 0, 0, 0.144);
+	border-radius: 100vh;
 	text-decoration: none;
-	color: var(--accent-dark);
-	transition: color var(--theme-transition);
+	color: var(--gray-50);
+	transition:
+		color 0.2s ease-in-out 0s,
+		background-color 0.2s ease-in-out 0s;
 	width: fit-content;
 	height: fit-content;
 }
 
 .social:hover,
 .social:focus {
-	color: var(--accent-text-over);
+	background-color: rgba(0, 0, 0, 0.823);
+	color: var(--gray-800);
 }

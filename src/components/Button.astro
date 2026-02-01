@@ -11,7 +11,7 @@ interface Props {
 	attributes?: object;
 }
 
-const {label, icon, href, target, class: className, attributes} = Astro.props;
+const {label, icon, href, target, class: className = "", attributes} = Astro.props;
 ---
 
 <a href={href} class={`button ${className}`} target={target} {...attributes}>
