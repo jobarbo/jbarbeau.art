@@ -12,7 +12,9 @@ interface Props {
 const {work} = Astro.props;
 
 const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "disabled" : "";
-const descriptionHtml = await marked(work.data.description);
+let descriptionHtml = await marked(work.data.description);
+// Escape literal <canvas> / </canvas> so they display as text, not as an actual element
+descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replace(/<\/canvas>/gi, "&lt;/canvas&gt;");
 ---
 
 <li class='recent-work-item'>
