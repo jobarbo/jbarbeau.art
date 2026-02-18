@@ -9,6 +9,15 @@ export default defineConfig({
 		sitemap({
 			filter: (page) =>
 				!page.includes("/admin") && !page.includes("/local_admin"),
+			// Guarantee main static pages are always in the sitemap (in case discovery misses them)
+			customPages: [
+				"https://jbarbeau.art/",
+				"https://jbarbeau.art/blog",
+				"https://jbarbeau.art/docs/artist-cv",
+				"https://jbarbeau.art/docs/artist-cv-fr",
+				"https://jbarbeau.art/docs/cv",
+				"https://jbarbeau.art/docs/cv-fr",
+			],
 		}),
 		tailwind(),
 	],
