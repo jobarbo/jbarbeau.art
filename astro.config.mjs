@@ -1,11 +1,17 @@
 import {defineConfig} from "astro/config";
-
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
 	site: "https://jbarbeau.art",
-	integrations: [tailwind()],
+	integrations: [
+		sitemap({
+			filter: (page) =>
+				!page.includes("/admin") && !page.includes("/local_admin"),
+		}),
+		tailwind(),
+	],
 	devToolbar: {
 		enabled: false,
 	},

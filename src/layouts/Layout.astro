@@ -15,7 +15,7 @@ interface Props {
   logo?: string | undefined;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image, type, logo } = Astro.props;
 
 // Declare netlifyIdentity type
 declare global {
@@ -32,7 +32,7 @@ const isProd = import.meta.env.PROD;
 
 <html lang="en">
   <head>
-    <MainHead title={title} description={description} />
+    <MainHead title={title} description={description} image={image} type={type} logo={logo} />
     <!-- Netlify Identity Widget is now only loaded in the admin section -->
   </head>
   <body>

@@ -10,6 +10,7 @@
 		"astro": "astro"
 	},
 	"dependencies": {
+		"@astrojs/sitemap": "^3.7.0",
 		"@astrojs/tailwind": "^6.0.1",
 		"astro": "^5.5.4",
 		"blaze-slider": "^1.9.3",
