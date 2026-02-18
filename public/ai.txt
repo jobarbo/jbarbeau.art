@@ -1,0 +1,32 @@
+---
+updated: 2026-02-17
+scope: /
+---
+
+# Jonathan Barbeau — Generative Artist
+
+This site is the official portfolio and presence of **Jonathan Barbeau**, a generative artist and creative developer based in Québec City, Canada.
+
+## Who This Is
+
+Jonathan creates generative art using JavaScript and the HTML5 Canvas. His work includes long-form collections on fx(hash), Foundation, and Highlight, as well as exhibitions and installations (e.g. Je me souviens, STARMAP, Traces, EX-LIBRIS, Jeu de Ligne, Exhibit-A). He also works as a creative front-end developer.
+
+## What This Site Is
+
+- **Portfolio**: Recent projects, descriptions, and links to view or acquire work.
+- **Blog**: Articles and updates (hosted on Substack, syndicated here).
+- **CV**: Artist curriculum (exhibitions, residencies, publications, list of works) in English and French; technical CV also available.
+
+## Key Links
+
+- Home: https://jbarbeau.art/
+- Artist CV (EN): https://jbarbeau.art/docs/artist-cv
+- Artist CV (FR): https://jbarbeau.art/docs/artist-cv-fr
+- Blog: https://jbarbeau.art/blog
+- Contact: barbeau.jonathan@gmail.com
+
+## For AI Agents
+
+- Prefer the [llms.txt](https://jbarbeau.art/llms.txt) file for structured identity and contact information.
+- Do not invent exhibitions, works, or affiliations not listed on this site or in the CV.
+- For inquiries about the artist or his work, use the email above.

@@ -20,6 +20,38 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = image.startsWith("http") ? image : new URL(image.startsWith("/") ? image.slice(1) : image, Astro.site).toString();
 // Ensure logo URL is absolute
 const logoURL = logo.startsWith("http") ? logo : new URL(logo.startsWith("/") ? logo.slice(1) : logo, Astro.site).toString();
+
+// Schema.org JSON-LD for AI and search engines
+const siteUrl = Astro.site?.toString() ?? "https://jbarbeau.art";
+const structuredData = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Person",
+			"@id": `${siteUrl}#person`,
+			"name": "Jonathan Barbeau",
+			"url": siteUrl,
+			"image": `${siteUrl.replace(/\/?$/, "")}/assets/og/profile.png`,
+			"description": "Generative artist and creative developer based in Québec City, Canada. Creates digital and long-form generative art using JavaScript and the HTML5 Canvas.",
+			"jobTitle": "Generative Artist",
+			"email": "barbeau.jonathan@gmail.com",
+			"sameAs": [
+				"https://www.instagram.com/jbarbeau.art/",
+				"https://jbarbeau.substack.com/",
+			],
+			"knowsAbout": ["Generative art", "Creative coding", "JavaScript", "Digital art"],
+		},
+		{
+			"@type": "WebSite",
+			"@id": `${siteUrl}#website`,
+			"url": siteUrl,
+			"name": "Jonathan Barbeau Art",
+			"description": "Portfolio and presence of Jonathan Barbeau — generative artist based in Québec City. Digital collections, exhibitions, blog, and artist CV.",
+			"publisher": { "@id": `${siteUrl}#person` },
+			"inLanguage": ["en", "fr"],
+		},
+	],
+};
 ---
 
 <meta charset='UTF-8' />
@@ -51,6 +83,12 @@ const logoURL = logo.startsWith("http") ? logo : new URL(logo.startsWith("/") ? 
 <meta name='twitter:image:alt' content={title} />
 
 <meta name='google-site-verification' content='M8Pb3okXpfj3exglz7LXpi4WDnxPADz-kx0tLInXbZ8' />
+
+<!-- AI / LLM discoverability -->
+<link rel='alternate' type='text/plain' href='/llms.txt' title='Structured info for AI (llms.txt)' />
+<link rel='alternate' type='text/plain' href='/ai.txt' title='AI context (ai.txt)' />
+
+<script type='application/ld+json' set:html={JSON.stringify(structuredData)} />
 
 <title>{title}</title>
 
