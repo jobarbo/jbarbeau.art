@@ -1,0 +1,29 @@
+/**
+ * Error page styling (404, etc.)
+ * Used by src/pages/404.astro
+ */
+
+.not-found-content {
+	max-width: 42rem;
+	margin-inline: auto;
+	padding: 4rem 1rem;
+	text-align: center;
+
+	h1 {
+		font-size: var(--text-3xl);
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--gray-100);
+	}
+
+	p {
+		font-size: var(--text-lg);
+		color: var(--gray-500);
+		margin-bottom: 2rem;
+		line-height: 1.6;
+	}
+
+	:global(.not-found-button) {
+		margin-inline: auto;
+	}
+}

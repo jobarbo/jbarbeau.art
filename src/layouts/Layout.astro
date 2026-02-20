@@ -55,7 +55,9 @@ const isProd = import.meta.env.PROD;
 		<!-- End Google Tag Manager (noscript) -->
 		<div class='main'>
 			<Nav />
-			<slot />
+			<main id='main-content'>
+				<slot />
+			</main>
 			<Footer />
 		</div>
 

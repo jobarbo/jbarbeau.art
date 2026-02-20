@@ -4,6 +4,20 @@ import {Debug} from "astro/components";
 
 <html lang='en' class='bg-slate-200'>
 	<head>
+		<!-- Google Tag Manager -->
+		<script>
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push({"gtm.start": new Date().getTime(), event: "gtm.js"});
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s) as HTMLScriptElement,
+					dl = l != "dataLayer" ? "&l=" + l : "";
+				j.async = true;
+				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, "script", "dataLayer", "GTM-WBPMDBK");
+		</script>
+		<!-- End Google Tag Manager -->
 		<meta charset='utf-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 		<meta name='generator' content={Astro.generator} />
@@ -25,6 +39,9 @@ import {Debug} from "astro/components";
 		<meta name='twitter:description' content='Artist CV of Jonathan Barbeau — Generative artist based in Québec City. Exhibitions, collections, publications, and list of works.' />
 	</head>
 	<body class='max-w-screen-lg m-auto bg-white py-8'>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WBPMDBK' height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
 		<section class='py-2 px-10'>
 			<div class='mb-2'>
 				<h1 class='text-xl font-light underline italic mb-5'>Curriculum Vitae</h1>

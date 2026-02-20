@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+---
+
+<Layout
+	title="Page not found | Jonathan Barbeau"
+	description="The page you're looking for doesn't exist. Return to Jonathan Barbeau's portfolio — generative artist based in Québec City."
+>
+	<section class="not-found-content" aria-label="Page not found">
+		<h1>Page not found</h1>
+		<p>
+			This page doesn't exist or has been moved. Head back to the portfolio to explore my work.
+		</p>
+		<Button label="Back to home" href="/" target="_self" icon="arrow-right" class="not-found-button" />
+	</section>
+</Layout>
+
+<style lang="scss">
+	@use "../styles/components/Error.scss" as *;
+</style>

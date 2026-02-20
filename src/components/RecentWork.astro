@@ -32,7 +32,7 @@ descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replac
 			<div class='blaze-container'>
 				<div class='blaze-track-container'>
 					<div class='blaze-track'>
-						{work.data.images.map((url, index) => <img alt='' class='work-image' width={300} height={200} loading='lazy' data-src={url} />)}
+						{work.data.images.map((url, index) => <img alt={`${work.data.title} — artwork ${index + 1}`} class='work-image' width={300} height={200} loading='lazy' data-src={url} />)}
 					</div>
 				</div>
 				<div class='work-description'>

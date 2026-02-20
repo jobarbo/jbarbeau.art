@@ -95,7 +95,7 @@ const ogImage = image || contentImage || "/assets/og/profile.png";
 ---
 
 <Layout title={`${title} | Blog | J Barbeau`} description={content?.substring(0, 160).replace(/<[^>]*>/g, "")} image={ogImage} type='article'>
-	<main class='container mx-auto px-4 py-8 max-w-4xl'>
+	<section class='container mx-auto px-4 py-8 max-w-4xl' aria-label='Blog post'>
 		<article class='prose max-w-none'>
 			<h1 class='text-4xl font-bold mb-4'>{title}</h1>
 			<div class='flex items-center gap-4 text-gray-600 mb-8'>
@@ -108,7 +108,7 @@ const ogImage = image || contentImage || "/assets/og/profile.png";
 		<div class='mt-8 pt-8 border-t'>
 			<a href='/blog' class='text-blue-600 hover:text-blue-800'> ← Back to all posts </a>
 		</div>
-	</main>
+	</section>
 </Layout>
 
 <style>
