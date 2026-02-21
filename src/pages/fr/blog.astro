@@ -1,0 +1,99 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BlogPostPreview from "../../components/BlogPostPreview.astro";
+import Parser from "rss-parser";
+import { t } from "../../i18n";
+
+const parser = new Parser({
+	customFields: {
+		item: [
+			["content:encoded", "contentEncoded"],
+			["description", "description"],
+			["enclosure", "image"],
+		],
+	},
+	timeout: 10000,
+	requestOptions: {
+		rejectUnauthorized: false,
+	},
+});
+
+const SUBSTACK_RSS_URL = "https://jbarbeau.substack.com/feed";
+
+function decodeEmoji(text: string) {
+	return text?.replace(/&#(\d+);/g, (_match, dec) => String.fromCodePoint(Number(dec))) || "";
+}
+
+function optimizeImageUrl(url: string, width = 600) {
+	if (!url) return null;
+	try {
+		if (url.includes("substackcdn.com")) {
+			const fetchIndex = url.indexOf("/fetch/");
+			if (fetchIndex === -1) return url;
+			const afterFetch = url.slice(fetchIndex + 7);
+			const originalUrl = afterFetch.split("/").slice(1).join("/");
+			return `https://substackcdn.com/image/fetch/w_${width},c_limit,f_auto,q_auto:good/${originalUrl}`;
+		}
+		return url;
+	} catch {
+		return url;
+	}
+}
+
+let posts: Array<{ title: string; link: string; pubDate: string; excerpt: string; slug: string; image: string | null }> = [];
+try {
+	const response = await fetch(SUBSTACK_RSS_URL);
+	if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+	const feedText = await response.text();
+	const feed = await parser.parseString(feedText);
+	if (feed.items?.length) {
+		posts = feed.items.map((post: any) => {
+			const parts = post.link.split("/p/");
+			const lastPart = parts[parts.length - 1];
+			const withoutQuery = lastPart?.split("?")[0];
+			const slug = withoutQuery?.split("#")[0];
+			const originalImageUrl = post.enclosure?.url;
+			const optimizedImageUrl = optimizeImageUrl(originalImageUrl);
+			let excerpt = post.description || "";
+			excerpt = excerpt.replace(/<!\[CDATA\[(.*?)\]\]>/g, "$1").trim();
+			excerpt = decodeEmoji(excerpt);
+			return {
+				title: post.title,
+				link: post.link,
+				pubDate: post.pubDate,
+				excerpt,
+				slug,
+				image: optimizedImageUrl,
+			};
+		});
+	}
+} catch (error) {
+	console.error("Blog page error:", error);
+}
+---
+
+<Layout
+	locale="fr"
+	title={t("fr", "blog.metaTitle")}
+	description={t("fr", "blog.metaDescription")}
+>
+	<section class="container mx-auto px-4 py-8 max-w-7xl" aria-label="Articles de blog">
+		<h1 class="text-4xl font-bold mb-8">{t("fr", "blog.title")}</h1>
+		{posts.length > 0 ? (
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+				{posts.map((post) => (
+					<BlogPostPreview
+						title={post.title}
+						link={post.link}
+						pubDate={post.pubDate}
+						excerpt={post.excerpt}
+						slug={post.slug}
+						image={post.image}
+					/>
+				))}
+			</div>
+		) : (
+			<p class="text-gray-600">{t("fr", "blog.loadError")}</p>
+		)}
+	</section>
+</Layout>

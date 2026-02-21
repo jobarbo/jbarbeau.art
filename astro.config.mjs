@@ -5,6 +5,13 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://jbarbeau.art",
+	i18n: {
+		locales: ["en", "fr"],
+		defaultLocale: "en",
+		routing: {
+			prefixDefaultLocale: false,
+		},
+	},
 	integrations: [
 		sitemap({
 			filter: (page) =>
@@ -13,6 +20,9 @@ export default defineConfig({
 			customPages: [
 				"https://jbarbeau.art/",
 				"https://jbarbeau.art/blog",
+				"https://jbarbeau.art/fr/",
+				"https://jbarbeau.art/fr/blog",
+				"https://jbarbeau.art/fr/docs/artist-cv",
 				"https://jbarbeau.art/docs/artist-cv",
 				"https://jbarbeau.art/docs/artist-cv-fr",
 				"https://jbarbeau.art/docs/cv",

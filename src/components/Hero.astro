@@ -3,8 +3,15 @@ import {Image} from "astro:assets";
 import Socials from "./Socials.astro";
 import Button from "./Button.astro";
 import Icon from "./Icon.astro";
+import { t, type Locale } from "../i18n";
 
-const {profileImage} = Astro.props;
+interface Props {
+	/** Path to the hero profile image (e.g. /assets/home/jonathan.png) */
+	profileImage: string;
+	locale?: Locale;
+}
+
+const { profileImage, locale = "en" } = Astro.props;
 ---
 
 <section class='hero'>
@@ -25,27 +32,27 @@ const {profileImage} = Astro.props;
 					<p class='hero-iframe-name' id='projectName'></p>
 					<div class='hero-iframe-hash-container'>
 						<p class='hero-iframe-hash' id='randomHash'></p>
-						<button class='copy-hash-btn' id='copyHashBtn' title='Copy full hash'>
+						<button class='copy-hash-btn' id='copyHashBtn' title={t(locale, "hero.copyHash")}>
 							<Icon icon='copy' size='0.8em' />
 						</button>
 					</div>
 					<div class='hero-iframe-buttons'>
-						<Button label='New variations' icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
-						<Button label='Fullscreen' icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
+						<Button label={t(locale, "hero.newVariations")} icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
+						<Button label={t(locale, "hero.fullscreen")} icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class='hero-content'>
 			<div class='hero-image'>
-				<Image src={profileImage} alt='Jonathan Barbeau, generative artist' class='work-image' width={300} height={200} loading='lazy' data-src={profileImage} />
+				<Image src={profileImage} alt={t(locale, "hero.profileAlt")} class='work-image' width={300} height={200} loading='lazy' data-src={profileImage} />
 			</div>
-			<h1 data-split-text class='hero-title'>Jonathan Barbeau</h1>
-			<h2 data-split-text class='hero-subtitle'>Generative Artist based in Québec City</h2>
+			<h1 data-split-text class='hero-title'>{t(locale, "hero.title")}</h1>
+			<h2 data-split-text class='hero-subtitle'>{t(locale, "hero.subtitle")}</h2>
 			<div class='hero-socials'>
 				<Socials iconClass='--socials' />
 			</div>
-			<Button class='hero-button my-6' label='View my Artist Curriculum' href='/docs/artist-cv' target='_blank' icon='external' />
+			<Button class='hero-button my-6' label={t(locale, "hero.cta")} href={t(locale, "hero.ctaHref")} target='_blank' icon='external' />
 		</div>
 	</div>
 </section>

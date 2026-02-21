@@ -1,0 +1,19 @@
+---
+// Static sites can't use Astro.redirect; use meta refresh to the existing French CV.
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Jonathan Barbeau – CV Artiste</title>
+		<link rel="canonical" href="https://jbarbeau.art/docs/artist-cv-fr" />
+		<meta http-equiv="refresh" content="0; url=/docs/artist-cv-fr" />
+		<script>
+			window.location.href = "/docs/artist-cv-fr";
+		</script>
+	</head>
+	<body>
+		<p><a href="/docs/artist-cv-fr">CV Artiste – Jonathan Barbeau</a></p>
+	</body>
+</html>

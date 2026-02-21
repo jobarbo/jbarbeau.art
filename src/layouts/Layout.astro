@@ -6,6 +6,7 @@
 import MainHead from "../components/MainHead.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import { getLocaleFromPath, type Locale } from "../i18n";
 
 interface Props {
 	title?: string | undefined;
@@ -13,9 +14,12 @@ interface Props {
 	image?: string | undefined;
 	type?: "website" | "article" | undefined;
 	logo?: string | undefined;
+	/** Locale for this page (en/fr). Defaults to path: /fr/... => fr */
+	locale?: Locale;
 }
 
-const {title, description, image, type, logo} = Astro.props;
+const { title, description, image, type, logo, locale: localeProp } = Astro.props;
+const locale: Locale = localeProp ?? getLocaleFromPath(Astro.url.pathname);
 
 // Declare netlifyIdentity type
 declare global {
@@ -30,7 +34,7 @@ declare global {
 const isProd = import.meta.env.PROD;
 ---
 
-<html lang='en'>
+<html lang={locale}>
 	<head>
 		<!-- Google Tag Manager -->
 		<script>
@@ -54,11 +58,11 @@ const isProd = import.meta.env.PROD;
 		<noscript><iframe src='https://www.googletagmanager.com/ns.html?id=GTM-WBPMDBK' height='0' width='0' style='display:none;visibility:hidden'></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 		<div class='main'>
-			<Nav />
+			<Nav locale={locale} />
 			<main id='main-content'>
 				<slot />
 			</main>
-			<Footer />
+			<Footer locale={locale} />
 		</div>
 
 		<div class='bg-texture'></div>

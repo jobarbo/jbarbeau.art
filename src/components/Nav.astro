@@ -1,14 +1,27 @@
 ---
 import Icon from "./Icon.astro";
+import { t, getRelativeLocaleUrl, type Locale } from "../i18n";
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
+const otherLocale = locale === "en" ? "fr" : "en";
+const currentPath = Astro.url.pathname;
+const pathWithoutLocale = locale === "fr" ? currentPath.replace(/^\/fr/, "") || "/" : currentPath;
+const pathForUrl = pathWithoutLocale.replace(/^\//, "") || "index";
+const switchUrl = getRelativeLocaleUrl(otherLocale, pathForUrl);
 ---
 
 <nav class='wrapper'>
 	<div class='menu-header'>
-		<a href='/' class='site-title'> JBarbeau.art</a>
+		<a href={locale === "en" ? "/" : "/fr/"} class='site-title'> JBarbeau.art</a>
+		<a href={switchUrl} class='lang-switch' aria-label={t(locale, "nav.langSwitch")}>{t(locale, "nav.langSwitch")}</a>
 		<menu-button>
 			<template>
 				<button class='menu-button' aria-expanded='false'>
-					<span class='sr-only'>Menu</span>
+					<span class='sr-only'>{t(locale, "nav.menu")}</span>
 					<Icon icon='list' />
 				</button>
 			</template>

@@ -1,13 +1,20 @@
 ---
 import RecentWork from "./RecentWork.astro";
-const {projects} = Astro.props;
+import { t, type Locale } from "../i18n";
+
+interface Props {
+	projects: import("astro:content").CollectionEntry<"project">[];
+	locale?: Locale;
+}
+
+const { projects, locale = "en" } = Astro.props;
 ---
 
 <section class='work'>
 	<div class='work-container'>
-		<h2 class='work-title'>Recent Work</h2>
+		<h2 class='work-title'>{t(locale, "recentWork.sectionTitle")}</h2>
 		<ul class='recent-work-list'>
-			{projects.map((work: any) => <RecentWork work={work} />)}
+			{projects.map((work) => <RecentWork work={work} locale={locale} />)}
 		</ul>
 	</div>
 </section>

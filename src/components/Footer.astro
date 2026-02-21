@@ -1,12 +1,19 @@
 ---
 import Icon from "./Icon.astro";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = "en" } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
 <footer>
 	<div class='group'>
-		<p>Designed & Developed in Québec City</p>
-		<p>&copy; {currentYear} Jonathan Barbeau</p>
+		<p>{t(locale, "footer.designed")}</p>
+		<p>{t(locale, "footer.copyright", { year: String(currentYear) })}</p>
 	</div>
 	<p class='socials'>
 		<a href='https://twitter.com/JBarbeau_Art'> Twitter</a>

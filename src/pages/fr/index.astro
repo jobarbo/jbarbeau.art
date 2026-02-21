@@ -1,0 +1,18 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import RecentWorkSection from "../../components/RecentWorkSection.astro";
+import { getSortedProjects } from "../../functions/contentCollections";
+import { t } from "../../i18n";
+
+const projects = await getSortedProjects();
+---
+
+<Layout
+	locale="fr"
+	title={t("fr", "home.metaTitle")}
+	description={t("fr", "home.metaDescription")}
+>
+	<Hero profileImage="/assets/home/jonathan.png" locale="fr" />
+	<RecentWorkSection projects={projects} locale="fr" />
+</Layout>

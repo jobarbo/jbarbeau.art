@@ -4,15 +4,19 @@ import Icon from "../components/Icon.astro";
 import Button from "../components/Button.astro";
 import {Image} from "astro:assets";
 import {marked} from "marked";
+import { t, type Locale } from "../i18n";
 
 interface Props {
 	work: CollectionEntry<"project">;
+	locale?: Locale;
 }
 
-const {work} = Astro.props;
+const { work, locale = "en" } = Astro.props;
 
 const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "disabled" : "";
-let descriptionHtml = await marked(work.data.description);
+const descriptionText =
+	locale === "fr" && work.data.descriptionFr ? work.data.descriptionFr : work.data.description;
+let descriptionHtml = await marked(descriptionText);
 // Escape literal <canvas> / </canvas> so they display as text, not as an actual element
 descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replace(/<\/canvas>/gi, "&lt;/canvas&gt;");
 ---
@@ -23,9 +27,9 @@ descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replac
 		<h3 class='work-description-title'>{work.data.title}</h3>
 		<p class='work-description-info'>{work.data.subtitle}</p>
 		<div class='work-description-link-wrapper'>
-			<Button label='View Project' icon='external' href={work.data.url} target='_blank' class={`work-description-link ${isBtnDisabled}`} />
-			{work.data.isRedeemable && <Button label='Redeem here!' icon='external' href={work.data.redeemUrl} target='_blank' class='work-description-link' />}
-			<Button label='Email me for inquiries' target='_blank' icon='email' href='mailto:barbeau.jonathan@gmail.com' class='work-description-link' />
+			<Button label={t(locale, "recentWork.viewProject")} icon='external' href={work.data.url} target='_blank' class={`work-description-link ${isBtnDisabled}`} />
+			{work.data.isRedeemable && <Button label={t(locale, "recentWork.redeemHere")} icon='external' href={work.data.redeemUrl} target='_blank' class='work-description-link' />}
+			<Button label={t(locale, "recentWork.emailInquiries")} target='_blank' icon='email' href='mailto:barbeau.jonathan@gmail.com' class='work-description-link' />
 		</div>
 
 		<div data-slider={work.data.slider} class='work-image-row blaze-slider'>
@@ -37,17 +41,17 @@ descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replac
 				</div>
 				<div class='work-description'>
 					<div class='work-description-wrapper'>
-						<h4 class='work-description-title'>Description</h4>
+						<h4 class='work-description-title'>{t(locale, "recentWork.description")}</h4>
 						<div class='work-description-text' set:html={descriptionHtml} />
 					</div>
 					<!-- navigation buttons -->
 					<div class='blaze-btn'>
 						<button class='blaze-prev'>
 							<span><Icon className='--slider --slider-prev' isButton={true} icon={"chevron_left"} /></span>
-							<span class='-mt-0.5'>Previous</span>
+							<span class='-mt-0.5'>{t(locale, "recentWork.previous")}</span>
 						</button>
 						<button class='blaze-next'>
-							<span class='-mt-0.5'>Next</span>
+							<span class='-mt-0.5'>{t(locale, "recentWork.next")}</span>
 							<span><Icon className='--slider --slider-next' isButton={true} icon={"chevron_right"} /></span>
 						</button>
 					</div>

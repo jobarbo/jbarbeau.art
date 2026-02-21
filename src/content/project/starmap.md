@@ -30,6 +30,38 @@ description: >-
 
 
   Made with Javascript on <canvas>
+descriptionFr: >-
+  STARMAP rend hommage au mysticisme du cosmos et à la crainte qui accompagne
+  l’exploration de l’inconnu. L’œuvre invite à un voyage cosmique et célèbre
+  l’immensité de l’univers.
+
+
+  Chaque pièce vous place dans la perspective d’un explorateur spatial anonyme,
+  seul et entièrement dévoué à cartographier le cosmos. L’explorateur n’est
+  jamais montré ; vous partagez son point de vue, entre émerveillement et
+  solitude dans un lieu plus grand que nous.
+
+
+  Cette collection générative traduit l’idée que le retour n’est jamais
+  garanti. Plus l’explorateur s’enfonce dans le cosmos, plus l’émerveillement
+  et la curiosité se mêlent à l’angoisse de l’isolement et au poids du vide.
+
+
+  L’artiste explore le paradoxe de la découverte et de la peur de perdre le
+  lien avec le familier — une dualité qui résonne en chacun, comme lors des
+  grands tournants de la vie.
+
+
+  ||==NOTES==||
+
+
+  STARMAP est une pièce méditative qui se peint dans le temps. Un grand nombre
+  de particules dessine chaque pièce. La collection a été conçue pour la
+  contemplation ; prenez le temps de vous installer et de regarder le processus
+  (environ 60 s).
+
+
+  Réalisé en Javascript sur <canvas>
 url: https://foundation.app/collection/strmp
 isRedeemable: false
 redeemUrl: /

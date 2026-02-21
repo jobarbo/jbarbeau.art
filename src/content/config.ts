@@ -7,6 +7,7 @@ const projectCollection = defineCollection({
 		publishDate: z.coerce.date(),
 		subtitle: z.string().optional(),
 		description: z.string(),
+		descriptionFr: z.string().optional(),
 		url: z.string(),
 		isRedeemable: z.boolean().optional(),
 		redeemUrl: z.string().optional(),

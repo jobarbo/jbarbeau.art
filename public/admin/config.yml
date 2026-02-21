@@ -38,6 +38,7 @@ collections:
       - {label: "Collection", name: "collection", widget: "hidden", default: "project"}
       - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
       - {label: "Description", name: "description", widget: "markdown", required: true}
+      - {label: "Description (French)", name: "descriptionFr", widget: "markdown", required: false}
       - {label: "URL", name: "url", widget: "string"}
       - {label: "Is Redeemable", name: "isRedeemable", widget: "boolean", default: false}
       - {label: "Redeem URL", name: "redeemUrl", widget: "string", required: false}

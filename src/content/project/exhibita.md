@@ -18,6 +18,14 @@ description: >-
 
 
   All pairs of artworks uses Perlin Noise as the main algorithmic foundation and shows how a similar techniques can yield such different results.
+descriptionFr: >-
+  Cette collection présente 10 œuvres réalisées par paires avec 5 algorithmes
+  différents. Elle a été exposée à La Korrigane à **Québec** durant l’été 2023.
+
+
+  Chaque paire s’appuie sur le bruit de Perlin comme base algorithmique et
+  montre comment une technique similaire peut produire des résultats très
+  différents.
 url: https://highlight.xyz/mint/64f7c27b373cff27b5e9309c
 redeemUrl: /
 image: /assets/exhibita/10_thumb.jpg

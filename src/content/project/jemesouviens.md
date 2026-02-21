@@ -37,6 +37,51 @@ description: >-
 
 
   Made with Javascript on <canvas>
+descriptionFr: >-
+  Dimensions : 5400 × 7614
+
+
+  Medium : Art numérique génératif
+
+
+  « Je me souviens » explore la mémoire, l’impermanence et le passage du temps.
+  Ancré dans la nostalgie et la perte, l’ensemble capture les échos de ce qui
+  fut : paysages urbains en décomposition, structures fragmentées et présences
+  spectrales qui persistent comme des afterimages.
+
+
+  Chaque pièce explore l’entre-deux de la présence et de l’absence, dans ces
+  espaces liminaux où l’histoire s’efface et où les vestiges du passé
+  murmurent. Le titre, emprunté à la devise québécoise, dépasse son origine pour
+  incarner une réflexion universelle sur la mémoire collective et personnelle.
+
+
+  Par ses textures type glitch et ses compositions en couches, « Je me souviens »
+  invite à réfléchir à nos propres liens au lieu, à la mémoire et à la
+  transformation inévitable des choses.
+
+
+  ||==INSPIRATION==||
+
+
+  L’œuvre s’inspire de la fragilité des civilisations et des traces éphémères
+  que nous laissons. Elle explore comment le temps transforme nos plus grandes
+  réalisations en simples échos.
+
+
+  Cette série est le fruit de plus d’un an de recherche sur la création de
+  textures, avec des systèmes de particules et le bruit de Perlin pour
+  transmettre la désintégration et la perte.
+
+
+  ||==NOTES==||
+
+
+  À vivre de préférence en projection grand format ou sur un écran de qualité
+  pour souligner les contrastes et les textures (4k). Tirage physique sur demande.
+
+
+  Réalisé en Javascript sur <canvas>
 url: https://highlight.xyz/mint/base:0x33C61d7B1Fce1b6cec8e0dA96d4f1e2393A783d4
 isRedeemable: false
 redeemUrl: /

@@ -7,6 +7,11 @@ subtitle: June 2023 - 256art.com
 description: "'Jeu de ligne' is a generative artwork that uses particles,
   movement, and constraint. As the initial composition glides across the canvas,
   columns and rows emerge from the particles getting trapped on the margin."
+descriptionFr: >-
+  « Jeu de ligne » est une œuvre générative qui utilise des particules, le
+  mouvement et la contrainte. Tandis que la composition initiale glisse sur la
+  toile, colonnes et rangées émergent des particules qui se retrouvent piégées
+  en marge.
 url: https://256art.com/project/jeu-de-ligne-2
 isRedeemable: false
 redeemUrl: /

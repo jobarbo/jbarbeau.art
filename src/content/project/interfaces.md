@@ -17,6 +17,25 @@ description: >-
 
 
   I'm also using a MIDI controller where I mapped the size, hue, saturation and brightness on the 4 top knobs and mapped all the frames from the dance on each of the 4 sliders. So 1 slider is really 1/4th of the whole sequence. So using this I could influence what was happening on the screen but still left the particles free to do their thing while moving the dancer on the timeline.
+descriptionFr: >-
+  TRACES est une collaboration multi-artistes. Le projet Interfaces relie la
+  danse et l’art génératif. L’équipe a capté des chorégraphies en motion
+  capture avec ml5.js ; les mouvements ont été convertis en JSON, représentant
+  les membres et déplacements des danseurs comme des objets JavaScript — un
+  système de coordonnées.
+
+
+  J’ai utilisé ces données pour peindre sur une toile numérique avec un système
+  de particules : au lieu de les placer au hasard, les particules sont réparties
+  en nœuds correspondant aux membres des danseurs (tête, poignets, épaules,
+  genoux, pieds). À la génération, les particules partent de ces points.
+
+
+  J’utilise aussi un contrôleur MIDI : les 4 potards du haut règlent taille,
+  teinte, saturation et luminosité ; les 4 faders parcourent les frames de la
+  danse (chaque fader = un quart de la séquence). Je pouvais ainsi influencer
+  l’image tout en laissant les particules évoluer librement en déplaçant le
+  danseur sur la timeline.
 url: https://objkt.com/collections/KT1Tw7BRpsMomGE4bf3bxjAc4AgNV8xq7BYb
 isRedeemable: false
 redeemUrl: /
