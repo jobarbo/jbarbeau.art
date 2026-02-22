@@ -23,10 +23,7 @@ descriptionFr: >-
   différents. Elle a été exposée à La Korrigane à **Québec** durant l’été 2023.
 
 
-  Chaque paire s’appuie sur le bruit de Perlin comme base algorithmique et montre comment une technique similaire peut produire des résultats très différents. 
-
-
-  ![](/assets/exhibita/5_thumb.jpg)
+  Chaque paire s’appuie sur le bruit de Perlin comme base algorithmique et montre comment une technique similaire peut produire des résultats très différents.
 url: https://highlight.xyz/mint/64f7c27b373cff27b5e9309c
 redeemUrl: /
 image: /assets/exhibita/10_thumb.jpg
