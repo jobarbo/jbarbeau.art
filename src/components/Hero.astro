@@ -3,7 +3,7 @@ import {Image} from "astro:assets";
 import Socials from "./Socials.astro";
 import Button from "./Button.astro";
 import Icon from "./Icon.astro";
-import { t, type Locale } from "../i18n";
+import {t, type Locale} from "../i18n";
 
 interface Props {
 	/** Path to the hero profile image (e.g. /assets/home/jonathan.png) */
@@ -11,7 +11,7 @@ interface Props {
 	locale?: Locale;
 }
 
-const { profileImage, locale = "en" } = Astro.props;
+const {profileImage, locale = "en"} = Astro.props;
 ---
 
 <section class='hero'>
@@ -28,19 +28,6 @@ const { profileImage, locale = "en" } = Astro.props;
 						loading='lazy'
 						allowfullscreen></iframe>
 				</div>
-				<div class='hero-iframe-info'>
-					<p class='hero-iframe-name' id='projectName'></p>
-					<div class='hero-iframe-hash-container'>
-						<p class='hero-iframe-hash' id='randomHash'></p>
-						<button class='copy-hash-btn' id='copyHashBtn' title={t(locale, "hero.copyHash")}>
-							<Icon icon='copy' size='0.8em' />
-						</button>
-					</div>
-					<div class='hero-iframe-buttons'>
-						<Button label={t(locale, "hero.newVariations")} icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
-						<Button label={t(locale, "hero.fullscreen")} icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
-					</div>
-				</div>
 			</div>
 		</div>
 		<div class='hero-content'>
@@ -53,6 +40,19 @@ const { profileImage, locale = "en" } = Astro.props;
 				<Socials iconClass='--socials' />
 			</div>
 			<Button class='hero-button my-6' label={t(locale, "hero.cta")} href={t(locale, "hero.ctaHref")} target='_blank' icon='external' />
+		</div>
+		<div class='hero-iframe-info'>
+			<p class='hero-iframe-name' id='projectName'></p>
+			<div class='hero-iframe-hash-container'>
+				<p class='hero-iframe-hash' id='randomHash'></p>
+				<button class='copy-hash-btn' id='copyHashBtn' title={t(locale, "hero.copyHash")}>
+					<Icon icon='copy' size='0.8em' />
+				</button>
+			</div>
+			<div class='hero-iframe-buttons'>
+				<Button label={t(locale, "hero.newVariations")} icon='refresh' href='#' target='_self' attributes={{"data-refresh": "true"}} />
+				<Button label={t(locale, "hero.fullscreen")} icon='external' href='#' target='_blank' attributes={{"data-fullscreen": "true"}} />
+			</div>
 		</div>
 	</div>
 </section>

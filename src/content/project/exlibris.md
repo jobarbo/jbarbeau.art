@@ -2,7 +2,7 @@
 title: EX-LIBRIS
 publishDate: 2023-12-15 12:00:00
 collection: project
-isRedeemable: true
+isRedeemable: false
 slider:
   - "6"
   - "5"
