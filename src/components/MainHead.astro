@@ -1,10 +1,14 @@
 ---
+import type { Locale } from "../i18n";
+
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
 	image?: string | undefined;
 	type?: "website" | "article" | undefined;
 	logo?: string | undefined;
+	/** Locale for this page (en/fr). Used for og:locale and hreflang. */
+	locale?: Locale;
 }
 
 const {
@@ -13,6 +17,7 @@ const {
 	image = "/assets/og/profile.png",
 	type = "website",
 	logo = "/favicon.svg",
+	locale = "en",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,8 +26,31 @@ const socialImageURL = image.startsWith("http") ? image : new URL(image.startsWi
 // Ensure logo URL is absolute
 const logoURL = logo.startsWith("http") ? logo : new URL(logo.startsWith("/") ? logo.slice(1) : logo, Astro.site).toString();
 
-// Schema.org JSON-LD for AI and search engines
+// Open Graph locale: primary and alternate for language variants
+const ogLocale = locale === "fr" ? "fr_CA" : "en_US";
+const ogLocaleAlternate = locale === "fr" ? "en_US" : "fr_CA";
+
+// Alternate URL for hreflang (other language version of this page)
+const pathname = Astro.url.pathname;
+const alternatePath =
+	locale === "fr"
+		? (pathname.replace(/^\/fr\/?/, "") || "/")
+		: pathname === "/"
+			? "/fr/"
+			: `/fr${pathname}`;
+const alternateURL = new URL(alternatePath, Astro.site);
+
+// Schema.org JSON-LD for AI and search engines (localized when French)
 const siteUrl = Astro.site?.toString() ?? "https://jbarbeau.art";
+const personDescription =
+	locale === "fr"
+		? "Artiste génératif et développeur créatif basé à Québec, Canada. Crée de l'art génératif numérique et long format avec JavaScript et le Canvas HTML5."
+		: "Generative artist and creative developer based in Québec City, Canada. Creates digital and long-form generative art using JavaScript and the HTML5 Canvas.";
+const personJobTitle = locale === "fr" ? "Artiste génératif" : "Generative Artist";
+const websiteDescription =
+	locale === "fr"
+		? "Portfolio et présence de Jonathan Barbeau — artiste génératif basé à Québec. Collections numériques, expositions, blog et CV artiste."
+		: "Portfolio and presence of Jonathan Barbeau — generative artist based in Québec City. Digital collections, exhibitions, blog, and artist CV.";
 const structuredData = {
 	"@context": "https://schema.org",
 	"@graph": [
@@ -32,18 +60,21 @@ const structuredData = {
 			name: "Jonathan Barbeau",
 			url: siteUrl,
 			image: `${siteUrl.replace(/\/?$/, "")}/assets/og/profile.png`,
-			description: "Generative artist and creative developer based in Québec City, Canada. Creates digital and long-form generative art using JavaScript and the HTML5 Canvas.",
-			jobTitle: "Generative Artist",
+			description: personDescription,
+			jobTitle: personJobTitle,
 			email: "barbeau.jonathan@gmail.com",
 			sameAs: ["https://www.instagram.com/jbarbeau.art/", "https://jbarbeau.substack.com/"],
-			knowsAbout: ["Generative art", "Creative coding", "JavaScript", "Digital art"],
+			knowsAbout:
+				locale === "fr"
+					? ["Art génératif", "Programmation créative", "JavaScript", "Art numérique"]
+					: ["Generative art", "Creative coding", "JavaScript", "Digital art"],
 		},
 		{
 			"@type": "WebSite",
 			"@id": `${siteUrl}#website`,
 			url: siteUrl,
 			name: "Jonathan Barbeau Art",
-			description: "Portfolio and presence of Jonathan Barbeau — generative artist based in Québec City. Digital collections, exhibitions, blog, and artist CV.",
+			description: websiteDescription,
 			publisher: {"@id": `${siteUrl}#person`},
 			inLanguage: ["en", "fr"],
 		},
@@ -58,6 +89,11 @@ const structuredData = {
 
 <link rel='canonical' href={canonicalURL} />
 
+<!-- Language alternates for SEO (main site pages using Layout) -->
+<link rel='alternate' hreflang='en' href={locale === "en" ? canonicalURL : alternateURL} />
+<link rel='alternate' hreflang='fr' href={locale === "fr" ? canonicalURL : alternateURL} />
+<link rel='alternate' hreflang='x-default' href={locale === "en" ? canonicalURL : alternateURL} />
+
 <!-- Open Graph / Facebook -->
 <meta property='og:type' content={type} />
 <meta property='og:url' content={canonicalURL} />
@@ -69,7 +105,8 @@ const structuredData = {
 <meta property='og:image:alt' content={title} />
 <meta property='og:logo' content={logoURL} />
 <meta property='og:site_name' content='Jonathan Barbeau Art' />
-<meta property='og:locale' content='en_US' />
+<meta property='og:locale' content={ogLocale} />
+<meta property='og:locale:alternate' content={ogLocaleAlternate} />
 
 <!-- Twitter -->
 <meta name='twitter:card' content='summary_large_image' />
