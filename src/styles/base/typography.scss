@@ -742,8 +742,8 @@ p {
 	@include text($preset: base, $apply_base: true);
 }
 
-ul,
-ol {
+ul:not([class]),
+ol:not([class]) {
 	@include list-styles();
 	li {
 		@include text($preset: base, $apply_base: true);

@@ -1,3 +1,8 @@
+@use "../base/variables" as *;
+@use "../base/functions" as *;
+@use "../base/container" as *;
+@use "../base/mediaqueries" as *;
+@use "../base/typography" as *;
 .work {
-	margin-top: 10em;
+	margin-top: to-vw(80);
 }
