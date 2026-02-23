@@ -57,18 +57,18 @@ Rapport d’analyse SEO du site (projet Astro + site en ligne).
 ### 6. Page d’accueil sans meta description personnalisée (priorité moyenne)
 
 - **Constat** : `index.astro` utilise le layout sans passer `title` ni `description`. La description par défaut dans `MainHead` est correcte mais générique.
-- **Action** : Passer une `description` (et éventuellement un `title`) plus orientée « artiste génératif, Québec » pour renforcer le positionnement sur ces requêtes.
+- **Action** : Passer une `description` (et éventuellement un `title`) plus orientée « artiste algorithmique, Québec » pour renforcer le positionnement sur ces requêtes.
 
 ### 7. Page Blog liste sans description (priorité moyenne)
 
 - **Constat** : `blog.astro` utilise `<Layout title='Blog | J Barbeau'>` sans `description`.
-- **Action** : Ajouter une `description` dédiée pour la page liste du blog (ex. « Articles et actualités de Jonathan Barbeau, artiste génératif »).
+- **Action** : Ajouter une `description` dédiée pour la page liste du blog (ex. « Articles et actualités de Jonathan Barbeau, artiste algorithmique »).
 
 ### 8. Attribut `alt` vide sur l’image du Hero (priorité moyenne)
 
 - **Constat** : Dans `Hero.astro`, l’image de profil a `alt=''`.
 - **Impact** : Image décorative OK en `alt=""`, mais si c’est une photo de l’artiste, un alt descriptif améliore accessibilité et contexte pour le SEO.
-- **Action** : Mettre un alt pertinent (ex. « Jonathan Barbeau, artiste génératif ») ou conserver `alt=""` uniquement si l’image est purement décorative.
+- **Action** : Mettre un alt pertinent (ex. « Jonathan Barbeau, artiste algorithmique ») ou conserver `alt=""` uniquement si l’image est purement décorative.
 
 ### 9. Viewport (priorité basse)
 

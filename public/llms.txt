@@ -1,6 +1,6 @@
 # Jonathan Barbeau
 
-> Jonathan Barbeau is a generative artist and creative developer based in Québec City, Canada. He creates digital and long-form generative art using JavaScript and the HTML5 Canvas. His work has been exhibited internationally and released on fx(hash), Foundation, and Highlight. He also works as a creative front-end developer.
+> Jonathan Barbeau is an algorithmic artist and creative developer based in Québec City, Canada. He creates digital and long-form algorithmic art using JavaScript and the HTML5 Canvas. His work has been exhibited internationally and released on fx(hash), Foundation, and Highlight. He also works as a creative front-end developer.
 
 ## Contact
 
@@ -11,7 +11,7 @@
 
 ## Services
 
-- [Generative art](https://jbarbeau.art/): Long-form and unique digital artworks
+- [Algorithmic art](https://jbarbeau.art/): Long-form and unique digital artworks
 - [Exhibitions and commissions](mailto:barbeau.jonathan@gmail.com): Inquiries for shows, installations, and commissioned work
 - [Artist CV (English)](https://jbarbeau.art/docs/artist-cv): Full exhibition history and list of works
 - [CV Artiste (Français)](https://jbarbeau.art/docs/artist-cv-fr): Parcours d'expositions et liste des œuvres
@@ -25,8 +25,8 @@
 
 ## What I Do Not Do
 
-- I do not offer generic design or branding services unrelated to generative or digital art.
-- I do not license or reproduce existing physical artworks; my primary practice is generative and digital.
+- I do not offer generic design or branding services unrelated to algorithmic or digital art.
+- I do not license or reproduce existing physical artworks; my primary practice is algorithmic and digital.
 
 ## AI Discovery Files
 

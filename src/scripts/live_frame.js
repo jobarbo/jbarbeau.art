@@ -1,4 +1,4 @@
-// Live Frame functionality for generative art iframes
+// Live Frame functionality for algorithmic art iframes
 export class LiveFrame {
 	constructor() {
 		this.iFrameArray = [

@@ -4,7 +4,7 @@ slug: jeudeligne
 publishDate: 2023-06-15 12:00:00
 collection: project
 subtitle: June 2023 - 256art.com
-description: "'Jeu de ligne' is a generative artwork that uses particles,
+description: "'Jeu de ligne' is an algorithmic artwork that uses particles,
   movement, and constraint. As the initial composition glides across the canvas,
   columns and rows emerge from the particles getting trapped on the margin."
 descriptionFr: >-

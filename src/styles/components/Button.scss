@@ -39,3 +39,18 @@ button {
 	background-color: var(--gray-999);
 	color: var(--gray-0);
 }
+
+.hero-button {
+	margin-top: to-vw(40);
+	margin-bottom: to-vw(0);
+
+	@media all and (max-width: 1024px) {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	@media all and (max-width: 640px) {
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+	}
+}

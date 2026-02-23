@@ -15,7 +15,7 @@ description: >-
   Each pieces put you in the perspective of an unnamed space explorer. Alone and fully committed to charting the vastness of the cosmos. The explorer is never shown; instead, the viewer shares his point of view, experiencing both the awe and wonder of discovery and the profound feeling of solitude in a place that is far greater than us.
 
 
-  This generative collection conveys the acute sentiment that returning home is never guaranteed. As the explorer delves deeper into the cosmos, emotions like wonder and curiosity becomes entwined with the dread of isolation and the weight of emptiness that begins to envelop them.
+  This algorithmic collection conveys the acute sentiment that returning home is never guaranteed. As the explorer delves deeper into the cosmos, emotions like wonder and curiosity becomes entwined with the dread of isolation and the weight of emptiness that begins to envelop them.
 
 
   The artist is showcasing the paradox of discovery mingled with the fear of losing connection with the familiar, a dichotomy resonating within every soul, akin to the emotions associated with significant life changes.

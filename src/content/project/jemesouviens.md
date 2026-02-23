@@ -9,7 +9,7 @@ description: >-
   Dimensions: 5400 × 7614
 
 
-  Creation Medium: Generative digital art
+  Creation Medium: Algorithmic digital art
 
 
   'Je me souviens' is a hauntingly evocative exploration of memory, impermanence, and the passage of time. Rooted in the spirit of nostalgia and loss, the collection captures the echoes of what once was — decayed cityscapes, fragmented structures, and spectral presences that linger like afterimages in the mind.
@@ -41,7 +41,7 @@ descriptionFr: >-
   Dimensions : 5400 × 7614
 
 
-  Medium : Art numérique génératif
+  Medium : Art numérique algorithmique
 
 
   « Je me souviens » explore la mémoire, l’impermanence et le passage du temps.

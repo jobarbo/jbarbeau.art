@@ -16,24 +16,24 @@ export const translations = {
 		},
 		hero: {
 			title: "Jonathan Barbeau",
-			subtitle: "Generative Artist based in Québec City",
+			subtitle: "Algorithmic Artist based in Québec City",
 			cta: "View my Artist Curriculum",
 			ctaHref: "/docs/artist-cv",
-			profileAlt: "Jonathan Barbeau, generative artist",
+			profileAlt: "Jonathan Barbeau, algorithmic artist",
 			newVariations: "Mutate",
 			fullscreen: "Fullscreen",
 			copyHash: "Copy full hash",
 		},
 		home: {
-			metaTitle: "Jonathan Barbeau | Generative Artist",
+			metaTitle: "Jonathan Barbeau | Algorithmic Artist",
 			metaDescription:
-				"Generative artist based in Québec City. Digital and long-form collections on fx(hash), Foundation, Highlight. Exhibitions, NFTs, and creative code.",
+				"Algorithmic artist based in Québec City. Digital and long-form collections on fx(hash), Foundation, Highlight. Exhibitions, NFTs, and creative code.",
 		},
 		blog: {
 			title: "Blog",
 			metaTitle: "Blog | J Barbeau",
 			metaDescription:
-				"Articles and updates from Jonathan Barbeau — generative art, creative process, exhibitions, and new releases.",
+				"Articles and updates from Jonathan Barbeau — algorithmic art, creative process, exhibitions, and new releases.",
 			loadError: "Unable to load blog posts at this time. Please check back later.",
 		},
 		recentWork: {
@@ -57,24 +57,24 @@ export const translations = {
 		},
 		hero: {
 			title: "Jonathan Barbeau",
-			subtitle: "Artiste génératif basé à Québec",
+			subtitle: "Artiste algorithmique basé à Québec",
 			cta: "Voir mon curriculum artiste",
 			ctaHref: "/fr/docs/artist-cv",
-			profileAlt: "Jonathan Barbeau, artiste génératif",
+			profileAlt: "Jonathan Barbeau, artiste algorithmique",
 			newVariations: "Muter",
 			fullscreen: "Plein écran",
 			copyHash: "Copier le hash",
 		},
 		home: {
-			metaTitle: "Jonathan Barbeau | Artiste génératif",
+			metaTitle: "Jonathan Barbeau | Artiste algorithmique",
 			metaDescription:
-				"Artiste génératif basé à Québec. Collections numériques et long format sur fx(hash), Foundation, Highlight. Expositions, NFTs et art par code.",
+				"Artiste algorithmique basé à Québec. Collections numériques et long format sur fx(hash), Foundation, Highlight. Expositions, NFTs et art par code.",
 		},
 		blog: {
 			title: "Blog",
 			metaTitle: "Blog | J Barbeau",
 			metaDescription:
-				"Articles et actualités de Jonathan Barbeau — art génératif, processus créatif, expositions et nouvelles œuvres.",
+				"Articles et actualités de Jonathan Barbeau — art algorithmique, processus créatif, expositions et nouvelles œuvres.",
 			loadError: "Impossible de charger les articles pour le moment. Revenez plus tard.",
 		},
 		recentWork: {

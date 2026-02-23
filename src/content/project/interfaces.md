@@ -7,7 +7,7 @@ subtitle: April 2024 - Intefaces - Funded by the federal government commissioner
   for culture and the media, Hanover, Stuttgart, Germany - OBJKT.
 description: >-
   TRACES is a multi-artist collaboration. It is part of the Interfaces project
-  which bridges the world of dance and generative art. The interfaces team
+  which bridges the world of dance and algorithmic art. The interfaces team
   motion-captured dance choreography using ml5.js. All choreography where the
   converted into a json file which mapped all the limbs and movement from the
   dancers into javascript object. It's kind of a coordinate system.
@@ -19,7 +19,7 @@ description: >-
   I'm also using a MIDI controller where I mapped the size, hue, saturation and brightness on the 4 top knobs and mapped all the frames from the dance on each of the 4 sliders. So 1 slider is really 1/4th of the whole sequence. So using this I could influence what was happening on the screen but still left the particles free to do their thing while moving the dancer on the timeline.
 descriptionFr: >-
   TRACES est une collaboration multi-artistes. Le projet Interfaces relie la
-  danse et l’art génératif. L’équipe a capté des chorégraphies en motion
+  danse et l’art algorithmique. L’équipe a capté des chorégraphies en motion
   capture avec ml5.js ; les mouvements ont été convertis en JSON, représentant
   les membres et déplacements des danseurs comme des objets JavaScript — un
   système de coordonnées.

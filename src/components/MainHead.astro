@@ -1,5 +1,5 @@
 ---
-import type { Locale } from "../i18n";
+import type {Locale} from "../i18n";
 
 interface Props {
 	title?: string | undefined;
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const {
-	title = "Jonathan Barbeau | Generative Artist",
+	title = "Jonathan Barbeau | Algorithmic Artist",
 	description = "I am an artist and developer using Javascript and the HTML5 Canvas as a medium creation",
 	image = "/assets/og/profile.png",
 	type = "website",
@@ -32,25 +32,20 @@ const ogLocaleAlternate = locale === "fr" ? "en_US" : "fr_CA";
 
 // Alternate URL for hreflang (other language version of this page)
 const pathname = Astro.url.pathname;
-const alternatePath =
-	locale === "fr"
-		? (pathname.replace(/^\/fr\/?/, "") || "/")
-		: pathname === "/"
-			? "/fr/"
-			: `/fr${pathname}`;
+const alternatePath = locale === "fr" ? pathname.replace(/^\/fr\/?/, "") || "/" : pathname === "/" ? "/fr/" : `/fr${pathname}`;
 const alternateURL = new URL(alternatePath, Astro.site);
 
 // Schema.org JSON-LD for AI and search engines (localized when French)
 const siteUrl = Astro.site?.toString() ?? "https://jbarbeau.art";
 const personDescription =
 	locale === "fr"
-		? "Artiste génératif et développeur créatif basé à Québec, Canada. Crée de l'art génératif numérique et long format avec JavaScript et le Canvas HTML5."
-		: "Generative artist and creative developer based in Québec City, Canada. Creates digital and long-form generative art using JavaScript and the HTML5 Canvas.";
-const personJobTitle = locale === "fr" ? "Artiste génératif" : "Generative Artist";
+		? "Artiste numérique et développeur créatif basé à Québec, Canada. Crée de l'art algorithmique numérique avec JavaScript et le Canvas HTML5."
+		: "digital artist and creative developer based in Québec City, Canada. Creates digital and long-form algorithmic art using JavaScript and the HTML5 Canvas.";
+const personJobTitle = locale === "fr" ? "Artiste algorithmique" : "Algorithmic Artist";
 const websiteDescription =
 	locale === "fr"
-		? "Portfolio et présence de Jonathan Barbeau — artiste génératif basé à Québec. Collections numériques, expositions, blog et CV artiste."
-		: "Portfolio and presence of Jonathan Barbeau — generative artist based in Québec City. Digital collections, exhibitions, blog, and artist CV.";
+		? "Portfolio et présence de Jonathan Barbeau — artiste numérique basé à Québec. Collections numériques, expositions, blog et CV artiste."
+		: "Portfolio and presence of Jonathan Barbeau — digital artist based in Québec City. Digital collections, exhibitions, blog, and artist CV.";
 const structuredData = {
 	"@context": "https://schema.org",
 	"@graph": [
@@ -66,8 +61,8 @@ const structuredData = {
 			sameAs: ["https://www.instagram.com/jbarbeau.art/", "https://jbarbeau.substack.com/"],
 			knowsAbout:
 				locale === "fr"
-					? ["Art génératif", "Programmation créative", "JavaScript", "Art numérique"]
-					: ["Generative art", "Creative coding", "JavaScript", "Digital art"],
+					? ["Art algorithmique", "Programmation créative", "JavaScript", "Art numérique"]
+					: ["Algorithmic art", "Creative coding", "JavaScript", "Digital art"],
 		},
 		{
 			"@type": "WebSite",
@@ -129,7 +124,10 @@ const structuredData = {
 <link rel='icon' type='image/png' href='/favicon.png' />
 <link rel='preconnect' href='https://fonts.googleapis.com' />
 <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
-<link href='https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@100..800&display=swap' rel='stylesheet' />
+<link
+	href='https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@100..800&display=swap'
+	rel='stylesheet'
+/>
 <script is:inline>
 	// This code is inlined in the head to make dark mode instant & blocking.
 	const getThemePreference = () => {
