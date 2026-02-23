@@ -120,7 +120,7 @@
 }
 
 .hero-iframe-name {
-	font-size: 1.2rem;
+	font-size: clamp(12px, to-vw(19), 1.2rem);
 	font-weight: 600;
 	font-family: var(--font-brand);
 }
@@ -132,7 +132,7 @@
 }
 
 .hero-iframe-hash {
-	font-size: 0.8rem;
+	font-size: clamp(12px, to-vw(16), 0.8rem);
 	font-weight: 400;
 	margin: 0;
 	font-family: var(--font-brand);
@@ -276,7 +276,7 @@ iframe {
 
 .hero-subtitle {
 	margin-bottom: 0.5rem;
-	font-size: 1.75rem;
+	font-size: clamp(12px, to-vw(30), 1.75rem);
 	font-weight: 400;
 
 	@media all and (max-width: 1024px) {
