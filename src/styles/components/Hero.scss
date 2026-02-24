@@ -5,13 +5,11 @@
 @use "../base/typography" as *;
 
 .hero {
-	height: 100vh;
+	height: calc(100vh - (80px + 120px));
 
 	min-height: fit-content;
 	display: flex;
 	align-items: center;
-	padding: to-vw(80) 0 0 0;
-	margin-top: -80px;
 	@media all and (max-width: 1024px) {
 		height: auto;
 		min-height: fit-content;
@@ -32,6 +30,7 @@
 	justify-content: space-between;
 	gap: to-vw(40) to-vw(200);
 	min-height: fit-content;
+	padding: to-vw(60);
 	@media all and (max-width: 1024px) {
 		grid-template-columns: 1fr;
 		padding-top: 5em;
@@ -223,24 +222,23 @@
 		width: 100%;
 		border-width: 3px;
 	}
-}
-
-iframe {
-	height: to-vw(700, true, 100, 900);
-	width: fit-content;
-	aspect-ratio: 1/1;
-	position: relative;
-
-	@media all and (max-width: 1024px) {
-		height: auto;
-		width: 100%;
-		min-height: 400px;
+	iframe {
+		height: to-vw(600);
+		width: fit-content;
 		aspect-ratio: 1/1;
-	}
+		position: relative;
 
-	@media all and (max-width: 640px) {
-		min-height: 300px;
-		aspect-ratio: 1/1;
+		@media all and (max-width: 1024px) {
+			height: auto;
+			width: 100%;
+			min-height: 400px;
+			aspect-ratio: 1/1;
+		}
+
+		@media all and (max-width: 640px) {
+			min-height: 300px;
+			aspect-ratio: 1/1;
+		}
 	}
 }
 
