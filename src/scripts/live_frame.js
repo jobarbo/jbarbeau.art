@@ -2,9 +2,9 @@
 export class LiveFrame {
 	constructor() {
 		this.iFrameArray = [
-			{url: "https://kodamandala.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1", name: "Kodamandala - working title"},
+			{url: "https://kodamandala.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1", name: "Kodamandala - 2026"},
 			{url: "https://jeudeligne.netlify.app/", urlParam: "hash", aspectRatio: "1/1.3756", name: "Jeu de ligne - 2023"},
-			{url: "https://ex-lignis.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1.25", name: "EX-LIGNIS (working title)"},
+			{url: "https://ex-lignis.netlify.app/", urlParam: "fxhash", aspectRatio: "1/1.25", name: "EX-LIGNIS - 2026"},
 		];
 
 		this.currentUrl = "";

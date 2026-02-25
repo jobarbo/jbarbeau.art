@@ -68,6 +68,10 @@
 	flex-direction: column;
 	align-items: flex-end;
 	gap: 2em;
+
+	@media all and (max-width: 640px) {
+		width: 90%;
+	}
 }
 
 .hero-image {
@@ -113,7 +117,7 @@
 	}
 
 	@media all and (max-width: 640px) {
-		padding: 1.25em;
+		padding: 0 1.25em;
 		width: 100%;
 	}
 }
@@ -214,7 +218,7 @@
 	@media all and (max-width: 1024px) {
 		height: auto;
 		width: 100%;
-		max-width: 500px;
+		max-width: auto;
 		border-width: 4px;
 	}
 
@@ -223,15 +227,17 @@
 		border-width: 3px;
 	}
 	iframe {
-		height: to-vw(600);
+		height: to-vh(700);
+		max-height: 40vw;
 		width: fit-content;
 		aspect-ratio: 1/1;
 		position: relative;
 
 		@media all and (max-width: 1024px) {
+			max-height: unset;
 			height: auto;
-			width: 100%;
-			min-height: 400px;
+			width: auto;
+			min-height: 600px;
 			aspect-ratio: 1/1;
 		}
 
@@ -269,7 +275,7 @@
 	}
 
 	@media all and (max-width: 640px) {
-		//font-size: 1.25rem;
+		font-size: 1.75rem;
 	}
 }
 
