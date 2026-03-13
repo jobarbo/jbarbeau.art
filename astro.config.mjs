@@ -1,6 +1,6 @@
 import {defineConfig} from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,10 +12,12 @@ export default defineConfig({
 			prefixDefaultLocale: false,
 		},
 	},
+	vite: {
+		plugins: [tailwindcss()],
+	},
 	integrations: [
 		sitemap({
-			filter: (page) =>
-				!page.includes("/admin") && !page.includes("/local_admin"),
+			filter: (page) => !page.includes("/admin") && !page.includes("/local_admin"),
 			// Guarantee main static pages are always in the sitemap (in case discovery misses them)
 			customPages: [
 				"https://jbarbeau.art/",
@@ -29,7 +31,6 @@ export default defineConfig({
 				"https://jbarbeau.art/docs/cv-fr",
 			],
 		}),
-		tailwind(),
 	],
 	devToolbar: {
 		enabled: false,
