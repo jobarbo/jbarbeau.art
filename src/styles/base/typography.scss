@@ -225,7 +225,7 @@ $text-presets: (
 
 	@if $apply_base {
 		// Base implementation - set all properties
-		$base_fs: if($fs, $fs, map.get($config, size));
+		$base_fs: if(sass($fs): $fs; else: map.get($config, size));
 		$base-size: strip-unit($base_fs); // Store the base size for mobile/tablet calculations
 
 		// If custom $fs is provided but min/max are not, calculate them based on $fs
@@ -233,25 +233,40 @@ $text-presets: (
 			$fs_min: math.div(strip-unit($base_fs), $title-divider);
 			$fs_max: strip-unit($base_fs) * $title-multiplier;
 		} @else {
-			$fs_min: if($fs_min, $fs_min, map.get($config, fs_min));
-			$fs_max: if($fs_max, $fs_max, map.get($config, fs_max));
+			$fs_min: if(sass($fs_min): $fs_min; else: map.get($config, fs_min));
+			$fs_max: if(sass($fs_max): $fs_max; else: map.get($config, fs_max));
 		}
 
-		$base_fw: if($fw, $fw, map.get($config, weight));
-		$base_lh: if($lh, $lh, map.get($config, line-height));
-		$base_ls: if($ls, $ls, map.get($config, letter-spacing));
-		$base_color: if($color, $color, map.get($config, color));
+		$base_fw: if(sass($fw): $fw; else: map.get($config, weight));
+		$base_lh: if(sass($lh): $lh; else: map.get($config, line-height));
+		$base_ls: if(sass($ls): $ls; else: map.get($config, letter-spacing));
+		$base_color: if(sass($color): $color; else: map.get($config, color));
 
 		// Convert to responsive units
-		$font_size_value: if($relative_fs, to-vw(strip-unit($base_fs)), rem($base_fs));
+		$font_size_value: if(
+			sass($relative_fs): to-vw(strip-unit($base_fs));
+			else: rem($base_fs)
+		);
 		$font_size_value: clamp(#{$fs_min}px, #{$font_size_value}, #{$fs_max}px);
-		$max_width_value: if($mw, if($relative_fs, to-vw(strip-unit($mw)), $mw), null);
+		$max_width_value: if(
+			sass($mw): if(
+				sass($relative_fs): to-vw(strip-unit($mw));
+				else: $mw
+			);
+			else: null
+		);
 
 		// Store initial px values for margins (only for simple numeric values)
 		$mt-is-number: meta.type-of($mt) == "number";
 		$mb-is-number: meta.type-of($mb) == "number";
-		$mt-px: if($mt-is-number and $mt != 0, strip-unit($mt), null);
-		$mb-px: if($mb-is-number and $mb != 0, strip-unit($mb), null);
+		$mt-px: if(
+			sass($mt-is-number and $mt != 0): strip-unit($mt);
+			else: null
+		);
+		$mb-px: if(
+			sass($mb-is-number and $mb != 0): strip-unit($mb);
+			else: null
+		);
 
 		// Set all properties
 		font: $style $variant $base_fw $font_size_value $font-family-title;
@@ -310,7 +325,10 @@ $text-presets: (
 			@each $breakpoint, $value in $scale {
 				@media all and (max-width: #{$breakpoint}px) {
 					@if meta.type-of($value) == "map" {
-						font-size: if(map.get($value, fixed), map.get($value, size), rem(map.get($value, size)));
+						font-size: if(
+							sass(map.get($value, fixed)): map.get($value, size);
+							else: rem(map.get($value, size))
+						);
 					} @else {
 						font-size: calc(#{rem(map.get($config, size))} * #{$value});
 					}
@@ -332,8 +350,14 @@ $text-presets: (
 		// Store initial px values for margins (only for simple numeric values)
 		$mt-is-number: meta.type-of($mt) == "number";
 		$mb-is-number: meta.type-of($mb) == "number";
-		$mt-px: if($mt-is-number and $mt != 0, strip-unit($mt), null);
-		$mb-px: if($mb-is-number and $mb != 0, strip-unit($mb), null);
+		$mt-px: if(
+			sass($mt-is-number and $mt != 0): strip-unit($mt);
+			else: null
+		);
+		$mb-px: if(
+			sass($mb-is-number and $mb != 0): strip-unit($mb);
+			else: null
+		);
 
 		@if $mb != 0 {
 			margin-bottom: $mb;
@@ -364,7 +388,10 @@ $text-presets: (
 		}
 
 		// Always set font-size based on level preset or custom value
-		$custom_fs: if($fs != null, $fs, map.get($config, size));
+		$custom_fs: if(
+			sass($fs != null): $fs;
+			else: map.get($config, size)
+		);
 		$base-size: strip-unit($custom_fs); // Store the base size for mobile/tablet calculations
 
 		// If custom $fs is provided but min/max are not, calculate them based on $fs
@@ -372,15 +399,27 @@ $text-presets: (
 			$fs_min: math.div(strip-unit($custom_fs), $title-divider);
 			$fs_max: strip-unit($custom_fs) * $title-multiplier;
 		} @else {
-			$fs_min: if($fs_min != null, $fs_min, map.get($config, fs_min));
-			$fs_max: if($fs_max != null, $fs_max, map.get($config, fs_max));
+			$fs_min: if(
+				sass($fs_min != null): $fs_min;
+				else: map.get($config, fs_min)
+			);
+			$fs_max: if(
+				sass($fs_max != null): $fs_max;
+				else: map.get($config, fs_max)
+			);
 		}
 
-		$custom_fs_value: if($relative_fs, to-vw(strip-unit($custom_fs)), rem($custom_fs));
+		$custom_fs_value: if(
+			sass($relative_fs): to-vw(strip-unit($custom_fs));
+			else: rem($custom_fs)
+		);
 		font-size: clamp(#{$fs_min}px, #{$custom_fs_value}, #{$fs_max}px);
 
 		@if $mw != null {
-			max-width: if($relative_fs, to-vw(strip-unit($mw)), $mw);
+			max-width: if(
+				sass($relative_fs): to-vw(strip-unit($mw));
+				else: $mw
+			);
 		}
 
 		@if $style != normal or $variant != normal {
@@ -454,19 +493,37 @@ $text-presets: (
 
 	@if $apply_base {
 		// Override preset with any custom values
-		$font-size: if($fs != null, $fs, map.get($config, size));
+		$font-size: if(
+			sass($fs != null): $fs;
+			else: map.get($config, size)
+		);
 		$base-size: strip-unit($font-size); // Store the base size for mobile/tablet calculations
-		$font-weight: if($fw != null, $fw, map.get($config, weight));
-		$line-height: if($lh != null, $lh, map.get($config, line-height));
-		$letter-spacing: if($ls != 0em, $ls, map.get($config, letter-spacing));
+		$font-weight: if(
+			sass($fw != null): $fw;
+			else: map.get($config, weight)
+		);
+		$line-height: if(
+			sass($lh != null): $lh;
+			else: map.get($config, line-height)
+		);
+		$letter-spacing: if(
+			sass($ls != 0em): $ls;
+			else: map.get($config, letter-spacing)
+		);
 
 		// If custom $fs is provided but min/max are not, calculate them based on $fs
 		@if $fs != null and $fs_min == null and $fs_max == null {
 			$fs_min: math.div(strip-unit($font-size), $text-divider);
 			$fs_max: strip-unit($font-size) * $text-multiplier;
 		} @else {
-			$fs_min: if($fs_min != null, $fs_min, map.get($config, fs_min));
-			$fs_max: if($fs_max != null, $fs_max, map.get($config, fs_max));
+			$fs_min: if(
+				sass($fs_min != null): $fs_min;
+				else: map.get($config, fs_min)
+			);
+			$fs_max: if(
+				sass($fs_max != null): $fs_max;
+				else: map.get($config, fs_max)
+			);
 		}
 
 		// Convert to vw if $relative_fs is true
@@ -483,7 +540,10 @@ $text-presets: (
 
 		// Store initial px values for margins (only for simple numeric values)
 		$mb-is-number: meta.type-of($mb) == "number";
-		$mb-px: if($mb-is-number and $mb != 0, strip-unit($mb), null);
+		$mb-px: if(
+			sass($mb-is-number and $mb != 0): strip-unit($mb);
+			else: null
+		);
 
 		// Use the font shorthand property
 		font: #{$style} #{$variant} #{$font-weight} #{$font-size}/#{$line-height} $font-family-default;
@@ -493,7 +553,7 @@ $text-presets: (
 		text-transform: $tt;
 		text-decoration: $td;
 		margin-bottom: $mb;
-		max-width: if($mw, $mw, null);
+		max-width: if(sass($mw): $mw; else: null);
 
 		&:last-child {
 			margin-bottom: 0;
@@ -530,7 +590,10 @@ $text-presets: (
 
 		// Store initial px values for margins (only for simple numeric values)
 		$mb-is-number: meta.type-of($mb) == "number";
-		$mb-px: if($mb-is-number and $mb != 0, strip-unit($mb), null);
+		$mb-px: if(
+			sass($mb-is-number and $mb != 0): strip-unit($mb);
+			else: null
+		);
 
 		@if $mb != 0 {
 			margin-bottom: $mb;
@@ -557,7 +620,10 @@ $text-presets: (
 		}
 
 		// Always set font-size based on preset or custom value
-		$custom-fs: if($fs != null, $fs, map.get($config, size));
+		$custom-fs: if(
+			sass($fs != null): $fs;
+			else: map.get($config, size)
+		);
 		$base-size: strip-unit($custom-fs); // Store the base size for mobile/tablet calculations
 
 		// If custom $fs is provided but min/max are not, calculate them based on $fs
@@ -565,16 +631,28 @@ $text-presets: (
 			$fs_min: math.div(strip-unit($custom-fs), $text-divider);
 			$fs_max: strip-unit($custom-fs) * $text-multiplier;
 		} @else {
-			$fs_min: if($fs_min != null, $fs_min, map.get($config, fs_min));
-			$fs_max: if($fs_max != null, $fs_max, map.get($config, fs_max));
+			$fs_min: if(
+				sass($fs_min != null): $fs_min;
+				else: map.get($config, fs_min)
+			);
+			$fs_max: if(
+				sass($fs_max != null): $fs_max;
+				else: map.get($config, fs_max)
+			);
 		}
 
-		$custom-fs-value: if($relative_fs, to-vw(strip-unit($custom-fs)), rem($custom-fs));
+		$custom-fs-value: if(
+			sass($relative_fs): to-vw(strip-unit($custom-fs));
+			else: rem($custom-fs)
+		);
 
 		font-size: clamp(#{$fs_min}px, #{$custom-fs-value}, #{$fs_max}px);
 
 		@if $mw != null {
-			max-width: if($relative_fs, to-vw(strip-unit($mw)), $mw);
+			max-width: if(
+				sass($relative_fs): to-vw(strip-unit($mw));
+				else: $mw
+			);
 		}
 
 		@if $style != normal or $variant != normal {
@@ -620,7 +698,12 @@ $text-presets: (
 		position: relative;
 		padding-left: $padding-left;
 		@if $fs != null {
-			@include text($fs: $fs, $fs_min: if($fs_min, $fs_min, 14), $fs_max: if($fs_max, $fs_max, $fs * 2), $apply_base: true);
+			@include text(
+				$fs: $fs,
+				$fs_min: if(sass($fs_min): $fs_min; else: 14),
+				$fs_max: if(sass($fs_max): $fs_max; else: $fs * 2),
+				$apply_base: true
+			);
 		} @else {
 			@include text($preset: $preset, $apply_base: true);
 		}

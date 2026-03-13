@@ -10,23 +10,23 @@
 		"astro": "astro"
 	},
 	"dependencies": {
-		"@astrojs/sitemap": "^3.7.0",
-		"@astrojs/tailwind": "^6.0.1",
-		"astro": "^5.5.4",
+		"@astrojs/sitemap": "^3.7.1",
+		"@tailwindcss/vite": "^4.2.1",
+		"astro": "^6.0.4",
 		"blaze-slider": "^1.9.3",
-		"decap-cms-app": "^3.6.2",
-		"gsap": "^3.13.0",
-		"marked": "^17.0.1",
+		"decap-cms-app": "^3.10.1",
+		"gsap": "^3.14.2",
+		"marked": "^17.0.4",
 		"rss-parser": "^3.13.0",
-		"sass": "^1.93.0"
+		"sass": "^1.98.0"
 	},
 	"devDependencies": {
-		"@tailwindcss/typography": "^0.5.16",
-		"prettier": "^3.2.4",
-		"prettier-plugin-astro": "^0.13.0",
-		"tailwindcss": "^3.4.17"
+		"@tailwindcss/typography": "^0.5.19",
+		"prettier": "^3.8.1",
+		"prettier-plugin-astro": "^0.14.1",
+		"tailwindcss": "^4.2.1"
 	},
 	"optionalDependencies": {
-		"@rollup/rollup-darwin-arm64": "^4.58.0"
+		"@rollup/rollup-darwin-arm64": "^4.59.0"
 	}
 }
