@@ -17,7 +17,7 @@ export default defineConfig({
 	},
 	integrations: [
 		sitemap({
-			filter: (page) => !page.includes("/admin") && !page.includes("/local_admin"),
+			filter: (page) => !page.includes("/admin") && !page.includes("/local_admin") && !page.includes("/collection-preview"),
 			// Guarantee main static pages are always in the sitemap (in case discovery misses them)
 			customPages: [
 				"https://jbarbeau.art/",

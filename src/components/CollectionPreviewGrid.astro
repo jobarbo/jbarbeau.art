@@ -1,0 +1,83 @@
+---
+interface Props {
+	title: string;
+	images: string[];
+}
+
+const {title, images} = Astro.props;
+---
+
+<section class='collection-preview-grid' aria-label='Collection preview'>
+	<h1 class='collection-preview-grid__title'>{title}</h1>
+	<div class='collection-preview-grid__list' data-collection-preview-images>
+		{
+			images.length > 0 ? (
+				images.map((src, index) => (
+					<button type='button' class='collection-preview-grid__item' data-index={index} data-src={src} aria-label={`View image ${index + 1}`}>
+						<img src={src} alt='' class='collection-preview-grid__img' loading='lazy' width='800' height='800' />
+					</button>
+				))
+			) : (
+				<p class='collection-preview-grid__empty'>No images yet. Add images in the admin.</p>
+			)
+		}
+	</div>
+</section>
+
+<style lang='scss'>
+	@use "../styles/base/functions" as *;
+	@use "../styles/base/variables" as *;
+	@use "../styles/base/mediaqueries" as *;
+
+	.collection-preview-grid {
+		padding: 2rem 1rem;
+		max-width: 1200px;
+		margin: 0 auto;
+
+		&__title {
+			font-size: 2rem;
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+
+		&__list {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1rem;
+		}
+
+		&__item {
+			appearance: none;
+			border: none;
+			padding: 0;
+			margin: 0;
+			background: none;
+			cursor: pointer;
+			display: block;
+			overflow: hidden;
+			border-radius: 4px;
+			flex: 1 1 25%;
+			width: fit-content;
+		}
+
+		&__img {
+			width: auto;
+			height: 100%;
+			object-fit: contain;
+			display: block;
+			border: 1px solid $gray-200;
+		}
+
+		&__item:focus-visible {
+			outline: 2px solid $teal;
+			outline-offset: 2px;
+		}
+
+		&__empty {
+			grid-column: 1 / -1;
+			text-align: center;
+			color: $gray-500;
+			padding: 2rem;
+		}
+	}
+</style>

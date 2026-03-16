@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import CollectionPreviewGrid from "../components/CollectionPreviewGrid.astro";
+import CollectionPreviewLightbox from "../components/CollectionPreviewLightbox.astro";
+import {getCollection} from "astro:content";
+
+const entries = await getCollection("collectionPreview");
+const entry = entries[0];
+const title = entry?.data.title ?? "Collection Preview";
+const images = (entry?.data.images ?? []) as string[];
+---
+
+<Layout
+	title={`${title} | Jonathan Barbeau`}
+	description="Preview of the artist's collection."
+>
+	<CollectionPreviewGrid title={title} images={images} />
+	<CollectionPreviewLightbox />
+</Layout>

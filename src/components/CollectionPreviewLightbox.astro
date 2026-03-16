@@ -1,0 +1,324 @@
+---
+// Lightbox for collection preview: open on grid image click, zoom up to 5x, drag when zoomed.
+// Listens for clicks on [data-collection-preview-images] button[data-src].
+---
+
+<div id='collection-preview-lightbox' class='collection-preview-lightbox' role='dialog' aria-modal='true' aria-label='Image viewer' hidden>
+	<div class='collection-preview-lightbox__backdrop' data-lightbox-backdrop></div>
+	<div class='collection-preview-lightbox__content' data-lightbox-content>
+		<div class='collection-preview-lightbox__img-wrap' data-lightbox-img-wrap>
+			<img class='collection-preview-lightbox__img' data-lightbox-img alt='' />
+		</div>
+		<div class='collection-preview-lightbox__controls'>
+			<button type='button' class='collection-preview-lightbox__zoom-btn' data-lightbox-zoom-out aria-label='Zoom out'> - </button>
+			<button type='button' class='collection-preview-lightbox__zoom-btn' data-lightbox-zoom-in aria-label='Zoom in'> + </button>
+		</div>
+		<button type='button' class='collection-preview-lightbox__close' data-lightbox-close aria-label='Close'>
+			<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
+				<line x1='18' y1='6' x2='6' y2='18'></line>
+				<line x1='6' y1='6' x2='18' y2='18'></line>
+			</svg>
+		</button>
+	</div>
+</div>
+
+<script>
+	(function () {
+		const MIN_ZOOM = 1;
+		const MAX_ZOOM = 5;
+		const ZOOM_STEP = 0.5;
+
+		const lightbox = document.getElementById("collection-preview-lightbox");
+		if (!lightbox) return;
+
+		const imgWrap = lightbox.querySelector("[data-lightbox-img-wrap]");
+		const img = lightbox.querySelector("[data-lightbox-img]");
+		const backdrop = lightbox.querySelector("[data-lightbox-backdrop]");
+		const closeBtn = lightbox.querySelector("[data-lightbox-close]");
+		const zoomInBtn = lightbox.querySelector("[data-lightbox-zoom-in]");
+		const zoomOutBtn = lightbox.querySelector("[data-lightbox-zoom-out]");
+
+		let scale = 1;
+		let translateX = 0;
+		let translateY = 0;
+		let isDragging = false;
+		let startX = 0;
+		let startY = 0;
+		let startTranslateX = 0;
+		let startTranslateY = 0;
+		let lastFocused = null;
+
+		function applyTransform() {
+			if (!imgWrap) return;
+			imgWrap.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+		}
+
+		function open(src) {
+			if (!img) return;
+			img.setAttribute("src", src);
+			scale = 1;
+			translateX = 0;
+			translateY = 0;
+			applyTransform();
+			lightbox.removeAttribute("hidden");
+			document.body.style.overflow = "hidden";
+			lastFocused = document.activeElement;
+			closeBtn?.focus();
+		}
+
+		function close() {
+			lightbox.setAttribute("hidden", "");
+			document.body.style.overflow = "";
+			if (lastFocused) {
+				lastFocused.focus();
+				lastFocused = null;
+			}
+		}
+
+		function trapFocus(e) {
+			if (e.key !== "Tab") return;
+			const focusable = lightbox.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+			const first = focusable[0];
+			const last = focusable[focusable.length - 1];
+			if (e.shiftKey) {
+				if (document.activeElement === first) {
+					e.preventDefault();
+					last?.focus();
+				}
+			} else {
+				if (document.activeElement === last) {
+					e.preventDefault();
+					first?.focus();
+				}
+			}
+		}
+
+		backdrop?.addEventListener("click", close);
+		closeBtn?.addEventListener("click", close);
+		lightbox.addEventListener("keydown", (e) => {
+			if (e.key === "Escape") close();
+			trapFocus(e);
+		});
+
+		// Open on grid image click
+		document.addEventListener("click", (e) => {
+			const target = e.target;
+			const trigger = target && typeof target.closest === "function" ? target.closest("[data-collection-preview-images] button[data-src]") : null;
+			if (!trigger) return;
+			const src = (trigger as HTMLElement).getAttribute("data-src");
+			if (src) open(src);
+		});
+
+		// Zoom with wheel
+		imgWrap &&
+			imgWrap.addEventListener(
+				"wheel",
+				(e) => {
+					e.preventDefault();
+					const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+					scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, scale + delta));
+					applyTransform();
+				},
+				{passive: false},
+			);
+
+		// Drag
+		function getClientCoords(e) {
+			if ("touches" in e) {
+				return {x: e.touches[0].clientX, y: e.touches[0].clientY};
+			}
+			return {x: e.clientX, y: e.clientY};
+		}
+
+		imgWrap &&
+			imgWrap.addEventListener("mousedown", (e) => {
+				if (e.button !== 0) return;
+				// Only allow dragging when zoomed in
+				if (scale <= 1) return;
+				isDragging = true;
+				startX = e.clientX;
+				startY = e.clientY;
+				startTranslateX = translateX;
+				startTranslateY = translateY;
+				e.preventDefault();
+			});
+		imgWrap &&
+			imgWrap.addEventListener(
+				"touchstart",
+				(e) => {
+					// Only allow dragging when zoomed in
+					if (scale <= 1) return;
+					isDragging = true;
+					const {x, y} = getClientCoords(e);
+					startX = x;
+					startY = y;
+					startTranslateX = translateX;
+					startTranslateY = translateY;
+				},
+				{passive: true},
+			);
+
+		document.addEventListener("mousemove", (e) => {
+			if (!isDragging) return;
+			translateX = startTranslateX + (e.clientX - startX);
+			translateY = startTranslateY + (e.clientY - startY);
+			applyTransform();
+			e.preventDefault();
+		});
+		document.addEventListener(
+			"touchmove",
+			(e) => {
+				if (!isDragging || !e.touches[0]) return;
+				const {x, y} = getClientCoords(e);
+				translateX = startTranslateX + (x - startX);
+				translateY = startTranslateY + (y - startY);
+				applyTransform();
+			},
+			{passive: true},
+		);
+
+		document.addEventListener("mouseup", () => {
+			isDragging = false;
+		});
+		document.addEventListener("touchend", () => {
+			isDragging = false;
+		});
+
+		// Zoom buttons for non-wheel devices
+		function zoomBy(step) {
+			scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, scale + step));
+			applyTransform();
+		}
+
+		zoomInBtn && zoomInBtn.addEventListener("click", () => zoomBy(ZOOM_STEP));
+		zoomOutBtn && zoomOutBtn.addEventListener("click", () => zoomBy(-ZOOM_STEP));
+	})();
+</script>
+
+<style lang='scss'>
+	@use "../styles/base/variables" as *;
+
+	.collection-preview-lightbox {
+		// Ensure it is hidden when the [hidden] attribute is present
+		&[hidden] {
+			display: none;
+		}
+
+		position: fixed;
+		inset: 0;
+		z-index: 1000;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+	}
+
+	.collection-preview-lightbox__backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.9);
+		cursor: pointer;
+	}
+
+	.collection-preview-lightbox__content {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		pointer-events: none;
+	}
+
+	.collection-preview-lightbox__img-wrap {
+		pointer-events: auto;
+		cursor: grab;
+		touch-action: none;
+		transform-origin: center center;
+		max-width: 90vw;
+		max-height: 90vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.collection-preview-lightbox__img-wrap:active {
+		cursor: grabbing;
+	}
+
+	.collection-preview-lightbox__img {
+		max-width: 100%;
+		max-height: 90vh;
+		width: auto;
+		height: auto;
+		object-fit: contain;
+		display: block;
+		user-select: none;
+	}
+
+	.collection-preview-lightbox__controls {
+		position: absolute;
+		bottom: 1.5rem;
+		left: 50%;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 0.75rem;
+		pointer-events: auto;
+	}
+
+	.collection-preview-lightbox__zoom-btn {
+		min-width: 40px;
+		height: 40px;
+		border-radius: 999px;
+		border: none;
+		background: rgba(0, 0, 0, 0.631);
+		color: $white;
+		font-size: 1.2rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		backdrop-filter: blur(10px);
+		transition: background 0.2s;
+	}
+
+	.collection-preview-lightbox__zoom-btn:hover,
+	.collection-preview-lightbox__zoom-btn:focus-visible {
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	.collection-preview-lightbox__zoom-btn:focus-visible {
+		outline: 2px solid $white;
+		outline-offset: 2px;
+	}
+
+	.collection-preview-lightbox__close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		width: 48px;
+		height: 48px;
+		padding: 0;
+		border: none;
+		background: rgba(0, 0, 0, 0.631);
+		backdrop-filter: blur(10px);
+		color: $white;
+		border-radius: 4px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		pointer-events: auto;
+		transition: background 0.2s;
+	}
+
+	.collection-preview-lightbox__close:hover,
+	.collection-preview-lightbox__close:focus-visible {
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	.collection-preview-lightbox__close:focus-visible {
+		outline: 2px solid $white;
+		outline-offset: 2px;
+	}
+</style>

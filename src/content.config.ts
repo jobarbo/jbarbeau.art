@@ -20,5 +20,16 @@ const project = defineCollection({
 	}),
 });
 
-export const collections = {project};
+const collectionPreview = defineCollection({
+	loader: glob({
+		pattern: "**/*.md",
+		base: "./src/content/collection-preview",
+	}),
+	schema: z.object({
+		title: z.string(),
+		images: z.array(z.string()).optional(),
+	}),
+});
+
+export const collections = {project, collectionPreview};
 
