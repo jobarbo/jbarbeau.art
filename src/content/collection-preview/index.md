@@ -1,5 +1,5 @@
 ---
-title: Ex-Machinas
+title: Ex-Machina (Retro Futura)
 images:
   - /assets/collection-preview/3_16_2026_22_17_55_ooo1B7Y2LP4Jiq9TvTJXPE1cRQFjYfyrnKMuq9zcSfW9PgBqhdD.png
   - /assets/collection-preview/3_16_2026_22_27_42_ooz4XzWT1erU3YxQXN8Ln1agby9QfaTvkEcfEMU8VTruwq2oLUQ.png
