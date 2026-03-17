@@ -1,19 +1,22 @@
 ---
 // Lightbox for collection preview: open on grid image click, zoom up to 5x, drag when zoomed.
 // Listens for clicks on [data-collection-preview-images] button[data-src].
+import {t, getLocaleFromPath, type Locale} from "../i18n";
+
+const locale: Locale = getLocaleFromPath(Astro.url.pathname);
 ---
 
-<div id='collection-preview-lightbox' class='collection-preview-lightbox' role='dialog' aria-modal='true' aria-label='Image viewer' hidden>
+<div id='collection-preview-lightbox' class='collection-preview-lightbox' role='dialog' aria-modal='true' aria-label={t(locale, "collectionPreview.lightboxAria")} hidden>
 	<div class='collection-preview-lightbox__backdrop' data-lightbox-backdrop></div>
 	<div class='collection-preview-lightbox__content' data-lightbox-content>
 		<div class='collection-preview-lightbox__img-wrap' data-lightbox-img-wrap>
 			<img class='collection-preview-lightbox__img' data-lightbox-img alt='' />
 		</div>
 		<div class='collection-preview-lightbox__controls'>
-			<button type='button' class='collection-preview-lightbox__zoom-btn' data-lightbox-zoom-out aria-label='Zoom out'> - </button>
-			<button type='button' class='collection-preview-lightbox__zoom-btn' data-lightbox-zoom-in aria-label='Zoom in'> + </button>
+			<button type='button' class='collection-preview-lightbox__zoom-btn' data-lightbox-zoom-out aria-label={t(locale, "collectionPreview.zoomOut")}> - </button>
+			<button type='button' class='collection-preview-lightbox__zoom-btn' data-lightbox-zoom-in aria-label={t(locale, "collectionPreview.zoomIn")}> + </button>
 		</div>
-		<button type='button' class='collection-preview-lightbox__close' data-lightbox-close aria-label='Close'>
+		<button type='button' class='collection-preview-lightbox__close' data-lightbox-close aria-label={t(locale, "collectionPreview.close")}>
 			<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>
 				<line x1='18' y1='6' x2='6' y2='18'></line>
 				<line x1='6' y1='6' x2='18' y2='18'></line>
@@ -53,6 +56,16 @@
 			imgWrap.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
 		}
 
+		function startZoomTransition() {
+			if (!imgWrap) return;
+			imgWrap.classList.add("collection-preview-lightbox__img-wrap--zooming");
+			const handleTransitionEnd = () => {
+				imgWrap.classList.remove("collection-preview-lightbox__img-wrap--zooming");
+				imgWrap.removeEventListener("transitionend", handleTransitionEnd);
+			};
+			imgWrap.addEventListener("transitionend", handleTransitionEnd);
+		}
+
 		function open(src) {
 			if (!img) return;
 			img.setAttribute("src", src);
@@ -61,18 +74,33 @@
 			translateY = 0;
 			applyTransform();
 			lightbox.removeAttribute("hidden");
+			// Allow CSS transition to run from initial state
+			requestAnimationFrame(() => {
+				lightbox.classList.add("is-visible");
+			});
 			document.body.style.overflow = "hidden";
 			lastFocused = document.activeElement;
 			closeBtn?.focus();
 		}
 
 		function close() {
-			lightbox.setAttribute("hidden", "");
-			document.body.style.overflow = "";
-			if (lastFocused) {
-				lastFocused.focus();
-				lastFocused = null;
-			}
+			// If already hidden, do nothing
+			if (lightbox.hasAttribute("hidden")) return;
+
+			const handleTransitionEnd = (event) => {
+				// Ensure we only handle the transition from the lightbox element itself
+				if (event.target !== lightbox) return;
+				lightbox.removeEventListener("transitionend", handleTransitionEnd);
+				lightbox.setAttribute("hidden", "");
+				document.body.style.overflow = "";
+				if (lastFocused) {
+					lastFocused.focus();
+					lastFocused = null;
+				}
+			};
+
+			lightbox.addEventListener("transitionend", handleTransitionEnd);
+			lightbox.classList.remove("is-visible");
 		}
 
 		function trapFocus(e) {
@@ -115,8 +143,13 @@
 				"wheel",
 				(e) => {
 					e.preventDefault();
+					startZoomTransition();
 					const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
 					scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, scale + delta));
+					if (scale === MIN_ZOOM) {
+						translateX = 0;
+						translateY = 0;
+					}
 					applyTransform();
 				},
 				{passive: false},
@@ -186,7 +219,12 @@
 
 		// Zoom buttons for non-wheel devices
 		function zoomBy(step) {
+			startZoomTransition();
 			scale = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, scale + step));
+			if (scale === MIN_ZOOM) {
+				translateX = 0;
+				translateY = 0;
+			}
 			applyTransform();
 		}
 
@@ -211,6 +249,16 @@
 		align-items: center;
 		justify-content: center;
 		padding: 2rem;
+
+		// Fade the overall overlay in/out
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 200ms ease-out;
+
+		&.is-visible {
+			opacity: 1;
+			pointer-events: auto;
+		}
 	}
 
 	.collection-preview-lightbox__backdrop {
@@ -228,6 +276,16 @@
 		align-items: center;
 		justify-content: center;
 		pointer-events: none;
+
+		// Slight scale/opacity animation for the content
+		transform: scale(0.98);
+		opacity: 0;
+		transition: transform 200ms ease-out, opacity 200ms ease-out;
+	}
+
+	.collection-preview-lightbox.is-visible .collection-preview-lightbox__content {
+		transform: scale(1);
+		opacity: 1;
 	}
 
 	.collection-preview-lightbox__img-wrap {
@@ -240,6 +298,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.collection-preview-lightbox__img-wrap--zooming {
+		transition: transform 180ms ease-out;
 	}
 
 	.collection-preview-lightbox__img-wrap:active {
@@ -257,10 +319,16 @@
 	}
 
 	.collection-preview-lightbox__controls {
+		background: #ffffffbd;
+		bottom: 0;
+		border-radius: 10px;
+		padding: 1rem;
+		backdrop-filter: blur(15px);
 		position: absolute;
-		bottom: 1.5rem;
-		left: 50%;
-		transform: translateX(-50%);
+		height: fit-content;
+		right: 0;
+		bottom: 0;
+		width: fit-content;
 		display: flex;
 		gap: 0.75rem;
 		pointer-events: auto;
@@ -300,9 +368,9 @@
 		height: 48px;
 		padding: 0;
 		border: none;
-		background: rgba(0, 0, 0, 0.631);
+		background: #ffffffbd;
 		backdrop-filter: blur(10px);
-		color: $white;
+		color: $black;
 		border-radius: 4px;
 		cursor: pointer;
 		display: flex;
@@ -314,7 +382,7 @@
 
 	.collection-preview-lightbox__close:hover,
 	.collection-preview-lightbox__close:focus-visible {
-		background: rgba(0, 0, 0, 0.3);
+		background: #ffffff80;
 	}
 
 	.collection-preview-lightbox__close:focus-visible {

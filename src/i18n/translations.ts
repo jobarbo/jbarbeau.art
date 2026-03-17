@@ -45,6 +45,19 @@ export const translations = {
 			previous: "Previous",
 			next: "Next",
 		},
+		collectionPreview: {
+			metaTitle: "Collection Preview | Jonathan Barbeau",
+			metaDescription: "Preview of the artist's collection.",
+			headerText: "If you want to generate your own artwork from this system, you can do so here:",
+			ctaText: "Generate your own artwork!",
+			sectionAria: "Collection preview",
+			emptyState: "No images yet. Add images in the admin.",
+			lightboxAria: "Image viewer",
+			zoomIn: "Zoom in",
+			zoomOut: "Zoom out",
+			close: "Close",
+			imageLabel: "View image {index}",
+		},
 	},
 	fr: {
 		nav: {
@@ -86,6 +99,19 @@ export const translations = {
 			previous: "Précédent",
 			next: "Suivant",
 		},
+		collectionPreview: {
+			metaTitle: "Aperçu de la collection | Jonathan Barbeau",
+			metaDescription: "Aperçu de la collection de l'artiste.",
+			headerText: "Si vous souhaitez générer vos propres œuvres à partir de ce système, vous pouvez le faire ici :",
+			ctaText: "Générez vos propres œuvres !",
+			sectionAria: "Aperçu de la collection",
+			emptyState: "Aucune image pour le moment. Ajoutez des images dans l’admin.",
+			lightboxAria: "Visionneuse d’images",
+			zoomIn: "Agrandir",
+			zoomOut: "Rétrécir",
+			close: "Fermer",
+			imageLabel: "Voir l’image {index}",
+		},
 	},
 } as const;
 
@@ -114,7 +140,18 @@ export type TranslationKey =
 	| "recentWork.emailInquiries"
 	| "recentWork.description"
 	| "recentWork.previous"
-	| "recentWork.next";
+	| "recentWork.next"
+	| "collectionPreview.metaTitle"
+	| "collectionPreview.metaDescription"
+	| "collectionPreview.headerText"
+	| "collectionPreview.ctaText"
+	| "collectionPreview.sectionAria"
+	| "collectionPreview.emptyState"
+	| "collectionPreview.lightboxAria"
+	| "collectionPreview.zoomIn"
+	| "collectionPreview.zoomOut"
+	| "collectionPreview.close"
+	| "collectionPreview.imageLabel";
 
 /** Get a translation string. Supports dot keys (e.g. 'hero.cta') and {param} placeholders. */
 export function t(

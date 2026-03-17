@@ -1,15 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import CollectionPreviewGrid from "../components/CollectionPreviewGrid.astro";
-import CollectionPreviewLightbox from "../components/CollectionPreviewLightbox.astro";
+import Layout from "../../layouts/Layout.astro";
+import CollectionPreviewGrid from "../../components/CollectionPreviewGrid.astro";
+import CollectionPreviewLightbox from "../../components/CollectionPreviewLightbox.astro";
 import {getCollection} from "astro:content";
-import {t, getLocaleFromPath, type Locale} from "../i18n";
+import {t, type Locale} from "../../i18n";
 
 const entries = await getCollection("collectionPreview");
 const entry = entries[0];
 const title = entry?.data.title ?? "Collection Preview";
 const images = (entry?.data.images ?? []) as string[];
-const locale: Locale = getLocaleFromPath(Astro.url.pathname);
+const locale: Locale = "fr";
 ---
 
 <Layout
@@ -20,3 +20,4 @@ const locale: Locale = getLocaleFromPath(Astro.url.pathname);
 	<CollectionPreviewGrid title={title} images={images} locale={locale} />
 	<CollectionPreviewLightbox />
 </Layout>
+
