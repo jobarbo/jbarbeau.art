@@ -8,7 +8,11 @@ const {title, images} = Astro.props;
 ---
 
 <section class='collection-preview-grid' aria-label='Collection preview'>
-	<h1 class='collection-preview-grid__title'>{title}</h1>
+	<div class='collection-preview-grid__header'>
+		<h1 class='collection-preview-grid__title'>{title}</h1>
+		<p class='collection-preview-grid__text'>If you want to generate your own artwork from this system, you can do so here:</p>
+		<a class='collection-preview-grid__link' href='https://retro-futura.netlify.app/' target='_blank'>Generate your own artwork!</a>
+	</div>
 	<div class='collection-preview-grid__list' data-collection-preview-images>
 		{
 			images.length > 0 ? (
@@ -22,12 +26,6 @@ const {title, images} = Astro.props;
 			)
 		}
 	</div>
-	<div class='collection-preview-grid__footer'>
-		<p class='collection-preview-grid__footer-text'>
-			If you want to generate your own artwork from this system, you can do so here:
-			<a href='https://retro-futura.netlify.app/' target='_blank'>https://retro-futura.netlify.app/</a>
-		</p>
-	</div>
 </section>
 
 <style lang='scss'>
@@ -40,10 +38,37 @@ const {title, images} = Astro.props;
 		max-width: 1200px;
 		margin: 0 auto;
 
+		&__header {
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
 		&__title {
 			font-size: 2rem;
 			margin-bottom: 2rem;
 			text-align: center;
+		}
+
+		&__text {
+			font-size: 1rem;
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+
+		&__link {
+			font-size: 1rem;
+			color: white;
+			font-weight: 600;
+			font-family: var(--font-brand);
+			padding: 0.5em 1em;
+			margin-bottom: 2rem;
+			background-color: black;
+			border-radius: 50px;
+			text-align: center;
+			margin: 0 auto;
 		}
 
 		&__list {
