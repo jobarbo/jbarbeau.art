@@ -15,15 +15,15 @@ descriptionFr: >-
 url: https://256art.com/project/jeu-de-ligne-2
 isRedeemable: false
 redeemUrl: /
-image: /assets/jeudeligne/jdl4.jpg
+image: /assets/jeudeligne/jdl4.webp
 images:
-  - /assets/jeudeligne/jdl.jpg
-  - /assets/jeudeligne/jdl2.jpg
-  - /assets/jeudeligne/jdl3.jpg
-  - /assets/jeudeligne/jdl4.jpg
-  - /assets/jeudeligne/jdl5.jpg
-  - /assets/jeudeligne/jdl6.jpg
-  - /assets/jeudeligne/jdl7.jpg
+  - /assets/jeudeligne/jdl.webp
+  - /assets/jeudeligne/jdl2.webp
+  - /assets/jeudeligne/jdl3.webp
+  - /assets/jeudeligne/jdl4.webp
+  - /assets/jeudeligne/jdl5.webp
+  - /assets/jeudeligne/jdl6.webp
+  - /assets/jeudeligne/jdl7.webp
 slider:
   - "4"
   - "3"

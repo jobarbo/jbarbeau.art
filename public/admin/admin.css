@@ -9,7 +9,7 @@
 }
 
 .widget-string input[type="text"][value^="/assets/jeudeligne"] {
-	background-image: url(/assets/jeudeligne/jdl.jpg);
+	background-image: url(/assets/jeudeligne/jdl.webp);
 }
 
 .widget-string input[type="text"][value^="/assets/starmap"] {
@@ -17,7 +17,7 @@
 }
 
 .widget-string input[type="text"][value^="/assets/traces"] {
-	background-image: url(/assets/traces/int1.jpg);
+	background-image: url(/assets/traces/int1.webp);
 }
 
 .widget-string input[type="text"][value^="/assets/jemesouviens"] {
@@ -25,11 +25,11 @@
 }
 
 .widget-string input[type="text"][value^="/assets/exhibita"] {
-	background-image: url(/assets/exhibita/1_thumb.jpg);
+	background-image: url(/assets/exhibita/1_thumb.webp);
 }
 
 .widget-string input[type="text"][value^="/assets/exlibris"] {
-	background-image: url(/assets/exlibris/1.jpg);
+	background-image: url(/assets/exlibris/1.webp);
 }
 
 /* Make the CMS layout more comfortable */

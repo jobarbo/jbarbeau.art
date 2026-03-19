@@ -7,7 +7,7 @@ slider:
   - "6"
   - "5"
   - "4"
-projectImage: /assets/exlibris/1.jpg
+projectImage: /assets/exlibris/1.webp
 slug: exlibris
 subtitle: January 2024 - fx(hash)
 description: >-
@@ -50,13 +50,13 @@ descriptionFr: >-
   à la tradition, au savoir, à l’innovation et aux horizons sans limite de
   l’art à l’ère numérique.
 url: https://www.fxhash.xyz/generative/0x682e10BF76d4150461ccf271e44aDb1DFe5f9F3A
-image: /assets/exlibris/4.jpg
+image: /assets/exlibris/4.webp
 images:
-  - /assets/exlibris/1.jpg
-  - /assets/exlibris/2.jpg
-  - /assets/exlibris/3.jpg
-  - /assets/exlibris/4.jpg
-  - /assets/exlibris/5.jpg
-  - /assets/exlibris/6.jpg
-  - /assets/exlibris/7.jpg
+  - /assets/exlibris/1.webp
+  - /assets/exlibris/2.webp
+  - /assets/exlibris/3.webp
+  - /assets/exlibris/4.webp
+  - /assets/exlibris/5.webp
+  - /assets/exlibris/6.webp
+  - /assets/exlibris/7.webp
 ---

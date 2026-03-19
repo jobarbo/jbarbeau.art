@@ -4,7 +4,7 @@ slider:
   - "4"
   - "3"
   - "2"
-projectImage: /assets/exhibita/10_thumb.jpg
+projectImage: /assets/exhibita/10_thumb.webp
 title: Exhibit-A
 slug: exhibita
 publishDate: 2023-04-15 12:00:00
@@ -26,16 +26,16 @@ descriptionFr: >-
   Chaque paire s’appuie sur le bruit de Perlin comme base algorithmique et montre comment une technique similaire peut produire des résultats très différents.
 url: https://highlight.xyz/mint/64f7c27b373cff27b5e9309c
 redeemUrl: /
-image: /assets/exhibita/10_thumb.jpg
+image: /assets/exhibita/10_thumb.webp
 images:
-  - /assets/exhibita/1_thumb.jpg
-  - /assets/exhibita/2_thumb.jpg
-  - /assets/exhibita/3_thumb.jpg
-  - /assets/exhibita/4_thumb.jpg
-  - /assets/exhibita/5_thumb.jpg
-  - /assets/exhibita/6_thumb.jpg
-  - /assets/exhibita/7_thumb.jpg
-  - /assets/exhibita/8_thumb.jpg
-  - /assets/exhibita/9_thumb.jpg
-  - /assets/exhibita/10_thumb.jpg
+  - /assets/exhibita/1_thumb.webp
+  - /assets/exhibita/2_thumb.webp
+  - /assets/exhibita/3_thumb.webp
+  - /assets/exhibita/4_thumb.webp
+  - /assets/exhibita/5_thumb.webp
+  - /assets/exhibita/6_thumb.webp
+  - /assets/exhibita/7_thumb.webp
+  - /assets/exhibita/8_thumb.webp
+  - /assets/exhibita/9_thumb.webp
+  - /assets/exhibita/10_thumb.webp
 ---

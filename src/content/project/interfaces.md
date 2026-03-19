@@ -39,15 +39,15 @@ descriptionFr: >-
 url: https://objkt.com/collections/KT1Tw7BRpsMomGE4bf3bxjAc4AgNV8xq7BYb
 isRedeemable: false
 redeemUrl: /
-image: /assets/traces/int6.jpg
+image: /assets/traces/int6.webp
 images:
-  - /assets/traces/int1.jpg
-  - /assets/traces/int2.jpg
-  - /assets/traces/int3.jpg
-  - /assets/traces/int4.jpg
-  - /assets/traces/int5.jpg
-  - /assets/traces/int6.jpg
-  - /assets/traces/int7.jpg
+  - /assets/traces/int1.webp
+  - /assets/traces/int2.webp
+  - /assets/traces/int3.webp
+  - /assets/traces/int4.webp
+  - /assets/traces/int5.webp
+  - /assets/traces/int6.webp
+  - /assets/traces/int7.webp
 slider:
   - "4"
   - "3"
