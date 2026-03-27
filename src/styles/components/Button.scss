@@ -1,17 +1,14 @@
 @use "../base/variables" as *;
 @use "../base/functions" as *;
+@use "../base/typography" as *;
 
 .button,
 button {
-	border-radius: 50px;
+	border-radius: to-vw(500);
 	background-color: var(--gray-0);
-	color: var(--gray-999);
-	text-decoration: none;
 	display: flex;
 	align-items: center;
 	padding: 0.75em 1.5em;
-	font-size: clamp(11px, to-vw(14), 16px);
-	font-weight: 600;
 	justify-content: center;
 	width: fit-content;
 	border: 1px solid black;
@@ -19,6 +16,14 @@ button {
 	transition: all 0.3s;
 	gap: 0.5em;
 	white-space: nowrap;
+
+	@include text(base, $family: $font-family-button, $color: $white, $fs: 14, $lh: 1.5, $fw: 550);
+
+	> * {
+		color: currentColor;
+		font-family: inherit;
+		font-weight: inherit;
+	}
 
 	&.blaze-prev {
 		padding-left: 0.5em;

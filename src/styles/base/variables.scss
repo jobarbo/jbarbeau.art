@@ -53,23 +53,23 @@ $max-height-stripped: 1080;
 $header-heights: (
 	mobile: (
 		full: 80px,
-		stripped: 80,
+		stripped: 80
 	),
 	tablet: (
 		full: 90px,
-		stripped: 90,
+		stripped: 90
 	),
 	desktop: (
 		full: 210px,
-		stripped: 210,
-	),
+		stripped: 210
+	)
 );
 
 // Transitions
 // ==========================================================================
 $transitions: (
 	short: 0.2s,
-	default: 0.3s ease-in-out,
+	default: 0.3s ease-in-out
 );
 
 // Breakpoints
@@ -77,20 +77,20 @@ $transitions: (
 $breakpoints: (
 	tiny: (
 		full: 320px,
-		stripped: 320,
+		stripped: 320
 	),
 	mobile: (
 		full: 720px,
-		stripped: 720,
+		stripped: 720
 	),
 	tablet: (
 		full: 1024px,
-		stripped: 1024,
+		stripped: 1024
 	),
 	xlarge: (
 		full: 1920px,
-		stripped: 1920,
-	),
+		stripped: 1920
+	)
 );
 
 // Padding System with dynamic fluid calculations
@@ -99,7 +99,7 @@ $base-paddings: (
 	base: 80px,
 	medium: 130px,
 	large: 180px,
-	xl: 220px,
+	xl: 220px
 );
 $padding: (
 	mobile: (
@@ -107,27 +107,27 @@ $padding: (
 		base: 14px,
 		medium: 18px,
 		large: 26px,
-		xl: 45px,
+		xl: 45px
 	),
 	tablet: (
 		tiny: 12px,
 		base: 18px,
 		medium: 24px,
 		large: 42px,
-		xl: 80px,
+		xl: 80px
 	),
 	desktop: (
 		tiny: map.get($base-paddings, tiny),
 		base: map.get($base-paddings, base),
 		medium: map.get($base-paddings, medium),
 		large: map.get($base-paddings, large),
-		xl: map.get($base-paddings, xl),
+		xl: map.get($base-paddings, xl)
 	),
 	xlarge: (
 		tiny: map.get($base-paddings, tiny),
 		base: map.get($base-paddings, base),
 		medium: map.get($base-paddings, medium),
 		large: map.get($base-paddings, large),
-		xl: map.get($base-paddings, xl),
-	),
+		xl: map.get($base-paddings, xl)
+	)
 );

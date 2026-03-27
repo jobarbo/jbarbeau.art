@@ -45,11 +45,11 @@ descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replac
 					</div>
 					<!-- navigation buttons -->
 					<div class='blaze-btn'>
-						<button class='blaze-prev'>
+						<button class='blaze-prev button'>
 							<span><Icon className='--slider --slider-prev' isButton={true} icon={"chevron_left"} /></span>
 							<span>{t(locale, "recentWork.previous")}</span>
 						</button>
-						<button class='blaze-next'>
+						<button class='blaze-next button'>
 							<span>{t(locale, "recentWork.next")}</span>
 							<span><Icon className='--slider --slider-next' isButton={true} icon={"chevron_right"} /></span>
 						</button>
@@ -117,5 +117,7 @@ descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replac
 </script>
 
 <style lang='scss'>
+	@use "../styles/base/typography.scss";
+	@use "../styles/components/Button.scss";
 	@use "../styles/components/RecentWork.scss";
 </style>

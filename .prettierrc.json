@@ -1,0 +1,25 @@
+{
+	"useTabs": true,
+	"jsxSingleQuote": true,
+	"bracketSpacing": false,
+	"bracketSameLine": true,
+	"printWidth": 200,
+	"singleQuote": false,
+	"semi": true,
+	"overrides": [
+		{
+			"files": ["*.scss", "*.css"],
+			"options": {
+				"trailingComma": "none",
+				"singleQuote": false
+			}
+		},
+		{
+			"files": "*.astro",
+			"options": {
+				"parser": "astro"
+			}
+		}
+	],
+	"plugins": ["prettier-plugin-astro"]
+}

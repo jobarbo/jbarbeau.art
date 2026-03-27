@@ -1,5 +1,6 @@
 @use "../base/variables" as *;
 @use "../base/functions" as *;
+@use "../base/typography" as *;
 
 .work-description {
 	margin: 1em 0;
@@ -111,7 +112,9 @@
 .blaze-track {
 	margin: 1em 0 1em 0;
 }
-
+.blaze-slider {
+	inset-inline-start: 0 !important;
+}
 .blaze-container {
 	max-width: 100%;
 }
@@ -125,27 +128,26 @@
 .blaze-prev,
 .blaze-next {
 	padding: 0.75em 1.5em;
-	border-radius: 50px;
-	background-color: black;
-	color: white;
-	font-size: clamp(12px, to-vw(14), 16px);
-	font-weight: 600;
+	border-radius: to-vw(500);
+	background-color: var(--gray-0);
 	margin-left: 1em;
 	border: 1px solid black;
 	transition: all 0.3s;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
+	@include text(base, $family: $font-family-button, $color: $white, $fs: 14, $lh: 1.5, $fw: 550);
 }
 
 .blaze-prev {
-	padding-left: 0.75em;
+	padding-left: 0.5em;
 	svg {
 		margin-right: 0.5em;
 	}
 }
 .blaze-next {
-	padding-right: 0.75em;
+	padding-right: 0.5em;
 	svg {
 		margin-left: 0.5em;
 	}
