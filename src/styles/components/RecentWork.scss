@@ -13,11 +13,11 @@
 }
 
 .work-title {
-	@include title(2, $lh: 1.2, $mb: 0.25em);
+	@include title(2, $lh: 1.2, $mb: 0.25em, $fw: 500);
 }
 
 .work-description-title {
-	@include title(3, $lh: 1.2, $mb: 0.5em);
+	@include title(3, $lh: 1.2, $mb: 0.5em, $fw: 500);
 }
 .work-description-text {
 	white-space: pre-wrap;
