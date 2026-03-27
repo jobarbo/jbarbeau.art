@@ -8,25 +8,20 @@
 	display: flex;
 	flex-direction: column-reverse;
 }
-.work-description-info {
-	margin: 0.15em 0;
-	font-size: 1em;
-	font-weight: 600;
-	color: var(--accent-regular);
-	max-width: 500px;
+.work-info {
+	@include text(base, $family: $font-family-default, $color: var(--gray-200), $fs: 18, $fw: 600, $lh: 1.5, $mb: 1.25em);
+}
+
+.work-title {
+	@include title(2, $lh: 1.2, $mb: 0.25em);
 }
 
 .work-description-title {
-	font-family: var(--font-brand);
-	font-size: 1.45rem;
-	margin-bottom: 0.5em;
+	@include title(3, $lh: 1.2, $mb: 0.5em);
 }
 .work-description-text {
-	line-height: 1.25em;
-	margin: 0.5em 0 2em 0;
-	font-family: var(--font-brand);
 	white-space: pre-wrap;
-	font-weight: 700;
+	@include text(base, $family: $font-family-default, $color: var(--gray-200), $fs: 16, $fw: 600, $lh: 1.5);
 }
 
 .work-description-link-wrapper {

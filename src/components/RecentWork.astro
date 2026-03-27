@@ -23,8 +23,8 @@ descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replac
 <li class='recent-work-item'>
 	<hr />
 	<div class='work-layout'>
-		<h3 class='work-description-title'>{work.data.title}</h3>
-		<p class='work-description-info'>{work.data.subtitle}</p>
+		<h3 class='work-title'>{work.data.title}</h3>
+		<p class='work-info'>{work.data.subtitle}</p>
 		<div class='work-description-link-wrapper'>
 			<Button label={t(locale, "recentWork.viewProject")} icon='external' href={work.data.url} target='_blank' class={`work-description-link ${isBtnDisabled}`} />
 			{work.data.isRedeemable && <Button label={t(locale, "recentWork.redeemHere")} icon='external' href={work.data.redeemUrl} target='_blank' class='work-description-link' />}

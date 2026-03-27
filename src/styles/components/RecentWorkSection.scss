@@ -3,6 +3,10 @@
 @use "../base/container" as *;
 @use "../base/mediaqueries" as *;
 @use "../base/typography" as *;
-.work {
+.recent-work-section {
 	margin-top: to-vw(80);
+
+	&__title {
+		@include title(2, $fs: 55, $lh: 1.2, $mb: 0.25em);
+	}
 }

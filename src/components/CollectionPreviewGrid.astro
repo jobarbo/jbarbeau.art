@@ -15,8 +15,8 @@ const locale: Locale = localeProp ?? getLocaleFromPath(Astro.url.pathname);
 	<div class='collection-preview-grid__header'>
 		<h1 class='collection-preview-grid__title'>{title}</h1>
 		<p class='collection-preview-grid__text'>{t(locale, "collectionPreview.headerText")}</p>
-		<a class='collection-preview-grid__link' href='https://retro-futura.netlify.app/' target='_blank'>
-			{t(locale, "collectionPreview.ctaText")}
+		<a class='collection-preview-grid__link button' href='https://retro-futura.netlify.app/' target='_blank'>
+			<span> {t(locale, "collectionPreview.ctaText")}</span>
 		</a>
 	</div>
 	<div class='collection-preview-grid__list' data-collection-preview-images>
@@ -37,7 +37,9 @@ const locale: Locale = localeProp ?? getLocaleFromPath(Astro.url.pathname);
 <style lang='scss'>
 	@use "../styles/base/functions" as *;
 	@use "../styles/base/variables" as *;
+	@use "../styles/base/typography" as *;
 	@use "../styles/base/mediaqueries" as *;
+	@use "../styles/components/button" as *;
 
 	.collection-preview-grid {
 		padding: 2rem 1rem;
@@ -55,25 +57,13 @@ const locale: Locale = localeProp ?? getLocaleFromPath(Astro.url.pathname);
 			font-size: 2rem;
 			margin-bottom: 2rem;
 			text-align: center;
+			@include title(2, $lh: 1.2, $mb: 0.5em);
 		}
 
 		&__text {
 			font-size: 1rem;
 			margin-bottom: 2rem;
 			text-align: center;
-		}
-
-		&__link {
-			font-size: 1rem;
-			color: white;
-			font-weight: 600;
-			font-family: var(--font-brand);
-			padding: 0.5em 1em;
-			margin-bottom: 2rem;
-			background-color: black;
-			border-radius: 50px;
-			text-align: center;
-			margin: 0 auto;
 		}
 
 		&__list {

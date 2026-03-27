@@ -36,9 +36,9 @@
 // 1. Variables
 // ==========================================================================
 
-$font-family-default: "aesthet-nova", "IBM Plex Mono";
-$font-family-title: $font-family-default;
-$font-family-button: $font-family-default, "lexia-mono", "IBM Plex Mono", monospace;
+$font-family-default: "JetBrains Mono", "IBM Plex Mono";
+$font-family-title: "aesthet-nova", "IBM Plex Mono";
+$font-family-button: $font-family-title, "IBM Plex Mono", monospace;
 $function-size-default: 16;
 $font-size-default: 16px;
 $line-height-default: 1.5;
@@ -469,7 +469,7 @@ $text-presets: (
 	$fw: null,
 	$color: $text-color-default,
 	$lh: null,
-	$ls: 0em,
+	$ls: -0.04em,
 	$ta: null,
 	$tt: null,
 	$td: null,

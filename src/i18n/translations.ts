@@ -26,14 +26,12 @@ export const translations = {
 		},
 		home: {
 			metaTitle: "Jonathan Barbeau | Algorithmic Artist",
-			metaDescription:
-				"Algorithmic artist based in Québec City. Digital and long-form collections on fx(hash), Foundation, Highlight. Exhibitions, NFTs, and creative code.",
+			metaDescription: "Algorithmic artist based in Québec City. Digital and long-form collections on fx(hash), Foundation, Highlight. Exhibitions, NFTs, and creative code.",
 		},
 		blog: {
 			title: "Blog",
 			metaTitle: "Blog | J Barbeau",
-			metaDescription:
-				"Articles and updates from Jonathan Barbeau — algorithmic art, creative process, exhibitions, and new releases.",
+			metaDescription: "Articles and updates from Jonathan Barbeau — algorithmic art, creative process, exhibitions, and new releases.",
 			loadError: "Unable to load blog posts at this time. Please check back later.",
 		},
 		recentWork: {
@@ -80,18 +78,16 @@ export const translations = {
 		},
 		home: {
 			metaTitle: "Jonathan Barbeau | Artiste algorithmique",
-			metaDescription:
-				"Artiste algorithmique basé à Québec. Collections numériques et long format sur fx(hash), Foundation, Highlight. Expositions, NFTs et art par code.",
+			metaDescription: "Artiste algorithmique basé à Québec. Collections numériques et long format sur fx(hash), Foundation, Highlight. Expositions, NFTs et art par code.",
 		},
 		blog: {
 			title: "Blog",
 			metaTitle: "Blog | J Barbeau",
-			metaDescription:
-				"Articles et actualités de Jonathan Barbeau — art algorithmique, processus créatif, expositions et nouvelles œuvres.",
+			metaDescription: "Articles et actualités de Jonathan Barbeau — art algorithmique, processus créatif, expositions et nouvelles œuvres.",
 			loadError: "Impossible de charger les articles pour le moment. Revenez plus tard.",
 		},
 		recentWork: {
-			sectionTitle: "Récent",
+			sectionTitle: "Oeuvres récentes",
 			viewProject: "Voir le projet",
 			redeemHere: "Récupérer ici !",
 			emailInquiries: "Me contacter",
@@ -154,11 +150,7 @@ export type TranslationKey =
 	| "collectionPreview.imageLabel";
 
 /** Get a translation string. Supports dot keys (e.g. 'hero.cta') and {param} placeholders. */
-export function t(
-	locale: Locale,
-	key: TranslationKey,
-	params?: Record<string, string | number>,
-): string {
+export function t(locale: Locale, key: TranslationKey, params?: Record<string, string | number>): string {
 	const keys = key.split(".");
 	let value: unknown = translations[locale];
 	for (const k of keys) {
