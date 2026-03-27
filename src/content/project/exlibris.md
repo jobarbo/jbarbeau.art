@@ -10,6 +10,7 @@ slider:
 projectImage: /assets/exlibris/1.webp
 slug: exlibris
 subtitle: January 2024 - fx(hash)
+subtitleFr: Janvier 2024 - fx(hash)
 description: >-
   The idea of EX-LIBRIS emerged only days before my pilgrimage to the Artblocks
   Marfa Weekend in September. What began as an intent to craft exquisite

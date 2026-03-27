@@ -5,6 +5,8 @@ publishDate: 2024-03-06 12:00:00
 collection: project
 subtitle: April 2024 - Intefaces - Funded by the federal government commissioner
   for culture and the media, Hanover, Stuttgart, Germany - OBJKT.
+subtitleFr: Avril 2024 - Interfaces - Financé par le délégué du gouvernement
+  fédéral à la culture et aux médias, Hanovre, Stuttgart, Allemagne - OBJKT.
 description: >-
   TRACES is a multi-artist collaboration. It is part of the Interfaces project
   which bridges the world of dance and algorithmic art. The interfaces team

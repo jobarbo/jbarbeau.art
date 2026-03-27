@@ -37,6 +37,7 @@ collections:
       - {label: "Publish Date", name: "publishDate", widget: "datetime"}
       - {label: "Collection", name: "collection", widget: "hidden", default: "project"}
       - {label: "Subtitle", name: "subtitle", widget: "string", required: false}
+      - {label: "Subtitle (French)", name: "subtitleFr", widget: "string", required: false}
       - {label: "Description", name: "description", widget: "markdown", required: true}
       - {label: "Description (French)", name: "descriptionFr", widget: "markdown", required: false}
       - {label: "URL", name: "url", widget: "string"}

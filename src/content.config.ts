@@ -10,6 +10,7 @@ const project = defineCollection({
 		title: z.string(),
 		publishDate: z.coerce.date(),
 		subtitle: z.string().optional(),
+		subtitleFr: z.string().optional(),
 		description: z.string(),
 		descriptionFr: z.string().optional(),
 		url: z.string(),

@@ -11,6 +11,8 @@ publishDate: 2023-04-15 12:00:00
 collection: project
 subtitle: May 2023 - Self curated - Exhibited at La Korrigane in Quebec city -
   Certificate hosted by Highlight.xyz
+subtitleFr: Mai 2023 - Auto-commissariée - Exposée à La Korrigane à Québec -
+  Certificat hébergé par Highlight.xyz
 description: >-
   This collection features 10 artworks made in pair by 5 different algorithm.
   This collection was exhibited at La Korrigane in **Quebec City** during the

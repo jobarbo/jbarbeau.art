@@ -5,6 +5,8 @@ publishDate: 2024-12-21 12:00:00
 collection: project
 subtitle: "December 2024  -  Show: My Reality  -  Curated by: Qm &
   Snow  -  Hosted by: Cloud Art Museum"
+subtitleFr: "Décembre 2024  -  Exposition : My Reality  -  Commissariat : Qm &
+  Snow  -  Hébergé par : Cloud Art Museum"
 description: >-
   Dimensions: 5400 × 7614
 
