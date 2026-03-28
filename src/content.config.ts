@@ -32,5 +32,20 @@ const collectionPreview = defineCollection({
 	}),
 });
 
-export const collections = {project, collectionPreview};
+const blog = defineCollection({
+	loader: glob({
+		pattern: "**/*.md",
+		base: "./src/content/blog",
+	}),
+	schema: z.object({
+		title: z.string(),
+		pubDate: z.coerce.date(),
+		substackUrl: z.string(),
+		image: z.string().optional(),
+		excerpt: z.string().optional(),
+		draft: z.boolean().default(false),
+	}),
+});
+
+export const collections = {project, collectionPreview, blog};
 

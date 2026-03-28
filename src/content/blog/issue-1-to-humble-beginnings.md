@@ -1,0 +1,40 @@
+---
+title: "Issue #0 - To humble beginnings "
+pubDate: "2023-02-20T19:34:03.000Z"
+substackUrl: "https://jbarbeau.substack.com/p/issue-1-to-humble-beginnings"
+image: "https://substackcdn.com/image/fetch/$s_!WXNw!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F32aecc28-26f5-4182-b17f-4f9987a018e3_3000x3000.png"
+excerpt: "Excited to launch my first newsletter! Join for exclusive access to my generative art tutorials, deep dives into my creative process, and early access to limited edition releases. Subscribe now!"
+draft: false
+---
+
+[Subscribe now](https://jbarbeau.substack.com/subscribe?)
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!WXNw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F32aecc28-26f5-4182-b17f-4f9987a018e3_3000x3000.png)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!WXNw!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F32aecc28-26f5-4182-b17f-4f9987a018e3_3000x3000.png)
+
+## Introduction
+
+Hello and welcome to my very first Substack newsletter! My name is Jonathan Barbeau and I am a full-time generative artist from Quebec, Canada. I'm excited to be using this platform to centralize all of my writings, and to share more of my creative process with you.
+
+For those of you who are new to my work, I specialize in creating generative art using code. This means that I write computer programs that generate unique pieces of art every time they are run. It's a fascinating process that allows me to create complex and intricate compositions that I would never be able to create by hand.
+
+## So, what’s the deal?
+
+While I have been writing about my process on [FX(hash)](https://www.fxhash.xyz/u/jbarbeau.art/articles), I decided that it was time to create an official newsletter to share my thoughts and ideas more directly with you. From now on, all of my articles will be released first on this newsletter, before being shared on other platforms.
+
+I'm really excited to use this platform to provide value to my community. I plan on sharing tutorials and deep dives into my creative process, as well as tips and tricks for creating your own generative art. Whether you're a fellow artist, a programmer, or just someone who is interested in the creative process, I think you'll find something of value here.
+
+## I get that, but why pay?
+
+In addition to sharing tutorials and deep dives into my creative process, I'm also excited to announce that I will be using this newsletter to share news about upcoming art releases and drops. As a subscriber, you will be among the first to know about new projects that I'm working on, and you will have early access to purchase them before anyone else.
+
+I believe that my subscribers are the backbone of my creative community, and I want to reward you for your support by providing exclusive access to my work. This means that you will get first dibs on limited edition prints and other unique pieces of art before they're available to the general public.
+
+To be clear, these exclusive offers will only be available to subscribers of this newsletter. So if you're interested in getting early access to my upcoming projects, be sure to subscribe today. More perks will be coming to paid subscribers, I just need to figure out the logistics on those (like one on one tutorials, priorities on commission work, discount and more).
+
+I'm excited to use this newsletter as a way to connect more directly with my community, and I can't wait to share more of my work with you in the future. Thanks for your support!

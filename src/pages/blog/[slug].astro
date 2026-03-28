@@ -1,135 +1,43 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Parser from "rss-parser";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-	const SUBSTACK_RSS_URL = "https://jbarbeau.substack.com/feed";
-	const TARGET_SLUG = "paths-meet-connections-emerge";
-
-	// Initialize parser inside getStaticPaths
-	const parser = new Parser({
-		customFields: {
-			item: [["content:encoded", "contentEncoded"]],
-		},
-		timeout: 10000,
-		requestOptions: {
-			rejectUnauthorized: false,
-		},
-	});
-
-	try {
-		const response = await fetch(SUBSTACK_RSS_URL);
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		}
-		const feedText = await response.text();
-
-		// Log the raw feed content to see what we're working with
-
-		const feed = await parser.parseString(feedText);
-
-		if (!feed.items || feed.items.length === 0) {
-			console.error("No items found in feed");
-			return [];
-		}
-
-		const paths = feed.items.map((post: any) => {
-			// Log the raw link first
-
-			// Split and log each step
-			const parts = post.link.split("/p/");
-
-			const lastPart = parts[parts.length - 1];
-
-			const withoutQuery = lastPart?.split("?")[0];
-
-			const withoutHash = withoutQuery?.split("#")[0];
-
-			return {
-				params: {slug: withoutHash},
-				props: {
-					title: post.title,
-					content: post.contentEncoded || post.content,
-					pubDate: post.pubDate,
-					link: post.link,
-					image: post.enclosure?.url || null,
-				},
-			};
-		});
-
-		// Verify the target slug exists
-		const hasTargetSlug = paths.some((p) => p.params.slug === TARGET_SLUG);
-
-		return paths;
-	} catch (error) {
-		console.error("\n=== Error Processing Feed ===");
-		console.error("Error:", error);
-		if (error instanceof Error) {
-			console.error("Error message:", error.message);
-			console.error("Error stack:", error.stack);
-		}
-		return [];
-	}
+	const posts = await getCollection("blog", ({ data }) => !data.draft);
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
 }
 
-const {title, content, pubDate, link, image} = Astro.props;
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, pubDate, substackUrl, image, excerpt } = post.data;
 
-// Format the date
-const date = new Date(pubDate);
-const formattedDate = date.toLocaleDateString("en-US", {
+const formattedDate = pubDate.toLocaleDateString("en-US", {
 	year: "numeric",
 	month: "long",
 	day: "numeric",
 });
 
-// Extract the first image from content as fallback if no enclosure
-let contentImage = null;
-if (!image && content) {
-	const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-	if (imgMatch && imgMatch[1]) {
-		contentImage = imgMatch[1];
-	}
-}
-
-const ogImage = image || contentImage || "/assets/og/profile.webp";
-
-/**
- * Process Substack HTML content:
- * - Strip pencraft/pc-* utility classes (Substack layout tokens unused on this site)
- * NOTE: Removing elements (e.g. image-link-expand) via regex is unsafe with nested tags.
- *       Those are hidden via CSS in BlogSingle.scss instead.
- */
-function processSubstackContent(html: string): string {
-	if (!html) return "";
-
-	let processed = html;
-
-	// Strip pencraft and pc-* class tokens, keeping other classes intact
-	processed = processed.replace(/\bpencraft\b\s*/g, "");
-	processed = processed.replace(/\bpc-[a-zA-Z0-9_-]+\b\s*/g, "");
-
-	// Clean up empty class attributes left behind
-	processed = processed.replace(/\s*class="\s*"/g, "");
-
-	return processed;
-}
-
-const processedContent = processSubstackContent(content);
+const ogImage = image || "/assets/og/profile.webp";
 ---
 
-<Layout title={`${title} | Blog | J Barbeau`} description={content?.substring(0, 160).replace(/<[^>]*>/g, "")} image={ogImage} type='article'>
-	<section class='blog-single' aria-label='Blog post'>
-		<article class='blog-single__article'>
-			<h1 class='blog-single__title'>{title}</h1>
-			<div class='blog-single__meta'>
-				<time class='blog-single__date' datetime={date.toISOString()}>{formattedDate}</time>
-				<a href={link} target='_blank' rel='noopener noreferrer' class='blog-single__substack-link'>View on Substack ↗</a>
+<Layout title={`${title} | Blog | J Barbeau`} description={excerpt ?? ""} image={ogImage} type="article">
+	<section class="blog-single" aria-label="Blog post">
+		<article class="blog-single__article">
+			<h1 class="blog-single__title">{title}</h1>
+			<div class="blog-single__meta">
+				<time class="blog-single__date" datetime={pubDate.toISOString()}>{formattedDate}</time>
+				<a href={substackUrl} target="_blank" rel="noopener noreferrer" class="blog-single__substack-link">View on Substack ↗</a>
 			</div>
-			<div class='blog-single__content' set:html={processedContent} />
+			<div class="blog-single__content">
+				<Content />
+			</div>
 		</article>
 
-		<div class='blog-single__footer'>
-			<a href='/blog' class='blog-single__back-link'>← Back to all posts</a>
+		<div class="blog-single__footer">
+			<a href="/blog" class="blog-single__back-link">← Back to all posts</a>
 		</div>
 	</section>
 </Layout>

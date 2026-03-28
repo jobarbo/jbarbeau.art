@@ -1,0 +1,166 @@
+---
+title: "Hi! It's been a while."
+pubDate: "2023-04-28T14:46:41.000Z"
+substackUrl: "https://jbarbeau.substack.com/p/hi-its-been-a-while"
+image: "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ff1d067-6b0e-4ec3-8f59-b8c4a57ce685_4032x3024.jpeg"
+excerpt: Where do I even begin...
+draft: false
+---
+
+[Inscrivez-vous maintenant](https://jbarbeau.substack.com/subscribe?)
+
+## The Long Dark
+
+The theme of the first two months of 2023 was mostly survival. I’m in Quebec, the NFT market is super slow and I had trouble finding some good web development gig. I was seriously wondering if I could continue being a full-time artist/independent web develop.
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!0fRE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe0baf8a9-6ea8-4279-bbdc-cf91ac061cd0_4032x3024.jpeg)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!0fRE!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe0baf8a9-6ea8-4279-bbdc-cf91ac061cd0_4032x3024.jpeg)
+
+Just a normal mid February snowstorm in downtown Quebec City
+
+# The Quick Bright
+
+Then, like a good David Attenborough BBC documentary, life saving monsoon came falling down. I got two really cool design / web development contract and it just started a chain reaction that made March and April go by like a fever dream.
+
+What made these project so special is that both of them are related to Generative Art and NFT’s.
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!ktv4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e0386a8-f74f-4c26-ac43-21e4add16c36_4032x3024.jpeg)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!ktv4!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e0386a8-f74f-4c26-ac43-21e4add16c36_4032x3024.jpeg)
+
+circa April 2022, On a island in the BC wilderness
+
+# Substratum
+
+The first of these project was to redesign Substratum website. It’s an NFT platform built from the ground up to support dynamic and experimental crypto art projects. It was founded by generative artist [Matto](https://matto.xyz/)
+
+The platform gives artists some really cool features to explore and play with, for example, I could build a generative art piece that would evolve over time. I’m talking about months and years and not only millis(). This is really interesting because I’m super interested in evolution and ecology and representing these mechanics with an art project would be really cool.
+
+The current redesign is still being implemented by the development team but you can visit the platform right here: [https://substratum.art/](https://substratum.art/)
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!ydJ6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2448fa4a-fa50-429e-a821-afa96b98855e_1440x2012.png)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!ydJ6!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2448fa4a-fa50-429e-a821-afa96b98855e_1440x2012.png)
+
+Home Page Design mockup for the Substratum project
+
+# The Station3 Project
+
+While I was working on Substratum, Bob Loukas was looking for a designer and developer to build the website for this really neat project called Station3.NYC
+
+Station 3 is a really cool collaborative workspace located in the heart of Manhattan Financial District. It’s mission is to support builders and artist in the Web3 / NFT world.
+
+It was a really fun project to design and code. All in all, I made the whole design and development in a little more than 3 week. The deadline where tight but I had a real blast. We wanted the website to be ready before the space launch party on the 12th of April which itself was during #NFTNYC. I’m really pleased with the result.
+
+If you are a builder / artist working with anything Web3 please take a look at the website here to know more : [https://station3.nyc/](https://station3.nyc/)
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!mXmI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b26937-a4a1-4f7b-869d-f16eda2d076d_1442x1306.png)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!mXmI!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b26937-a4a1-4f7b-869d-f16eda2d076d_1442x1306.png)
+
+Home Page design mockup from the Station3 project
+
+# Solo Trip To NYC
+
+While working on the Station3 project, I decided it would be fun to go in real life to the launch party. So I booked a flight and an hotel room, I mean how cool it is, to help build a project and go there in person to celebrate. I’ll get to meet Bob, Matto, and so many other artists and collector friends. It would be a very quick trip though since my return flight was set for the next day at 10am.
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!0Ipl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ff1d067-6b0e-4ec3-8f59-b8c4a57ce685_4032x3024.jpeg)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!0Ipl!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ff1d067-6b0e-4ec3-8f59-b8c4a57ce685_4032x3024.jpeg)
+
+weeeeeeeee
+
+## Generative art everywhere
+
+I was really surprised how much generative art galleries and event there is in NYC, even with the current slow(really) market. I had the chance to meet Dmitri Cherniak and Helena Sarin at the really cool [Bitforms Gallery](https://bitforms.art/). They worked together on this collaborative project called #gen2gan and released a really nice book that I had the chance to pick up. Met a bunch of cool people there too !
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!Lj9i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F58f5c52d-c336-4762-b19b-722385539c6f_1290x1720.jpeg)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!Lj9i!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F58f5c52d-c336-4762-b19b-722385539c6f_1290x1720.jpeg)
+
+[Emily Xie](https://xie-emily.com/), [Kaloh](https://www.kaloh.xyz/) and me(looking like a 34 years old kid getting ready for school) at the Bitforms Gallery
+
+Then I had the chance to see the Station3 space in person. It’s a really nice space and it made me wish I lived in NYC to use it. The launch party was a blast and again it was really fun to meet all these online friends in the real world.
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!awPK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26bc75de-f228-453d-81cb-e46307bc77f0_2560x1707.jpeg)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!awPK!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26bc75de-f228-453d-81cb-e46307bc77f0_2560x1707.jpeg)
+
+Cafe - Event Space, courtesy of the station3.nyc website
+
+I closed this beautiful day with a final stop at [ZeroSpace](https://www.zerospace.co/) in Brooklyn. It hosted the Refraction Festival x PROOF OF PEOPLE Event. The location is basically a giant warehouse that serves as a brain melting playground for generative art. There was a throne by [EBB](https://twitter.com/ebb_global) and [Nicolas Sassoon](https://nicolassassoon.com/) that had sensors on it and it would scan your butt signature to generate art. I saw [IxShells](https://twitter.com/ix_shells) display sound reactive art on a display while house music was blasting. Finally, I had the chance to meet one of my main inspiration in this crazy journey, [Joshua Davis](https://www.instagram.com/praystation/?hl=fr).
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!W7gq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fde52a664-8269-45f9-bd88-4ef7516befbf_2961x3495.jpeg)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!W7gq!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fde52a664-8269-45f9-bd88-4ef7516befbf_2961x3495.jpeg)
+
+[SCANNERS V1.2](https://ebb.global/projects/shopdesk.php) By EBB and Nicolas Sassoon
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!Ephx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd041c80-2d59-49fb-9a19-aa9b03c5a6c5_4032x3024.jpeg)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!Ephx!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd041c80-2d59-49fb-9a19-aa9b03c5a6c5_4032x3024.jpeg)
+
+This trip to NYC went by so quick but I’m back in Quebec City with hope and optimism about the future of the space. If I can survive this market, I think everything will fall in it’s place.
+
+## My first IRL Exhibition
+
+Finally Starting on the 18th of May, I will be exhibiting 10 exclusive piece of generative art at [La Korrigane](https://www.instagram.com/brasserielakorrigane/). It’s a local pub and micro-brewery that is located in downtown Quebec City.
+
+It’s the first time I’ll have my own work exhibited in a space so I’m really stoked for that opportunity. The team there are great and super welcoming.
+
+I’m currently waiting for the prints to be framed and I can’t wait to show you the final result. It’s going to look amazing because it will be made by none others that [Les Trafiquants D’art](https://trafiquantsdart.com/). I’ve been collaborating with them since I started my art journey in 2018. It’s a really great place where they make really high quality prints and frame.
+
+So be sure to stop by and let me know if you’re ever near the quaint city of Quebec between May and September!
+
+[
+
+![](https://substackcdn.com/image/fetch/$s_!H_lH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa532f265-b364-423c-bb72-96f165eac8aa_2338x1270.png)
+
+
+
+](https://substackcdn.com/image/fetch/$s_!H_lH!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa532f265-b364-423c-bb72-96f165eac8aa_2338x1270.png)
+
+It was a long update, but I hope to be more consistent in the next weeks so I’ll be able to make more bit size content.
+
+Hope you liked it
+
+Have a great week everyone!
+
+Thanks for reading The Weekly Process by Jonathan Barbeau! Subscribe for free to receive new posts and support my work.
