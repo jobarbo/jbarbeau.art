@@ -1,0 +1,127 @@
+@use "../base/variables" as *;
+@use "../base/functions" as *;
+@use "../base/container" as *;
+@use "../base/mediaqueries" as *;
+@use "../base/typography" as *;
+
+// ==========================================================================
+//  BLOG SINGLE — individual post page
+// ==========================================================================
+
+.blog-single {
+	@include container();
+	padding-top: to-vw(60);
+	padding-bottom: to-vw(80);
+
+	@include tablet-only {
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+	}
+
+	&__article {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	&__title {
+		@include title(1, $fs: 50, $lh: 1.2, $mb: 0.3em);
+	}
+
+	&__meta {
+		display: flex;
+		align-items: center;
+		gap: to-vw(24);
+		flex-wrap: wrap;
+		margin-bottom: to-vw(40);
+
+		@include mobile-only {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.5rem;
+		}
+	}
+
+	&__date {
+		@include text(base, $fs: 14, $fw: 600, $color: $charcoal, $lh: 1);
+	}
+
+	&__substack-link {
+		@include text(base, $fs: 14, $color: $teal, $lh: 1);
+		text-decoration: underline;
+
+		&:hover {
+			color: $deep-teal;
+		}
+	}
+
+	&__content {
+		@include wysiwyg();
+
+		// Hide Substack UI controls that don't belong on this site
+		:global(.image-link-expand),
+		:global(.restack-image),
+		:global(.view-image) {
+			display: none;
+		}
+
+		:global(img),
+		:global(iframe) {
+			max-width: 100%;
+			height: auto;
+			margin: to-vw(24) 0;
+			border-radius: 4px;
+		}
+
+		:global(blockquote) {
+			border-left: 4px solid $teal;
+			padding-left: to-vw(24);
+			margin: to-vw(24) 0;
+			color: $charcoal;
+		}
+
+		:global(pre) {
+			background-color: $gray-50;
+			padding: to-vw(16);
+			border-radius: 4px;
+			overflow-x: auto;
+			font-family: $font-family-default;
+		}
+
+		:global(code) {
+			background-color: $gray-50;
+			padding: 0.2em 0.4em;
+			border-radius: 0.25em;
+			font-family: $font-family-default;
+			font-size: 0.875em;
+		}
+
+		:global(.embedded-post-wrap),
+		:global(.embedded-publication-wrap) {
+			margin: to-vw(32) 0;
+			padding: to-vw(16);
+			border: 1px solid $gray-100;
+			border-radius: 4px;
+		}
+
+		:global(.image-gallery-embed) {
+			margin: to-vw(32) 0;
+		}
+	}
+
+	&__footer {
+		max-width: 800px;
+		margin: to-vw(48) auto 0;
+		padding-top: to-vw(32);
+		border-top: 1px solid $gray-100;
+	}
+
+	&__back-link {
+		@include text(base, $fs: 14, $color: $teal, $lh: 1);
+		text-decoration: none;
+
+		&:hover {
+			color: $deep-teal;
+			text-decoration: underline;
+		}
+	}
+}

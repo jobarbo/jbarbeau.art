@@ -92,111 +92,48 @@ if (!image && content) {
 }
 
 const ogImage = image || contentImage || "/assets/og/profile.webp";
+
+/**
+ * Process Substack HTML content:
+ * - Strip pencraft/pc-* utility classes (Substack layout tokens unused on this site)
+ * NOTE: Removing elements (e.g. image-link-expand) via regex is unsafe with nested tags.
+ *       Those are hidden via CSS in BlogSingle.scss instead.
+ */
+function processSubstackContent(html: string): string {
+	if (!html) return "";
+
+	let processed = html;
+
+	// Strip pencraft and pc-* class tokens, keeping other classes intact
+	processed = processed.replace(/\bpencraft\b\s*/g, "");
+	processed = processed.replace(/\bpc-[a-zA-Z0-9_-]+\b\s*/g, "");
+
+	// Clean up empty class attributes left behind
+	processed = processed.replace(/\s*class="\s*"/g, "");
+
+	return processed;
+}
+
+const processedContent = processSubstackContent(content);
 ---
 
 <Layout title={`${title} | Blog | J Barbeau`} description={content?.substring(0, 160).replace(/<[^>]*>/g, "")} image={ogImage} type='article'>
-	<section class='container mx-auto px-4 py-8 max-w-4xl' aria-label='Blog post'>
-		<article class='prose max-w-none'>
-			<h1 class='text-4xl font-bold mb-4'>{title}</h1>
-			<div class='flex items-center gap-4 text-gray-600 mb-8'>
-				<time datetime={date.toISOString()}>{formattedDate}</time>
-				<a href={link} target='_blank' rel='noopener noreferrer' class='hover:text-gray-800'> View on Substack ↗ </a>
+	<section class='blog-single' aria-label='Blog post'>
+		<article class='blog-single__article'>
+			<h1 class='blog-single__title'>{title}</h1>
+			<div class='blog-single__meta'>
+				<time class='blog-single__date' datetime={date.toISOString()}>{formattedDate}</time>
+				<a href={link} target='_blank' rel='noopener noreferrer' class='blog-single__substack-link'>View on Substack ↗</a>
 			</div>
-			<div class='substack-content' set:html={content} />
+			<div class='blog-single__content' set:html={processedContent} />
 		</article>
 
-		<div class='mt-8 pt-8 border-t'>
-			<a href='/blog' class='text-blue-600 hover:text-blue-800'> ← Back to all posts </a>
+		<div class='blog-single__footer'>
+			<a href='/blog' class='blog-single__back-link'>← Back to all posts</a>
 		</div>
 	</section>
 </Layout>
 
-<style>
-	/* Ensure images and iframes in the content are responsive */
-	.substack-content :global(img),
-	.substack-content :global(iframe) {
-		max-width: 100%;
-		height: auto;
-		margin: 1.5rem 0;
-	}
-
-	/* Style blockquotes */
-	.substack-content :global(blockquote) {
-		border-left: 4px solid #e5e7eb;
-		padding-left: 1rem;
-		margin: 1.5rem 0;
-		color: #4b5563;
-	}
-
-	/* Style code blocks */
-	.substack-content :global(pre) {
-		background-color: #f3f4f6;
-		padding: 1rem;
-		border-radius: 0.375rem;
-		overflow-x: auto;
-	}
-
-	/* Style inline code */
-	.substack-content :global(code) {
-		background-color: #f3f4f6;
-		padding: 0.2rem 0.4rem;
-		border-radius: 0.25rem;
-		font-size: 0.875em;
-	}
-
-	/* Ensure proper spacing for paragraphs */
-	.substack-content :global(p) {
-		margin: 1.25rem 0;
-	}
-
-	/* Style links within the content */
-	.substack-content :global(a) {
-		color: #2563eb;
-		text-decoration: underline;
-	}
-
-	.substack-content :global(a:hover) {
-		color: #1d4ed8;
-	}
-
-	/* Style image galleries */
-	.substack-content :global(.image-gallery-embed) {
-		margin: 2rem 0;
-	}
-
-	/* Style embedded content */
-	.substack-content :global(.embedded-post-wrap),
-	.substack-content :global(.embedded-publication-wrap) {
-		margin: 2rem 0;
-		padding: 1rem;
-		border: 1px solid #e5e7eb;
-		border-radius: 0.5rem;
-	}
-
-	/* Style lists */
-	.substack-content :global(ul),
-	.substack-content :global(ol) {
-		margin: 1.25rem 0;
-		padding-left: 1.5rem;
-	}
-
-	.substack-content :global(li) {
-		margin: 0.5rem 0;
-	}
-
-	/* Style headings */
-	.substack-content :global(h2),
-	.substack-content :global(h3) {
-		margin-top: 2rem;
-		margin-bottom: 1rem;
-		font-weight: bold;
-	}
-
-	.substack-content :global(h2) {
-		font-size: 1.5em;
-	}
-
-	.substack-content :global(h3) {
-		font-size: 1.25em;
-	}
+<style lang="scss">
+	@use "../../styles/components/BlogSingle.scss";
 </style>

@@ -108,19 +108,25 @@ try {
 	title='Blog | J Barbeau'
 	description='Articles and updates from Jonathan Barbeau — algorithmic art, creative process, exhibitions, and new releases.'
 >
-	<section class='container mx-auto px-4 py-8 max-w-7xl' aria-label='Blog posts'>
-		<h1 class='text-4xl font-bold mb-8'>Blog</h1>
+	<section class='blog' aria-label='Blog posts'>
+		<div class='blog__header'>
+			<h1 class='blog__title'>Blog</h1>
+		</div>
 
 		{
 			posts.length > 0 ? (
-				<div class='grid grid-cols-1 md:grid-cols-2 gap-8'>
+				<div class='blog__grid'>
 					{posts.map((post) => (
 						<BlogPostPreview title={post.title} link={post.link} pubDate={post.pubDate} excerpt={post.excerpt} slug={post.slug} image={post.image} />
 					))}
 				</div>
 			) : (
-				<p class='text-gray-600'>Unable to load blog posts at this time. Please check back later.</p>
+				<p class='blog__empty'>Unable to load blog posts at this time. Please check back later.</p>
 			)
 		}
 	</section>
 </Layout>
+
+<style lang="scss">
+	@use "../styles/components/Blog.scss";
+</style>

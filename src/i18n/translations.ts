@@ -33,6 +33,10 @@ export const translations = {
 			metaTitle: "Blog | J Barbeau",
 			metaDescription: "Articles and updates from Jonathan Barbeau — algorithmic art, creative process, exhibitions, and new releases.",
 			loadError: "Unable to load blog posts at this time. Please check back later.",
+			readPost: "Read full post →",
+			viewOnSubstack: "View on Substack ↗",
+			backToBlog: "← Back to all posts",
+			writtenBy: "By Jonathan Barbeau",
 		},
 		recentWork: {
 			sectionTitle: "Recent Work",
@@ -85,6 +89,10 @@ export const translations = {
 			metaTitle: "Blog | J Barbeau",
 			metaDescription: "Articles et actualités de Jonathan Barbeau — art algorithmique, processus créatif, expositions et nouvelles œuvres.",
 			loadError: "Impossible de charger les articles pour le moment. Revenez plus tard.",
+			readPost: "Lire l'article →",
+			viewOnSubstack: "Voir sur Substack ↗",
+			backToBlog: "← Tous les articles",
+			writtenBy: "Par Jonathan Barbeau",
 		},
 		recentWork: {
 			sectionTitle: "Oeuvres récentes",
@@ -130,6 +138,10 @@ export type TranslationKey =
 	| "blog.metaTitle"
 	| "blog.metaDescription"
 	| "blog.loadError"
+	| "blog.readPost"
+	| "blog.viewOnSubstack"
+	| "blog.backToBlog"
+	| "blog.writtenBy"
 	| "recentWork.sectionTitle"
 	| "recentWork.viewProject"
 	| "recentWork.redeemHere"
