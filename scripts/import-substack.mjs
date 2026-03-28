@@ -1,7 +1,7 @@
 /**
  * import-substack.mjs
  * Fetches the Substack RSS feed and saves each post as a Markdown file
- * in src/content/blog/[slug].md, ready for Astro Content Collections
+ * in src/content/blog/[slug].mdx, ready for Astro Content Collections
  * and Decap CMS editing.
  *
  * Usage:
@@ -43,6 +43,19 @@ td.addRule("strip-image-link-expand", {
 	replacement: () => "",
 });
 
+// Convert the sentinel div (from preprocessGalleries) into MDX ImageGrid syntax
+td.addRule("mdx-image-grid", {
+	filter: (node) =>
+		node.nodeType === 1 && (node.getAttribute("class") || "") === "mdx-image-grid",
+	replacement: (_content, node) => {
+		const cols = node.getAttribute("data-cols") || "3";
+		const imgs = Array.from(node.querySelectorAll("img"));
+		if (imgs.length === 0) return "";
+		const imgLines = imgs.map((img) => `  <img src="${img.getAttribute("src")}" alt="" loading="lazy" />`).join("\n");
+		return `\n\n<ImageGrid columns={${cols}}>\n${imgLines}\n</ImageGrid>\n\n`;
+	},
+});
+
 // ---------------------------------------------------------------------------
 // RSS parser setup
 // ---------------------------------------------------------------------------
@@ -78,6 +91,31 @@ function buildExcerpt(html, maxChars = 200) {
 	if (!html) return "";
 	const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 	return text.length > maxChars ? text.slice(0, maxChars).trimEnd() + "…" : text;
+}
+
+/**
+ * Replace Substack image gallery divs with MDX ImageGrid markup BEFORE Turndown runs.
+ * Turndown ignores empty divs, so we preprocess the raw HTML instead.
+ */
+function preprocessGalleries(html) {
+	return html.replace(
+		/<div[^>]+class="[^"]*image-gallery-embed[^"]*"[^>]+data-attrs="([^"]+)"[^>]*><\/div>/g,
+		(_match, rawAttrs) => {
+			try {
+				const attrs = JSON.parse(rawAttrs.replace(/&quot;/g, '"'));
+				const images = attrs?.gallery?.images ?? [];
+				if (images.length === 0) return "";
+				const cols = images.length === 1 ? 1 : images.length === 2 ? 2 : 3;
+				const imgTags = images
+					.map((img) => `<img src="${img.src}" alt="" loading="lazy" />`)
+					.join("");
+				// Use a sentinel div that Turndown will see as having content
+				return `<div class="mdx-image-grid" data-cols="${cols}">${imgTags}</div>`;
+			} catch {
+				return "";
+			}
+		}
+	);
 }
 
 /** Minimal safe YAML string serializer — quotes values that could confuse parsers. */
@@ -129,7 +167,7 @@ async function main() {
 			continue;
 		}
 
-		const filePath = join(CONTENT_DIR, `${slug}.md`);
+		const filePath = join(CONTENT_DIR, `${slug}.mdx`);
 
 		if (existsSync(filePath) && !FORCE) {
 			console.log(`  skip  ${slug}`);
@@ -138,7 +176,15 @@ async function main() {
 		}
 
 		const html = item.contentEncoded || item.content || "";
-		const markdown = td.turndown(html);
+		const hasGalleries = html.includes("image-gallery-embed");
+		const processedHtml = hasGalleries ? preprocessGalleries(html) : html;
+		const markdown = td.turndown(processedHtml);
+
+		// Prepend MDX imports for any components used in the generated content
+		const mdxImports = [
+			...(hasGalleries ? ["import ImageGrid from '../../components/blog/ImageGrid.astro';"] : []),
+		];
+		const mdxHeader = mdxImports.length > 0 ? mdxImports.join("\n") + "\n" : "";
 
 		// Image: prefer RSS enclosure, fall back to first <img> in body
 		const image = item.enclosure?.url ?? extractFirstImage(html) ?? null;
@@ -160,7 +206,7 @@ async function main() {
 			draft: false,
 		});
 
-		writeFileSync(filePath, `${frontmatter}\n\n${markdown}\n`);
+		writeFileSync(filePath, `${frontmatter}\n${mdxHeader}\n${markdown}\n`);
 		console.log(` create  ${slug}`);
 		created++;
 	}

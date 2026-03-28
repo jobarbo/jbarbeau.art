@@ -34,7 +34,7 @@ const collectionPreview = defineCollection({
 
 const blog = defineCollection({
 	loader: glob({
-		pattern: "**/*.md",
+		pattern: "**/*.{md,mdx}",
 		base: "./src/content/blog",
 	}),
 	schema: z.object({

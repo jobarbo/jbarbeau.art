@@ -1,0 +1,44 @@
+---
+interface Props {
+	gap?: string;
+}
+
+const { gap = "1rem" } = Astro.props;
+---
+
+<section class="blog-text-content" style={`--gap: ${gap}`}>
+	<slot />
+</section>
+
+<style lang="scss">
+	@use "../../styles/base/variables" as *;
+	@use "../../styles/base/functions" as *;
+	@use "../../styles/base/mediaqueries" as *;
+	@use "../../styles/base/typography" as *;
+
+	.blog-text-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap);
+		margin-bottom: to-vw(40);
+
+		@include tablet-only {
+			margin-bottom: 1.5rem;
+		}
+
+		:global(h1, h2, h3, h4, h5, h6) {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		:global(p) {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		:global(ul, ol) {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+</style>

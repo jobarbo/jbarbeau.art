@@ -1,0 +1,57 @@
+---
+interface Props {
+	src: string;
+	alt?: string;
+	caption?: string;
+	fullSrc?: string;
+	width?: string;
+}
+
+const { src, alt = "", caption, fullSrc, width } = Astro.props;
+const linkHref = fullSrc || src;
+---
+
+<figure class="blog-figure" style={width ? `max-width: ${width}` : undefined}>
+	<a href={linkHref} target="_blank" rel="noopener noreferrer">
+		<img src={src} alt={alt} loading="lazy" />
+	</a>
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style lang="scss">
+	@use "../../styles/base/variables" as *;
+	@use "../../styles/base/functions" as *;
+	@use "../../styles/base/typography" as *;
+	@use "../../styles/base/mediaqueries" as *;
+
+	.blog-figure {
+		margin: to-vw(32) auto;
+
+		@include tablet-only {
+			margin: 1.5rem auto;
+		}
+
+		a {
+			display: block;
+			line-height: 0;
+		}
+
+		img {
+			width: 100%;
+			height: auto;
+			border-radius: 4px;
+			transition: opacity 0.2s ease;
+
+			&:hover {
+				opacity: 0.9;
+			}
+		}
+
+		figcaption {
+			@include text(small, $color: $charcoal, $lh: 1.4);
+			margin-top: 0.5rem;
+			text-align: center;
+			font-style: italic;
+		}
+	}
+</style>

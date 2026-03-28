@@ -6,6 +6,7 @@ image: "https://substackcdn.com/image/fetch/$s_!0Ly_!,f_auto,q_auto:good,fl_prog
 excerpt: Or how I get inspiration for creating stuff with code
 draft: false
 ---
+import ImageGrid from '../../components/blog/ImageGrid.astro';
 
 [
 
@@ -106,6 +107,11 @@ Here I tried using the OVERLAY blend mode and it gave this pretty interesting ou
 ](https://substackcdn.com/image/fetch/$s_!Oi6X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F21829dda-ed94-4987-b24a-91836feba7a9_2000x2000.png)
 
 Then I tried with different colours and sizes :
+
+<ImageGrid columns={2}>
+  <img src="https://substack-post-media.s3.amazonaws.com/public/images/78b18160-43ce-44bb-9236-5970ebeef400_2000x2000.png" alt="" loading="lazy" />
+  <img src="https://substack-post-media.s3.amazonaws.com/public/images/797d080d-d32c-4ed6-b2be-ea25ba9b2317_2000x2000.png" alt="" loading="lazy" />
+</ImageGrid>
 
 I then decided to put back the circle AND use the blending mode, It gave some cool space type composition that I find really interesting.
 

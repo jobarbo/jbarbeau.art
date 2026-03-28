@@ -1,0 +1,42 @@
+---
+interface Props {
+	columns?: 2 | 3 | 4;
+	gap?: string;
+}
+
+const { columns = 2, gap = "1rem" } = Astro.props;
+---
+
+<div class="blog-image-grid" style={`--columns: ${columns}; --gap: ${gap}`}>
+	<slot />
+</div>
+
+<style lang="scss">
+	@use "../../styles/base/mediaqueries" as *;
+
+	.blog-image-grid {
+		display: grid;
+		grid-template-columns: repeat(var(--columns), 1fr);
+		gap: var(--gap);
+		margin: 1.5rem 0;
+
+		:global(img) {
+			width: 100%;
+			height: auto;
+			border-radius: 4px;
+			object-fit: cover;
+		}
+
+		:global(a) {
+			line-height: 0;
+		}
+
+		:global(.blog-figure) {
+			margin: 0;
+		}
+
+		@include mobile-only {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
