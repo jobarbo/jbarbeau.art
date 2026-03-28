@@ -1,9 +1,9 @@
-svg {
+.icon {
 	vertical-align: middle;
 	width: var(--size, 1.3em);
 	height: var(--size, 1.3em);
 
-	&.--socials {
+	&--socials {
 		width: 70%;
 		height: 70%;
 	}

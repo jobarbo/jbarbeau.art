@@ -13,7 +13,7 @@ interface Props {
 
 const {work, locale = "en"} = Astro.props;
 
-const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "disabled" : "";
+const isBtnDisabled = work.data.url === "" || work.data.url === "undefined" ? "button--disabled" : "";
 const descriptionText = locale === "fr" && work.data.descriptionFr ? work.data.descriptionFr : work.data.description;
 const subtitleText = locale === "fr" && work.data.subtitleFr ? work.data.subtitleFr : work.data.subtitle;
 let descriptionHtml = await marked(descriptionText);
@@ -21,38 +21,38 @@ let descriptionHtml = await marked(descriptionText);
 descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replace(/<\/canvas>/gi, "&lt;/canvas&gt;");
 ---
 
-<li class='recent-work-item'>
+<li class='recent-work__item'>
 	<hr />
-	<div class='work-layout'>
-		<h3 class='work-title'>{work.data.title}</h3>
-		<p class='work-info'>{subtitleText}</p>
-		<div class='work-description-link-wrapper'>
-			<Button label={t(locale, "recentWork.viewProject")} icon='external' href={work.data.url} target='_blank' class={`work-description-link ${isBtnDisabled}`} />
-			{work.data.isRedeemable && <Button label={t(locale, "recentWork.redeemHere")} icon='external' href={work.data.redeemUrl} target='_blank' class='work-description-link' />}
-			<Button label={t(locale, "recentWork.emailInquiries")} target='_blank' icon='email' href='mailto:barbeau.jonathan@gmail.com' class='work-description-link' />
+	<div class='recent-work__layout'>
+		<h3 class='recent-work__title'>{work.data.title}</h3>
+		<p class='recent-work__info'>{subtitleText}</p>
+		<div class='recent-work__link-wrapper'>
+			<Button label={t(locale, "recentWork.viewProject")} icon='external' href={work.data.url} target='_blank' class={`recent-work__link ${isBtnDisabled}`} />
+			{work.data.isRedeemable && <Button label={t(locale, "recentWork.redeemHere")} icon='external' href={work.data.redeemUrl} target='_blank' class='recent-work__link' />}
+			<Button label={t(locale, "recentWork.emailInquiries")} target='_blank' icon='email' href='mailto:barbeau.jonathan@gmail.com' class='recent-work__link' />
 		</div>
 
-		<div data-slider={work.data.slider} class='work-image-row blaze-slider'>
+		<div data-slider={work.data.slider} class='recent-work__image-row blaze-slider'>
 			<div class='blaze-container'>
 				<div class='blaze-track-container'>
 					<div class='blaze-track'>
-						{work.data.images.map((url, index) => <img alt={`${work.data.title} — artwork ${index + 1}`} class='work-image' width={300} height={200} loading='lazy' data-src={url} />)}
+						{work.data.images.map((url, index) => <img alt={`${work.data.title} — artwork ${index + 1}`} class='recent-work__image' data-work-image width={300} height={200} loading='lazy' data-src={url} />)}
 					</div>
 				</div>
-				<div class='work-description'>
-					<div class='work-description-wrapper'>
-						<h4 class='work-description-title'>{t(locale, "recentWork.description")}</h4>
-						<div class='work-description-text' set:html={descriptionHtml} />
+				<div class='recent-work__description'>
+					<div class='recent-work__description-wrapper'>
+						<h4 class='recent-work__description-title'>{t(locale, "recentWork.description")}</h4>
+						<div class='recent-work__description-text' set:html={descriptionHtml} />
 					</div>
 					<!-- navigation buttons -->
 					<div class='blaze-btn'>
 						<button class='blaze-prev button'>
-							<span><Icon className='--slider --slider-prev' isButton={true} icon={"chevron_left"} /></span>
+							<span><Icon className='icon--slider icon--slider-prev' isButton={true} icon={"chevron_left"} /></span>
 							<span>{t(locale, "recentWork.previous")}</span>
 						</button>
 						<button class='blaze-next button'>
 							<span>{t(locale, "recentWork.next")}</span>
-							<span><Icon className='--slider --slider-next' isButton={true} icon={"chevron_right"} /></span>
+							<span><Icon className='icon--slider icon--slider-next' isButton={true} icon={"chevron_right"} /></span>
 						</button>
 					</div>
 				</div>
@@ -83,12 +83,12 @@ descriptionHtml = descriptionHtml.replace(/<canvas>/gi, "&lt;canvas&gt;").replac
 		});
 	}, observerConfig);
 
-	const el_array = document.querySelectorAll(".blaze-slider") as NodeListOf<HTMLElement>;
+	const el_array = document.querySelectorAll("[data-slider]") as NodeListOf<HTMLElement>;
 
 	el_array.forEach((el) => {
 		// convert the data attribute to a an array by splitting it at the comma and then removing the comma
 		let sliderArray = el.dataset.slider.split(",").map((item) => Number(item.trim()));
-		const images = el.querySelectorAll(".work-image") as NodeListOf<HTMLImageElement>;
+		const images = el.querySelectorAll("[data-work-image]") as NodeListOf<HTMLImageElement>;
 		// Preload the images likely to be visible when the slider first appears
 		const preloadCount = Math.max((sliderArray[0] || 3) + 1, 3);
 

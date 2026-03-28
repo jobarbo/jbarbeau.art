@@ -16,7 +16,7 @@ export class LiveFrame {
 
 	init() {
 		this.canvas = document.querySelector("[data-canvas]");
-		this.iframe = document.getElementById("generativeArtFrame");
+		this.iframe = document.querySelector("[data-generative-art-frame]");
 
 		if (!this.iframe) {
 			console.warn("LiveFrame: iframe element not found");
@@ -37,11 +37,11 @@ export class LiveFrame {
 		try {
 			await navigator.clipboard.writeText(text);
 			// Show visual feedback
-			const copyBtn = document.getElementById("copyHashBtn");
+			const copyBtn = document.querySelector("[data-copy-hash-btn]");
 			if (copyBtn) {
-				copyBtn.classList.add("copied");
+				copyBtn.classList.add("hero__copy-btn--copied");
 				setTimeout(() => {
-					copyBtn.classList.remove("copied");
+					copyBtn.classList.remove("hero__copy-btn--copied");
 				}, 1500);
 			}
 		} catch (err) {
@@ -55,7 +55,7 @@ export class LiveFrame {
 		this.currentFullHash = hash; // Store the full hash
 		// create excerpt of the hash
 		const hashExcerpt = hash.substring(0, 8);
-		const hashElement = document.getElementById("randomHash");
+		const hashElement = document.querySelector("[data-random-hash]");
 		if (hashElement) {
 			hashElement.textContent = `Seed: #${hashExcerpt}...`;
 		}
@@ -73,7 +73,7 @@ export class LiveFrame {
 		}
 
 		// Update project name
-		const projectNameElement = document.getElementById("projectName");
+		const projectNameElement = document.querySelector("[data-project-name]");
 		if (projectNameElement) {
 			projectNameElement.textContent = `Project: ${this.randomIframe.name}`;
 		}
@@ -90,7 +90,7 @@ export class LiveFrame {
 		const hash = this.generateRandomHash(64);
 		this.currentFullHash = hash; // Store the full hash
 		const hashExcerpt = hash.substring(0, 8);
-		const hashElement = document.getElementById("randomHash");
+		const hashElement = document.querySelector("[data-random-hash]");
 		if (hashElement) {
 			hashElement.textContent = `Seed: #${hashExcerpt}...`;
 		}
@@ -102,7 +102,7 @@ export class LiveFrame {
 		}
 
 		// Update project name
-		const projectNameElement = document.getElementById("projectName");
+		const projectNameElement = document.querySelector("[data-project-name]");
 		if (projectNameElement && this.randomIframe) {
 			projectNameElement.textContent = `Project: ${this.randomIframe.name}`;
 		}
@@ -114,7 +114,7 @@ export class LiveFrame {
 		// Add event listeners to the buttons
 		const refreshBtn = document.querySelector("[data-refresh]");
 		const fullscreenBtn = document.querySelector("[data-fullscreen]");
-		const copyBtn = document.getElementById("copyHashBtn");
+		const copyBtn = document.querySelector("[data-copy-hash-btn]");
 
 		if (refreshBtn) {
 			refreshBtn.addEventListener("click", () => this.updateHash());

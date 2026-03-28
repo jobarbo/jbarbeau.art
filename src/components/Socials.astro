@@ -22,11 +22,11 @@ const iconLinks: {label: string; href: string; icon: IconProps["icon"]}[] = [
 ];
 ---
 
-<div class='menu-footer'>
-	<div class='socials'>
+<div class='socials'>
+	<div class='socials__list'>
 		{
 			iconLinks.map(({href, icon, label}) => (
-				<a target='_blank' href={href} class='social'>
+				<a target='_blank' href={href} class='socials__item'>
 					<span class='sr-only'>{label}</span>
 					<Icon className={iconClass} icon={icon} />
 				</a>

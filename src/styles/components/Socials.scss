@@ -4,53 +4,53 @@
 @use "../base/mediaqueries" as *;
 @use "../base/typography" as *;
 
-.menu-footer {
+.socials {
 	display: flex;
 	justify-content: space-between;
 	gap: 0.25rem;
 	border-radius: 0 0 0.75rem 0.75rem;
-}
 
-.socials {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.6em;
-	font-size: var(--icon-size);
-	padding: 0.5em 0;
-}
-
-.social {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: rgba(0, 0, 0, 0.144);
-	border-radius: 100vh;
-	text-decoration: none;
-	color: var(--gray-50);
-	transition:
-		color 0.2s ease-in-out 0s,
-		background-color 0.2s ease-in-out 0s;
-	width: to-vw(40);
-	height: to-vw(40);
-
-	svg {
-		width: 100%;
-		height: 100%;
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6em;
+		font-size: var(--icon-size);
+		padding: 0.5em 0;
 	}
 
-	@media all and (max-width: 1024px) {
-		width: 30px;
-		height: 30px;
-	}
+	&__item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: rgba(0, 0, 0, 0.144);
+		border-radius: 100vh;
+		text-decoration: none;
+		color: var(--gray-50);
+		transition:
+			color 0.2s ease-in-out 0s,
+			background-color 0.2s ease-in-out 0s;
+		width: to-vw(40);
+		height: to-vw(40);
 
-	@media all and (max-width: 640px) {
-		width: 20px;
-		height: 20px;
-	}
-}
+		svg {
+			width: 100%;
+			height: 100%;
+		}
 
-.social:hover,
-.social:focus {
-	background-color: rgba(0, 0, 0, 0.823);
-	color: var(--gray-800);
+		@media all and (max-width: 1024px) {
+			width: 30px;
+			height: 30px;
+		}
+
+		@media all and (max-width: 640px) {
+			width: 20px;
+			height: 20px;
+		}
+
+		&:hover,
+		&:focus {
+			background-color: rgba(0, 0, 0, 0.823);
+			color: var(--gray-800);
+		}
+	}
 }

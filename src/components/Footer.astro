@@ -10,15 +10,15 @@ const { locale = "en" } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>
-	<div class='group'>
+<footer class='footer'>
+	<div class='footer__group'>
 		<p>{t(locale, "footer.designed")}</p>
 		<p>{t(locale, "footer.copyright", { year: String(currentYear) })}</p>
 	</div>
-	<p class='socials'>
-		<a href='https://twitter.com/JBarbeau_Art'> Twitter</a>
-		<a href='https://www.instagram.com/jbarbeau.art/'> Instagram</a>
-		<a href='https://twitter.com/JBarbeau_Art'> Linktree</a>
+	<p class='footer__socials'>
+		<a href='https://twitter.com/JBarbeau_Art' class='footer__link'> Twitter</a>
+		<a href='https://www.instagram.com/jbarbeau.art/' class='footer__link'> Instagram</a>
+		<a href='https://twitter.com/JBarbeau_Art' class='footer__link'> Linktree</a>
 	</p>
 </footer>
 <style lang='scss'>

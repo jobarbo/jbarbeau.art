@@ -19,8 +19,8 @@ if (size) attrs.style = {"--size": size};
 
 const gradientId = "icon-gradient-" + Math.round(Math.random() * 10e12).toString(36);
 
-let cssClass = isButton ? "icon-button" : "";
-//Add the className to the cssClass string if it exists
+let cssClass = "icon";
+if (isButton) cssClass += " icon-button";
 if (className) cssClass += ` ${className}`;
 ---
 

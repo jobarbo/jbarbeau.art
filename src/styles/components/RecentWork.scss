@@ -2,108 +2,86 @@
 @use "../base/functions" as *;
 @use "../base/typography" as *;
 
-.work-description {
-	margin: 1em 0;
-	max-width: 100%;
-	display: flex;
-	flex-direction: column-reverse;
-}
-.work-info {
-	@include text(base, $family: $font-family-default, $color: var(--gray-200), $fs: 18, $fw: 600, $lh: 1.5, $mb: 1.25em);
-}
+.recent-work {
+	&__item {
+		margin-top: 2em;
+	}
 
-.work-title {
-	@include title(2, $lh: 1.2, $mb: 0.25em, $fw: 500);
-}
+	&__layout {
+		display: flex;
+		flex-direction: column;
+		overflow: visible;
+		margin-top: 2em;
+	}
 
-.work-description-title {
-	@include title(3, $lh: 1.2, $mb: 0.5em, $fw: 500);
-}
-.work-description-text {
-	white-space: pre-wrap;
-	@include text(base, $family: $font-family-default, $color: var(--gray-200), $fs: 16, $fw: 600, $lh: 1.5);
-}
+	&__title {
+		@include title(2, $lh: 1.2, $mb: 0.25em, $fw: 500);
+	}
 
-.work-description-link-wrapper {
-	display: flex;
-	gap: 0.5em 1em;
-	flex-wrap: wrap;
-	margin: 1em 0;
-}
+	&__info {
+		@include text(base, $family: $font-family-default, $color: var(--gray-200), $fs: 18, $fw: 600, $lh: 1.5, $mb: 1.25em);
+	}
 
-.work-description-link {
-	cursor: pointer;
-	font-size: 14px;
-	white-space: nowrap;
-}
+	&__description {
+		margin: 1em 0;
+		max-width: 100%;
+		display: flex;
+		flex-direction: column-reverse;
+	}
 
-.work-description-link.disabled {
-	pointer-events: none;
-	cursor: default;
-	opacity: 0.6;
-}
-.work-layout {
-	display: flex;
-	flex-direction: column;
-	overflow: visible;
-	margin-top: 2em;
-}
-.work-image-row {
-	display: flex;
-	flex-direction: row;
-	gap: 0.5em;
-	position: relative;
-	z-index: 1;
-}
+	&__description-title {
+		@include title(3, $lh: 1.2, $mb: 0.5em, $fw: 500);
+	}
 
-/* remove the scrollbar */
-.work-image-row::-webkit-scrollbar {
-	display: none;
-}
+	&__description-text {
+		white-space: pre-wrap;
+		@include text(base, $family: $font-family-default, $color: var(--gray-200), $fs: 16, $fw: 600, $lh: 1.5);
+	}
 
-.work-image {
-	max-height: 100%; /* Fill the cell's height */
-	max-width: 100%;
-	height: auto;
-	box-shadow:
-		1.3px 0.9px 1.8px rgba(0, 0, 0, 0.02),
-		2px 1.4px 3.5px rgba(0, 0, 0, 0.02),
-		2.4px 1.7px 5.1px rgba(0, 0, 0, 0.02),
-		2.6px 1.9px 6.6px rgba(0, 0, 0, 0.02),
-		2.8px 2px 8px rgba(0, 0, 0, 0.019),
-		3.2px 2.3px 9.5px rgba(0, 0, 0, 0.019),
-		3.9px 2.8px 11.1px rgba(0, 0, 0, 0.018),
-		5.3px 3.8px 13.1px rgba(0, 0, 0, 0.018),
-		8.2px 5.9px 15.7px rgba(0, 0, 0, 0.017),
-		21px 15px 19px rgba(0, 0, 0, 0.014);
-}
+	&__link-wrapper {
+		display: flex;
+		gap: 0.5em 1em;
+		flex-wrap: wrap;
+		margin: 1em 0;
+	}
 
-.recent-work-item {
-	margin-top: 2em;
-}
+	&__link {
+		cursor: pointer;
+		font-size: 14px;
+		white-space: nowrap;
+	}
 
-.button {
-	border-radius: 50px;
-	background-color: var(--gray-0);
-	color: var(--gray-999);
-	text-decoration: none;
-	display: flex;
-	align-items: center;
-	padding: 0.75em 1.5em;
-	font-size: clamp(11px, to-vw(14), 16px);
-	font-weight: 600;
-	justify-content: center;
-	width: fit-content;
-	border: 1px solid black;
-	cursor: pointer;
-	transition: all 0.3s;
-	gap: 0.5em;
-	white-space: nowrap;
-	svg {
-		margin-left: 0.5em;
+	&__image-row {
+		display: flex;
+		flex-direction: row;
+		gap: 0.5em;
+		position: relative;
+		z-index: 1;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	&__image {
+		max-height: 100%;
+		max-width: 100%;
+		height: auto;
+		box-shadow:
+			1.3px 0.9px 1.8px rgba(0, 0, 0, 0.02),
+			2px 1.4px 3.5px rgba(0, 0, 0, 0.02),
+			2.4px 1.7px 5.1px rgba(0, 0, 0, 0.02),
+			2.6px 1.9px 6.6px rgba(0, 0, 0, 0.02),
+			2.8px 2px 8px rgba(0, 0, 0, 0.019),
+			3.2px 2.3px 9.5px rgba(0, 0, 0, 0.019),
+			3.9px 2.8px 11.1px rgba(0, 0, 0, 0.018),
+			5.3px 3.8px 13.1px rgba(0, 0, 0, 0.018),
+			8.2px 5.9px 15.7px rgba(0, 0, 0, 0.017),
+			21px 15px 19px rgba(0, 0, 0, 0.014);
 	}
 }
 
+// BlazeSlider library classes — kept as-is (imposed by the library)
 .blaze-track {
 	margin: 1em 0 1em 0;
 }
@@ -154,16 +132,17 @@
 }
 
 @media (min-width: 1024px) {
-	.work-image-row {
+	.recent-work__image-row {
 		gap: 1em;
 	}
 
-	.work-image {
-		max-height: 100%; /* Fill the cell's height */
+	.recent-work__image {
+		max-height: 100%;
 		max-width: 100%;
 		height: auto;
 	}
-	.work-description {
+
+	.recent-work__description {
 		margin: 2em 0 1em 0;
 		max-width: 100%;
 		display: flex;
@@ -172,16 +151,12 @@
 		flex-direction: row;
 	}
 
-	.work-description-text {
+	.recent-work__description-text {
 		max-width: 75%;
 	}
+
 	.blaze-next:hover,
 	.blaze-prev:hover {
-		background-color: white;
-		color: black;
-		border: 1px solid black;
-	}
-	.button:hover {
 		background-color: white;
 		color: black;
 		border: 1px solid black;

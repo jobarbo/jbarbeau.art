@@ -7,12 +7,12 @@ import Button from "../components/Button.astro";
 	title="Page not found | Jonathan Barbeau"
 	description="The page you're looking for doesn't exist. Return to Jonathan Barbeau's portfolio — algorithmic artist based in Québec City."
 >
-	<section class="not-found-content" aria-label="Page not found">
-		<h1>Page not found</h1>
-		<p>
+	<section class="error" aria-label="Page not found">
+		<h1 class="error__title">Page not found</h1>
+		<p class="error__text">
 			This page doesn't exist or has been moved. Head back to the portfolio to explore my work.
 		</p>
-		<Button label="Back to home" href="/" target="_self" icon="arrow-right" class="not-found-button" />
+		<Button label="Back to home" href="/" target="_self" icon="arrow-right" class="error__button" />
 	</section>
 </Layout>
 
