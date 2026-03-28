@@ -3,9 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import BlogPostPreview from "../components/BlogPostPreview.astro";
 import { getCollection } from "astro:content";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-);
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = allPosts
+	.filter((p) => !p.id.startsWith("fr/"))
+	.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
 <Layout title="Blog | J Barbeau" description="Articles and updates from Jonathan Barbeau — algorithmic art, creative process, exhibitions, and new releases.">

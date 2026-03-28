@@ -16,7 +16,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const CONTENT_DIR = join(__dirname, "../src/content/blog");
+const CONTENT_DIR = join(__dirname, "../src/content/blog"); // EN posts at root, FR translations in fr/
 const FEED_URL = "https://jbarbeau.substack.com/feed";
 const FORCE = process.argv.includes("--force");
 

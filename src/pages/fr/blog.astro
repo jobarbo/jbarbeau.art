@@ -4,9 +4,16 @@ import BlogPostPreview from "../../components/BlogPostPreview.astro";
 import { getCollection } from "astro:content";
 import { t } from "../../i18n";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-	(a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
-);
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const enPosts = allPosts.filter((p) => !p.id.startsWith("fr/"));
+const frPosts = allPosts.filter((p) => p.id.startsWith("fr/"));
+const frSlugs = new Set(frPosts.map((p) => p.id.slice(3)));
+
+// FR posts first, then EN posts without a FR translation (fallback)
+const posts = [
+	...frPosts,
+	...enPosts.filter((p) => !frSlugs.has(p.id)),
+].sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 
 <Layout locale="fr" title={t("fr", "blog.metaTitle")} description={t("fr", "blog.metaDescription")}>
@@ -23,7 +30,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 							link={post.data.substackUrl}
 							pubDate={post.data.pubDate.toISOString()}
 							excerpt={post.data.excerpt ?? ""}
-							slug={post.id}
+							slug={post.id.startsWith("fr/") ? post.id.slice(3) : post.id}
 							image={post.data.image}
 							locale="fr"
 						/>

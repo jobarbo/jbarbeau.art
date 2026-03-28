@@ -11,6 +11,7 @@ interface Props {
 
 const {title, link, pubDate, excerpt, slug, image, locale = "en"} = Astro.props;
 
+const basePath = locale === "fr" ? "/fr/blog" : "/blog";
 const readPost = locale === "fr" ? "Lire l'article →" : "Read full post →";
 const viewOnSubstack = locale === "fr" ? "Voir sur Substack ↗" : "View on Substack ↗";
 
@@ -24,7 +25,7 @@ const formattedDate = date.toLocaleDateString(locale === "fr" ? "fr-CA" : "en-US
 ---
 
 <article class="blog-card">
-	<a href={`/blog/${slug}`} class="blog-card__link">
+	<a href={`${basePath}/${slug}`} class="blog-card__link">
 		{
 			image && (
 				<div class="blog-card__image-wrapper">
@@ -39,7 +40,7 @@ const formattedDate = date.toLocaleDateString(locale === "fr" ? "fr-CA" : "en-US
 		</div>
 	</a>
 	<div class="blog-card__actions">
-		<a href={`/blog/${slug}`} class="blog-card__read-link">{readPost}</a>
+		<a href={`${basePath}/${slug}`} class="blog-card__read-link">{readPost}</a>
 		<a href={link} target="_blank" rel="noopener noreferrer" class="blog-card__substack-link">{viewOnSubstack}</a>
 	</div>
 </article>
