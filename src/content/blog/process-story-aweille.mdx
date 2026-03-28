@@ -6,7 +6,10 @@ image: "https://substack-post-media.s3.amazonaws.com/public/images/d2ac32ac-ae79
 excerpt: "Let's talk about my first speed run"
 draft: false
 ---
+import Figure from '../../components/blog/Figure.astro';
+import BlogTextContent from '../../components/blog/BlogTextContent.astro';
 
+<BlogTextContent>
 Last month, I had one of those days where nothing seemed to get done. You know the type of day when you work tirelessly but don't achieve any milestones, and you don't feel like you've made any progress in any way. It's just filled with busywork.
 
 It was 3 pm, and I was ready to call it a day and head home to relax when the idea of creating a longform collection in under 2 hours crossed my mind. I thought, "Why not? Nothing productive came out of today, so I might as well do something." I set myself a deadline: it had to be ready for publication by 6 pm and released the next morning at 9 am.
@@ -34,49 +37,33 @@ It's pronounced like "A-WAY-E" (the E is somewhat aspirated or cut in half).
 I thoroughly enjoy creating from intuition and embracing surprises along the way that guide me in new directions.
 
 For this project, I began with a simple ball in the middle of the canvas, and that's it.
+</BlogTextContent>
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!tZGI!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ad64d3a-848f-4f64-bd62-41e7400c3724_2832x2832.png" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!tZGI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ad64d3a-848f-4f64-bd62-41e7400c3724_2832x2832.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!tZGI!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ad64d3a-848f-4f64-bd62-41e7400c3724_2832x2832.png)
-
+<BlogTextContent>
 then decided to eliminate the opacity and generate multiple of them to be randomly positioned on the X-axis while remaining fixed on the Y-axis.
+</BlogTextContent>
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!6Yt1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0070e47f-795b-48c8-a257-baeb250d89df_2622x2622.png" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!6Yt1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0070e47f-795b-48c8-a257-baeb250d89df_2622x2622.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!6Yt1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0070e47f-795b-48c8-a257-baeb250d89df_2622x2622.png)
-
+<BlogTextContent>
 To work with low-opacity elements effectively, you need a significant quantity of them; otherwise, they appear somewhat faint and don't create a pleasing visual effect. Therefore, instead of having approximately 50 circles, I chose to generate around 60,000 of them.
+</BlogTextContent>
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!jbJz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0b91a8e2-4848-4b03-9b9f-54d4c8b4bd12_2832x2832.png" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!jbJz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0b91a8e2-4848-4b03-9b9f-54d4c8b4bd12_2832x2832.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!jbJz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0b91a8e2-4848-4b03-9b9f-54d4c8b4bd12_2832x2832.png)
-
+<BlogTextContent>
 What followed resembled a plaster or some peculiar, blurry skateboard, but it wasn't quite right. Then an idea struck me: I could elongate those circles to the point where they appeared like rectangles, yet being comprised of ellipses, they would allow the background "light" to shine through.
 
 To achieve this elongation, I decided that each circle would mostly be 0.5 to 3 pixels in width, while its height would be approximately a fifth of the canvas height. To distribute each circle, I mapped the value returned by a noise function (ranging from 0 to 1) to its position from left to right. I applied the same concept to adjust the colors of each circle, creating a sense of continuity rather than random colors.
 
 The result became intriguing, and at that point, I had been working on it for around an hour.
+</BlogTextContent>
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!q3rf!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc5e1e0ce-2ff4-4296-bdc3-5524bdb85ded_2832x2832.png" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!q3rf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc5e1e0ce-2ff4-4296-bdc3-5524bdb85ded_2832x2832.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!q3rf!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc5e1e0ce-2ff4-4296-bdc3-5524bdb85ded_2832x2832.png)
-
+<BlogTextContent>
 ## Finishing touches(5pm)
 
 I had approximately 30 minutes left to finalize the code and another 30 minutes to publish the project.
@@ -93,15 +80,11 @@ The second feature I introduced is what I refer to as the "Mode Type," which con
     
 
 Here is an example of the "Crazy" mode being rendered:
+</BlogTextContent>
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!yPDs!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa57b4ca1-efe4-4505-8519-3f936df953a9_1080x1080.png" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!yPDs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa57b4ca1-efe4-4505-8519-3f936df953a9_1080x1080.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!yPDs!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa57b4ca1-efe4-4505-8519-3f936df953a9_1080x1080.png)
-
+<BlogTextContent>
 Aweille! #48, collected by P1x3lboy
 
 The "Straight" mode had a higher probability of being generated (50%), while the other two modes each had a 25% chance.
@@ -121,3 +104,4 @@ I hope you found this process post interesting. Please don't hesitate to comment
 Cheerio!
 
 Thanks for reading The Weekly Process by Jonathan Barbeau! Subscribe for free to receive new posts and support my work.
+</BlogTextContent>

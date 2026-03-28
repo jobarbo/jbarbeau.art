@@ -1,8 +1,14 @@
 /**
  * import-substack.mjs
- * Fetches the Substack RSS feed and saves each post as a Markdown file
- * in src/content/blog/[slug].mdx, ready for Astro Content Collections
- * and Decap CMS editing.
+ * Fetches the Substack RSS feed and saves each post as a MDX file
+ * in src/content/blog/[slug].mdx, ready for Astro Content Collections.
+ *
+ * Automatically converts content to reusable blog components:
+ *   ImageGrid    — Substack image galleries
+ *   Figure       — standalone linked images
+ *   YouTubeEmbed — YouTube iframes
+ *   SubstackLink — embedded post / publication cards
+ *   BlogTextContent — wraps every text block between media elements
  *
  * Usage:
  *   npm run import:blog              # create only new files (skip existing)
@@ -11,12 +17,12 @@
 
 import Parser from "rss-parser";
 import TurndownService from "turndown";
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
+import { writeFileSync, existsSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const CONTENT_DIR = join(__dirname, "../src/content/blog"); // EN posts at root, FR translations in fr/
+const CONTENT_DIR = join(__dirname, "../src/content/blog");
 const FEED_URL = "https://jbarbeau.substack.com/feed";
 const FORCE = process.argv.includes("--force");
 
@@ -30,20 +36,13 @@ const td = new TurndownService({
 	codeBlockStyle: "fenced",
 });
 
-// Keep iframes as raw HTML (Spotify embeds, YouTube, Substack video, etc.)
-td.addRule("keep-iframes", {
-	filter: "iframe",
-	replacement: (_content, node) => `\n\n${node.outerHTML}\n\n`,
-});
-
 // Strip the Substack image action bar (restack + expand buttons)
-// Using DOM filter (not regex) so nested tags don't cause broken HTML
 td.addRule("strip-image-link-expand", {
 	filter: (node) => node.nodeType === 1 && node.classList.contains("image-link-expand"),
 	replacement: () => "",
 });
 
-// Convert the sentinel div (from preprocessGalleries) into MDX ImageGrid syntax
+// Render ImageGrid sentinel divs (injected by preprocessGalleries)
 td.addRule("mdx-image-grid", {
 	filter: (node) =>
 		node.nodeType === 1 && (node.getAttribute("class") || "") === "mdx-image-grid",
@@ -51,13 +50,21 @@ td.addRule("mdx-image-grid", {
 		const cols = node.getAttribute("data-cols") || "3";
 		const imgs = Array.from(node.querySelectorAll("img"));
 		if (imgs.length === 0) return "";
-		const imgLines = imgs.map((img) => `  <img src="${img.getAttribute("src")}" alt="" loading="lazy" />`).join("\n");
+		const imgLines = imgs
+			.map((img) => `  <img src="${img.getAttribute("src")}" alt="" loading="lazy" />`)
+			.join("\n");
 		return `\n\n<ImageGrid columns={${cols}}>\n${imgLines}\n</ImageGrid>\n\n`;
 	},
 });
 
+// Keep bare iframes (anything not already handled above)
+td.addRule("keep-iframes", {
+	filter: "iframe",
+	replacement: (_content, node) => `\n\n${node.outerHTML}\n\n`,
+});
+
 // ---------------------------------------------------------------------------
-// RSS parser setup
+// RSS parser
 // ---------------------------------------------------------------------------
 
 const parser = new Parser({
@@ -71,6 +78,175 @@ const parser = new Parser({
 	timeout: 10000,
 	requestOptions: { rejectUnauthorized: false },
 });
+
+// ---------------------------------------------------------------------------
+// HTML pre-processing (runs before Turndown)
+// ---------------------------------------------------------------------------
+
+/** Substack gallery divs → sentinel divs with real <img> children. */
+function preprocessGalleries(html) {
+	return html.replace(
+		/<div[^>]+class="[^"]*image-gallery-embed[^"]*"[^>]+data-attrs="([^"]+)"[^>]*><\/div>/g,
+		(_match, rawAttrs) => {
+			try {
+				const attrs = JSON.parse(rawAttrs.replace(/&quot;/g, '"'));
+				const images = attrs?.gallery?.images ?? [];
+				if (images.length === 0) return "";
+				const cols = images.length === 1 ? 1 : images.length === 2 ? 2 : 3;
+				const imgTags = images
+					.map((img) => `<img src="${img.src}" alt="" loading="lazy" />`)
+					.join("");
+				return `<div class="mdx-image-grid" data-cols="${cols}">${imgTags}</div>`;
+			} catch {
+				return "";
+			}
+		}
+	);
+}
+
+/** Strip HTML tags and collapse whitespace to plain text. */
+function htmlToText(html) {
+	return html
+		.replace(/<[^>]+>/g, " ")
+		.replace(/&quot;/g, '"')
+		.replace(/&amp;/g, "&")
+		.replace(/&lt;/g, "<")
+		.replace(/&gt;/g, ">")
+		.replace(/&#\d+;/g, "")
+		.replace(/\s+/g, " ")
+		.trim();
+}
+
+function preprocessHTML(html) {
+	return preprocessGalleries(html);
+}
+
+// ---------------------------------------------------------------------------
+// Markdown post-processing (runs after Turndown)
+// ---------------------------------------------------------------------------
+
+/** Replace YouTube iframes with <YouTubeEmbed> components. */
+function convertYoutubeIframes(md) {
+	return md.replace(
+		/<iframe[^>]+src="https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\/([^?"'\s]+)[^"]*"[^>]*(?:\/>|><\/iframe>)/g,
+		(_, videoId) => `<YouTubeEmbed id="${videoId}" />`
+	);
+}
+
+/**
+ * Convert all linked image patterns to <Figure> or <SubstackLink>.
+ *
+ * Handles every form Turndown can produce for <a href="..."><img .../></a>:
+ *
+ *   Compact (no extra text):  [![alt](img)](href)
+ *   Multi-line (image only):  [\n\n![](img)\n\n\n\n](href)
+ *   Embed (image + text):     [![](img)Title\n\nDesc\n\n](href)
+ *                          or [\n\n![](img)\n\nTitle\n\n](href)
+ *
+ * Rule:
+ *   - No text paragraphs after the image → <Figure>
+ *   - Text paragraphs present             → <SubstackLink>
+ */
+function convertLinkedContent(md) {
+	// Unified regex: any [...](url) where the link body starts with an image
+	// \s* allows optional whitespace/newlines between [ and ![]()
+	return md.replace(
+		/\[\s*!\[([^\]]*)\]\(([^\)]+)\)([\s\S]*?)\]\(([^\)\n]+)\)/g,
+		(fullMatch, imgAlt, imgSrc, extraContent, href) => {
+			const text = extraContent.trim();
+			const paragraphs = text
+				.split(/\n{2,}/)
+				.map((p) => p.trim())
+				.filter(Boolean);
+
+			// No extra text → simple Figure
+			if (paragraphs.length === 0) {
+				return `<Figure src="${href}" alt="${imgAlt}" />`;
+			}
+
+			// Has paragraphs → SubstackLink
+			const hasListen = paragraphs.some((p) => /listen\s+now/i.test(p));
+			const metaLine =
+				paragraphs.find((p) => /\d+\s+(?:ago|like|comment)/i.test(p)) ?? "";
+			const contentLines = paragraphs.filter(
+				(p) => p !== metaLine && !/listen\s+now/i.test(p)
+			);
+			const title = contentLines[0] ?? "";
+			const description = contentLines[1] ?? "";
+			const label = hasListen ? "Listen now" : "Follow on Substack";
+
+			const esc = (s) => s.replace(/"/g, "&quot;");
+			return [
+				`<SubstackLink`,
+				`  href="${href}"`,
+				imgSrc ? `  image="${imgSrc}"` : null,
+				title ? `  title="${esc(title)}"` : null,
+				description ? `  description="${esc(description)}"` : null,
+				metaLine ? `  meta="${esc(metaLine)}"` : null,
+				`  label="${label}"`,
+				`/>`,
+			]
+				.filter(Boolean)
+				.join("\n");
+		}
+	);
+}
+
+/**
+ * Wrap every text segment (headings + paragraphs between media components)
+ * in a <BlogTextContent> block.
+ *
+ * Block tags (with children): ImageGrid
+ * Self-closing tags: Figure, YouTubeEmbed, SubstackLink
+ */
+function wrapTextInBlogTextContent(md) {
+	// Precise patterns — block tags match their full open/close pair,
+	// self-closing tags match only the self-closing form.
+	const blockTagPattern = `<ImageGrid[\\s\\S]*?<\\/ImageGrid>`;
+	const selfClosingPattern = `<(?:Figure|YouTubeEmbed|SubstackLink)[^>]*\\/>`;
+	const splitRe = new RegExp(`(${blockTagPattern}|${selfClosingPattern})`, "g");
+
+	const COMPONENT_START = /^<(ImageGrid|Figure|YouTubeEmbed|SubstackLink)[\s>]/;
+
+	return md
+		.split(splitRe)
+		.map((part) => {
+			if (COMPONENT_START.test(part.trim())) return part;
+			const trimmed = part.trim();
+			if (!trimmed) return "";
+			return `<BlogTextContent>\n${trimmed}\n</BlogTextContent>`;
+		})
+		.filter(Boolean)
+		.join("\n\n");
+}
+
+function postprocessMarkdown(md) {
+	let result = md;
+	result = convertYoutubeIframes(result);
+	result = convertLinkedContent(result);
+	result = wrapTextInBlogTextContent(result);
+	return result;
+}
+
+// ---------------------------------------------------------------------------
+// MDX import builder
+// ---------------------------------------------------------------------------
+
+function buildMdxImports(md) {
+	const components = {
+		ImageGrid: "import ImageGrid from '../../components/blog/ImageGrid.astro';",
+		Figure: "import Figure from '../../components/blog/Figure.astro';",
+		YouTubeEmbed: "import YouTubeEmbed from '../../components/blog/YouTubeEmbed.astro';",
+		SubstackLink: "import SubstackLink from '../../components/blog/SubstackLink.astro';",
+		BlogTextContent: "import BlogTextContent from '../../components/blog/BlogTextContent.astro';",
+	};
+
+	const used = Object.entries(components)
+		.filter(([tag]) => md.includes(`<${tag}`))
+		.map(([, importLine]) => importLine);
+
+	return used.length > 0 ? used.join("\n") + "\n" : "";
+}
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -93,38 +269,13 @@ function buildExcerpt(html, maxChars = 200) {
 	return text.length > maxChars ? text.slice(0, maxChars).trimEnd() + "…" : text;
 }
 
-/**
- * Replace Substack image gallery divs with MDX ImageGrid markup BEFORE Turndown runs.
- * Turndown ignores empty divs, so we preprocess the raw HTML instead.
- */
-function preprocessGalleries(html) {
-	return html.replace(
-		/<div[^>]+class="[^"]*image-gallery-embed[^"]*"[^>]+data-attrs="([^"]+)"[^>]*><\/div>/g,
-		(_match, rawAttrs) => {
-			try {
-				const attrs = JSON.parse(rawAttrs.replace(/&quot;/g, '"'));
-				const images = attrs?.gallery?.images ?? [];
-				if (images.length === 0) return "";
-				const cols = images.length === 1 ? 1 : images.length === 2 ? 2 : 3;
-				const imgTags = images
-					.map((img) => `<img src="${img.src}" alt="" loading="lazy" />`)
-					.join("");
-				// Use a sentinel div that Turndown will see as having content
-				return `<div class="mdx-image-grid" data-cols="${cols}">${imgTags}</div>`;
-			} catch {
-				return "";
-			}
-		}
-	);
-}
-
 /** Minimal safe YAML string serializer — quotes values that could confuse parsers. */
 function yamlValue(value) {
 	if (typeof value === "boolean") return String(value);
 	if (value instanceof Date) return value.toISOString();
 	const str = String(value);
-	// Quote if the value contains YAML special characters or starts/ends with whitespace
-	const needsQuote = /[:#&*!\[\]{},|>'"@`%]/.test(str) || /^\s|\s$/.test(str) || str === "";
+	const needsQuote =
+		/[:#&*!\[\]{},|>'"@`%]/.test(str) || /^\s|\s$/.test(str) || str === "";
 	if (needsQuote) {
 		return `"${str.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
 	}
@@ -176,15 +327,10 @@ async function main() {
 		}
 
 		const html = item.contentEncoded || item.content || "";
-		const hasGalleries = html.includes("image-gallery-embed");
-		const processedHtml = hasGalleries ? preprocessGalleries(html) : html;
-		const markdown = td.turndown(processedHtml);
-
-		// Prepend MDX imports for any components used in the generated content
-		const mdxImports = [
-			...(hasGalleries ? ["import ImageGrid from '../../components/blog/ImageGrid.astro';"] : []),
-		];
-		const mdxHeader = mdxImports.length > 0 ? mdxImports.join("\n") + "\n" : "";
+		const processedHtml = preprocessHTML(html);
+		const rawMarkdown = td.turndown(processedHtml);
+		const markdown = postprocessMarkdown(rawMarkdown);
+		const mdxImports = buildMdxImports(markdown);
 
 		// Image: prefer RSS enclosure, fall back to first <img> in body
 		const image = item.enclosure?.url ?? extractFirstImage(html) ?? null;
@@ -206,7 +352,7 @@ async function main() {
 			draft: false,
 		});
 
-		writeFileSync(filePath, `${frontmatter}\n${mdxHeader}\n${markdown}\n`);
+		writeFileSync(filePath, `${frontmatter}\n${mdxImports}\n${markdown}\n`);
 		console.log(` create  ${slug}`);
 		created++;
 	}
