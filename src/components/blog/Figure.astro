@@ -1,19 +1,23 @@
 ---
+import {Image} from "astro:assets";
+
 interface Props {
 	src: string;
 	alt?: string;
 	caption?: string;
 	fullSrc?: string;
 	width?: string;
+	imgWidth?: number;
+	imgHeight?: number;
 }
 
-const {src, alt = "", caption, fullSrc, width} = Astro.props;
+const {src, alt = "", caption, fullSrc, width, imgWidth = 1440, imgHeight = 960} = Astro.props;
 const linkHref = fullSrc || src;
 ---
 
 <figure class='blog-figure' style={width ? `max-width: ${width}` : undefined}>
 	<a href={linkHref} target='_blank' rel='noopener noreferrer'>
-		<img src={src} alt={alt} loading='lazy' />
+		<Image src={src} alt={alt} width={imgWidth} height={imgHeight} loading='lazy' />
 	</a>
 	{caption && <figcaption>{caption}</figcaption>}
 </figure>
