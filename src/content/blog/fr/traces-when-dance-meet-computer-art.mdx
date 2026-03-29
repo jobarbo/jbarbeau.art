@@ -1,159 +1,118 @@
 ---
-title: "Traces : quand la danse rencontre l'art informatique."
+title: "Traces: When dance meet computer art."
 pubDate: "2024-04-10T22:11:51.000Z"
 substackUrl: "https://jbarbeau.substack.com/p/traces-when-dance-meet-computer-art"
 image: "https://substackcdn.com/image/fetch/$s_!coFV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3bc9e9da-98a8-491d-9e5b-aa0f69972925_3024x4032.jpeg"
-excerpt: "Je vais essayer de faire celui-ci beaucoup plus court que le précédent."
+excerpt: "I&#8217;m going to try to make this one a lot shorter than the other one."
 draft: false
 ---
+import Figure from '../../../components/blog/Figure.astro';
+import YouTubeEmbed from '../../../components/blog/YouTubeEmbed.astro';
+import BlogTextContent from '../../../components/blog/BlogTextContent.astro';
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!coFV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3bc9e9da-98a8-491d-9e5b-aa0f69972925_3024x4032.jpeg" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!coFV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3bc9e9da-98a8-491d-9e5b-aa0f69972925_3024x4032.jpeg)
+<BlogTextContent>
+I’m going to try to make this one a lot shorter than the other one. Let’s see if I manage to do it or not.  
+  
+Back in May of last year, I got contacted by Philipp Contag-Lada about a project that would incorporate collaboration between computer art and dance. The project was funded by the German federal government commissioner for culture and the media and it was such a wild idea that I could not say no to this.
 
+I was also super fortunate to be a part of this project with other amazing artist like Moodsoup, Arwan Beetooh, Danica Schlosser and Philipp Contag-Lada himself.  
 
+Thanks for reading The Weekly Process by Jonathan Barbeau! Subscribe for free to receive new posts and support my work.
 
-](https://substackcdn.com/image/fetch/$s_!coFV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3bc9e9da-98a8-491d-9e5b-aa0f69972925_3024x4032.jpeg)
+## How does it work?
 
-Je vais essayer de faire celui-ci beaucoup plus court que le précédent. On verra si j'y arrive ou non.
+Philip and the Interface project has developed a way to motion capture dance choreographies. The data captured from this would then be outputted into a very large json file that would store all the movement of all the limbs of the human body, 30 times per second(30fps) for the duration of the dance sequence. As artist, we could then use this data to interpret it visually through computer art.
+</BlogTextContent>
 
-En mai de l'an dernier, Philipp Contag-Lada m'a contacté pour un projet qui intégrerait une collaboration entre l'art informatique et la danse. Le projet était financé par le commissaire du gouvernement fédéral allemand chargé de la culture et des médias, et c'était une idée tellement folle que je ne pouvais pas dire non.
+<Figure src="https://substackcdn.com/image/fetch/$s_!lVVg!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8d9541a-0768-4b43-b507-67cd8a9a1f8c_1616x1512.png" alt="" />
 
-J'ai aussi eu la grande chance de faire partie de ce projet avec d'autres artistes incroyables comme Moodsoup, Arwan Beetooh, Danica Schlosser et Philipp Contag-Lada lui-même.
+<BlogTextContent>
+Early interpretation of the data called “The Stickman”
 
-Merci de lire The Weekly Process par Jonathan Barbeau! Abonnez-vous gratuitement pour recevoir de nouveaux articles et soutenir mon travail.
+The Interfaces team had already setup a live server on their website with a couple of example. This was real helpful for me to get my bearings with the data provided. In the above picture, each circle represent a joint and each line represent a “bone”. Starting from this I could really start having fun and find way to visually interpret dance movement.
 
-## Comment ça fonctionne?
+## The secrect ingredient
 
-Philipp et le projet Interface ont développé une façon de capturer par motion capture des chorégraphies de danse. Les données captées seraient ensuite exportées dans un très grand fichier JSON qui stockerait tous les mouvements de tous les membres du corps humain, 30 fois par seconde (30 fps) pendant toute la durée de la séquence de danse. En tant qu'artistes, nous pouvions ensuite utiliser ces données pour les interpréter visuellement à travers l'art informatique.
+Around the same time that I started working on the project, I ordered a small MIDI controller from Intech called the “Grid”.
+</BlogTextContent>
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!dTKO!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1a4832fb-b8f6-42ae-89d4-24668c297a58_4032x3024.jpeg" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!lVVg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8d9541a-0768-4b43-b507-67cd8a9a1f8c_1616x1512.png)
+<BlogTextContent>
+Using the grid, I mapped the four knobs on the top row to the particles width, hue, saturation and brightness respectively.
 
+Then I divided the choreography’s length (total number of frames) by four and attributed each forth to it’s respective slider.
 
+The buttons on the bottom row we’re mapped to utility functions:
 
-](https://substackcdn.com/image/fetch/$s_!lVVg!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc8d9541a-0768-4b43-b507-67cd8a9a1f8c_1616x1512.png)
+-   Deleting the particle (but keeping what was drawn)
+    
+-   Clearing the canvas completely
+    
+-   Switching theme (bright or dark)
+    
+-   Changing the perlin noise octaves
+    
 
-Interprétation préliminaire des données appelée « Le Bonhomme de bois »
+That way, I could effectively scrub through the coreography without having to find the perfect frame number. Also I could incorporate movement into the output and I think this is real important since the main subjects are dancers.
 
-L'équipe d'Interfaces avait déjà mis en place un serveur live sur leur site web avec quelques exemples. C'était vraiment utile pour m'orienter dans les données fournies. Dans l'image ci-dessus, chaque cercle représente une articulation et chaque ligne représente un « os ». En partant de là, je pouvais vraiment commencer à m'amuser et à trouver des façons d'interpréter visuellement les mouvements de danse.
+How it works is that each joint from the dancers act as an origin cluster node for the particles. So when I unleash them using the midi controller, they start from there and then they spread out. That way I could keep the silhouette in the composition and I think it really helps to tell a story.
 
-## L'ingrédient secret
+Here's a really good example where you can see the particle starting point and the silhouette.
+</BlogTextContent>
 
-À peu près au même moment où j'ai commencé à travailler sur le projet, j'ai commandé un petit contrôleur MIDI d'Intech appelé le « Grid ».
+<Figure src="https://substackcdn.com/image/fetch/$s_!-52D!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F421b0539-2bd3-487a-a4e2-179ed4a9b296_1010x1358.png" alt="" />
 
-[
+<BlogTextContent>
+## The Collection
 
-![](https://substackcdn.com/image/fetch/$s_!dTKO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1a4832fb-b8f6-42ae-89d4-24668c297a58_4032x3024.jpeg)
+After playing with the Algorithm, I was able to get very satisfying artwork and sent them to 7pc so they can work on the exhibition.
 
+Here’s the two chosen artwork for that first exhibit.
+</BlogTextContent>
 
+<Figure src="https://substackcdn.com/image/fetch/$s_!qH9a!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F306b75df-f56b-4f25-9d30-ddec930c68f5_1128x1554.png" alt="" />
 
-](https://substackcdn.com/image/fetch/$s_!dTKO!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1a4832fb-b8f6-42ae-89d4-24668c297a58_4032x3024.jpeg)
+<Figure src="https://substackcdn.com/image/fetch/$s_!nc0p!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F688d20da-3808-42f0-b499-39a8cd9ac656_1112x1532.png" alt="" />
 
-En utilisant le Grid, j'ai mappé les quatre boutons rotatifs de la rangée supérieure à la largeur, la teinte, la saturation et la luminosité des particules respectivement.
+<BlogTextContent>
+## The first exhibit
 
-J'ai ensuite divisé la durée de la chorégraphie (nombre total de trames) par quatre et attribué chaque quart à son curseur correspondant.
+The Interface project was exhibited at the Hanover Opera House in Germany during the last week of march 2024. It’s the first exhibit for the project and I’m sure it won’t be the last. It’s such an amazing experience to see our work displayed in such a beautiful setting.  
+  
+Here’s a short video from Philipp that explains a bit more about the project and the exhibition:
+</BlogTextContent>
 
-Les boutons de la rangée du bas étaient mappés aux fonctions utilitaires :
+<YouTubeEmbed id="YIAze8QFKVA" />
 
--   Supprimer la particule (mais garder ce qui avait été dessiné)
+<BlogTextContent>
+The complete Traces collection which includes a total of seven artwork is available to collect on OBJKT here : [https://objkt.com/collections/KT1Tw7BRpsMomGE4bf3bxjAc4AgNV8xq7BYb](https://objkt.com/collections/KT1Tw7BRpsMomGE4bf3bxjAc4AgNV8xq7BYb)
 
--   Effacer le canevas complètement
+## What’s next?
 
--   Changer le thème (clair ou sombre)
+While the Traces collection of the Interface project is done. My contribution to the project isn’t. I’ve been working more and more with the intech grid and it’s a lot of fun.  
+  
+I have programmed different ID to each page of the controller. so when I click the utility button (hidden on the side) it changes page which make the grid like a totally different controller. There is 4 page total, so it means that I can map a total of 48 functions to that little machine. That’s amazing.
 
--   Changer les octaves du bruit de Perlin
+I also have been working with rotation and different noise scale and particle displacement techniques. Here’s a sneek peak of the the state of my research.
+</BlogTextContent>
 
+<Figure src="https://substackcdn.com/image/fetch/$s_!Pu0a!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ba89752-e303-4732-89f2-a729a5fc504f_1716x1788.png" alt="" />
 
-De cette façon, je pouvais effectivement parcourir la chorégraphie sans avoir à trouver le numéro de trame parfait. J'ai aussi pu incorporer le mouvement dans le résultat et je pense que c'est vraiment important puisque les sujets principaux sont des danseurs.
+<Figure src="https://substackcdn.com/image/fetch/$s_!JqSm!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50c3bf8f-6679-4556-b1f2-f7b27a8b5b49_2469x2469.png" alt="" />
 
-Voici un très bon exemple où l'on peut voir le point de départ des particules et la silhouette.
+<Figure src="https://substackcdn.com/image/fetch/$s_!zJyE!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff8713d2d-69b1-4d5c-948c-e3ba9dc88e5c_2469x2469.png" alt="" />
 
-[
+<Figure src="https://substackcdn.com/image/fetch/$s_!FHZV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F08abfdc4-c7ca-41ef-9e82-f3153a312d43_2469x2469.png" alt="" />
 
-![](https://substackcdn.com/image/fetch/$s_!-52D!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F421b0539-2bd3-487a-a4e2-179ed4a9b296_1010x1358.png)
+<BlogTextContent>
+## DANCE OFF!
 
+Well that’s it! I hope you liked it and it wasn’t a drag to read. I know I said it’d be shorter but it’s a hard thing to respect lol. Next time will be a shorter one, I promise!  
+  
+In the meantime, have a nice rest of the week and see you soon!
 
-
-](https://substackcdn.com/image/fetch/$s_!-52D!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F421b0539-2bd3-487a-a4e2-179ed4a9b296_1010x1358.png)
-
-## La collection
-
-Après avoir joué avec l'algorithme, j'ai pu obtenir des œuvres très satisfaisantes et les envoyer à 7pc pour qu'ils travaillent sur l'exposition.
-
-Voici les deux œuvres choisies pour cette première exposition.
-
-[
-
-![](https://substackcdn.com/image/fetch/$s_!qH9a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F306b75df-f56b-4f25-9d30-ddec930c68f5_1128x1554.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!qH9a!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F306b75df-f56b-4f25-9d30-ddec930c68f5_1128x1554.png)
-
-[
-
-![](https://substackcdn.com/image/fetch/$s_!nc0p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F688d20da-3808-42f0-b499-39a8cd9ac656_1112x1532.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!nc0p!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F688d20da-3808-42f0-b499-39a8cd9ac656_1112x1532.png)
-
-## La première exposition
-
-Le projet Interface a été exposé à l'Opéra de Hanovre en Allemagne lors de la dernière semaine de mars 2024. C'est la première exposition pour le projet et je suis certain que ce ne sera pas la dernière. C'est une expérience incroyable de voir notre travail affiché dans un si beau cadre.
-
-Voici une courte vidéo de Philipp qui explique un peu plus le projet et l'exposition :
-
-<iframe src="https://www.youtube-nocookie.com/embed/YIAze8QFKVA?rel=0&amp;autoplay=0&amp;showinfo=0&amp;enablejsapi=0" frameborder="0" loading="lazy" gesture="media" allow="autoplay; fullscreen" allowautoplay="true" allowfullscreen="true" width="728" height="409"></iframe>
-
-La collection Traces complète, qui comprend un total de sept œuvres, est disponible à collecter sur OBJKT ici : [https://objkt.com/collections/KT1Tw7BRpsMomGE4bf3bxjAc4AgNV8xq7BYb](https://objkt.com/collections/KT1Tw7BRpsMomGE4bf3bxjAc4AgNV8xq7BYb)
-
-## Et la suite?
-
-Bien que la collection Traces du projet Interface soit terminée, ma contribution au projet ne l'est pas. Je travaille de plus en plus avec le Grid d'Intech et c'est vraiment amusant.
-
-J'ai programmé différents ID sur chaque page du contrôleur, de sorte que lorsque je clique sur le bouton utilitaire (caché sur le côté), il change de page, ce qui transforme le Grid en un contrôleur totalement différent. Il y a 4 pages au total, ce qui signifie que je peux mapper un total de 48 fonctions à cette petite machine. C'est incroyable.
-
-J'ai également travaillé avec la rotation et différentes techniques d'échelle de bruit et de déplacement de particules. Voici un aperçu de l'état de ma recherche.
-
-[
-
-![](https://substackcdn.com/image/fetch/$s_!Pu0a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ba89752-e303-4732-89f2-a729a5fc504f_1716x1788.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!Pu0a!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ba89752-e303-4732-89f2-a729a5fc504f_1716x1788.png)
-
-[
-
-![](https://substackcdn.com/image/fetch/$s_!JqSm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50c3bf8f-6679-4556-b1f2-f7b27a8b5b49_2469x2469.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!JqSm!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50c3bf8f-6679-4556-b1f2-f7b27a8b5b49_2469x2469.png)
-
-[
-
-![](https://substackcdn.com/image/fetch/$s_!zJyE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff8713d2d-69b1-4d5c-948c-e3ba9dc88e5c_2469x2469.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!zJyE!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff8713d2d-69b1-4d5c-948c-e3ba9dc88e5c_2469x2469.png)
-
-[
-
-![](https://substackcdn.com/image/fetch/$s_!FHZV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F08abfdc4-c7ca-41ef-9e82-f3153a312d43_2469x2469.png)
-
-
-
-](https://substackcdn.com/image/fetch/$s_!FHZV!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F08abfdc4-c7ca-41ef-9e82-f3153a312d43_2469x2469.png)
-
-## À vos marques, dansez!
-
-Voilà, c'est tout! J'espère que vous avez aimé et que ce n'était pas ennuyeux à lire. Je sais que j'avais dit que ce serait plus court, mais c'est difficile à respecter lol. La prochaine fois sera plus courte, je le promets!
-
-En attendant, passez une bonne fin de semaine et à bientôt!
-
-Merci de lire The Weekly Process par Jonathan Barbeau! Abonnez-vous gratuitement pour recevoir de nouveaux articles et soutenir mon travail.
+Thanks for reading The Weekly Process by Jonathan Barbeau! Subscribe for free to receive new posts and support my work.
+</BlogTextContent>

@@ -23,6 +23,7 @@ import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONTENT_DIR = join(__dirname, "../src/content/blog");
+const CONTENT_DIR_FR = join(CONTENT_DIR, "fr");
 const FEED_URL = "https://jbarbeau.substack.com/feed";
 const FORCE = process.argv.includes("--force");
 
@@ -232,18 +233,18 @@ function postprocessMarkdown(md) {
 // MDX import builder
 // ---------------------------------------------------------------------------
 
-function buildMdxImports(md) {
-	const components = {
-		ImageGrid: "import ImageGrid from '../../components/blog/ImageGrid.astro';",
-		Figure: "import Figure from '../../components/blog/Figure.astro';",
-		YouTubeEmbed: "import YouTubeEmbed from '../../components/blog/YouTubeEmbed.astro';",
-		SubstackLink: "import SubstackLink from '../../components/blog/SubstackLink.astro';",
-		BlogTextContent: "import BlogTextContent from '../../components/blog/BlogTextContent.astro';",
-	};
+function buildMdxImports(md, prefix = "../..") {
+	const names = [
+		"ImageGrid",
+		"Figure",
+		"YouTubeEmbed",
+		"SubstackLink",
+		"BlogTextContent",
+	];
 
-	const used = Object.entries(components)
-		.filter(([tag]) => md.includes(`<${tag}`))
-		.map(([, importLine]) => importLine);
+	const used = names
+		.filter((tag) => md.includes(`<${tag}`))
+		.map((tag) => `import ${tag} from '${prefix}/components/blog/${tag}.astro';`);
 
 	return used.length > 0 ? used.join("\n") + "\n" : "";
 }
@@ -298,6 +299,7 @@ function buildFrontmatter(fields) {
 
 async function main() {
 	mkdirSync(CONTENT_DIR, { recursive: true });
+	mkdirSync(CONTENT_DIR_FR, { recursive: true });
 
 	console.log(`Fetching RSS feed: ${FEED_URL}`);
 	const response = await fetch(FEED_URL);
@@ -310,6 +312,8 @@ async function main() {
 
 	let created = 0;
 	let skipped = 0;
+	let frCreated = 0;
+	let frSkipped = 0;
 
 	for (const item of items) {
 		const slug = slugFromLink(item.link);
@@ -319,10 +323,12 @@ async function main() {
 		}
 
 		const filePath = join(CONTENT_DIR, `${slug}.mdx`);
+		const frFilePath = join(CONTENT_DIR_FR, `${slug}.mdx`);
 
 		if (existsSync(filePath) && !FORCE) {
 			console.log(`  skip  ${slug}`);
 			skipped++;
+			if (existsSync(frFilePath)) frSkipped++;
 			continue;
 		}
 
@@ -331,6 +337,7 @@ async function main() {
 		const rawMarkdown = td.turndown(processedHtml);
 		const markdown = postprocessMarkdown(rawMarkdown);
 		const mdxImports = buildMdxImports(markdown);
+		const mdxImportsFr = buildMdxImports(markdown, "../../..");
 
 		// Image: prefer RSS enclosure, fall back to first <img> in body
 		const image = item.enclosure?.url ?? extractFirstImage(html) ?? null;
@@ -352,12 +359,25 @@ async function main() {
 			draft: false,
 		});
 
+		// EN file
 		writeFileSync(filePath, `${frontmatter}\n${mdxImports}\n${markdown}\n`);
 		console.log(` create  ${slug}`);
 		created++;
+
+		// FR file — same content with adjusted imports, skip if already translated
+		if (!existsSync(frFilePath) || FORCE) {
+			writeFileSync(frFilePath, `${frontmatter}\n${mdxImportsFr}\n${markdown}\n`);
+			console.log(` create  fr/${slug}`);
+			frCreated++;
+		} else {
+			console.log(`   skip  fr/${slug} (already translated)`);
+			frSkipped++;
+		}
 	}
 
-	console.log(`\nDone. Created: ${created}, Skipped: ${skipped}`);
+	console.log(`\nDone.`);
+	console.log(`  EN — Created: ${created}, Skipped: ${skipped}`);
+	console.log(`  FR — Created: ${frCreated}, Skipped: ${frSkipped}`);
 }
 
 main().catch((err) => {
