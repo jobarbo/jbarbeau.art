@@ -50,6 +50,7 @@ public/
 | `npm run preview` | Prévisualisation du build |
 | `npm run import:blog` | Importe les nouveaux posts depuis Substack (skip les existants) |
 | `npm run import:blog -- --force` | Ré-importe tous les posts (écrase les existants) |
+| `npx @astrojs/upgrade` | Met à jour Astro et les intégrations `@astrojs/*` |
 
 ## Import Substack
 
