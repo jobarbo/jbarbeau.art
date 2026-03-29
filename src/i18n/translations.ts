@@ -9,6 +9,7 @@ export const translations = {
 		nav: {
 			menu: "Menu",
 			langSwitch: "Français",
+			blog: "Blog",
 		},
 		footer: {
 			designed: "Designed & Developed in Québec City",
@@ -65,6 +66,7 @@ export const translations = {
 		nav: {
 			menu: "Menu",
 			langSwitch: "English",
+			blog: "Articles",
 		},
 		footer: {
 			designed: "Conçu et développé à Québec",

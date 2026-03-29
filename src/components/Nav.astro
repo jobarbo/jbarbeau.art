@@ -17,6 +17,7 @@ const switchUrl = pathForUrl === "" ? (otherLocale === "fr" ? "/fr" : "/") : get
 <nav class='navigation'>
 	<div class='navigation__container'>
 		<a href={locale === "en" ? "/" : "/fr"} class='navigation__site-title'> JBarbeau.art</a>
+		<a href={locale === "en" ? "/blog" : "/fr/blog"} class='navigation__blog-link'>{t(locale, "nav.blog")}</a>
 		<a href={switchUrl} class='navigation__lang-switch' aria-label={t(locale, "nav.langSwitch")}>{otherLocale}</a>
 	</div>
 </nav>
