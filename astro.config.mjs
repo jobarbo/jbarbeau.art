@@ -48,8 +48,4 @@ export default defineConfig({
 		port: 4321,
 		host: true,
 	},
-	// Ensure the build outputs files as-is
-	build: {
-		format: "file",
-	},
 });
