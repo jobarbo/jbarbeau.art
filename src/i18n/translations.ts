@@ -66,7 +66,7 @@ export const translations = {
 		nav: {
 			menu: "Menu",
 			langSwitch: "English",
-			blog: "Articles",
+			blog: "Blogue",
 		},
 		footer: {
 			designed: "Conçu et développé à Québec",
@@ -87,8 +87,8 @@ export const translations = {
 			metaDescription: "Artiste algorithmique basé à Québec. Collections numériques et long format sur fx(hash), Foundation, Highlight. Expositions, NFTs et art par code.",
 		},
 		blog: {
-			title: "Blog",
-			metaTitle: "Blog | J Barbeau",
+			title: "Blogue",
+			metaTitle: "Blogue | J Barbeau",
 			metaDescription: "Articles et actualités de Jonathan Barbeau — art algorithmique, processus créatif, expositions et nouvelles œuvres.",
 			loadError: "Impossible de charger les articles pour le moment. Revenez plus tard.",
 			readPost: "Lire l'article →",
