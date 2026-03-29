@@ -1,54 +1,70 @@
-# Astro Starter Kit: Basics
+# jbarbeau.art
 
-```sh
-npm create astro@latest -- --template basics
+Site web personnel de Jonathan Barbeau — artiste génératif de Québec. Construit avec Astro 6, MDX, SCSS et Decap CMS. Déployé sur Netlify.
+
+## Stack
+
+- **[Astro 6](https://astro.build)** — générateur de site statique
+- **[@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/)** — composants Astro dans le contenu blog
+- **[Tailwind CSS v4](https://tailwindcss.com)** + SCSS personnalisé
+- **[Decap CMS](https://decapcms.org)** — interface d'édition (git-gateway via Netlify Identity)
+- **i18n bilingue** — EN à la racine, FR dans `src/content/blog/fr/`
+
+## Structure
+
+```
+src/
+├── components/
+│   ├── blog/
+│   │   ├── BlogTextContent.astro  — conteneur flex pour blocs texte
+│   │   ├── Divider.astro          — séparateur de section
+│   │   ├── Figure.astro           — image standalone avec lien
+│   │   ├── HighlightBox.astro     — boîte de mise en valeur
+│   │   ├── ImageGrid.astro        — grille d'images responsive
+│   │   ├── SubstackLink.astro     — carte de lien Substack
+│   │   └── YouTubeEmbed.astro     — embed YouTube responsive
+│   └── ...
+├── content/
+│   ├── blog/           — posts EN (.mdx)
+│   │   └── fr/         — posts FR (.mdx)
+│   └── project/        — projets artistiques
+├── pages/
+│   ├── blog/[slug].astro
+│   ├── fr/blog/[slug].astro
+│   └── ...
+└── styles/
+    └── base/           — variables, mixins, typographie SCSS
+scripts/
+└── import-substack.mjs — import automatisé depuis le flux RSS Substack
+public/
+└── admin/              — configuration Decap CMS
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Commandes
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+| Commande | Action |
+| :--- | :--- |
+| `npm install` | Installe les dépendances |
+| `npm run dev` | Serveur de développement sur `localhost:4321` |
+| `npm run build` | Build de production dans `./dist/` |
+| `npm run preview` | Prévisualisation du build |
+| `npm run import:blog` | Importe les nouveaux posts depuis Substack (skip les existants) |
+| `npm run import:blog -- --force` | Ré-importe tous les posts (écrase les existants) |
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Import Substack
 
-## 🚀 Project Structure
+Le script `scripts/import-substack.mjs` récupère le flux RSS de Substack et génère automatiquement des fichiers `.mdx` structurés avec les composants blog :
 
-Inside of your Astro project, you'll see the following folders and files:
+- `<ImageGrid>` — galeries d'images (détectées depuis les données JSON Substack)
+- `<Figure>` — images standalone cliquables
+- `<YouTubeEmbed>` — iframes YouTube
+- `<SubstackLink>` — cartes de liens embed
+- `<BlogTextContent>` — tous les blocs de texte entre les médias
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Après chaque import EN, un fichier FR est automatiquement créé dans `src/content/blog/fr/` avec le contenu anglais comme point de départ pour la traduction. Les fichiers FR existants (déjà traduits) ne sont pas écrasés.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Decap CMS
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Accessible sur `/admin`. En développement local, utilise le backend local (`npx decap-server` requis). En production, utilise Netlify Identity (git-gateway).
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Les posts créés via le CMS sont en markdown standard sans composants MDX. Les composants peuvent être ajoutés manuellement après coup si nécessaire.
