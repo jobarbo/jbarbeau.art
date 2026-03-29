@@ -7,18 +7,18 @@ interface Props {
 	width?: string;
 }
 
-const { src, alt = "", caption, fullSrc, width } = Astro.props;
+const {src, alt = "", caption, fullSrc, width} = Astro.props;
 const linkHref = fullSrc || src;
 ---
 
-<figure class="blog-figure" style={width ? `max-width: ${width}` : undefined}>
-	<a href={linkHref} target="_blank" rel="noopener noreferrer">
-		<img src={src} alt={alt} loading="lazy" />
+<figure class='blog-figure' style={width ? `max-width: ${width}` : undefined}>
+	<a href={linkHref} target='_blank' rel='noopener noreferrer'>
+		<img src={src} alt={alt} loading='lazy' />
 	</a>
 	{caption && <figcaption>{caption}</figcaption>}
 </figure>
 
-<style lang="scss">
+<style lang='scss'>
 	@use "../../styles/base/variables" as *;
 	@use "../../styles/base/functions" as *;
 	@use "../../styles/base/typography" as *;
@@ -32,14 +32,20 @@ const linkHref = fullSrc || src;
 		}
 
 		a {
-			display: block;
+			display: flex;
 			line-height: 0;
+			margin: 0 auto;
+			width: 100%;
+			max-width: 1440px;
+			overflow: hidden;
 		}
 
 		img {
 			width: 100%;
 			height: auto;
 			border-radius: 4px;
+			object-fit: cover;
+			object-position: center;
 			transition: opacity 0.2s ease;
 
 			&:hover {

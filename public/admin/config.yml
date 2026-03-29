@@ -80,7 +80,7 @@ collections:
     create: true
     summary: "{{fields.title}}"
     format: frontmatter
-    extension: md
+    extension: mdx
     media_folder: "/public/assets/blog"
     public_folder: "/assets/blog"
     fields:
@@ -104,7 +104,7 @@ collections:
     create: true
     summary: "{{fields.title}}"
     format: frontmatter
-    extension: md
+    extension: mdx
     media_folder: "/public/assets/blog"
     public_folder: "/assets/blog"
     fields:
