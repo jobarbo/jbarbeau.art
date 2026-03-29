@@ -8,6 +8,7 @@ draft: false
 ---
 import ImageGrid from '../../../components/blog/ImageGrid.astro';
 import Figure from '../../../components/blog/Figure.astro';
+import GridImage from '../../../components/blog/GridImage.astro';
 import BlogTextContent from '../../../components/blog/BlogTextContent.astro';
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!0Ly_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faef7fa2b-66ae-4967-882a-b4fb17c0acd5_1840x1380.jpeg" alt="" />
@@ -87,8 +88,8 @@ Ensuite j'ai essaye avec differentes couleurs et tailles :
 </BlogTextContent>
 
 <ImageGrid columns={2}>
-  <img src="https://substack-post-media.s3.amazonaws.com/public/images/78b18160-43ce-44bb-9236-5970ebeef400_2000x2000.png" alt="" loading="lazy" />
-  <img src="https://substack-post-media.s3.amazonaws.com/public/images/797d080d-d32c-4ed6-b2be-ea25ba9b2317_2000x2000.png" alt="" loading="lazy" />
+  <GridImage src="https://substack-post-media.s3.amazonaws.com/public/images/78b18160-43ce-44bb-9236-5970ebeef400_2000x2000.png" alt="" />
+  <GridImage src="https://substack-post-media.s3.amazonaws.com/public/images/797d080d-d32c-4ed6-b2be-ea25ba9b2317_2000x2000.png" alt="" />
 </ImageGrid>
 
 <BlogTextContent>
