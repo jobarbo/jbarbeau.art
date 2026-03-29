@@ -1,9 +1,9 @@
 ---
-title: "#2 - Pathfinding"
+title: "#2 - Trouver son chemin"
 pubDate: "2023-03-03T20:57:41.000Z"
 substackUrl: "https://jbarbeau.substack.com/p/2-pathfinding"
 image: "https://substackcdn.com/image/fetch/$s_!0Ly_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faef7fa2b-66ae-4967-882a-b4fb17c0acd5_1840x1380.jpeg"
-excerpt: Or how I get inspiration for creating stuff with code
+excerpt: Ou comment je trouve l'inspiration pour creer avec du code
 draft: false
 ---
 import ImageGrid from '../../../components/blog/ImageGrid.astro';
@@ -13,77 +13,77 @@ import BlogTextContent from '../../../components/blog/BlogTextContent.astro';
 <Figure src="https://substackcdn.com/image/fetch/$s_!0Ly_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faef7fa2b-66ae-4967-882a-b4fb17c0acd5_1840x1380.jpeg" alt="" />
 
 <BlogTextContent>
-## Preparation for the journey
+## Preparation pour le voyage
 
-If you want updates on my creative journey, don’t hesitate to subscribe! All blog posts are free but if you’re a collector and really like my stuff, you can subscribe for a small amount. It helps me a lot on my creative journey and you will receive exclusive pre order on future long-form releases and printed collections.
+Si tu veux suivre mon parcours creatif, n'hesite pas a t'abonner! Tous les articles sont gratuits, mais si t'es collectionneur pis que t'aimes vraiment ce que je fais, tu peux t'abonner pour un petit montant. Ca m'aide beaucoup dans mon cheminement creatif et tu vas recevoir des pre-commandes exclusives sur les futures sorties long-form et les collections imprimees.
 
 [Inscrivez-vous maintenant](https://jbarbeau.substack.com/subscribe?)
 
-## Getting to base camp
+## Arriver au camp de base
 
-More often than not, when I start a new project, I don’t really know what i’ll do. Sometimes I will have a very basic idea in the back of my mind or like, a basic set of rules.
+La plupart du temps, quand je commence un nouveau projet, je sais pas trop ce que je vais faire. Des fois j'ai une idee super vague en arriere de la tete ou genre, un ensemble de regles de base.
 
-I always start with a mostly empty canvas with an ellipse in the center, It’s a bit like my own version of Hello World. My current working environment is a modified version of the [FX(hash) webpack boilerplate](https://github.com/fxhash/fxhash-webpack-boilerplate). It’s a very basic file system that is made for creating long-form project and publish them on the fx(hash) platform.
+Je commence toujours avec un canvas pratiquement vide avec une ellipse au centre. C'est un peu comme ma propre version du Hello World. Mon environnement de travail actuel est une version modifiee du [FX(hash) webpack boilerplate](https://github.com/fxhash/fxhash-webpack-boilerplate). C'est un systeme de fichiers tres simple fait pour creer des projets long-form et les publier sur la plateforme fx(hash).
 
-I could talk about what longform and shortform is but my friend Dan Catt made a pretty thorough video on his youtube channel a couple of week ago so I will just link it here for those interested: [What is long-form generative art](https://www.youtube.com/watch?v=-rE5tQSVVJs).
+Je pourrais parler de ce que c'est le longform et le shortform, mais mon ami Dan Catt a fait une video pas mal complete sur sa chaine YouTube il y a quelques semaines, fait que je vais juste la mettre ici pour ceux que ca interesse : [What is long-form generative art](https://www.youtube.com/watch?v=-rE5tQSVVJs).
 
-So let’s get back to pathfinding. My starting canvas would look like that:
+Bon, revenons au pathfinding. Mon canvas de depart ressemblerait a ca :
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!Vot5!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa3aa94e9-2c85-48d8-9616-793365893e03_2000x2000.png" alt="" />
 
 <BlogTextContent>
-Then I would try stuff like moving the circle on the canvas to get my creative brain flowing. For this one, I decided to make a circle packing algorithm.In Generative Art, circle packing is a technique used where circles are packed tightly together within a specific boundary, such as a rectangle or a shape, without overlapping each other. The circles are often randomly sized and placed according to a set of rules determined by the artist.
+Ensuite j'essaierais des affaires comme deplacer le cercle sur le canvas pour faire rouler ma creativite. Pour celui-ci, j'ai decide de faire un algorithme de circle packing. En art generatif, le circle packing est une technique ou les cercles sont empaquetes serres dans une limite specifique, comme un rectangle ou une forme, sans se chevaucher. Les cercles sont souvent de tailles aleatoires et places selon un ensemble de regles determinees par l'artiste.
 
-Here is a basic Circle Packing output
+Voici un resultat de base de Circle Packing
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!mpsA!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff183823d-7346-42bb-b82e-5f3892d309e8_2000x2000.png" alt="" />
 
 <BlogTextContent>
-## Getting the lay of the land
+## Explorer le terrain
 
-Even though it’s visually interesting. It’s just a visual representation of an algorithm in it’s most simple form. I often use such algorithm as a starting basecamp for exploring the neighborhood.
+Meme si c'est visuellement interessant, c'est juste une representation visuelle d'un algorithme dans sa forme la plus simple. J'utilise souvent ce genre d'algorithme comme camp de base pour explorer les alentours.
 
-At this time I was pretty underwhelmed by the time it took to load the whole thing. It loaded in a bit less than 23 seconds, it may seems like nothing but if someone want to see the live render, a 23 second loading screen can be pretty boring. The time it takes is understandable though. The program start by Adding a circle and check if it’s colliding with the previous circle. If not, it is displayed. If it’s colliding, the current circle is deleted and then drawn elsewhere and the program will verify again, until it finds a place to put it.
+A ce moment-la, j'etais pas mal decu du temps que ca prenait pour loader le tout. Ca chargeait en un peu moins de 23 secondes. Ca a l'air de rien, mais si quelqu'un veut voir le rendu en direct, un ecran de chargement de 23 secondes, ca peut etre pas mal plate. Le temps que ca prend est comprehensible par contre. Le programme commence par ajouter un cercle et verifie s'il entre en collision avec le cercle precedent. Si non, il est affiche. S'il y a collision, le cercle actuel est supprime puis dessine ailleurs, et le programme verifie encore, jusqu'a ce qu'il trouve une place ou le mettre.
 
-There is a limited number of tries it can go through though. If the number of attempt surpass the threshold, the program will consider that all possible circle have been placed and then complete. This is to prevent infinite loop and crashing the browser.
+Il y a un nombre limite d'essais par contre. Si le nombre de tentatives depasse le seuil, le programme considere que tous les cercles possibles ont ete places et termine. C'est pour eviter les boucles infinies et de faire planter le navigateur.
 
-## Setting Camp
+## Monter le camp
 
-I wanted the optimise the loading or at the very least create the illusion that the whole rendering was faster. I recently learned a trick for that with generator functions\*. I use them in a way that give the impression that the rendering of the piece is faster. Instead of generating all the elements of an artwork in a loop and then rendering them (like 10k ellipses with collision detection), you can use a generator function to render the elements one at a time or per batch, which can create the illusion that the artwork is being created in real-time.
+Je voulais optimiser le chargement ou au minimum creer l'illusion que le rendu etait plus rapide. J'ai recemment appris un truc pour ca avec les fonctions generatrices\*. Je les utilise d'une facon qui donne l'impression que le rendu de la piece est plus rapide. Au lieu de generer tous les elements d'une oeuvre dans une boucle et ensuite les afficher (genre 10k ellipses avec detection de collision), tu peux utiliser une fonction generatrice pour afficher les elements un a la fois ou par lot, ce qui cree l'illusion que l'oeuvre est creee en temps reel.
 
-For example, you could use a generator function to generate each shape on-the-fly and render it to the canvas before moving on to the next shape or whatever. This can create the impression of a fast, dynamic rendering process that is constantly evolving.
+Par exemple, tu pourrais utiliser une fonction generatrice pour generer chaque forme a la volee et la rendre sur le canvas avant de passer a la forme suivante ou whatever. Ca peut creer l'impression d'un rendu rapide et dynamique qui evolue constamment.
 
-I will talk about generator function a bit more in a following post.
+Je vais parler des fonctions generatrices un peu plus dans un prochain article.
 
-## Foraging for sticks
+## Ramasser du bois
 
-Once I felt the base was solid, started experimenting with different colors, and trying removing the fill colour and play with strokes. It was okay but nothing that hooked me.
+Une fois que je sentais que la base etait solide, j'ai commence a experimenter avec differentes couleurs, pis essayer d'enlever la couleur de remplissage pour jouer avec les contours. C'etait correct mais rien qui m'accrochait.
 
-In order to aid in debugging, I decided that the program would draw a line between the current circle and any existing circle it was colliding with. It gave this thing:
+Pour m'aider a debugger, j'ai decide que le programme dessinerait une ligne entre le cercle actuel et tout cercle existant avec lequel il entrait en collision. Ca a donne ca :
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!9eYc!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e14792-607a-4f5d-a9e5-d85d18bcf099_2000x2000.png" alt="" />
 
 <BlogTextContent>
-I thought that this had real visual potential so I decided to just remove the circles and focus only on the lines. To give them a sens of tactile depth, I had the idea to render to more lines under each one. One would be blue with a small offset to the right and the other one would be red with a small offset to the left. It gave something pretty interesting.
+Je trouvais que ca avait un vrai potentiel visuel, fait que j'ai decide d'enlever les cercles et de me concentrer juste sur les lignes. Pour leur donner un sens de profondeur tactile, j'ai eu l'idee de rendre deux lignes supplementaires en dessous de chacune. Une serait bleue avec un petit decalage vers la droite et l'autre serait rouge avec un petit decalage vers la gauche. Ca a donne quelque chose de pas mal interessant.
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!Y20F!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2f2abd8-8884-4b29-a6ad-cf3ce712720d_2000x2000.png" alt="" />
 
 <BlogTextContent>
-## Starting a fire
+## Allumer un feu
 
-From there, I knew I hade something and tried a bunch of stuff. This section will be example heavy so bear with me :)
+A partir de la, je savais que j'avais quelque chose et j'ai essaye un paquet d'affaires. Cette section va etre lourde en exemples, fait que bear with me :)
 
-Here I tried using the OVERLAY blend mode and it gave this pretty interesting output
+Ici j'ai essaye le mode de fusion OVERLAY et ca a donne ce resultat pas mal interessant
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!Oi6X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F21829dda-ed94-4987-b24a-91836feba7a9_2000x2000.png" alt="" />
 
 <BlogTextContent>
-Then I tried with different colours and sizes :
+Ensuite j'ai essaye avec differentes couleurs et tailles :
 </BlogTextContent>
 
 <ImageGrid columns={2}>
@@ -92,31 +92,31 @@ Then I tried with different colours and sizes :
 </ImageGrid>
 
 <BlogTextContent>
-I then decided to put back the circle AND use the blending mode, It gave some cool space type composition that I find really interesting.
+J'ai ensuite decide de remettre les cercles ET d'utiliser le mode de fusion. Ca a donne des compositions style espace pas mal cool que je trouve vraiment interessantes.
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!PVZl!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c8a71b9-edb5-41cc-93f0-1a61234f870e_2000x2000.png" alt="" />
 
 <BlogTextContent>
-## Seeing in the dark
+## Voir dans le noir
 
-The next day, I had the idea of removing the original ellipses and replacing the lines with a series of ellipses really close to each other.
+Le lendemain, j'ai eu l'idee d'enlever les ellipses originales et de remplacer les lignes par une serie d'ellipses vraiment proches les unes des autres.
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!wnrv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F34d94a21-756c-49a6-bf18-06e818ed9c92_2222x2222.png" alt="" />
 
 <BlogTextContent>
-Next idea i had is that the ellipses that would be closer to the center of each section would be bigger and they would get smaller and smaller the further away they get from the center. I also gave each ellipses the same treatment as the lines, which meant that each small ellipse would also have two other ellipses underneath with small offset. One would be darker and the other one would be lighter.
+L'idee suivante que j'ai eue, c'est que les ellipses plus proches du centre de chaque section seraient plus grosses et deviendraient de plus en plus petites en s'eloignant du centre. J'ai aussi donne a chaque ellipse le meme traitement que les lignes, ce qui veut dire que chaque petite ellipse aurait aussi deux autres ellipses en dessous avec un petit decalage. Une serait plus foncee et l'autre plus pale.
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!EWMg!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb516f62c-34f7-49de-8893-48f6de62b011_2228x2228.png" alt="" />
 
 <BlogTextContent>
-Now this was something else, I feels 3d and organic. It render an illusion of shadows but it’s all a fraud, an optical illusion.
+La c'etait autre chose, ca fait 3D et organique. Ca rend une illusion d'ombres mais c'est tout du fake, une illusion d'optique.
 
-## Surviving and harvesting
+## Survivre et recolter
 
-My stay in this weird part of the forest is still ongoing, but I have found a plentiful source of creative sustenance. Now I need to exploit it in a sustainable fashion. I already have a couple of nice gems here that I want to share with you all before going back to work.
+Mon sejour dans cette partie bizarre de la foret est encore en cours, mais j'ai trouve une source abondante de nourriture creative. Maintenant il faut que je l'exploite de facon durable. J'ai deja quelques belles trouvailles ici que je veux partager avec vous avant de retourner travailler.
 </BlogTextContent>
 
 <Figure src="https://substackcdn.com/image/fetch/$s_!fqZN!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd663afc1-059c-4286-977d-292e36a6562f_2470x2470.png" alt="" />
@@ -126,7 +126,7 @@ My stay in this weird part of the forest is still ongoing, but I have found a pl
 <Figure src="https://substackcdn.com/image/fetch/$s_!yJ7u!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d4f19c4-0cb8-4d15-9bec-622c486b60fa_2412x2412.png" alt="" />
 
 <BlogTextContent>
-## To Be Continued
+## A suivre
 
-Stay tuned for the follow up on this journey! Thanks everyone for reading, it really matters to me :) Have a great weekend!
+Restez a l'affut pour la suite de ce voyage! Merci a tout le monde d'avoir lu, ca compte vraiment pour moi :) Passez une belle fin de semaine!
 </BlogTextContent>
