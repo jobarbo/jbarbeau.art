@@ -27,7 +27,8 @@ export const translations = {
 		},
 		home: {
 			metaTitle: "Jonathan Barbeau | Algorithmic Artist",
-			metaDescription: "Algorithmic artist based in Québec City. Digital and long-form collections on fx(hash), Foundation, Highlight. Exhibitions, NFTs, and creative code.",
+			metaDescription:
+				"Algorithmic artist based in Québec City. I write code as a creative medium — building generative systems where structure, randomness, and repetition produce unexpected visual outcomes.",
 		},
 		blog: {
 			title: "Blog",
@@ -84,7 +85,7 @@ export const translations = {
 		},
 		home: {
 			metaTitle: "Jonathan Barbeau | Artiste algorithmique",
-			metaDescription: "Artiste algorithmique basé à Québec. Collections numériques et long format sur fx(hash), Foundation, Highlight. Expositions, NFTs et art par code.",
+			metaDescription: "Artiste algorithmique basé à Québec. J'écris du code comme médium créatif — en construisant des systèmes génératifs explorant des résultats visuels inattendus.",
 		},
 		blog: {
 			title: "Blogue",
