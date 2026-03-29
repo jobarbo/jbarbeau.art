@@ -31,6 +31,7 @@
 	align-items: center;
 	height: 100%;
 	padding: to-vw(30);
+	gap: 1rem;
 }
 
 .navigation__site-title {
@@ -40,6 +41,19 @@
 	line-height: 1.1;
 	color: var(--gray-0);
 	text-decoration: none;
+}
+
+.navigation__blog-link {
+	color: var(--gray-0);
+	opacity: 1;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: var(--text-md);
+	margin-left: auto;
+	&:hover {
+		opacity: 0.85;
+		text-decoration: underline;
+	}
 }
 
 .navigation__lang-switch {

@@ -1,0 +1,132 @@
+---
+title: "#2 - Trouver son chemin"
+pubDate: "2023-03-03T20:57:41.000Z"
+substackUrl: "https://jbarbeau.substack.com/p/2-pathfinding"
+image: "https://substackcdn.com/image/fetch/$s_!0Ly_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faef7fa2b-66ae-4967-882a-b4fb17c0acd5_1840x1380.jpeg"
+excerpt: Ou comment je trouve l'inspiration pour creer avec du code
+draft: false
+---
+import ImageGrid from '../../../components/blog/ImageGrid.astro';
+import Figure from '../../../components/blog/Figure.astro';
+import BlogTextContent from '../../../components/blog/BlogTextContent.astro';
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!0Ly_!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faef7fa2b-66ae-4967-882a-b4fb17c0acd5_1840x1380.jpeg" alt="" />
+
+<BlogTextContent>
+## Preparation pour le voyage
+
+Si tu veux suivre mon parcours creatif, n'hesite pas a t'abonner! Tous les articles sont gratuits, mais si t'es collectionneur pis que t'aimes vraiment ce que je fais, tu peux t'abonner pour un petit montant. Ca m'aide beaucoup dans mon cheminement creatif et tu vas recevoir des pre-commandes exclusives sur les futures sorties long-form et les collections imprimees.
+
+[Inscrivez-vous maintenant](https://jbarbeau.substack.com/subscribe?)
+
+## Arriver au camp de base
+
+La plupart du temps, quand je commence un nouveau projet, je sais pas trop ce que je vais faire. Des fois j'ai une idee super vague en arriere de la tete ou genre, un ensemble de regles de base.
+
+Je commence toujours avec un canvas pratiquement vide avec une ellipse au centre. C'est un peu comme ma propre version du Hello World. Mon environnement de travail actuel est une version modifiee du [FX(hash) webpack boilerplate](https://github.com/fxhash/fxhash-webpack-boilerplate). C'est un systeme de fichiers tres simple fait pour creer des projets long-form et les publier sur la plateforme fx(hash).
+
+Je pourrais parler de ce que c'est le longform et le shortform, mais mon ami Dan Catt a fait une video pas mal complete sur sa chaine YouTube il y a quelques semaines, fait que je vais juste la mettre ici pour ceux que ca interesse : [What is long-form generative art](https://www.youtube.com/watch?v=-rE5tQSVVJs).
+
+Bon, revenons au pathfinding. Mon canvas de depart ressemblerait a ca :
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!Vot5!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa3aa94e9-2c85-48d8-9616-793365893e03_2000x2000.png" alt="" />
+
+<BlogTextContent>
+Ensuite j'essaierais des affaires comme deplacer le cercle sur le canvas pour faire rouler ma creativite. Pour celui-ci, j'ai decide de faire un algorithme de circle packing. En art generatif, le circle packing est une technique ou les cercles sont empaquetes serres dans une limite specifique, comme un rectangle ou une forme, sans se chevaucher. Les cercles sont souvent de tailles aleatoires et places selon un ensemble de regles determinees par l'artiste.
+
+Voici un resultat de base de Circle Packing
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!mpsA!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff183823d-7346-42bb-b82e-5f3892d309e8_2000x2000.png" alt="" />
+
+<BlogTextContent>
+## Explorer le terrain
+
+Meme si c'est visuellement interessant, c'est juste une representation visuelle d'un algorithme dans sa forme la plus simple. J'utilise souvent ce genre d'algorithme comme camp de base pour explorer les alentours.
+
+A ce moment-la, j'etais pas mal decu du temps que ca prenait pour loader le tout. Ca chargeait en un peu moins de 23 secondes. Ca a l'air de rien, mais si quelqu'un veut voir le rendu en direct, un ecran de chargement de 23 secondes, ca peut etre pas mal plate. Le temps que ca prend est comprehensible par contre. Le programme commence par ajouter un cercle et verifie s'il entre en collision avec le cercle precedent. Si non, il est affiche. S'il y a collision, le cercle actuel est supprime puis dessine ailleurs, et le programme verifie encore, jusqu'a ce qu'il trouve une place ou le mettre.
+
+Il y a un nombre limite d'essais par contre. Si le nombre de tentatives depasse le seuil, le programme considere que tous les cercles possibles ont ete places et termine. C'est pour eviter les boucles infinies et de faire planter le navigateur.
+
+## Monter le camp
+
+Je voulais optimiser le chargement ou au minimum creer l'illusion que le rendu etait plus rapide. J'ai recemment appris un truc pour ca avec les fonctions generatrices\*. Je les utilise d'une facon qui donne l'impression que le rendu de la piece est plus rapide. Au lieu de generer tous les elements d'une oeuvre dans une boucle et ensuite les afficher (genre 10k ellipses avec detection de collision), tu peux utiliser une fonction generatrice pour afficher les elements un a la fois ou par lot, ce qui cree l'illusion que l'oeuvre est creee en temps reel.
+
+Par exemple, tu pourrais utiliser une fonction generatrice pour generer chaque forme a la volee et la rendre sur le canvas avant de passer a la forme suivante ou whatever. Ca peut creer l'impression d'un rendu rapide et dynamique qui evolue constamment.
+
+Je vais parler des fonctions generatrices un peu plus dans un prochain article.
+
+## Ramasser du bois
+
+Une fois que je sentais que la base etait solide, j'ai commence a experimenter avec differentes couleurs, pis essayer d'enlever la couleur de remplissage pour jouer avec les contours. C'etait correct mais rien qui m'accrochait.
+
+Pour m'aider a debugger, j'ai decide que le programme dessinerait une ligne entre le cercle actuel et tout cercle existant avec lequel il entrait en collision. Ca a donne ca :
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!9eYc!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e14792-607a-4f5d-a9e5-d85d18bcf099_2000x2000.png" alt="" />
+
+<BlogTextContent>
+Je trouvais que ca avait un vrai potentiel visuel, fait que j'ai decide d'enlever les cercles et de me concentrer juste sur les lignes. Pour leur donner un sens de profondeur tactile, j'ai eu l'idee de rendre deux lignes supplementaires en dessous de chacune. Une serait bleue avec un petit decalage vers la droite et l'autre serait rouge avec un petit decalage vers la gauche. Ca a donne quelque chose de pas mal interessant.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!Y20F!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2f2abd8-8884-4b29-a6ad-cf3ce712720d_2000x2000.png" alt="" />
+
+<BlogTextContent>
+## Allumer un feu
+
+A partir de la, je savais que j'avais quelque chose et j'ai essaye un paquet d'affaires. Cette section va etre lourde en exemples, fait que bear with me :)
+
+Ici j'ai essaye le mode de fusion OVERLAY et ca a donne ce resultat pas mal interessant
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!Oi6X!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F21829dda-ed94-4987-b24a-91836feba7a9_2000x2000.png" alt="" />
+
+<BlogTextContent>
+Ensuite j'ai essaye avec differentes couleurs et tailles :
+</BlogTextContent>
+
+<ImageGrid columns={2}>
+  <img src="https://substack-post-media.s3.amazonaws.com/public/images/78b18160-43ce-44bb-9236-5970ebeef400_2000x2000.png" alt="" loading="lazy" />
+  <img src="https://substack-post-media.s3.amazonaws.com/public/images/797d080d-d32c-4ed6-b2be-ea25ba9b2317_2000x2000.png" alt="" loading="lazy" />
+</ImageGrid>
+
+<BlogTextContent>
+J'ai ensuite decide de remettre les cercles ET d'utiliser le mode de fusion. Ca a donne des compositions style espace pas mal cool que je trouve vraiment interessantes.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!PVZl!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c8a71b9-edb5-41cc-93f0-1a61234f870e_2000x2000.png" alt="" />
+
+<BlogTextContent>
+## Voir dans le noir
+
+Le lendemain, j'ai eu l'idee d'enlever les ellipses originales et de remplacer les lignes par une serie d'ellipses vraiment proches les unes des autres.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!wnrv!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F34d94a21-756c-49a6-bf18-06e818ed9c92_2222x2222.png" alt="" />
+
+<BlogTextContent>
+L'idee suivante que j'ai eue, c'est que les ellipses plus proches du centre de chaque section seraient plus grosses et deviendraient de plus en plus petites en s'eloignant du centre. J'ai aussi donne a chaque ellipse le meme traitement que les lignes, ce qui veut dire que chaque petite ellipse aurait aussi deux autres ellipses en dessous avec un petit decalage. Une serait plus foncee et l'autre plus pale.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!EWMg!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb516f62c-34f7-49de-8893-48f6de62b011_2228x2228.png" alt="" />
+
+<BlogTextContent>
+La c'etait autre chose, ca fait 3D et organique. Ca rend une illusion d'ombres mais c'est tout du fake, une illusion d'optique.
+
+## Survivre et recolter
+
+Mon sejour dans cette partie bizarre de la foret est encore en cours, mais j'ai trouve une source abondante de nourriture creative. Maintenant il faut que je l'exploite de facon durable. J'ai deja quelques belles trouvailles ici que je veux partager avec vous avant de retourner travailler.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!fqZN!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd663afc1-059c-4286-977d-292e36a6562f_2470x2470.png" alt="" />
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!tlIr!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fb1ad45-f129-4e91-8e99-fb6bcba60e3e_2468x2468.png" alt="" />
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!yJ7u!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d4f19c4-0cb8-4d15-9bec-622c486b60fa_2412x2412.png" alt="" />
+
+<BlogTextContent>
+## A suivre
+
+Restez a l'affut pour la suite de ce voyage! Merci a tout le monde d'avoir lu, ca compte vraiment pour moi :) Passez une belle fin de semaine!
+</BlogTextContent>

@@ -1,4 +1,5 @@
 import {defineConfig} from "astro/config";
+import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -16,6 +17,7 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 	},
 	integrations: [
+		mdx(),
 		sitemap({
 			filter: (page) => !page.includes("/admin") && !page.includes("/local_admin") && !page.includes("/collection-preview"),
 			// Guarantee main static pages are always in the sitemap (in case discovery misses them)

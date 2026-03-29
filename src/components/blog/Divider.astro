@@ -1,0 +1,53 @@
+---
+interface Props {
+	spacing?: "small" | "medium" | "large";
+}
+
+const { spacing = "medium" } = Astro.props;
+---
+
+<hr class={`blog-divider blog-divider--${spacing}`} />
+
+<style lang="scss">
+	@use "../../styles/base/variables" as *;
+	@use "../../styles/base/functions" as *;
+	@use "../../styles/base/mediaqueries" as *;
+
+	.blog-divider {
+		border: none;
+		border-top: 1px solid $gray-200;
+		width: 60%;
+		margin-left: auto;
+		margin-right: auto;
+
+		&--small {
+			margin-top: to-vw(24);
+			margin-bottom: to-vw(24);
+
+			@include tablet-only {
+				margin-top: 1rem;
+				margin-bottom: 1rem;
+			}
+		}
+
+		&--medium {
+			margin-top: to-vw(40);
+			margin-bottom: to-vw(40);
+
+			@include tablet-only {
+				margin-top: 1.5rem;
+				margin-bottom: 1.5rem;
+			}
+		}
+
+		&--large {
+			margin-top: to-vw(64);
+			margin-bottom: to-vw(64);
+
+			@include tablet-only {
+				margin-top: 2.5rem;
+				margin-bottom: 2.5rem;
+			}
+		}
+	}
+</style>

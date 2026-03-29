@@ -1,0 +1,55 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+import { t } from "../../../i18n";
+
+export async function getStaticPaths() {
+	const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+	const enPosts = allPosts.filter((p) => !p.id.startsWith("fr/"));
+	const frPosts = allPosts.filter((p) => p.id.startsWith("fr/"));
+
+	// Generate a route for every EN slug — serve FR if it exists, else fallback to EN
+	return enPosts.map((enPost) => {
+		const frPost = frPosts.find((p) => p.id === `fr/${enPost.id}`);
+		return {
+			params: { slug: enPost.id },
+			props: { post: frPost ?? enPost },
+		};
+	});
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, pubDate, substackUrl, image, excerpt } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString("fr-CA", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+
+const ogImage = image || "/assets/og/profile.webp";
+---
+
+<Layout title={`${title} | Blogue | J Barbeau`} description={excerpt ?? ""} image={ogImage} type="article">
+	<section class="blog-single" aria-label="Article de blogue">
+		<article class="blog-single__article">
+			<h1 class="blog-single__title">{title}</h1>
+			<div class="blog-single__meta">
+				<time class="blog-single__date" datetime={pubDate.toISOString()}>{formattedDate}</time>
+				<a href={substackUrl} target="_blank" rel="noopener noreferrer" class="blog-single__substack-link">{t("fr", "blog.viewOnSubstack")}</a>
+			</div>
+			<div class="blog-single__content">
+				<Content />
+			</div>
+		</article>
+
+		<div class="blog-single__footer">
+			<a href="/fr/blog" class="blog-single__back-link">{t("fr", "blog.backToBlog")}</a>
+		</div>
+	</section>
+</Layout>
+
+<style lang="scss">
+	@use "../../../styles/components/BlogSingle.scss";
+</style>

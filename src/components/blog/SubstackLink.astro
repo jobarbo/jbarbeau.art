@@ -1,0 +1,102 @@
+---
+interface Props {
+	href: string;
+	image?: string;
+	title: string;
+	description?: string;
+	meta?: string;
+	label?: string;
+}
+
+const { href, image, title, description, meta, label = "Read on Substack" } = Astro.props;
+---
+
+<a class="substack-link" href={href} target="_blank" rel="noopener noreferrer">
+	{image && (
+		<div class="substack-link__image">
+			<img src={image} alt={title} loading="lazy" />
+		</div>
+	)}
+	<div class="substack-link__body">
+		<span class="substack-link__title">{title}</span>
+		{description && <span class="substack-link__description">{description}</span>}
+		{meta && <span class="substack-link__meta">{meta}</span>}
+		<span class="substack-link__cta">{label} ↗</span>
+	</div>
+</a>
+
+<style lang="scss">
+	@use "../../styles/base/variables" as *;
+	@use "../../styles/base/functions" as *;
+	@use "../../styles/base/mediaqueries" as *;
+	@use "../../styles/base/typography" as *;
+
+	.substack-link {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: to-vw(16) to-vw(20);
+		margin: to-vw(24) 0;
+		border: 1px solid $gray-200;
+		border-radius: 6px;
+		text-decoration: none;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+		@include tablet-only {
+			padding: 1rem 1.25rem;
+			margin: 1.25rem 0;
+		}
+
+		&:hover {
+			border-color: $teal;
+			box-shadow: 0 2px 8px rgba($teal, 0.1);
+		}
+
+		&__image {
+			flex-shrink: 0;
+			width: 48px;
+			height: 48px;
+			border-radius: 50%;
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				margin: 0;
+				border-radius: 0;
+			}
+		}
+
+		&__body {
+			display: flex;
+			flex-direction: column;
+			gap: 0.2rem;
+			min-width: 0;
+		}
+
+		&__title {
+			@include text(base, $fw: 600, $lh: 1.3);
+			display: block;
+		}
+
+		&__description {
+			@include text(small, $color: $charcoal, $lh: 1.4);
+			display: block;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		&__meta {
+			@include text(small, $color: $gray-500, $lh: 1.3);
+			display: block;
+		}
+
+		&__cta {
+			@include text(small, $color: $teal, $lh: 1.3);
+			display: block;
+			margin-top: 0.15rem;
+		}
+	}
+</style>

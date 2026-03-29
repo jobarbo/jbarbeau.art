@@ -1,0 +1,107 @@
+---
+title: "Process Story: Aweille!"
+pubDate: "2023-09-11T20:10:07.000Z"
+substackUrl: "https://jbarbeau.substack.com/p/process-story-aweille"
+image: "https://substack-post-media.s3.amazonaws.com/public/images/d2ac32ac-ae79-4568-91f3-9464732e4532_5400x3024.png"
+excerpt: "Let's talk about my first speed run"
+draft: false
+---
+import Figure from '../../components/blog/Figure.astro';
+import BlogTextContent from '../../components/blog/BlogTextContent.astro';
+
+<BlogTextContent>
+Last month, I had one of those days where nothing seemed to get done. You know the type of day when you work tirelessly but don't achieve any milestones, and you don't feel like you've made any progress in any way. It's just filled with busywork.
+
+It was 3 pm, and I was ready to call it a day and head home to relax when the idea of creating a longform collection in under 2 hours crossed my mind. I thought, "Why not? Nothing productive came out of today, so I might as well do something." I set myself a deadline: it had to be ready for publication by 6 pm and released the next morning at 9 am.
+
+Thanks for reading The Weekly Process by Jonathan Barbeau! Subscribe for free to receive new posts and support my work.
+
+## The Finished Project
+
+You can access the project directly on fx(hash) if you'd like to check out the collection while reading.
+
+**[Aweille!](https://www.fxhash.xyz/generative/slug/aweille!)**
+
+## The Name
+
+Why did I choose to call it "Aweille!"? What does it mean?
+
+"Aweille!" is a French-Canadian (Quebec) word or slang that derives from the French word "Envoye," which means "to send." It's typically used when urging someone to hurry up. For instance, if you're leaving for an appointment, and the person you're going with is taking their time, you could say, "Aweille! We need to get there by 4 pm."
+
+I hope you'll use this word with respect.
+
+It's pronounced like "A-WAY-E" (the E is somewhat aspirated or cut in half).
+
+## Creating from intuition (4pm)
+
+I thoroughly enjoy creating from intuition and embracing surprises along the way that guide me in new directions.
+
+For this project, I began with a simple ball in the middle of the canvas, and that's it.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!tZGI!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ad64d3a-848f-4f64-bd62-41e7400c3724_2832x2832.png" alt="" />
+
+<BlogTextContent>
+then decided to eliminate the opacity and generate multiple of them to be randomly positioned on the X-axis while remaining fixed on the Y-axis.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!6Yt1!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0070e47f-795b-48c8-a257-baeb250d89df_2622x2622.png" alt="" />
+
+<BlogTextContent>
+To work with low-opacity elements effectively, you need a significant quantity of them; otherwise, they appear somewhat faint and don't create a pleasing visual effect. Therefore, instead of having approximately 50 circles, I chose to generate around 60,000 of them.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!jbJz!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0b91a8e2-4848-4b03-9b9f-54d4c8b4bd12_2832x2832.png" alt="" />
+
+<BlogTextContent>
+What followed resembled a plaster or some peculiar, blurry skateboard, but it wasn't quite right. Then an idea struck me: I could elongate those circles to the point where they appeared like rectangles, yet being comprised of ellipses, they would allow the background "light" to shine through.
+
+To achieve this elongation, I decided that each circle would mostly be 0.5 to 3 pixels in width, while its height would be approximately a fifth of the canvas height. To distribute each circle, I mapped the value returned by a noise function (ranging from 0 to 1) to its position from left to right. I applied the same concept to adjust the colors of each circle, creating a sense of continuity rather than random colors.
+
+The result became intriguing, and at that point, I had been working on it for around an hour.
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!q3rf!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc5e1e0ce-2ff4-4296-bdc3-5524bdb85ded_2832x2832.png" alt="" />
+
+<BlogTextContent>
+## Finishing touches(5pm)
+
+I had approximately 30 minutes left to finalize the code and another 30 minutes to publish the project.
+
+To introduce some variety, I decided to incorporate two types of features into the collection. The first was the "Hue Type," which had four parameters. One extreme would produce vibrant and multicolored patterns (similar to the one just mentioned above), while the other end would generate a more static pattern with a dominant color and some variation in saturation and brightness. The other two parameters fell somewhere in between.
+
+The second feature I introduced is what I refer to as the "Mode Type," which consists of three modes: "Straight," "Moderate," and "Crazy." This mode would impact the height of each circle.
+
+-   "Straight" would produce a straight rectangular structure.
+    
+-   "Moderate" would create a blocky but variable structure.
+    
+-   "Crazy" would result in a wavy structure, sometimes resembling a fish.
+    
+
+Here is an example of the "Crazy" mode being rendered:
+</BlogTextContent>
+
+<Figure src="https://substackcdn.com/image/fetch/$s_!yPDs!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa57b4ca1-efe4-4505-8519-3f936df953a9_1080x1080.png" alt="" />
+
+<BlogTextContent>
+Aweille! #48, collected by P1x3lboy
+
+The "Straight" mode had a higher probability of being generated (50%), while the other two modes each had a 25% chance.
+
+To complete the composition, I opted to introduce some texture by rendering numerous points that spanned from white to black, creating a relief-like texture effect.
+
+## Publishing (5:30pm)
+
+I wasn't entirely satisfied with the outcome, to be honest, but my time was up, and I had made a promise to myself to release the work whether it was ready or not. Despite not being fully content with the quality, I had an immense amount of fun working on it. Since the project was free from expectations and the stress that often accompanies long-term projects, it felt like an enjoyable, spontaneous game of building something from scratch.
+
+I decided to publish the project on fx(hash) with a total of 128 editions. I considered the price of 2 tez to be reasonable for this type of project (which was roughly $2 at the time). I had no specific expectations for how the project would perform, and I refrained from sharing any work-in-progress or teasers on social media. When the next day arrived, I simply posted a single tweet.
+
+The response was remarkably positive, and the collection sold out in about a week and a half. I was truly thrilled and cannot express my gratitude enough to all the supporters. Even though it was only 2 tez each, it marked my first longform project completely selling out, and it means so much to me. So, once again, thank you to all the collectors and artists for your support. It truly means the world to me.
+
+I hope you found this process post interesting. Please don't hesitate to comment, like, and share this post if you enjoyed it. I love receiving feedback, and it helps spread the word. Plus, it triggers a dopamine response in my brain and all that good stuff!
+
+Cheerio!
+
+Thanks for reading The Weekly Process by Jonathan Barbeau! Subscribe for free to receive new posts and support my work.
+</BlogTextContent>

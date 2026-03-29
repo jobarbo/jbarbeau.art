@@ -1,0 +1,53 @@
+---
+interface Props {
+	variant?: "teal" | "charcoal" | "frost" | "lime";
+}
+
+const { variant = "teal" } = Astro.props;
+---
+
+<aside class={`blog-highlight blog-highlight--${variant}`}>
+	<slot />
+</aside>
+
+<style lang="scss">
+	@use "../../styles/base/variables" as *;
+	@use "../../styles/base/functions" as *;
+	@use "../../styles/base/mediaqueries" as *;
+
+	.blog-highlight {
+		padding: to-vw(24) to-vw(32);
+		margin: to-vw(32) 0;
+		border-radius: 4px;
+		border-left: 4px solid;
+
+		@include tablet-only {
+			padding: 1.25rem 1.5rem;
+			margin: 1.5rem 0;
+		}
+
+		:global(p:last-child) {
+			margin-bottom: 0;
+		}
+
+		&--teal {
+			background-color: rgba($teal, 0.06);
+			border-left-color: $teal;
+		}
+
+		&--charcoal {
+			background-color: rgba($charcoal, 0.06);
+			border-left-color: $charcoal;
+		}
+
+		&--frost {
+			background-color: $frost;
+			border-left-color: $powder;
+		}
+
+		&--lime {
+			background-color: rgba($lime, 0.2);
+			border-left-color: $lime;
+		}
+	}
+</style>

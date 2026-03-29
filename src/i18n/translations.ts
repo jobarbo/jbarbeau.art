@@ -9,6 +9,7 @@ export const translations = {
 		nav: {
 			menu: "Menu",
 			langSwitch: "Français",
+			blog: "Blog",
 		},
 		footer: {
 			designed: "Designed & Developed in Québec City",
@@ -33,6 +34,10 @@ export const translations = {
 			metaTitle: "Blog | J Barbeau",
 			metaDescription: "Articles and updates from Jonathan Barbeau — algorithmic art, creative process, exhibitions, and new releases.",
 			loadError: "Unable to load blog posts at this time. Please check back later.",
+			readPost: "Read full post →",
+			viewOnSubstack: "View on Substack ↗",
+			backToBlog: "← Back to all posts",
+			writtenBy: "By Jonathan Barbeau",
 		},
 		recentWork: {
 			sectionTitle: "Recent Work",
@@ -61,6 +66,7 @@ export const translations = {
 		nav: {
 			menu: "Menu",
 			langSwitch: "English",
+			blog: "Blogue",
 		},
 		footer: {
 			designed: "Conçu et développé à Québec",
@@ -81,10 +87,14 @@ export const translations = {
 			metaDescription: "Artiste algorithmique basé à Québec. Collections numériques et long format sur fx(hash), Foundation, Highlight. Expositions, NFTs et art par code.",
 		},
 		blog: {
-			title: "Blog",
-			metaTitle: "Blog | J Barbeau",
+			title: "Blogue",
+			metaTitle: "Blogue | J Barbeau",
 			metaDescription: "Articles et actualités de Jonathan Barbeau — art algorithmique, processus créatif, expositions et nouvelles œuvres.",
 			loadError: "Impossible de charger les articles pour le moment. Revenez plus tard.",
+			readPost: "Lire l'article →",
+			viewOnSubstack: "Voir sur Substack ↗",
+			backToBlog: "← Tous les articles",
+			writtenBy: "Par Jonathan Barbeau",
 		},
 		recentWork: {
 			sectionTitle: "Oeuvres récentes",
@@ -130,6 +140,10 @@ export type TranslationKey =
 	| "blog.metaTitle"
 	| "blog.metaDescription"
 	| "blog.loadError"
+	| "blog.readPost"
+	| "blog.viewOnSubstack"
+	| "blog.backToBlog"
+	| "blog.writtenBy"
 	| "recentWork.sectionTitle"
 	| "recentWork.viewProject"
 	| "recentWork.redeemHere"

@@ -74,6 +74,54 @@ collections:
           hint: "Enter numbers in order: [Large screens >900px, Medium screens 500px-900px, Small screens <500px]"
       - {label: "Body", name: "body", widget: "markdown", required: false}
 
+  - name: "blog_en"
+    label: "Blog Posts (EN)"
+    folder: "src/content/blog"
+    create: true
+    summary: "{{fields.title}}"
+    format: frontmatter
+    extension: mdx
+    media_folder: "/public/assets/blog"
+    public_folder: "/assets/blog"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "pubDate", widget: "datetime"}
+      - {label: "Substack URL", name: "substackUrl", widget: "string"}
+      - label: "Cover Image"
+        name: "image"
+        widget: "image"
+        choose_url: true
+        required: false
+        media_folder: "/public/assets/blog"
+        public_folder: "/assets/blog"
+      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Body", name: "body", widget: "markdown", required: false}
+
+  - name: "blog_fr"
+    label: "Blog Posts (FR)"
+    folder: "src/content/blog/fr"
+    create: true
+    summary: "{{fields.title}}"
+    format: frontmatter
+    extension: mdx
+    media_folder: "/public/assets/blog"
+    public_folder: "/assets/blog"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Date de publication", name: "pubDate", widget: "datetime"}
+      - {label: "URL Substack", name: "substackUrl", widget: "string", hint: "Même URL que le post EN correspondant"}
+      - label: "Image de couverture"
+        name: "image"
+        widget: "image"
+        choose_url: true
+        required: false
+        media_folder: "/public/assets/blog"
+        public_folder: "/assets/blog"
+      - {label: "Extrait", name: "excerpt", widget: "text", required: false}
+      - {label: "Brouillon", name: "draft", widget: "boolean", default: false}
+      - {label: "Corps", name: "body", widget: "markdown", required: false, hint: "Le nom du fichier doit correspondre au post EN à traduire (ex: my-post.md)"}
+
   - label: "Collection Preview"
     name: "collection_preview"
     files:
