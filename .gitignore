@@ -4,6 +4,10 @@
 dist/
 .output/
 
+# decap cms admin bundle
+public/admin/decap-cms.js
+public/admin/decap-cms.css
+
 # generated types
 .astro/
 
