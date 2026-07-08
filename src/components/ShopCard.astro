@@ -1,0 +1,79 @@
+---
+import type {CollectionEntry} from "astro:content";
+import Button from "../components/Button.astro";
+import {marked} from "marked";
+import {t, type Locale, type TranslationKey} from "../i18n";
+
+interface Props {
+	item: CollectionEntry<"shop">;
+	locale?: Locale;
+}
+
+const {item, locale = "en"} = Astro.props;
+const {data} = item;
+
+const title = locale === "fr" && data.titleFr ? data.titleFr : data.title;
+const price = locale === "fr" && data.priceFr ? data.priceFr : data.price;
+const editionInfo = locale === "fr" && data.editionInfoFr ? data.editionInfoFr : data.editionInfo;
+const descriptionText = locale === "fr" && data.descriptionFr ? data.descriptionFr : data.description;
+const descriptionHtml = await marked(descriptionText);
+
+const typeKeys: Record<typeof data.type, TranslationKey> = {
+	digital: "shop.typeDigital",
+	print: "shop.typePrint",
+	nft: "shop.typeNft",
+};
+const statusKeys: Record<typeof data.status, TranslationKey> = {
+	available: "shop.statusAvailable",
+	upcoming: "shop.statusUpcoming",
+	minting: "shop.statusMinting",
+	soldout: "shop.statusSoldout",
+};
+const statusLabel = t(locale, statusKeys[data.status]);
+
+const editionLine = [editionInfo, data.platform].filter(Boolean).join(" · ");
+
+// CTA resolution
+let cta: {label: string; href: string; target: string; icon?: "external" | "email"; disabled: boolean};
+if (data.type === "nft") {
+	if (data.externalUrl) {
+		const isMinting = data.status === "minting";
+		// Secondary-market links go through raster.art; label the CTA accordingly
+		const linkPlatform = data.externalUrl.includes("raster.art") ? "Raster" : data.platform;
+		const label = linkPlatform
+			? t(locale, isMinting ? "shop.ctaMint" : "shop.ctaView", {platform: linkPlatform})
+			: t(locale, isMinting ? "shop.ctaMintGeneric" : "shop.ctaViewGeneric");
+		cta = {label, href: data.externalUrl, target: "_blank", icon: "external", disabled: false};
+	} else {
+		cta = {label: statusLabel, href: "#", target: "_self", disabled: true};
+	}
+} else if (data.status === "available" || data.status === "minting") {
+	const subject = encodeURIComponent(t(locale, "shop.mailSubject", {title}));
+	cta = {label: t(locale, "shop.ctaContact"), href: `mailto:barbeau.jonathan@gmail.com?subject=${subject}`, target: "_blank", icon: "email", disabled: false};
+} else {
+	cta = {label: statusLabel, href: "#", target: "_self", disabled: true};
+}
+---
+
+<article class='shop-card' data-type={data.type}>
+	<div class='shop-card__image-wrapper'>
+		<img src={data.images[0]} alt={title} class='shop-card__image' width='800' height='800' loading='lazy' />
+	</div>
+	<div class='shop-card__body'>
+		<div class='shop-card__badges'>
+			<span class={`shop-card__badge shop-card__badge--${data.type}`}>{t(locale, typeKeys[data.type])}</span>
+			{data.status !== "available" && <span class={`shop-card__badge shop-card__badge--${data.status}`}>{statusLabel}</span>}
+		</div>
+		<h3 class='shop-card__title'>{title}</h3>
+		{editionLine && <p class='shop-card__edition'>{editionLine}</p>}
+		<div class='shop-card__description' set:html={descriptionHtml} />
+		<div class='shop-card__footer'>
+			{price && <span class='shop-card__price'>{price}</span>}
+			<Button label={cta.label} icon={cta.icon} href={cta.href} target={cta.target} class={`shop-card__cta ${cta.disabled ? "button--disabled" : ""}`} />
+		</div>
+	</div>
+</article>
+
+<style lang='scss'>
+	@use "../styles/components/Shop.scss";
+</style>

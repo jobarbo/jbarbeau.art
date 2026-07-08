@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ShopGrid from "../components/ShopGrid.astro";
+import { getSortedShopItems } from "../functions/contentCollections";
+
+const items = await getSortedShopItems();
+---
+
+<Layout title="Shop | J Barbeau" description="Original artworks by Jonathan Barbeau — signed limited edition prints, digital works, and generative NFT collections.">
+	<section class="shop" aria-label="Shop">
+		<div class="shop__header">
+			<h1 class="shop__title">Shop</h1>
+			<p class="shop__intro">Signed prints, digital works and generative collections.</p>
+		</div>
+
+		<ShopGrid items={items} locale="en" />
+	</section>
+</Layout>
+
+<style lang="scss">
+	@use "../styles/components/Shop.scss";
+</style>

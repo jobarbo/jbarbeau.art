@@ -1,0 +1,23 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShopGrid from "../../components/ShopGrid.astro";
+import { getSortedShopItems } from "../../functions/contentCollections";
+import { t } from "../../i18n";
+
+const items = await getSortedShopItems();
+---
+
+<Layout locale="fr" title={t("fr", "shop.metaTitle")} description={t("fr", "shop.metaDescription")}>
+	<section class="shop" aria-label="Boutique">
+		<div class="shop__header">
+			<h1 class="shop__title">{t("fr", "shop.title")}</h1>
+			<p class="shop__intro">{t("fr", "shop.intro")}</p>
+		</div>
+
+		<ShopGrid items={items} locale="fr" />
+	</section>
+</Layout>
+
+<style lang="scss">
+	@use "../../styles/components/Shop.scss";
+</style>

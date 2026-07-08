@@ -10,6 +10,7 @@ export const translations = {
 			menu: "Menu",
 			langSwitch: "Français",
 			blog: "Blog",
+			shop: "Shop",
 		},
 		footer: {
 			designed: "Designed & Developed in Québec City",
@@ -49,6 +50,32 @@ export const translations = {
 			previous: "Previous",
 			next: "Next",
 		},
+		shop: {
+			title: "Shop",
+			metaTitle: "Shop | J Barbeau",
+			metaDescription: "Original artworks by Jonathan Barbeau — signed limited edition prints, digital works, and generative NFT collections.",
+			intro: "Signed prints, digital works and generative collections.",
+			filterAll: "All",
+			filterDigital: "Digital",
+			filterPrint: "Prints",
+			filterNft: "NFT",
+			filterAria: "Filter artworks by type",
+			typeDigital: "Digital",
+			typePrint: "Print",
+			typeNft: "NFT",
+			statusAvailable: "Available",
+			statusUpcoming: "Coming soon",
+			statusMinting: "Minting now",
+			statusSoldout: "Sold out",
+			ctaContact: "Contact me",
+			ctaMint: "Mint on {platform}",
+			ctaView: "View on {platform}",
+			ctaMintGeneric: "Mint now",
+			ctaViewGeneric: "View collection",
+			mailSubject: "Inquiry — {title}",
+			emptyTitle: "The shop is empty for now",
+			empty: "New works, prints and digital editions are on their way. Check back soon — or write to me if something caught your eye.",
+		},
 		collectionPreview: {
 			metaTitle: "Collection Preview | Jonathan Barbeau",
 			metaDescription: "Preview of the artist's collection.",
@@ -68,6 +95,7 @@ export const translations = {
 			menu: "Menu",
 			langSwitch: "English",
 			blog: "Blogue",
+			shop: "Boutique",
 		},
 		footer: {
 			designed: "Conçu et développé à Québec",
@@ -106,6 +134,32 @@ export const translations = {
 			previous: "Précédent",
 			next: "Suivant",
 		},
+		shop: {
+			title: "Boutique",
+			metaTitle: "Boutique | J Barbeau",
+			metaDescription: "Œuvres originales de Jonathan Barbeau — impressions en édition limitée signées, œuvres numériques et collections NFT génératives.",
+			intro: "Impressions signées, œuvres numériques et collections génératives.",
+			filterAll: "Tout",
+			filterDigital: "Numérique",
+			filterPrint: "Impressions",
+			filterNft: "NFT",
+			filterAria: "Filtrer les œuvres par type",
+			typeDigital: "Numérique",
+			typePrint: "Impression",
+			typeNft: "NFT",
+			statusAvailable: "Disponible",
+			statusUpcoming: "À venir",
+			statusMinting: "En cours de mint",
+			statusSoldout: "Épuisé",
+			ctaContact: "Me contacter",
+			ctaMint: "Minter sur {platform}",
+			ctaView: "Voir sur {platform}",
+			ctaMintGeneric: "Minter",
+			ctaViewGeneric: "Voir la collection",
+			mailSubject: "Demande — {title}",
+			emptyTitle: "La boutique est vide pour le moment",
+			empty: "De nouvelles œuvres, impressions et éditions numériques s'en viennent. Revenez bientôt — ou écrivez-moi si quelque chose vous intéresse.",
+		},
 		collectionPreview: {
 			metaTitle: "Aperçu de la collection | Jonathan Barbeau",
 			metaDescription: "Aperçu de la collection de l'artiste.",
@@ -125,6 +179,8 @@ export const translations = {
 export type TranslationKey =
 	| "nav.menu"
 	| "nav.langSwitch"
+	| "nav.blog"
+	| "nav.shop"
 	| "footer.designed"
 	| "footer.copyright"
 	| "hero.title"
@@ -152,6 +208,30 @@ export type TranslationKey =
 	| "recentWork.description"
 	| "recentWork.previous"
 	| "recentWork.next"
+	| "shop.title"
+	| "shop.metaTitle"
+	| "shop.metaDescription"
+	| "shop.intro"
+	| "shop.filterAll"
+	| "shop.filterDigital"
+	| "shop.filterPrint"
+	| "shop.filterNft"
+	| "shop.filterAria"
+	| "shop.typeDigital"
+	| "shop.typePrint"
+	| "shop.typeNft"
+	| "shop.statusAvailable"
+	| "shop.statusUpcoming"
+	| "shop.statusMinting"
+	| "shop.statusSoldout"
+	| "shop.ctaContact"
+	| "shop.ctaMint"
+	| "shop.ctaView"
+	| "shop.ctaMintGeneric"
+	| "shop.ctaViewGeneric"
+	| "shop.mailSubject"
+	| "shop.emptyTitle"
+	| "shop.empty"
 	| "collectionPreview.metaTitle"
 	| "collectionPreview.metaDescription"
 	| "collectionPreview.headerText"

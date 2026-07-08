@@ -122,6 +122,59 @@ collections:
       - {label: "Brouillon", name: "draft", widget: "boolean", default: false}
       - {label: "Corps", name: "body", widget: "markdown", required: false, hint: "Le nom du fichier doit correspondre au post EN à traduire (ex: my-post.md)"}
 
+  - name: "shop"
+    label: "Shop"
+    folder: "src/content/shop"
+    create: true
+    summary: "{{fields.title}} ({{fields.type}} — {{fields.status}})"
+    format: frontmatter
+    extension: md
+    media_folder: "/public/assets/shop"
+    public_folder: "/assets/shop"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Title (French)", name: "titleFr", widget: "string", required: false}
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options:
+          - {label: "Digital download", value: "digital"}
+          - {label: "Print (limited edition)", value: "print"}
+          - {label: "NFT collection", value: "nft"}
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        default: "available"
+        options:
+          - {label: "Available", value: "available"}
+          - {label: "Coming soon", value: "upcoming"}
+          - {label: "Minting now", value: "minting"}
+          - {label: "Sold out", value: "soldout"}
+      - {label: "Price (display only, e.g. \"250 CAD\" or \"0.05 ETH\")", name: "price", widget: "string", required: false}
+      - {label: "Price (French display, e.g. \"250 $ CAD\")", name: "priceFr", widget: "string", required: false}
+      - {label: "Edition info (e.g. \"1/1/256\" or \"Edition of 30, signed\")", name: "editionInfo", widget: "string", required: false}
+      - {label: "Edition info (French)", name: "editionInfoFr", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "markdown"}
+      - {label: "Description (French)", name: "descriptionFr", widget: "markdown", required: false}
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        summary: "{{fields.image}}"
+        field:
+          label: "Image"
+          name: "image"
+          widget: "image"
+          choose_url: true
+          media_folder: "/public/assets/shop"
+          public_folder: "/assets/shop"
+          allow_multiple: false
+      - {label: "External URL (NFT)", name: "externalUrl", widget: "string", required: false, hint: "Toujours utiliser la page raster.art de la collection (https://raster.art/artwork/<slug>-by-jonathan-barbeau) — sauf pendant un mint actif: URL de la mint page de la plateforme"}
+      - {label: "Platform (e.g. fxhash, Art Blocks, Transient Labs, 256art)", name: "platform", widget: "string", required: false}
+      - {label: "Stripe Price ID (future checkout — leave empty)", name: "stripePriceId", widget: "string", required: false}
+      - {label: "Publish Date", name: "publishDate", widget: "datetime"}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Body", name: "body", widget: "markdown", required: false}
+
   - label: "Collection Preview"
     name: "collection_preview"
     files:

@@ -24,8 +24,10 @@ export default defineConfig({
 			customPages: [
 				"https://jbarbeau.art/",
 				"https://jbarbeau.art/blog",
+				"https://jbarbeau.art/shop",
 				"https://jbarbeau.art/fr/",
 				"https://jbarbeau.art/fr/blog",
+				"https://jbarbeau.art/fr/shop",
 				"https://jbarbeau.art/fr/docs/artist-cv",
 				"https://jbarbeau.art/docs/artist-cv",
 				"https://jbarbeau.art/docs/artist-cv-fr",

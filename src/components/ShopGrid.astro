@@ -1,0 +1,77 @@
+---
+import type {CollectionEntry} from "astro:content";
+import ShopCard from "./ShopCard.astro";
+import Icon from "./Icon.astro";
+import Button from "./Button.astro";
+import {t, type Locale, type TranslationKey} from "../i18n";
+
+interface Props {
+	items: CollectionEntry<"shop">[];
+	locale?: Locale;
+}
+
+const {items, locale = "en"} = Astro.props;
+
+const types = ["digital", "print", "nft"] as const;
+const filterKeys: Record<(typeof types)[number], TranslationKey> = {
+	digital: "shop.filterDigital",
+	print: "shop.filterPrint",
+	nft: "shop.filterNft",
+};
+const availableTypes = types.filter((type) => items.some((item) => item.data.type === type));
+---
+
+{
+	items.length > 0 ? (
+		<>
+			{availableTypes.length > 1 && (
+				<div class='shop-filters' role='group' aria-label={t(locale, "shop.filterAria")} data-shop-filters>
+					<button class='shop-filters__btn shop-filters__btn--active' data-filter='all' aria-pressed='true'>
+						{t(locale, "shop.filterAll")}
+					</button>
+					{availableTypes.map((type) => (
+						<button class='shop-filters__btn' data-filter={type} aria-pressed='false'>
+							{t(locale, filterKeys[type])}
+						</button>
+					))}
+				</div>
+			)}
+			<div class='shop__grid' data-shop-grid>
+				{items.map((item) => (
+					<ShopCard item={item} locale={locale} />
+				))}
+			</div>
+		</>
+	) : (
+		<div class='shop-empty'>
+			<div class='shop-empty__icon' aria-hidden='true'>
+				<Icon icon='magic' size='48px' />
+			</div>
+			<h2 class='shop-empty__title'>{t(locale, "shop.emptyTitle")}</h2>
+			<p class='shop-empty__text'>{t(locale, "shop.empty")}</p>
+			<Button label={t(locale, "shop.ctaContact")} icon='email' href='mailto:barbeau.jonathan@gmail.com' target='_blank' class='shop-empty__cta' />
+		</div>
+	)
+}
+
+<script>
+	document.querySelectorAll<HTMLElement>("[data-shop-filters]").forEach((bar) => {
+		const grid = bar.parentElement?.querySelector("[data-shop-grid]");
+		bar.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const filter = btn.dataset.filter;
+				bar.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((b) => {
+					b.classList.toggle("shop-filters__btn--active", b === btn);
+					b.setAttribute("aria-pressed", String(b === btn));
+				});
+				grid?.querySelectorAll<HTMLElement>("[data-type]").forEach((card) => {
+					card.hidden = filter !== "all" && card.dataset.type !== filter;
+				});
+			});
+		});
+	});
+</script>
+
+<style lang='scss'>
+	@use "../styles/components/Shop.scss";
+</style>

@@ -47,5 +47,31 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = {project, collectionPreview, blog};
+const shop = defineCollection({
+	loader: glob({
+		pattern: "**/*.md",
+		base: "./src/content/shop",
+	}),
+	schema: z.object({
+		title: z.string(),
+		titleFr: z.string().optional(),
+		type: z.enum(["digital", "print", "nft"]),
+		status: z.enum(["available", "upcoming", "minting", "soldout"]).default("available"),
+		// Display-only strings ("250 CAD", "0.05 ETH") — Stripe will own real pricing later
+		price: z.string().optional(),
+		priceFr: z.string().optional(),
+		editionInfo: z.string().optional(),
+		editionInfoFr: z.string().optional(),
+		description: z.string(),
+		descriptionFr: z.string().optional(),
+		images: z.array(z.string()).min(1),
+		externalUrl: z.string().optional(),
+		platform: z.string().optional(),
+		stripePriceId: z.string().optional(),
+		publishDate: z.coerce.date(),
+		draft: z.boolean().default(false),
+	}),
+});
+
+export const collections = {project, collectionPreview, blog, shop};
 
