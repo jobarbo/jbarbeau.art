@@ -29,8 +29,8 @@
 		transition:
 			color 0.2s ease-in-out 0s,
 			background-color 0.2s ease-in-out 0s;
-		width: to-vw(40);
-		height: to-vw(40);
+		width: to-vw(40, true, 20, 40);
+		height: to-vw(40, true, 20, 40);
 
 		svg {
 			width: 100%;
