@@ -35,7 +35,7 @@ descriptionFr: >-
 
 
   Exhibit-A marque un tournant — le moment où l’art génératif a quitté l’écran pour entrer dans une salle, dans une conversation avec des inconnus. Les certificats de la collection sont hébergés sur Highlight.xyz, comme un pont entre le physique et le numérique.
-url: https://highlight.xyz/mint/64f7c27b373cff27b5e9309c
+url: https://www.raster.art/artwork/jb-genart-series-by-jonathan-barbeau
 redeemUrl: /
 image: /assets/exhibita/10_thumb.webp
 images:
