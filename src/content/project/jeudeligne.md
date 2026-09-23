@@ -27,7 +27,7 @@ descriptionFr: >-
 
 
   « Jeu de ligne » est lancée en juin 2023 sur 256art.com en édition limitée de 300 exemplaires. Le format 16×22, une rupture avec le carré 1:1 habituel, offre à la composition de l'espace pour respirer. Chaque sortie porte son propre récit — un agencement unique de lignes, de complexité et de palette qui invite le spectateur à nommer ce qu'il voit.
-url: https://256art.com/project/jeu-de-ligne-2
+url: https://www.raster.art/artwork/jeu-de-ligne-by-jonathan-barbeau
 isRedeemable: false
 redeemUrl: /
 image: /assets/jeudeligne/jdl4.webp

@@ -64,7 +64,7 @@ descriptionFr: >-
 
 
   Réalisé en Javascript sur <canvas>
-url: https://foundation.app/collection/strmp
+url: https://www.raster.art/artwork/starmap-by-jonathan-barbeau
 isRedeemable: false
 redeemUrl: /
 image: /assets/starmap/0.webp

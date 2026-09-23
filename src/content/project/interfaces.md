@@ -38,7 +38,7 @@ descriptionFr: >-
   danse (chaque fader = un quart de la séquence). Je pouvais ainsi influencer
   l’image tout en laissant les particules évoluer librement en déplaçant le
   danseur sur la timeline.
-url: https://objkt.com/collections/KT1Tw7BRpsMomGE4bf3bxjAc4AgNV8xq7BYb
+url: https://www.raster.art/artwork/traces-from-the-interfaces-exhibit-by-jonathan-barbeau
 isRedeemable: false
 redeemUrl: /
 image: /assets/traces/int6.webp

@@ -50,7 +50,7 @@ descriptionFr: >-
   où l’œuvre est devenue un témoignage durable de l’évolution de l’art — une ode
   à la tradition, au savoir, à l’innovation et aux horizons sans limite de
   l’art à l’ère numérique.
-url: https://www.fxhash.xyz/generative/0x682e10BF76d4150461ccf271e44aDb1DFe5f9F3A
+url: https://www.raster.art/artwork/ex-libris-by-jonathan-barbeau
 image: /assets/exlibris/4.webp
 images:
   - /assets/exlibris/1.webp
